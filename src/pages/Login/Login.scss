@@ -1,0 +1,21 @@
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  .card {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .form-container {
+    .title {
+      text-align: center;
+    }
+
+    .login-button {
+      width: 100%;
+    }
+  }
+}

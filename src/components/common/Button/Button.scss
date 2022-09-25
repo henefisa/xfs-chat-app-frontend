@@ -1,0 +1,13 @@
+@use "../../../assets/styles/_variables.scss" as v;
+
+.ant-btn.button {
+  padding: 8px 16px;
+  height: auto;
+  background: v.$button;
+  border: 1px solid transparent;
+
+  &:hover {
+    background: v.$button-hover;
+    border: 1px solid v.$button-hover-border;
+  }
+}

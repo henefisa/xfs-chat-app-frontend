@@ -1,0 +1,18 @@
+import * as React from "react";
+import { InputProps, Input as AInput } from "antd";
+import clsx from "clsx";
+
+import "./Input.scss";
+
+interface IInputPasswordProps extends InputProps {}
+
+const InputPassword: React.FC<IInputPasswordProps> = ({
+  className,
+  ...rest
+}) => {
+  return (
+    <AInput className={clsx("input", "input-password", className)} {...rest} />
+  );
+};
+
+export default InputPassword;

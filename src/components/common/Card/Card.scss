@@ -1,0 +1,7 @@
+@use "../../../assets/styles/_variables.scss" as v;
+
+.card {
+  background: v.$card-background;
+  border: 1px solid v.$card-border;
+  padding: 16px;
+}
