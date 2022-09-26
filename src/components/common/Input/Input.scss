@@ -1,0 +1,67 @@
+@use "../../../assets/styles/variables" as v;
+
+.ant-input.input {
+  padding: 8px 16px;
+  height: auto;
+  font-size: 16px;
+  color: v.$text-color;
+  border: 1px solid v.$input-border;
+  border-radius: 0;
+
+  &.username-input {
+    &:hover {
+      border-color: v.$input-border;
+    }
+
+    &:focus,
+    &.ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input {
+      border-color: v.$input-border;
+      box-shadow: none;
+    }
+
+    &::placeholder {
+      font-size: 16px;
+      color: v.$input-placeholder;
+    }
+
+    &.ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:focus {
+      border-color: v.$input-border;
+      box-shadow: 0 0 0 2.4px rgb(239 71 111 / 25%);
+    }
+  }
+}
+
+#username_help,
+#password_help {
+  .ant-form-item-explain-error {
+    color: v.$input-error;
+    margin-top: 2px;
+  }
+}
+
+.ant-input-password.input {
+  padding: 8px 16px;
+  height: auto;
+  font-size: 16px;
+  color: v.$text-color;
+  border: 1px solid v.$input-border;
+  border-radius: 0;
+
+  &.password-input {
+    &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
+    &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper,
+    &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
+      border-color: v.$input-border;
+    }
+
+    &.ant-input-affix-wrapper:focus,
+    &.ant-input-affix-wrapper-focused {
+      box-shadow: none;
+    }
+
+    &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:focus,
+    &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper-focused {
+      box-shadow: 0 0 0 2.4px rgb(239 71 111 / 25%);
+    }
+  }
+}

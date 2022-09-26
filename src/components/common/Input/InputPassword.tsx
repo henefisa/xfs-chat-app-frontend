@@ -6,12 +6,13 @@ import "./Input.scss";
 
 interface IInputPasswordProps extends InputProps {}
 
-const InputPassword: React.FC<IInputPasswordProps> = ({
-  className,
-  ...rest
-}) => {
+const InputPassword: React.FC<IInputPasswordProps> = ({ className, ...rest }) => {
   return (
-    <AInput className={clsx("input", "input-password", className)} {...rest} />
+    <AInput.Password
+      className={clsx("input", "input-password", className)}
+      spellCheck={false}
+      {...rest}
+    />
   );
 };
 
