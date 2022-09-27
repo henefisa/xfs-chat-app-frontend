@@ -11,7 +11,7 @@ interface ILoginInputProps {
   SuffixInput: FunctionComponent<IInputProps>;
   className?: string;
   placeholder?: string;
-  defaultValue?: string;
+  dfValue?: string;
 }
 
 const LoginInput: React.FC<ILoginInputProps> = ({
@@ -19,7 +19,7 @@ const LoginInput: React.FC<ILoginInputProps> = ({
   SuffixInput,
   className,
   placeholder,
-  defaultValue,
+  dfValue,
   ...rest
 }) => {
   return (
@@ -30,7 +30,7 @@ const LoginInput: React.FC<ILoginInputProps> = ({
       <SuffixInput
         className={clsx("suffix-input", className)}
         placeholder={placeholder}
-        defaultValue={defaultValue}
+        defaultValue={dfValue}
       />
     </div>
   );

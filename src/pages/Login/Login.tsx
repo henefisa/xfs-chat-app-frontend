@@ -1,10 +1,13 @@
 import * as React from "react";
 import { Form } from "antd";
+import { Link } from "react-router-dom";
 import Button from "@common/Button/Button";
 import Input from "@common/Input/Input";
 import InputPassword from "@common/Input/InputPassword";
 import Title from "@common/Title/Title";
 import Card from "@common/Card/Card";
+import LoginInput from "src/components/LoginInput/LoginInput";
+import { UserOutlined, LockOutlined, HeartFilled } from "@ant-design/icons";
 
 import "./Login.scss";
 import logo from "../../assets/img/light-logo.png";
@@ -32,32 +35,67 @@ const LoginPage: React.FC = () => {
       </Title>
       <Card>
         <div className="form-container">
-          <Title level={1}>Login</Title>
           <Form onFinish={handleFinish}>
             <Form.Item
               name="username"
               label="Username"
               labelCol={{ span: 24 }}
-              rules={[{ required: true, message: "Username is required" }]}
+              rules={[{ required: true, message: "Please Enter Your Username" }]}
             >
-              <Input placeholder="Username" />
+              <LoginInput
+                PrefixIcon={UserOutlined}
+                SuffixInput={Input}
+                className="input-username"
+                placeholder="Enter email"
+                dfValue="admin@themesbrand.com"
+              />
             </Form.Item>
-            <Form.Item
-              name="password"
-              label="Password"
-              labelCol={{ span: 24 }}
-              rules={[{ required: true, message: "Password is required" }]}
-            >
-              <InputPassword placeholder="Password" />
+            <Form.Item className="wrapper-password">
+              <Link className="login-form-forgot-link" to="/forgot-password">
+                Forgot password?
+              </Link>
+              <Form.Item
+                name="password"
+                label="Password"
+                labelCol={{ span: 24 }}
+                rules={[{ required: true, message: "Please Enter Your Password" }]}
+              >
+                <LoginInput
+                  PrefixIcon={LockOutlined}
+                  SuffixInput={InputPassword}
+                  placeholder="Enter Password"
+                  dfValue="admin123"
+                />
+              </Form.Item>
             </Form.Item>
-            <Form.Item>
+            <Form.Item className="wrapper-checkbox">
+              <div className="wrapper-checkbox-item">
+                <input type="checkbox" id="remember-me" />
+                <label htmlFor="remember-me" className="checkbox-title">
+                  Remember me
+                </label>
+              </div>
+            </Form.Item>
+            <Form.Item className="wrapper-button-login">
               <Button htmlType="submit" type="primary" className="login-button">
-                Login
+                Sign in
               </Button>
             </Form.Item>
           </Form>
         </div>
       </Card>
+
+      <div className="form-footer">
+        <Title className="footer-ask-account" level={5}>
+          Don't have an account ?{" "}
+          <Link to="/register" className="register-link">
+            Signup now
+          </Link>
+        </Title>
+        <Title className="footer-author" level={5}>
+          © 2022 Chatvia. Crafted with <HeartFilled className="heart-icon" /> by Themesbrand
+        </Title>
+      </div>
     </div>
   );
 };

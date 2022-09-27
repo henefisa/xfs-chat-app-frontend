@@ -7,7 +7,7 @@ import "./Input.scss";
 interface IInputProps extends InputProps {}
 
 const Input: React.FC<IInputProps> = ({ className, ...rest }) => {
-  return <AInput className={clsx("input", className)} spellCheck={false} {...rest} />;
+  return <AInput className={clsx("input", className)} {...rest} />;
 };
 
 export default Input;
