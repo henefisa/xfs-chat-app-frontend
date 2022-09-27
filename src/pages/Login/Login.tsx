@@ -6,7 +6,7 @@ import Input from "@common/Input/Input";
 import InputPassword from "@common/Input/InputPassword";
 import Title from "@common/Title/Title";
 import Card from "@common/Card/Card";
-import LoginInput from "src/components/LoginInput/LoginInput";
+import LoginInput from "../../components/modules/LoginInput/LoginInput";
 import { UserOutlined, LockOutlined, HeartFilled } from "@ant-design/icons";
 
 import "./Login.scss";
@@ -47,7 +47,7 @@ const LoginPage: React.FC = () => {
                 SuffixInput={Input}
                 className="input-username"
                 placeholder="Enter email"
-                dfValue="admin@themesbrand.com"
+                inputDefaultValue="admin@themesbrand.com"
               />
             </Form.Item>
             <Form.Item className="wrapper-password">
@@ -64,7 +64,7 @@ const LoginPage: React.FC = () => {
                   PrefixIcon={LockOutlined}
                   SuffixInput={InputPassword}
                   placeholder="Enter Password"
-                  dfValue="admin123"
+                  inputDefaultValue="admin123"
                 />
               </Form.Item>
             </Form.Item>
