@@ -8,6 +8,11 @@
 
   &:hover {
     background: v.$button-hover;
-    border: 1px solid v.$button-hover-border;
+    border-color: v.$button-hover-border;
+  }
+
+  &.login-button {
+    height: 40.5px;
+    border-radius: 4px;
   }
 }
