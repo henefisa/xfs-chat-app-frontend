@@ -1,8 +1,32 @@
+@use "../../assets/styles/variables" as v;
+
 .login-page {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  flex-direction: column;
+
+  .logo {
+    margin-bottom: 48px;
+    img {
+      height: 30px;
+    }
+  }
+
+  .heading {
+    color: v.$text-color;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .sub-heading {
+    color: v.$text-sub-color;
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
 
   .card {
     width: 100%;

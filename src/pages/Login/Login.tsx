@@ -7,6 +7,7 @@ import Title from "@common/Title/Title";
 import Card from "@common/Card/Card";
 
 import "./Login.scss";
+import logo from "../../assets/img/light-logo.png";
 
 interface IFormFields {
   username: string;
@@ -20,6 +21,15 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="login-page">
+      <div className="logo">
+        <img src={logo} alt="Chat App Logo" />
+      </div>
+      <Title className="heading" level={4}>
+        Sign in
+      </Title>
+      <Title className="sub-heading" level={5}>
+        Sign in to continue to Chatvia.
+      </Title>
       <Card>
         <div className="form-container">
           <Title level={1}>Login</Title>
