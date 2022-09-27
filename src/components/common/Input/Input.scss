@@ -3,12 +3,12 @@
 .ant-input.input {
   padding: 8px 16px;
   height: auto;
-  font-size: 16px;
+  font-size: 15px;
   color: v.$text-color;
   border: 1px solid v.$input-border;
   border-radius: 0;
 
-  &.username-input {
+  &.input-username {
     &:hover {
       border-color: v.$input-border;
     }
@@ -20,7 +20,7 @@
     }
 
     &::placeholder {
-      font-size: 16px;
+      font-size: 15px;
       color: v.$input-placeholder;
     }
 
@@ -42,12 +42,19 @@
 .ant-input-password.input {
   padding: 8px 16px;
   height: auto;
-  font-size: 16px;
-  color: v.$text-color;
   border: 1px solid v.$input-border;
   border-radius: 0;
 
-  &.password-input {
+  &.input-password {
+    & > input {
+      color: v.$text-color;
+    }
+
+    & > input::placeholder {
+      font-size: 15px;
+      color: v.$input-placeholder;
+    }
+
     &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
     &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper,
     &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
