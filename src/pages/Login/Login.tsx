@@ -8,9 +8,9 @@ import Title from "@common/Title/Title";
 import Card from "@common/Card/Card";
 import LoginInput from "../../components/modules/LoginInput/LoginInput";
 import { UserOutlined, LockOutlined, HeartFilled } from "@ant-design/icons";
+import logo from "public/images/logos/light-logo.png";
 
 import "./Login.scss";
-import logo from "../../assets/img/light-logo.png";
 
 interface IFormFields {
   username: string;
