@@ -89,7 +89,7 @@
 
     &:checked + label::before {
       content: "";
-      background-image: url("/public/images/icons/check-icon.svg");
+      background-image: url("/images/icons/check-icon.svg");
       background-color: v.$checkbox-bg;
       border-color: v.$checkbox-bg;
       display: flex;
