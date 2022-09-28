@@ -6,8 +6,12 @@ import "./LoginInput.scss";
 
 interface IInputProps extends InputProps {}
 
+interface IIconProps {
+  className?: string;
+}
+
 interface ILoginInputProps {
-  PrefixIcon: React.ForwardRefExoticComponent<any>;
+  PrefixIcon: React.FC<IIconProps>;
   SuffixInput: FunctionComponent<IInputProps>;
   className?: string;
   placeholder?: string;

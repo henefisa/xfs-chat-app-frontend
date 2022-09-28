@@ -6,7 +6,8 @@
   background: v.$button;
   border: 1px solid transparent;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: v.$button-hover;
     border-color: v.$button-hover-border;
   }

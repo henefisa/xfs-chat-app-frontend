@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "@common/Button/Button";
 import Input from "@common/Input/Input";
 import InputPassword from "@common/Input/InputPassword";
+import InputCheckbox from "@common/Input/InputCheckbox";
 import Title from "@common/Title/Title";
 import Card from "@common/Card/Card";
 import LoginInput from "../../components/modules/LoginInput/LoginInput";
@@ -50,7 +51,7 @@ const LoginPage: React.FC = () => {
                 inputDefaultValue="admin@themesbrand.com"
               />
             </Form.Item>
-            <Form.Item className="wrapper-password">
+            <div className="wrapper-password">
               <Link className="login-form-forgot-link" to="/forgot-password">
                 Forgot password?
               </Link>
@@ -67,14 +68,9 @@ const LoginPage: React.FC = () => {
                   inputDefaultValue="admin123"
                 />
               </Form.Item>
-            </Form.Item>
-            <Form.Item className="wrapper-checkbox">
-              <div className="wrapper-checkbox-item">
-                <input type="checkbox" id="remember-me" />
-                <label htmlFor="remember-me" className="checkbox-title">
-                  Remember me
-                </label>
-              </div>
+            </div>
+            <Form.Item>
+              <InputCheckbox label="Remember me" />
             </Form.Item>
             <Form.Item className="wrapper-button-login">
               <Button htmlType="submit" type="primary" className="login-button">
