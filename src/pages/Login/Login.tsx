@@ -1,15 +1,12 @@
 import * as React from 'react';
 import { Form } from 'antd';
 import { Link } from 'react-router-dom';
-import Button from '@common/Button/Button';
-import Input from '@common/Input/Input';
-import InputPassword from '@common/Input/InputPassword';
-import InputCheckbox from '@common/Input/InputCheckbox';
-import Title from '@common/Title/Title';
-import Card from '@common/Card/Card';
-import LoginInput from '../../components/modules/LoginInput/LoginInput';
 import { UserOutlined, LockOutlined, HeartFilled } from '@ant-design/icons';
-import logo from '/images/logos/light-logo.png';
+import Card from '@common/Card/Card';
+import Title from '@common/Title/Title';
+import Button from '@common/Button/Button';
+import InputCheckbox from '@common/Input/InputCheckbox';
+import WrapperInput from '@modules/WrapperInput/WrapperInput';
 
 import './Login.scss';
 
@@ -26,7 +23,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className='login-page'>
       <div className='logo'>
-        <img src={logo} alt='Chat App Logo' />
+        <img src='/images/logos/light-logo.png' alt='Chat App Logo' />
       </div>
       <Title className='heading' level={4}>
         Sign in
@@ -43,9 +40,9 @@ const LoginPage: React.FC = () => {
               labelCol={{ span: 24 }}
               rules={[{ required: true, message: 'Please Enter Your Username' }]}
             >
-              <LoginInput
+              <WrapperInput
                 PrefixIcon={UserOutlined}
-                SuffixInput={Input}
+                inputType='text'
                 className='input-username'
                 placeholder='Enter email'
                 inputDefaultValue='admin@themesbrand.com'
@@ -61,9 +58,9 @@ const LoginPage: React.FC = () => {
                 labelCol={{ span: 24 }}
                 rules={[{ required: true, message: 'Please Enter Your Password' }]}
               >
-                <LoginInput
+                <WrapperInput
                   PrefixIcon={LockOutlined}
-                  SuffixInput={InputPassword}
+                  inputType='password'
                   placeholder='Enter Password'
                   inputDefaultValue='admin123'
                 />
