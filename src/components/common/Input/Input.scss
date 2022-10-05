@@ -1,4 +1,4 @@
-@use "../../../assets/styles/variables" as v;
+@use '../../../assets/styles/variables' as v;
 
 .ant-input.input {
   padding: 8px 16px;
@@ -79,7 +79,7 @@
   align-items: center;
   gap: 10px;
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     opacity: 0;
 
     &:focus + label::before {
@@ -88,8 +88,8 @@
     }
 
     &:checked + label::before {
-      content: "";
-      background-image: url("/images/icons/check-icon.svg");
+      content: '';
+      background-image: url('/images/icons/check-icon.svg');
       background-color: v.$checkbox-bg;
       border-color: v.$checkbox-bg;
       display: flex;
@@ -108,7 +108,7 @@
   }
 
   .checkbox-label::before {
-    content: "";
+    content: '';
     width: 16px;
     height: 16px;
     border: 1px solid #b9b9be;

@@ -1,4 +1,4 @@
-@use "assets/styles/variables" as v;
+@use 'assets/styles/variables' as v;
 
 #root {
   background: v.$background;
@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: "Public Sans", sans-serif;
+  font-family: 'Public Sans', sans-serif;
   line-height: 1.5;
   color: v.$text-color;
   text-rendering: optimizeSpeed;

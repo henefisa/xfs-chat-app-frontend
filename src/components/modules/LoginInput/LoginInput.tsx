@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from "react";
-import { InputProps } from "antd";
-import clsx from "clsx";
+import React, { FunctionComponent } from 'react';
+import { InputProps } from 'antd';
+import clsx from 'clsx';
 
-import "./LoginInput.scss";
+import './LoginInput.scss';
 
 interface IInputProps extends InputProps {}
 
@@ -27,12 +27,12 @@ const LoginInput: React.FC<ILoginInputProps> = ({
   ...rest
 }) => {
   return (
-    <div className="login-input" {...rest}>
-      <div className="wrapper-prefix-icon">
-        <PrefixIcon className="prefix-icon" />
+    <div className='login-input' {...rest}>
+      <div className='wrapper-prefix-icon'>
+        <PrefixIcon className='prefix-icon' />
       </div>
       <SuffixInput
-        className={clsx("suffix-input", className)}
+        className={clsx('suffix-input', className)}
         placeholder={placeholder}
         defaultValue={inputDefaultValue}
       />

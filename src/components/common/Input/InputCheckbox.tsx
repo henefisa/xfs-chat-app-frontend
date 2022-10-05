@@ -1,7 +1,7 @@
-import * as React from "react";
-import clsx from "clsx";
+import * as React from 'react';
+import clsx from 'clsx';
 
-import "./Input.scss";
+import './Input.scss';
 
 interface IInputCheckboxProps {
   className?: string;
@@ -10,12 +10,12 @@ interface IInputCheckboxProps {
 }
 
 const InputCheckbox: React.FC<IInputCheckboxProps> = ({ className, label, ...rest }) => {
-  let idForInput = label.toLowerCase().split(" ").join("-");
+  let idForInput = label.toLowerCase().split(' ').join('-');
 
   return (
-    <div className={clsx("checkbox", className)} {...rest}>
-      <input type="checkbox" id={idForInput} />
-      <label htmlFor={idForInput} className="checkbox-label">
+    <div className={clsx('checkbox', className)} {...rest}>
+      <input type='checkbox' id={idForInput} />
+      <label htmlFor={idForInput} className='checkbox-label'>
         {label}
       </label>
     </div>

@@ -1,7 +1,7 @@
-import * as React from "react";
-import clsx from "clsx";
+import * as React from 'react';
+import clsx from 'clsx';
 
-import "./Card.scss";
+import './Card.scss';
 
 interface ICardProps {
   className?: string;
@@ -9,7 +9,7 @@ interface ICardProps {
 }
 
 const Card: React.FC<ICardProps> = ({ className, ...rest }) => {
-  return <div className={clsx("card", className)} {...rest}></div>;
+  return <div className={clsx('card', className)} {...rest}></div>;
 };
 
 export default Card;
