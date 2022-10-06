@@ -1,4 +1,5 @@
 import * as React from 'react';
+import clsx from 'clsx';
 
 import Input from '@common/Input/Input';
 import InputPassword from '@common/Input/InputPassword';
@@ -33,12 +34,12 @@ const WrapperInput: React.FC<IWrapperInputProps> = ({
   }
 
   return (
-    <div className="login-input" {...rest}>
+    <div className="wrapper-input" {...rest}>
       <div className="wrapper-prefix-icon">
         <PrefixIcon className="prefix-icon" />
       </div>
       <InputComp
-        className={className}
+        className={clsx('suffix-input', className)}
         placeholder={placeholder}
         defaultValue={inputDefaultValue}
       />
