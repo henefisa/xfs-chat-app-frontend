@@ -4,6 +4,7 @@ import clsx from 'clsx';
 
 import './Button.scss';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IButtonProps extends ButtonProps {}
 
 const Button: React.FC<IButtonProps> = ({ className, ...rest }) => {

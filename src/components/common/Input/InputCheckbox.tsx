@@ -9,13 +9,17 @@ interface IInputCheckboxProps {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const InputCheckbox: React.FC<IInputCheckboxProps> = ({ className, label, ...rest }) => {
-  let idForInput = label.toLowerCase().split(' ').join('-');
+const InputCheckbox: React.FC<IInputCheckboxProps> = ({
+  className,
+  label,
+  ...rest
+}) => {
+  const idForInput = label.toLowerCase().split(' ').join('-');
 
   return (
     <div className={clsx('checkbox', className)} {...rest}>
-      <input type='checkbox' id={idForInput} />
-      <label htmlFor={idForInput} className='checkbox-label'>
+      <input type="checkbox" id={idForInput} />
+      <label htmlFor={idForInput} className="checkbox-label">
         {label}
       </label>
     </div>

@@ -4,7 +4,10 @@ import clsx from 'clsx';
 
 type TitleProps = React.ComponentProps<typeof Typography.Title>;
 
-interface ITitleProps extends TitleProps {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface ITitleProps extends TitleProps {
+  className?: string;
+}
 
 const Title: React.FC<ITitleProps> = ({ className, ...rest }) => {
   return <Typography.Title className={clsx('title', className)} {...rest} />;

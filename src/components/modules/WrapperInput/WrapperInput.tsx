@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import Input from '@common/Input/Input';
 import InputPassword from '@common/Input/InputPassword';
@@ -33,11 +33,15 @@ const WrapperInput: React.FC<IWrapperInputProps> = ({
   }
 
   return (
-    <div className='login-input' {...rest}>
-      <div className='wrapper-prefix-icon'>
-        <PrefixIcon className='prefix-icon' />
+    <div className="login-input" {...rest}>
+      <div className="wrapper-prefix-icon">
+        <PrefixIcon className="prefix-icon" />
       </div>
-      <InputComp className={className} placeholder={placeholder} defaultValue={inputDefaultValue} />
+      <InputComp
+        className={className}
+        placeholder={placeholder}
+        defaultValue={inputDefaultValue}
+      />
     </div>
   );
 };
