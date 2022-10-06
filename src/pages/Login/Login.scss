@@ -15,18 +15,20 @@
     }
   }
 
-  .login-page__heading {
-    color: v.$text-color;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
+  .title {
+    &.login-page__heading {
+      color: v.$text-color;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
 
-  .login-page__sub-heading {
-    color: v.$text-sub-color;
-    font-size: 15px;
-    font-weight: 400;
-    margin-top: 0px !important;
-    margin-bottom: 24px;
+    &.login-page__sub-heading {
+      color: v.$text-sub-color;
+      font-size: 15px;
+      font-weight: 400;
+      margin-top: 0px;
+      margin-bottom: 24px;
+    }
   }
 
   .card {
@@ -36,21 +38,21 @@
     border-radius: 4px;
   }
 
-  &__form-container {
+  .login-page__form-container {
     padding: 16px;
 
     .ant-form-item {
       margin-bottom: 16px;
-    }
 
-    // Custom CSS for label
-    .ant-form-item-label {
-      padding: 0 !important;
+      // Custom CSS for label
+      .ant-form-item-label {
+        padding: 0;
 
-      .ant-form-item-required {
-        font-size: 15px;
-        color: v.$text-color;
-        font-weight: 500;
+        .ant-form-item-required {
+          font-size: 15px;
+          color: v.$text-color;
+          font-weight: 500;
+        }
       }
     }
 
@@ -73,29 +75,29 @@
       }
     }
 
-    &__button {
-      margin-bottom: 0 !important;
+    .login-page__form-container__button {
+      margin-bottom: 0;
     }
   }
 
-  &__footer {
+  .login-page__footer {
     margin-top: 48px;
     text-align: center;
 
     &__ask-account,
     &__author {
-      font-size: 15px !important;
-      font-weight: 500 !important;
-      color: v.$text-color !important;
+      font-size: 15px;
+      font-weight: 500;
+      color: v.$text-color;
     }
 
-    &__register-link {
-      color: v.$primary !important;
+    .login-page__footer__register-link {
+      color: v.$primary;
     }
 
     &__heart-icon {
       font-size: 12px;
-      color: #ff0000 !important;
+      color: #ff0000;
     }
   }
 }
