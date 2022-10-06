@@ -7,6 +7,8 @@ import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import InputCheckbox from '@common/Input/InputCheckbox';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
+import { useAppDispatch } from 'src/store/hooks';
+import { usernameChange, passwordChange } from 'src/store/userSlice';
 
 import './Login.scss';
 
@@ -18,6 +20,16 @@ interface IFormFields {
 const LoginPage: React.FC = () => {
   const handleFinish = (values: IFormFields) => {
     console.log(values);
+  };
+
+  const dispatch = useAppDispatch();
+
+  const handleUsernameChange = (value: string) => {
+    dispatch(usernameChange(value));
+  };
+
+  const handlePasswordChange = (value: string) => {
+    dispatch(passwordChange(value));
   };
 
   return (
@@ -48,6 +60,7 @@ const LoginPage: React.FC = () => {
                 className="input-username"
                 placeholder="Enter email"
                 inputDefaultValue="admin@themesbrand.com"
+                inputOnChange={handleUsernameChange}
               />
             </Form.Item>
             <div className="wrapper-password">
@@ -67,6 +80,7 @@ const LoginPage: React.FC = () => {
                   inputType="password"
                   placeholder="Enter Password"
                   inputDefaultValue="admin123"
+                  inputOnChange={handlePasswordChange}
                 />
               </Form.Item>
             </div>
