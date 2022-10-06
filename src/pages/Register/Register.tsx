@@ -113,7 +113,7 @@ const Register: React.FC = () => {
         <Title className="register-page__footer__ask-account" level={5}>
           {/*eslint-disable react/no-unescaped-entities*/}
           Already have an account ?{' '}
-          <Link to="/login" className="register-page__footer__register-link">
+          <Link to="/login" className="register-page__footer__login-link">
             Signin
           </Link>
         </Title>
