@@ -8,7 +8,8 @@
   border: 1px solid v.$input-border;
   border-radius: 0;
 
-  &.input-username {
+  &.input-username,
+  &.input-email {
     &:hover {
       border-color: v.$input-border;
     }
