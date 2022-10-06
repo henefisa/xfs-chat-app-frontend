@@ -7,20 +7,21 @@
   height: 100vh;
   flex-direction: column;
 
-  .logo {
+  &__logo {
     margin-bottom: 48px;
+
     img {
       height: 30px;
     }
   }
 
-  .heading {
+  .login-page__heading {
     color: v.$text-color;
     font-weight: 600;
     margin-bottom: 8px;
   }
 
-  .sub-heading {
+  .login-page__sub-heading {
     color: v.$text-sub-color;
     font-size: 15px;
     font-weight: 400;
@@ -35,12 +36,16 @@
     border-radius: 4px;
   }
 
-  .form-container {
+  &__form-container {
     padding: 16px;
+
+    .ant-form-item {
+      margin-bottom: 16px;
+    }
 
     // Custom CSS for label
     .ant-form-item-label {
-      padding: 0;
+      padding: 0 !important;
 
       .ant-form-item-required {
         font-size: 15px;
@@ -49,54 +54,48 @@
       }
     }
 
-    .login-button {
-      width: 100%;
-    }
-
     // CSS link styles
-    .wrapper-password {
+    &__password {
       position: relative;
-      .login-form-forgot-link {
+
+      &__forgot-link {
         font-size: 13px;
         color: v.$text-sub-color;
         position: absolute;
         right: 0;
         top: 16px;
         transform: translateY(-50%);
-      }
-    }
+        z-index: 1;
 
-    .ant-form-item {
-      margin-bottom: 16px;
-
-      &.wrapper-button-login {
-        margin-bottom: 0;
-
-        button {
-          font-size: 15px;
+        &:hover {
+          color: v.$text-sub-color;
         }
       }
     }
+
+    &__button {
+      margin-bottom: 0 !important;
+    }
   }
 
-  .form-footer {
+  &__footer {
     margin-top: 48px;
     text-align: center;
 
-    .footer-ask-account,
-    .footer-author {
-      font-size: 15px;
-      font-weight: 500;
-      color: v.$text-color;
+    &__ask-account,
+    &__author {
+      font-size: 15px !important;
+      font-weight: 500 !important;
+      color: v.$text-color !important;
     }
 
-    .register-link {
-      color: v.$primary;
+    &__register-link {
+      color: v.$primary !important;
     }
 
-    .heart-icon {
+    &__heart-icon {
       font-size: 12px;
-      color: #ff0000;
+      color: #ff0000 !important;
     }
   }
 }
