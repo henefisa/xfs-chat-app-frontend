@@ -19,7 +19,7 @@ const InputCheckbox: React.FC<IInputCheckboxProps> = ({
   return (
     <div className={clsx('checkbox', className)} {...rest}>
       <input type="checkbox" id={idForInput} />
-      <label htmlFor={idForInput} className="checkbox-label">
+      <label htmlFor={idForInput} className="checkbox__label">
         {label}
       </label>
     </div>

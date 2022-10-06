@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
 
-  .wrapper-prefix-icon {
+  .wrapper-input__prefix {
     width: 48px;
     height: 100%;
     color: v.$icon-color;
@@ -19,7 +19,7 @@
     border-bottom-left-radius: 4px;
   }
 
-  .suffix-input {
+  .wrapper-input__suffix-input {
     flex: 1;
     height: 100%;
     border-top-right-radius: 4px;
