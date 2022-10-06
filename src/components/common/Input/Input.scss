@@ -1,14 +1,14 @@
-@use "../../../assets/styles/variables" as v;
+@use '../../../assets/styles/variables' as v;
 
 .ant-input.input {
   padding: 8px 16px;
   height: auto;
-  font-size: 16px;
+  font-size: 15px;
   color: v.$text-color;
   border: 1px solid v.$input-border;
   border-radius: 0;
 
-  &.username-input {
+  &.input-username {
     &:hover {
       border-color: v.$input-border;
     }
@@ -20,7 +20,7 @@
     }
 
     &::placeholder {
-      font-size: 16px;
+      font-size: 15px;
       color: v.$input-placeholder;
     }
 
@@ -31,23 +31,30 @@
   }
 }
 
-#username_help,
-#password_help {
+.ant-form-item-explain.ant-form-item-explain-connected {
   .ant-form-item-explain-error {
     color: v.$input-error;
     margin-top: 2px;
+    font-size: 13px;
   }
 }
 
 .ant-input-password.input {
   padding: 8px 16px;
   height: auto;
-  font-size: 16px;
-  color: v.$text-color;
   border: 1px solid v.$input-border;
   border-radius: 0;
 
-  &.password-input {
+  &.input-password {
+    & > input {
+      color: v.$text-color;
+    }
+
+    & > input::placeholder {
+      font-size: 15px;
+      color: v.$input-placeholder;
+    }
+
     &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
     &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper,
     &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
@@ -63,5 +70,55 @@
     &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper-focused {
       box-shadow: 0 0 0 2.4px rgb(239 71 111 / 25%);
     }
+  }
+}
+
+//Custom Checkbox styles
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  input[type='checkbox'] {
+    opacity: 0;
+
+    &:focus + label::before {
+      border-color: #b9b4f7;
+      box-shadow: 0 0 0 2.4px rgb(114 105 239 / 25%);
+    }
+
+    &:checked + label::before {
+      content: '';
+      background-image: url('/images/icons/check-icon.svg');
+      background-color: v.$checkbox-bg;
+      border-color: v.$checkbox-bg;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+    }
+  }
+
+  .checkbox-label {
+    display: flex;
+    position: relative;
+    font-weight: 500;
+    color: v.$text-color;
+  }
+
+  .checkbox-label::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 1px solid #b9b9be;
+    border-radius: 4px;
+    background-color: #f7f7ff;
+    cursor: pointer;
+    position: absolute;
+    top: calc(50%);
+    left: -23px;
+    transform: translateY(-50%);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
   }
 }
