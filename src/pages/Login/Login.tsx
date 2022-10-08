@@ -34,17 +34,21 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="login-page">
-      <div className="login-page__logo">
-        <img src="/images/logos/light-logo.png" alt="Chat App Logo" />
+      <div className="logo">
+        <img
+          className="logo__img"
+          src="/images/logos/light-logo.png"
+          alt="Chat App Logo"
+        />
       </div>
-      <Title className="login-page__heading" level={4}>
+      <Title className="heading" level={4}>
         Sign in
       </Title>
-      <Title className="login-page__sub-heading" level={5}>
+      <Title className="sub-heading" level={5}>
         Sign in to continue to Chatvia.
       </Title>
       <Card>
-        <div className="login-page__form-container">
+        <div className="form-container">
           <Form onFinish={handleFinish}>
             <Form.Item
               name="username"
@@ -63,10 +67,10 @@ const LoginPage: React.FC = () => {
                 inputOnChange={handleUsernameChange}
               />
             </Form.Item>
-            <div className="login-page__form-container__password">
+            <div className="password-item">
               <Link
                 to="/forgot-password"
-                className="login-page__form-container__password__forgot-link"
+                className="password-item__forgot-link"
               >
                 Forgot password?
               </Link>
@@ -90,7 +94,7 @@ const LoginPage: React.FC = () => {
             <Form.Item>
               <InputCheckbox label="Remember me" />
             </Form.Item>
-            <Form.Item className="login-page__form-container__button">
+            <Form.Item className="button-item">
               <Button htmlType="submit" type="primary" className="login-button">
                 Sign in
               </Button>
@@ -100,17 +104,16 @@ const LoginPage: React.FC = () => {
       </Card>
 
       <div className="login-page__footer">
-        <Title className="login-page__footer__ask-account" level={5}>
+        <Title className="ask-account" level={5}>
           {/*eslint-disable react/no-unescaped-entities*/}
           Don't have an account ?{' '}
-          <Link to="/register" className="login-page__footer__register-link">
+          <Link to="/register" className="ask-account__register-link">
             Signup now
           </Link>
         </Title>
-        <Title className="login-page__footer__author" level={5}>
+        <Title className="author" level={5}>
           © 2022 Chatvia. Crafted with{' '}
-          <HeartFilled className="login-page__footer__heart-icon" /> by
-          Themesbrand
+          <HeartFilled className="author__heart-icon" /> by Themesbrand
         </Title>
       </div>
     </div>

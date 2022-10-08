@@ -40,11 +40,11 @@ const WrapperInput: React.FC<IWrapperInputProps> = ({
 
   return (
     <div className="wrapper-input" {...rest}>
-      <div className="wrapper-input__prefix">
-        <PrefixIcon className="wrapper-input__prefix-icon" />
+      <div className="prefix-icon">
+        <PrefixIcon />
       </div>
       <InputComp
-        className={clsx('wrapper-input__suffix-input', className)}
+        className={clsx('suffix-input', className)}
         placeholder={placeholder}
         defaultValue={inputDefaultValue}
         value={inputValue}

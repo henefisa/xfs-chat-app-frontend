@@ -7,33 +7,27 @@
   height: 100vh;
   flex-direction: column;
 
-  &__logo {
+  .logo {
     margin-bottom: 48px;
 
-    img {
+    .logo__img {
       height: 30px;
     }
   }
 
   .title {
-    &.register-page__heading {
+    &.heading {
       color: v.$text-color;
       font-weight: 600;
       margin-bottom: 8px;
     }
 
-    &.register-page__sub-heading,
-    &.register-page__form-container__terms-title {
+    &.sub-heading {
       color: v.$text-sub-color;
       font-size: 15px;
       font-weight: 400;
       margin-top: 0px;
       margin-bottom: 24px;
-    }
-
-    &.register-page__form-container__terms-title {
-      margin-top: 24px;
-      margin-bottom: 0;
     }
   }
 
@@ -42,36 +36,45 @@
     max-width: 456px;
     padding: 24px;
     border-radius: 4px;
-  }
 
-  &__form-container {
-    padding: 16px;
+    .form-container {
+      padding: 16px;
 
-    .ant-form-item {
-      margin-bottom: 16px;
+      .ant-form-item {
+        margin-bottom: 16px;
 
-      // Custom CSS for label
-      .ant-form-item-label {
-        padding: 0;
+        // Custom CSS for label
+        .ant-form-item-label {
+          padding: 0;
 
-        .ant-form-item-required {
-          font-size: 15px;
-          color: v.$text-color;
-          font-weight: 500;
+          .ant-form-item-required {
+            font-size: 15px;
+            color: v.$text-color;
+            font-weight: 500;
+          }
         }
       }
-    }
 
-    .register-page__form-container__button {
-      margin-top: 30px;
-      margin-bottom: 0;
-    }
+      .button-item {
+        margin-top: 30px;
+        margin-bottom: 0;
+      }
 
-    .register-page__form-container__terms {
-      text-align: center;
+      .terms-item {
+        text-align: center;
 
-      .register-page__form-container__terms-link {
-        color: v.$primary;
+        .title {
+          &.terms-item__title {
+            color: v.$text-sub-color;
+            font-size: 15px;
+            font-weight: 400;
+            margin-top: 24px;
+            margin-bottom: 0;
+          }
+        }
+        .terms-item__link {
+          color: v.$primary;
+        }
       }
     }
   }
@@ -80,18 +83,18 @@
     margin-top: 48px;
     text-align: center;
 
-    .register-page__footer__ask-account,
-    .register-page__footer__author {
+    .ask-account,
+    .author {
       font-size: 15px;
       font-weight: 500;
       color: v.$text-color;
     }
 
-    .register-page__footer__login-link {
+    .ask-account__login-link {
       color: v.$primary;
     }
 
-    .register-page__footer__heart-icon {
+    .author__heart-icon {
       font-size: 12px;
       color: #ff0000;
     }

@@ -26,17 +26,21 @@ const Register: React.FC = () => {
 
   return (
     <div className="register-page">
-      <div className="register-page__logo">
-        <img src="/images/logos/light-logo.png" alt="Chat App Logo" />
+      <div className="logo">
+        <img
+          className="logo__img"
+          src="/images/logos/light-logo.png"
+          alt="Chat App Logo"
+        />
       </div>
-      <Title className="register-page__heading" level={4}>
+      <Title className="heading" level={4}>
         Sign up
       </Title>
-      <Title className="register-page__sub-heading" level={5}>
+      <Title className="sub-heading" level={5}>
         Get your Chatvia account now.
       </Title>
       <Card>
-        <div className="register-page__form-container">
+        <div className="form-container">
           <Form onFinish={handleFinish}>
             <Form.Item
               name="email"
@@ -82,7 +86,7 @@ const Register: React.FC = () => {
                 placeholder="Enter Password"
               />
             </Form.Item>
-            <Form.Item className="register-page__form-container__button">
+            <Form.Item className="button-item">
               <Button
                 htmlType="submit"
                 type="primary"
@@ -91,16 +95,10 @@ const Register: React.FC = () => {
                 Sign up
               </Button>
             </Form.Item>
-            <div className="register-page__form-container__terms">
-              <Title
-                className="register-page__form-container__terms-title"
-                level={5}
-              >
+            <div className="terms-item">
+              <Title className="terms-item__title" level={5}>
                 By registering you agree to the Chatvia{' '}
-                <Link
-                  to="#"
-                  className="register-page__form-container__terms-link"
-                >
+                <Link to="#" className="terms-item__link">
                   Terms of Use
                 </Link>
               </Title>
@@ -110,17 +108,16 @@ const Register: React.FC = () => {
       </Card>
 
       <div className="register-page__footer">
-        <Title className="register-page__footer__ask-account" level={5}>
+        <Title className="ask-account" level={5}>
           {/*eslint-disable react/no-unescaped-entities*/}
           Already have an account ?{' '}
-          <Link to="/login" className="register-page__footer__login-link">
+          <Link to="/login" className="ask-account__login-link">
             Signin
           </Link>
         </Title>
-        <Title className="register-page__footer__author" level={5}>
+        <Title className="author" level={5}>
           © 2022 Chatvia. Crafted with{' '}
-          <HeartFilled className="register-page__footer__heart-icon" /> by
-          Themesbrand
+          <HeartFilled className="author__heart-icon" /> by Themesbrand
         </Title>
       </div>
     </div>
