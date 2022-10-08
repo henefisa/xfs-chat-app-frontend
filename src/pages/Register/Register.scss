@@ -1,6 +1,6 @@
 @use '../../assets/styles/variables' as v;
 
-.login-page {
+.register-page {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,32 +55,31 @@
         }
       }
 
-      // CSS link styles
-      .password-item {
-        position: relative;
-
-        .password-item__forgot-link {
-          font-size: 13px;
-          color: v.$text-sub-color;
-          position: absolute;
-          right: 0;
-          top: 16px;
-          transform: translateY(-50%);
-          z-index: 1;
-
-          &:hover {
-            color: v.$text-sub-color;
-          }
-        }
+      .button-item {
+        margin-top: 30px;
+        margin-bottom: 0;
       }
 
-      .button-item {
-        margin-bottom: 0;
+      .terms-item {
+        text-align: center;
+
+        .title {
+          &.terms-item__title {
+            color: v.$text-sub-color;
+            font-size: 15px;
+            font-weight: 400;
+            margin-top: 24px;
+            margin-bottom: 0;
+          }
+        }
+        .terms-item__link {
+          color: v.$primary;
+        }
       }
     }
   }
 
-  .login-page__footer {
+  .register-page__footer {
     margin-top: 48px;
     text-align: center;
 
@@ -91,7 +90,7 @@
       color: v.$text-color;
     }
 
-    .ask-account__register-link {
+    .ask-account__login-link {
       color: v.$primary;
     }
 
