@@ -14,6 +14,7 @@ import {
 import Tooltip from '@common/Tooltip/Tooltip';
 import Dropdown from 'src/components/common/Dropdown/Dropdown';
 import LanguageMenu from '../LanguageMenu/LanguageMenu';
+import UserMenu from '../UserMenu/UserMenu';
 import Button from '@common/Button/Button';
 import Avatar from '@common/Avatar/Avatar';
 
@@ -100,7 +101,7 @@ const NavbarDash: React.FC = () => {
         </div>
         <div className="actions__item">
           <Dropdown
-            overlay={<LanguageMenu />}
+            overlay={<UserMenu />}
             trigger={['click']}
             placement="topRight"
             className="custom-dropdown-menu"

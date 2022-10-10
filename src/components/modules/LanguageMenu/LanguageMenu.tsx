@@ -1,11 +1,14 @@
 import * as React from 'react';
 import clsx from 'clsx';
-import { Menu } from 'antd';
+import { Menu, MenuProps } from 'antd';
 
 import Title from '@common/Title/Title';
 import Button from 'src/components/common/Button/Button';
 
 import './LanguageMenu.scss';
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface IMenuProps extends MenuProps {}
 
 const languages = [
   {
@@ -50,7 +53,7 @@ const items = languages.map((item, index) => {
   };
 });
 
-const LanguageMenu: React.FC = () => {
+const LanguageMenu: React.FC<IMenuProps> = () => {
   return <Menu className="language-menu" items={items} />;
 };
 
