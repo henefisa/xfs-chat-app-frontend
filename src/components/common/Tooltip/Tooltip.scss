@@ -1,0 +1,43 @@
+@use '../../../assets/styles/_variables.scss' as v;
+
+.ant-tooltip {
+  &.ant-tooltip-placement-top,
+  .ant-tooltip-placement-topLeft,
+  .ant-tooltip-placement-topRight {
+    padding-bottom: 0;
+  }
+
+  &.ant-tooltip-placement-bottom,
+  .ant-tooltip-placement-bottomLeft,
+  .ant-tooltip-placement-bottomRight {
+    padding-top: 0;
+  }
+
+  &.ant-tooltip-placement-right,
+  .ant-tooltip-placement-rightTop,
+  .ant-tooltip-placement-rightBottom {
+    padding-left: 0;
+  }
+
+  &.ant-tooltip-placement-left,
+  .ant-tooltip-placement-leftTop,
+  .ant-tooltip-placement-leftBottom {
+    padding-right: 0;
+  }
+
+  .ant-tooltip-arrow {
+    display: none;
+  }
+
+  .ant-tooltip-inner {
+    background-color: #000;
+    border-radius: 4px;
+    color: #fff;
+    max-width: 200px;
+    min-height: unset;
+    padding: 4px 8px;
+    text-align: center;
+    box-shadow: none;
+    font-size: 13px;
+  }
+}
