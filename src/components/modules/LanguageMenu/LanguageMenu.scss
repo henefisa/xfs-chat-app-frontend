@@ -1,0 +1,45 @@
+@use '../../../assets/styles/variables' as v;
+
+.ant-dropdown-menu.language-menu {
+  width: 158px;
+  padding: 8px 0;
+  border-radius: 4px;
+  border: 1px solid #f0eff5;
+  box-shadow: 0 2px 4px rgb(15 34 58 / 12%);
+
+  .ant-dropdown-menu-item {
+    padding: 0;
+
+    .language-item {
+      height: 36px;
+      width: 100%;
+      background-color: transparent;
+      border: 0;
+      border-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      padding-left: 28px;
+      box-shadow: unset;
+
+      &.active {
+        background-color: v.$primary;
+
+        .language-item__title {
+          color: v.$white;
+        }
+      }
+
+      .language-item__img {
+        height: 12px;
+      }
+
+      .language-item__title {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 400;
+      }
+    }
+  }
+}

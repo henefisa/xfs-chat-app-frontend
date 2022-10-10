@@ -6,6 +6,12 @@
   background: v.$button;
   border: 1px solid transparent;
 
+  &[ant-click-animating-without-extra-node='true']::after,
+  .ant-click-animating-node {
+    box-shadow: unset;
+    animation: unset;
+  }
+
   &:hover,
   &:focus {
     background: v.$button-hover;

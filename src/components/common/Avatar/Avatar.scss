@@ -1,0 +1,8 @@
+@use '../../../assets/styles/variables' as v;
+
+.ant-avatar.avatar {
+  color: v.$avatar-text;
+  background-color: v.$avatar-bg;
+  display: flex;
+  align-items: center;
+}
