@@ -6,7 +6,7 @@ import './Tooltip.scss';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 type ITooltipProps = TooltipProps & {
-  tooltipTitle: string;
+  tooltipTitle?: string;
   className?: string;
   isActive?: boolean;
   children: React.ReactNode | React.FC;
@@ -15,8 +15,8 @@ type ITooltipProps = TooltipProps & {
 const Tooltip: React.FC<ITooltipProps> = ({
   className,
   tooltipTitle,
-  children,
   isActive,
+  children,
   ...rest
 }) => {
   return (

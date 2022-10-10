@@ -1,0 +1,39 @@
+@use '../../../assets/styles/variables' as v;
+
+.navbar-dash {
+  width: 75px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgb(15 34 58 / 12%);
+  margin-right: 4px;
+  background-color: v.$white;
+
+  .logo {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .logo__img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .menu {
+    .menu__item + .menu__item {
+      margin-top: 14px;
+    }
+  }
+
+  .actions {
+    .actions__item + .actions__item {
+      margin-top: 14px;
+    }
+  }
+}
