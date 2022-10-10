@@ -4,7 +4,6 @@ import clsx from 'clsx';
 
 import './Tooltip.scss';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 type ITooltipProps = TooltipProps & {
   tooltipTitle?: string;
   className?: string;

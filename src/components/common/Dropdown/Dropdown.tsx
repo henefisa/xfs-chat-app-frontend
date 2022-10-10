@@ -4,7 +4,6 @@ import { Dropdown as ADropdown, Space, DropDownProps } from 'antd';
 
 import './Dropdown.scss';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IDropDownProps extends DropDownProps {
   className?: string;
   children: React.ReactNode;

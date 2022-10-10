@@ -4,7 +4,6 @@ import clsx from 'clsx';
 
 import './Input.scss';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IInputPasswordProps extends InputProps {}
 
 const InputPassword: React.FC<IInputPasswordProps> = ({

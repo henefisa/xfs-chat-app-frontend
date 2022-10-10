@@ -7,7 +7,6 @@ import Button from 'src/components/common/Button/Button';
 
 import './LanguageMenu.scss';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IMenuProps extends MenuProps {}
 
 const languages = [
