@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { Form } from 'antd';
 import { Link } from 'react-router-dom';
 import {
@@ -15,13 +16,30 @@ import WrapperInput from '@modules/WrapperInput/WrapperInput';
 import './Register.scss';
 
 interface IFormFields {
+  email: string;
   username: string;
   password: string;
 }
 
 const Register: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleFinish = (values: IFormFields) => {
     console.log(values);
+  };
+
+  const handleUserEmailChange = (value: string) => {
+    setEmail(value);
+  };
+
+  const handleUsernameChange = (value: string) => {
+    setUsername(value);
+  };
+
+  const handleUserPasswordChange = (value: string) => {
+    setPassword(value);
   };
 
   return (
@@ -59,6 +77,8 @@ const Register: React.FC = () => {
                 inputType="email"
                 className="input-email"
                 placeholder="Enter email"
+                inputValue={email}
+                inputOnChange={handleUserEmailChange}
               />
             </Form.Item>
             <Form.Item
@@ -72,6 +92,8 @@ const Register: React.FC = () => {
                 inputType="text"
                 className="input-username"
                 placeholder="Enter Username"
+                inputValue={username}
+                inputOnChange={handleUsernameChange}
               />
             </Form.Item>
             <Form.Item
@@ -84,6 +106,8 @@ const Register: React.FC = () => {
                 PrefixIcon={LockOutlined}
                 inputType="password"
                 placeholder="Enter Password"
+                inputValue={password}
+                inputOnChange={handleUserPasswordChange}
               />
             </Form.Item>
             <Form.Item className="button-item">

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import clsx from 'clsx';
-import { useState } from 'react';
 
 import Input from '@common/Input/Input';
 import InputPassword from '@common/Input/InputPassword';
@@ -14,6 +13,7 @@ interface IIconProps {
 interface IWrapperInputProps {
   PrefixIcon: React.FC<IIconProps>;
   inputType: string;
+  inputValue?: string;
   className?: string;
   placeholder?: string;
   inputDefaultValue?: string;
@@ -23,6 +23,7 @@ interface IWrapperInputProps {
 const WrapperInput: React.FC<IWrapperInputProps> = ({
   PrefixIcon,
   inputType,
+  inputValue,
   className,
   placeholder,
   inputDefaultValue,
@@ -36,7 +37,11 @@ const WrapperInput: React.FC<IWrapperInputProps> = ({
     InputComp = InputPassword;
   }
 
-  const [inputValue, setInputValue] = useState('');
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (inputOnChange) {
+      inputOnChange(e.target.value);
+    }
+  };
 
   return (
     <div className="wrapper-input" {...rest}>
@@ -47,13 +52,8 @@ const WrapperInput: React.FC<IWrapperInputProps> = ({
         className={clsx('suffix-input', className)}
         placeholder={placeholder}
         defaultValue={inputDefaultValue}
-        value={inputValue}
-        onChange={(e) => {
-          setInputValue(e.target.value);
-          if (inputOnChange) {
-            inputOnChange(e.target.value);
-          }
-        }}
+        value={inputValue ? inputValue : inputDefaultValue}
+        onChange={handleInputChange}
       />
     </div>
   );
