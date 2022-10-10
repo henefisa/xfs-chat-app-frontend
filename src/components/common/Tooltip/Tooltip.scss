@@ -30,7 +30,7 @@
   }
 
   .ant-tooltip-inner {
-    background-color: #000;
+    background-color: v.$black;
     border-radius: 4px;
     color: #fff;
     max-width: 200px;
@@ -39,5 +39,23 @@
     text-align: center;
     box-shadow: none;
     font-size: 13px;
+  }
+}
+
+.tooltip.custom-nav-icon {
+  width: 56px;
+  height: 56px;
+  color: #878a92;
+  font-size: 24px;
+  border-radius: 8px;
+  background-color: v.$white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &.active {
+    color: v.$primary;
+    background-color: v.$background;
   }
 }

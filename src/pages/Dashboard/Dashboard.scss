@@ -1,0 +1,6 @@
+@use '../../assets/styles/variables' as v;
+
+.dashboard-page {
+  height: 100vh;
+  background-color: v.$white;
+}
