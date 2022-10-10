@@ -26,12 +26,43 @@
   }
 
   .menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .menu__item {
+      padding: 0;
+      background-color: v.$white;
+      border: unset;
+    }
+
     .menu__item + .menu__item {
       margin-top: 14px;
     }
   }
 
   .actions {
+    margin-bottom: 10px;
+
+    .actions__item {
+      .actions__button {
+        padding: 0;
+        background-color: v.$white;
+        border: unset;
+        box-shadow: unset;
+      }
+
+      .custom-avatar {
+        padding: 3px;
+        background-color: #f0eff5;
+
+        img {
+          border-radius: 50%;
+        }
+      }
+    }
+
     .actions__item + .actions__item {
       margin-top: 14px;
     }

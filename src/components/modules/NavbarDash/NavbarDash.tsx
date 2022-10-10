@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import {
   UserOutlined,
   MessageOutlined,
@@ -6,9 +7,15 @@ import {
   ContactsOutlined,
   SettingOutlined,
   GlobalOutlined,
+  AlertOutlined,
+  ApiOutlined,
 } from '@ant-design/icons';
 
 import Tooltip from '@common/Tooltip/Tooltip';
+import Dropdown from 'src/components/common/Dropdown/Dropdown';
+import LanguageMenu from '../LanguageMenu/LanguageMenu';
+import Button from '@common/Button/Button';
+import Avatar from '@common/Avatar/Avatar';
 
 import './NavbarDash.scss';
 
@@ -38,6 +45,13 @@ const navBarMenu = [
 const activeIndex = 0;
 
 const NavbarDash: React.FC = () => {
+  // Viết tạm state dark/light theme
+  const [isDark, setIsDark] = useState(false);
+
+  const handleClick = () => {
+    setIsDark(!isDark);
+  };
+
   return (
     <div className="navbar-dash">
       <div className="logo">
@@ -48,7 +62,7 @@ const NavbarDash: React.FC = () => {
         {navBarMenu.map((item, index) => {
           const MenuIcon = item.icon;
           return (
-            <div key={index} className="menu__item">
+            <Button key={index} className="menu__item">
               <Tooltip
                 className="custom-nav-icon"
                 placement="top"
@@ -57,26 +71,47 @@ const NavbarDash: React.FC = () => {
               >
                 <MenuIcon />
               </Tooltip>
-            </div>
+            </Button>
           );
         })}
       </div>
 
       <div className="actions">
         <div className="actions__item">
-          <Tooltip className="custom-nav-icon">
+          <Dropdown
+            overlay={<LanguageMenu />}
+            trigger={['click']}
+            placement="topRight"
+            className="custom-dropdown-menu"
+          >
             <GlobalOutlined />
-          </Tooltip>
+          </Dropdown>
         </div>
         <div className="actions__item">
-          <Tooltip className="custom-nav-icon">
-            <GlobalOutlined />
-          </Tooltip>
+          <Button className="actions__button" onClick={handleClick}>
+            <Tooltip
+              className="custom-nav-icon"
+              tooltipTitle="Dark / Light Mode"
+              placement="right"
+            >
+              {isDark ? <ApiOutlined /> : <AlertOutlined />}
+            </Tooltip>
+          </Button>
         </div>
         <div className="actions__item">
-          <Tooltip className="custom-nav-icon">
-            <GlobalOutlined />
-          </Tooltip>
+          <Dropdown
+            overlay={<LanguageMenu />}
+            trigger={['click']}
+            placement="topRight"
+            className="custom-dropdown-menu"
+          >
+            <Avatar
+              imgPath="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv1xQ7nJI29iWl5Y03OombrIakd-EWulIezA&usqp=CAU"
+              userName="A"
+              imgWidth={36}
+              className="custom-avatar"
+            />
+          </Dropdown>
         </div>
       </div>
     </div>

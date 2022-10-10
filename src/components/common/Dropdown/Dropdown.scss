@@ -1,0 +1,19 @@
+@use '../../../assets/styles/variables' as v;
+
+.ant-dropdown-trigger.dropdown.custom-dropdown-menu {
+  width: 56px;
+  height: 56px;
+  color: #878a92;
+  font-size: 24px;
+  border-radius: 8px;
+  background-color: v.$white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &.ant-dropdown-open {
+    color: v.$primary;
+    background-color: v.$background;
+  }
+}
