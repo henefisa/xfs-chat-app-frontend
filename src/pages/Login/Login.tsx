@@ -115,8 +115,8 @@ const LoginPage: React.FC = () => {
           </Link>
         </Title>
         <Title className="author" level={5}>
-          © 2022 Chatvia. Crafted with{' '}
-          <HeartFilled className="author__heart-icon" /> by Themesbrand
+          © 2022 Chat App. Crafted with{' '}
+          <HeartFilled className="author__heart-icon" /> by RVK Team
         </Title>
       </div>
     </div>
