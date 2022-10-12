@@ -16,6 +16,7 @@ interface IWrapperInputProps {
   className?: string;
   placeholder?: string;
   inputDefaultValue?: string;
+  inputOnChange?: (value: string) => void;
 }
 
 const WrapperInput: React.FC<IWrapperInputProps> = ({
@@ -24,6 +25,7 @@ const WrapperInput: React.FC<IWrapperInputProps> = ({
   className,
   placeholder,
   inputDefaultValue,
+  inputOnChange,
   ...rest
 }) => {
   let InputComp = Input;
@@ -42,6 +44,11 @@ const WrapperInput: React.FC<IWrapperInputProps> = ({
         className={clsx('suffix-input', className)}
         placeholder={placeholder}
         defaultValue={inputDefaultValue}
+        onChange={(e) => {
+          if (inputOnChange) {
+            inputOnChange(e.target.value);
+          }
+        }}
       />
     </div>
   );
