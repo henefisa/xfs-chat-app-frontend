@@ -18,7 +18,7 @@ import UserMenu from '../UserMenu/UserMenu';
 import Button from '@common/Button/Button';
 import Avatar from '@common/Avatar/Avatar';
 
-import './NavbarDash.scss';
+import './NavDashboard.scss';
 
 const navBarMenu = [
   {
@@ -45,7 +45,7 @@ const navBarMenu = [
 
 const activeIndex = 0;
 
-const NavbarDash: React.FC = () => {
+const NavDashboard: React.FC = () => {
   // Viết tạm state dark/light theme
   const [isDark, setIsDark] = useState(false);
 
@@ -107,7 +107,7 @@ const NavbarDash: React.FC = () => {
             className="custom-dropdown-menu"
           >
             <Avatar
-              imgPath="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv1xQ7nJI29iWl5Y03OombrIakd-EWulIezA&usqp=CAU"
+              path="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv1xQ7nJI29iWl5Y03OombrIakd-EWulIezA&usqp=CAU"
               userName="A"
               imgWidth={36}
               className="custom-avatar"
@@ -119,4 +119,4 @@ const NavbarDash: React.FC = () => {
   );
 };
 
-export default NavbarDash;
+export default NavDashboard;

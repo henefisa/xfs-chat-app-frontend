@@ -8,10 +8,17 @@
   flex-direction: column;
 
   .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 48px;
 
     .logo__img {
       height: 30px;
+    }
+
+    .app-name {
+      margin: 0;
     }
   }
 

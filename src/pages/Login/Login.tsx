@@ -37,9 +37,12 @@ const LoginPage: React.FC = () => {
       <div className="logo">
         <img
           className="logo__img"
-          src="/images/logos/light-logo.png"
+          src="/images/logos/logo.svg"
           alt="Chat App Logo"
         />
+        <Title className="app-name" level={4}>
+          RVK Chat App
+        </Title>
       </div>
       <Title className="heading" level={4}>
         Sign in
