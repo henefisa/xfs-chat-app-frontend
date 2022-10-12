@@ -13,21 +13,17 @@ interface IIconProps {
 interface IWrapperInputProps {
   PrefixIcon: React.FC<IIconProps>;
   inputType: string;
-  inputValue?: string;
   className?: string;
   placeholder?: string;
   inputDefaultValue?: string;
-  inputOnChange?: (value: string) => void;
 }
 
 const WrapperInput: React.FC<IWrapperInputProps> = ({
   PrefixIcon,
   inputType,
-  inputValue,
   className,
   placeholder,
   inputDefaultValue,
-  inputOnChange,
   ...rest
 }) => {
   let InputComp = Input;
@@ -36,12 +32,6 @@ const WrapperInput: React.FC<IWrapperInputProps> = ({
   } else if (inputType === 'password') {
     InputComp = InputPassword;
   }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (inputOnChange) {
-      inputOnChange(e.target.value);
-    }
-  };
 
   return (
     <div className="wrapper-input" {...rest}>
@@ -52,8 +42,6 @@ const WrapperInput: React.FC<IWrapperInputProps> = ({
         className={clsx('suffix-input', className)}
         placeholder={placeholder}
         defaultValue={inputDefaultValue}
-        value={inputValue ? inputValue : inputDefaultValue}
-        onChange={handleInputChange}
       />
     </div>
   );
