@@ -5,14 +5,14 @@ import { Avatar as AAvatar, AvatarProps } from 'antd';
 import './Avatar.scss';
 
 interface IAvatarProps extends AvatarProps {
-  imgPath?: string;
+  path?: string;
   userName: string;
   imgWidth: number;
   className?: string;
 }
 
 const Avatar: React.FC<IAvatarProps> = ({
-  imgPath,
+  path,
   userName,
   imgWidth,
   className,
@@ -21,7 +21,7 @@ const Avatar: React.FC<IAvatarProps> = ({
   return (
     <AAvatar
       className={clsx('avatar', className)}
-      src={imgPath}
+      src={path}
       size={imgWidth}
       {...rest}
     >
