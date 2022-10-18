@@ -4,12 +4,6 @@
   height: 100vh;
   display: flex;
 
-  .side-bar {
-    width: 380px;
-    background-color: v.$background;
-    margin-right: 4px;
-  }
-
   .chat-ui {
     flex: 1;
     background-color: v.$white;

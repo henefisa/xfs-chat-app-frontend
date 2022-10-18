@@ -1,26 +1,20 @@
 import * as React from 'react';
 import { Menu, MenuProps } from 'antd';
-import {
-  SettingOutlined,
-  ProfileOutlined,
-  LogoutOutlined,
-} from '@ant-design/icons';
 
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 
-import './UserMenu.scss';
+import './FileActionMenu.scss';
 
-interface IMenuProps extends MenuProps {}
+interface IFileActionMenuProps extends MenuProps {}
 
 const menu: MenuProps['items'] = [
   {
     label: (
       <Button className="menu-item">
         <Title className="menu-item__title" level={5}>
-          Profile
+          Action
         </Title>
-        <ProfileOutlined className="custom-menu-icon" />
       </Button>
     ),
     key: 0,
@@ -29,9 +23,8 @@ const menu: MenuProps['items'] = [
     label: (
       <Button className="menu-item">
         <Title className="menu-item__title" level={5}>
-          Settings
+          Another Action
         </Title>
-        <SettingOutlined className="custom-menu-icon" />
       </Button>
     ),
     key: 1,
@@ -43,17 +36,16 @@ const menu: MenuProps['items'] = [
     label: (
       <Button className="menu-item">
         <Title className="menu-item__title" level={5}>
-          Logout
+          Delete
         </Title>
-        <LogoutOutlined className="custom-menu-icon" />
       </Button>
     ),
     key: 2,
   },
 ];
 
-const UserMenu: React.FC<IMenuProps> = () => {
-  return <Menu className="user-menu" items={menu} />;
+const FileActionMenu: React.FC<IFileActionMenuProps> = () => {
+  return <Menu className="file-menu" items={menu} />;
 };
 
-export default UserMenu;
+export default FileActionMenu;

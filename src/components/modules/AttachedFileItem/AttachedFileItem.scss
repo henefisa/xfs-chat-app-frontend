@@ -1,0 +1,82 @@
+@use '../../../assets/styles/variables' as v;
+
+.file-item {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #f0eff5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  margin-bottom: 8px;
+
+  .file-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .file-icon {
+      --size: 48px;
+      height: var(--size);
+      width: var(--size);
+      border-radius: 4px;
+      background-color: #dcd9fc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .file-icon__type {
+        font-size: 18px;
+        color: v.$primary;
+      }
+    }
+
+    .file-body {
+      .file-body__name {
+        font-size: 14px;
+        color: v.$text-color;
+        margin-bottom: 4px;
+      }
+
+      .file-body__size {
+        color: v.$text-sub-color;
+        font-size: 12px;
+        font-weight: 400;
+        margin: 0;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .ant-btn.button.download-btn {
+      font-size: 18px;
+      color: #7a7f9a;
+      box-shadow: none;
+      background-color: transparent;
+      transition: none;
+      border: unset;
+
+      &:hover,
+      &:focus,
+      &:active {
+        border: unset;
+      }
+
+      .download-icon {
+        font-size: 18px;
+      }
+    }
+
+    .file-actions {
+      .menu-icon {
+        color: #7a7f9a;
+        font-size: 22px;
+        margin-right: 6px;
+      }
+    }
+  }
+}
