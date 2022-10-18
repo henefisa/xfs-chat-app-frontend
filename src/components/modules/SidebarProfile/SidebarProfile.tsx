@@ -10,6 +10,7 @@ import Title from '@common/Title/Title';
 import Dropdown from '@common/Dropdown/Dropdown';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import Avatar from '@common/Avatar/Avatar';
+import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
 
 import './SidebarProfile.scss';
 
@@ -20,6 +21,29 @@ const userInfo = [
   { title: 'Email', desc: 'admin@mgail.com' },
   { title: 'Time', desc: '15:30 PM' },
   { title: 'Location', desc: 'Danang, VN' },
+];
+
+const listAttachedFile = [
+  {
+    name: 'Admin-A.zip',
+    type: 'zip',
+    size: '12.5 MB',
+  },
+  {
+    name: 'Image-1.jpg',
+    type: 'jpg',
+    size: '4.2 MB',
+  },
+  {
+    name: 'Image-2.jpg',
+    type: 'jpg',
+    size: '3.1 MB',
+  },
+  {
+    name: 'Landing-A.zip',
+    type: 'zip',
+    size: '6.7 MB',
+  },
 ];
 
 const SidebarProfile: React.FC = () => {
@@ -93,14 +117,20 @@ const SidebarProfile: React.FC = () => {
           className="attached__panel"
           header={
             <div className="panel-header">
-              <PaperClipOutlined panel-icon />
+              <PaperClipOutlined className="panel-icon" />
               <Title level={5} className="panel-title">
                 Attached Files
               </Title>
             </div>
           }
           key="1"
-        ></Panel>
+        >
+          <div className="list-file">
+            {listAttachedFile.map((item, index) => (
+              <AttachedFileItem key={index} item={item} />
+            ))}
+          </div>
+        </Panel>
       </Collapse>
     </div>
   );
