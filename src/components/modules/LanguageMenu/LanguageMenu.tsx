@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Menu, MenuProps } from 'antd';
 
 import Title from '@common/Title/Title';
-import Button from 'src/components/common/Button/Button';
+import Button from '@common/Button/Button';
 
 import './LanguageMenu.scss';
 

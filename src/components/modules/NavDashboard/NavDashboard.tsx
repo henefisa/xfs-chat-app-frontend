@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 
 import Tooltip from '@common/Tooltip/Tooltip';
-import Dropdown from 'src/components/common/Dropdown/Dropdown';
+import Dropdown from '@common/Dropdown/Dropdown';
 import LanguageMenu from '../LanguageMenu/LanguageMenu';
 import UserMenu from '../UserMenu/UserMenu';
 import Button from '@common/Button/Button';
