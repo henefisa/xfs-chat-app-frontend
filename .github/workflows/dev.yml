@@ -44,7 +44,7 @@ jobs:
       - name: 'Build production'
         run: yarn build
       - name: 'Zip files'
-        run: zip -r chat-fe.zip build
+        run: zip -r chat-fe.zip dist
       - name: Upload file build to host
         uses: appleboy/scp-action@master
         with:
