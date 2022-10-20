@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Form } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserOutlined, LockOutlined, HeartFilled } from '@ant-design/icons';
 import Card from '@common/Card/Card';
 import Title from '@common/Title/Title';
@@ -8,28 +8,22 @@ import Button from '@common/Button/Button';
 import InputCheckbox from '@common/Input/InputCheckbox';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 import { useAppDispatch } from 'src/store/hooks';
-import { usernameChange, passwordChange } from 'src/store/userSlice';
+import { login } from 'src/services/loginService';
 
 import './Login.scss';
 
 interface IFormFields {
   username: string;
   password: string;
+  remember: boolean;
 }
 
 const LoginPage: React.FC = () => {
-  const handleFinish = (values: IFormFields) => {
-    console.log(values);
-  };
-
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const handleUsernameChange = (value: string) => {
-    dispatch(usernameChange(value));
-  };
-
-  const handlePasswordChange = (value: string) => {
-    dispatch(passwordChange(value));
+  const handleFinish = (values: IFormFields) => {
+    login(values, dispatch, navigate);
   };
 
   return (
@@ -65,9 +59,7 @@ const LoginPage: React.FC = () => {
                 PrefixIcon={UserOutlined}
                 inputType="text"
                 className="input-username"
-                placeholder="Enter email"
-                inputDefaultValue="admin@themesbrand.com"
-                inputOnChange={handleUsernameChange}
+                placeholder="Enter Your Username"
               />
             </Form.Item>
             <div className="password-item">
@@ -88,13 +80,11 @@ const LoginPage: React.FC = () => {
                 <WrapperInput
                   PrefixIcon={LockOutlined}
                   inputType="password"
-                  placeholder="Enter Password"
-                  inputDefaultValue="admin123"
-                  inputOnChange={handlePasswordChange}
+                  placeholder="Enter Your Password"
                 />
               </Form.Item>
             </div>
-            <Form.Item>
+            <Form.Item name="isRemember" valuePropName="checked">
               <InputCheckbox label="Remember me" />
             </Form.Item>
             <Form.Item className="button-item">
