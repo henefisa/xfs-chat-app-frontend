@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Form } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   MailOutlined,
   UserOutlined,
@@ -11,6 +11,8 @@ import Card from '@common/Card/Card';
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
+import { register } from '../../services/registerService';
+import { useAppDispatch } from 'src/store/hooks';
 
 import './Register.scss';
 
@@ -21,8 +23,11 @@ interface IFormFields {
 }
 
 const Register: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const handleFinish = (values: IFormFields) => {
-    console.log(values);
+    register(values, dispatch, navigate);
   };
 
   return (
