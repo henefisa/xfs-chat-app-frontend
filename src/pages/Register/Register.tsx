@@ -11,7 +11,7 @@ import Card from '@common/Card/Card';
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
-import * as registerService from '../../services/registerService';
+import { register } from '../../services/registerService';
 import { useAppDispatch } from 'src/store/hooks';
 
 import './Register.scss';
@@ -27,7 +27,7 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
 
   const handleFinish = (values: IFormFields) => {
-    registerService.register(values, dispatch, navigate);
+    register(values, dispatch, navigate);
   };
 
   return (
