@@ -7,6 +7,7 @@ export const loginSlice = createSlice({
     isFetching: false,
     currentAccessToken: '',
     isRemember: false,
+    isLoggedIn: false,
     error: false,
   },
   reducers: {
@@ -16,6 +17,7 @@ export const loginSlice = createSlice({
     loginSuccess: (state, action: PayloadAction<string>) => {
       state.isFetching = false;
       state.currentAccessToken = action.payload;
+      state.isLoggedIn = true;
       state.error = false;
     },
     loginFailed: (state) => {

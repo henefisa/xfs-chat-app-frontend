@@ -7,7 +7,7 @@ import apiRequest from 'src/api/apiRequest';
 interface IUser {
   username: string;
   password: string;
-  remember: boolean;
+  isRemember: boolean;
 }
 
 export const login = async (

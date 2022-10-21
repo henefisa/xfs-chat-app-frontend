@@ -15,7 +15,7 @@ import './Login.scss';
 interface IFormFields {
   username: string;
   password: string;
-  remember: boolean;
+  isRemember: boolean;
 }
 
 const LoginPage: React.FC = () => {
