@@ -23,7 +23,12 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleFinish = (values: IFormFields) => {
-    login(values, dispatch, navigate);
+    const { isRemember, ...user } = values;
+
+    const isRememberValue: boolean =
+      isRemember === undefined ? false : isRemember;
+
+    login(user, isRememberValue, dispatch, navigate);
   };
 
   return (

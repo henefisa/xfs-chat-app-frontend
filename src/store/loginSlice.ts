@@ -24,14 +24,19 @@ export const loginSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    rememberOnSubmit: (state, action: PayloadAction<boolean>) => {
+      state.isRemember = action.payload;
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailed } = loginSlice.actions;
+export const { loginStart, loginSuccess, loginFailed, rememberOnSubmit } =
+  loginSlice.actions;
 
 export const selectCurrentAccesToken = (state: RootState) =>
   state.login.currentAccessToken;
 
 export const selectIsRemember = (state: RootState) => state.login.isRemember;
+export const selectisLoggedIn = (state: RootState) => state.login.isLoggedIn;
 
 export default loginSlice.reducer;
