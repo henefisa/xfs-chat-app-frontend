@@ -8,14 +8,14 @@ import {
   registerFailed,
 } from '../store/registerSlice';
 
-interface User {
+interface IUser {
   email: string;
   username: string;
   password: string;
 }
 
 export const register = async (
-  user: User,
+  user: IUser,
   dispatch: AppDispatch,
   navigate: NavigateFunction
 ) => {
