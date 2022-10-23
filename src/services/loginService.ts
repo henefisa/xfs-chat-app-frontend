@@ -25,7 +25,7 @@ export const login = async (
     const res = await apiRequest.post('api/auth/login', user);
     if (res.data.access_token) {
       dispatch(loginSuccess(res.data.access_token));
-      dispatch(rememberOnSubmit(isRemember));
+      dispatch(rememberOnSubmit(!!isRemember));
       navigate('/dashboard');
     } else {
       dispatch(loginFailed());

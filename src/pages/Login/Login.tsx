@@ -25,10 +25,7 @@ const LoginPage: React.FC = () => {
   const handleFinish = (values: IFormFields) => {
     const { isRemember, ...user } = values;
 
-    const isRememberValue: boolean =
-      isRemember === undefined ? false : isRemember;
-
-    login(user, isRememberValue, dispatch, navigate);
+    login(user, isRemember, dispatch, navigate);
   };
 
   return (
