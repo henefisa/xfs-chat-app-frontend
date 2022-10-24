@@ -15,7 +15,7 @@ import './Login.scss';
 interface IFormFields {
   username: string;
   password: string;
-  remember: boolean;
+  isRemember: boolean;
 }
 
 const LoginPage: React.FC = () => {
@@ -23,7 +23,9 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleFinish = (values: IFormFields) => {
-    login(values, dispatch, navigate);
+    const { isRemember, ...user } = values;
+
+    login(user, isRemember, dispatch, navigate);
   };
 
   return (
