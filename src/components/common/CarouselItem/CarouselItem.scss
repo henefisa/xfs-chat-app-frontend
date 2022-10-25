@@ -1,0 +1,42 @@
+@use '../../../assets/styles/variables' as v;
+
+
+.carousel-item {
+    padding: 8px 14px;
+    position: relative;
+    text-align: center;
+    border-radius: 8px;
+    background-color: #e6ebf5;
+    margin-top: 16px;
+    margin-right: 8px;
+
+    .carousel-item__avatar {
+        position: absolute;
+        margin: 0 auto;
+        left: 50%;
+        top: -16px;
+        transform: translateX(-50%);
+
+        .user-status {
+            background-color: #06d6a0;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            bottom: 0;
+            height: 10px;
+            left: auto;
+            position: absolute;
+            right: 0;
+            width: 10px;
+        }
+    }
+
+    h5 {
+        font-size: 13px;
+        margin-top: 12px;
+        margin-bottom: 4px;
+        font-weight: 600;
+        color: v.$text-color;
+        position: relative;
+        top: 1px;
+    }
+}

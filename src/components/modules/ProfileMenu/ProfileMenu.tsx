@@ -46,6 +46,6 @@ const menu: MenuProps['items'] = [
 
 const ProfileMenu: React.FC<IProfileMenuProps> = () => {
   return <Menu className="profile-menu" items={menu} />;
-};
+};  
 
 export default ProfileMenu;
