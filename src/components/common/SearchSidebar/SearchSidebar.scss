@@ -1,29 +1,28 @@
 @use '../../../assets/styles/variables' as v;
 
-
 .search-sidebar {
-    position: relative;
+  position: relative;
 
-    .search-sidebar__input {
-        padding: 11px 16px 11px 56px;
-        border-radius: 6px;
-        font-size: 14px;
-        line-height: 1.5;
-        background-color: #e6ebf5;
+  .search-sidebar__input {
+    padding: 11px 16px 11px 56px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: #e6ebf5;
 
-        &::placeholder {
-            color: v.$text-sub-color;
-        }
+    &::placeholder {
+      color: v.$text-sub-color;
     }
+  }
 
-    span {
-        position: absolute;
-        top: 7px;
-        left: 9px;
+  span {
+    position: absolute;
+    top: 7px;
+    left: 9px;
 
-        .search-sidebar__icon {
-            font-size: 18px;
-            color: v.$icon-color;
-        }
+    .search-sidebar__icon {
+      font-size: 18px;
+      color: v.$icon-color;
     }
+  }
 }

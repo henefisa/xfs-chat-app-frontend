@@ -63,7 +63,7 @@ const NavDashboard: React.FC = () => {
         {navBarMenu.map((item, index) => {
           const MenuIcon = item.icon;
           return (
-            <Button key={index} className="menu__item" >
+            <Button key={index} className="menu__item">
               <Tooltip
                 className="custom-nav-icon"
                 placement="top"

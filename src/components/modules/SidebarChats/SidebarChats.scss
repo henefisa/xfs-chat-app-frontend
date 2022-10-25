@@ -1,14 +1,14 @@
-@use '../../../assets/styles/variables' as v;
+@use '../../../../src/assets/styles/variables' as v;
 
 .sidebar-charts {
   .header-charts {
     padding: 24px 24px 0;
 
     .title {
-        color: v.$text-color;
-        font-size: 21px;
-        font-weight: 600;
-        margin: 0 0 24px;
+      color: v.$text-color;
+      font-size: 21px;
+      font-weight: 600;
+      margin: 0 0 24px;
     }
 
     .search-box {
@@ -18,16 +18,6 @@
 
   .charts__carousel--wrapper {
     padding: 0 24px 24px;
-
-    .charts__carousel--list {
-      display: flex;
-      width: 100%;
-      overflow: scroll;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
   }
 
   .charts-recent {
@@ -45,10 +35,10 @@
       height: calc(100vh - 280px);
       overflow: hidden scroll;
 
-      &::-webkit-scrollbar, .simplebar-hide-scrollbar::-webkit-scrollbar {
+      &::-webkit-scrollbar,
+      .simplebar-hide-scrollbar::-webkit-scrollbar {
         display: none;
       }
     }
   }
-
 }

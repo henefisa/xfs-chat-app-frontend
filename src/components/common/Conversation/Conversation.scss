@@ -1,143 +1,139 @@
 @use '../../../assets/styles/variables' as v;
 
 .conversation-item {
-    position: relative;
-    padding: 15px 20px;
-    border-radius: 4px;
-    transition: all .4s;
+  position: relative;
+  padding: 15px 20px;
+  border-radius: 4px;
+  transition: all 0.4s;
+  display: flex;
+
+  .conversation__avatar {
+    margin-right: 16px;
     display: flex;
+    align-items: center;
+    position: relative;
 
-    .conversation__avatar {
-        margin-right: 16px;
-        display: flex;
-        align-items: center;
-        position: relative;
-
-        .user-status {
-            position: absolute;
-            border: 2px solid v.$white;
-            border-radius: 50%;
-            bottom: 4px;
-            height: 10px;
-            left: auto;
-            position: absolute;
-            right: 0;
-            width: 10px;
-        }
-
-        .user-status.online {
-            background-color: #06d6a0;
-        }
-
-        .user-status.off {
-            background-color: #ffd166;
-        }
-
-        .user-status.hide {
-            background-color: transparent;
-            border: none;
-        }
-
+    .user-status {
+      position: absolute;
+      border: 2px solid v.$white;
+      border-radius: 50%;
+      bottom: 4px;
+      height: 10px;
+      left: auto;
+      position: absolute;
+      right: 0;
+      width: 10px;
     }
 
-    .conversation__content {
-        flex-grow: 1;
-        
-
-        .conversation__content--name {
-            margin-bottom: 4px;
-
-            .title {
-                font-size: 15px;
-                margin: 0;
-            }
-        }
-
-        .message {
-            margin: 0;
-            color: v.$text-sub-color;
-
-            .message-image__icon {
-                margin-right: 4px;
-            }
-        }
-
-        .message.typing {
-            color: v.$primary;
-            font-weight: 500;
-
-            .animate-typing {
-                .dot {
-                    animation: wave 1.3s linear infinite;
-                    background: #7269ef;
-                    border-radius: 50%;
-                    display: inline-block;
-                    height: 4px;
-                    margin-right: -1px;
-                    opacity: .6;
-                    width: 4px;
-
-                    &:nth-child(2) {
-                        animation-delay: -1.1s;
-                    }
-    
-                    &:nth-child(3) {
-                        animation-delay: -.9s;
-                    }
-                }
-
-                .ms-1 {
-                    margin-left: 4px;
-                }
-
-               
-            }
-        }
+    .conversation-item__status.online {
+      background-color: #06d6a0;
     }
 
-    .conversation__time {
-        font-size: 11px;
-        color: v.$text-sub-color;
+    .conversation-item__status.off {
+      background-color: #ffd166;
     }
 
-    &:hover {
-        background-color: v.$card-background-hover;
-        cursor: pointer;
+    .conversation-item__status.hide {
+      background-color: transparent;
+      border: none;
+    }
+  }
+
+  .conversation__content {
+    flex-grow: 1;
+
+    .conversation__content--name {
+      margin-bottom: 4px;
+
+      .title {
+        font-size: 15px;
+        margin: 0;
+      }
     }
 
-    .unread-message {
-        display: inline-block;
-        left: auto;
-        position: absolute;
-        right: 24px;
-        top: 33px;
+    .message {
+      margin: 0;
+      color: v.$text-sub-color;
 
-        span {
-            background-color: rgba(239,71,111,.18);
-            color: #ef476f;
-            border-radius: 45%;
-            font-size: 10px;
-            font-weight: 600;
-            line-height: 16px;
-            padding: 5px 5.5px;
+      .message-image__icon {
+        margin-right: 4px;
+      }
+    }
+
+    .message.typing {
+      color: v.$primary;
+      font-weight: 500;
+
+      .animate-typing {
+        .dot {
+          animation: wave 1.3s linear infinite;
+          background: #7269ef;
+          border-radius: 50%;
+          display: inline-block;
+          height: 4px;
+          margin-right: -1px;
+          opacity: 0.6;
+          width: 4px;
+
+          &:nth-child(2) {
+            animation-delay: -1.1s;
+          }
+
+          &:nth-child(3) {
+            animation-delay: -0.9s;
+          }
         }
+
+        .ms-1 {
+          margin-left: 4px;
+        }
+      }
     }
+  }
+
+  .conversation__time {
+    font-size: 11px;
+    color: v.$text-sub-color;
+  }
+
+  &:hover {
+    background-color: v.$card-background-hover;
+    cursor: pointer;
+  }
+
+  .conversation__unread {
+    display: inline-block;
+    left: auto;
+    position: absolute;
+    right: 24px;
+    top: 33px;
+
+    span {
+      background-color: rgba(239, 71, 111, 0.18);
+      color: #ef476f;
+      border-radius: 45%;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 16px;
+      padding: 5px 5.5px;
+    }
+  }
 }
 
 @keyframes wave {
-	0% {
-		transform: initial;
-	}
+  0% {
+    transform: initial;
+  }
 
-	30% {
-		transform: translateY(-6px);
-	}
+  30% {
+    transform: translateY(-6px);
+  }
 
-    60% {
-		transform: initial;
-	}
+  60% {
+    transform: initial;
+  }
 
-    100% {
-		transform: initial;
-	}
+  100% {
+    transform: initial;
+  }
 }

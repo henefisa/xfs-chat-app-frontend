@@ -1,9 +1,6 @@
 import * as React from 'react';
 import Avatar from '../Avatar/Avatar';
 import Title from '../Title/Title';
-import {
-  FileImageOutlined
-} from '@ant-design/icons';
 
 import './Conversation.scss';
 
@@ -17,25 +14,23 @@ const Conversation: React.FC = () => {
           imgWidth={35.2}
           className="avatar"
         />
-        <span className="user-status online" />
+        <span className="conversation-item__status online" />
       </div>
       <div className="conversation__content">
         <div className="conversation__content--name">
           <Title className="title">Patrick Hendricks</Title>
         </div>
         <p className="message typing">
-          {/* <FileImageOutlined className="message-image__icon"/> */}
-           Typing
+          Typing
           <span className="animate-typing">
             <span className="dot ms-1"></span>
             <span className="dot ms-1"></span>
             <span className="dot ms-1"></span>
-          </span> 
-          
+          </span>
         </p>
       </div>
       <div className="conversation__time">10:05</div>
-      <div className="unread-message">
+      <div className="conversation__unread">
         <span>2</span>
       </div>
     </div>
