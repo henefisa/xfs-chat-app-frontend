@@ -129,7 +129,7 @@ const SidebarProfile: React.FC = () => {
             {listAttachedFile.map((item, index) => (
               <AttachedFileItem key={index} item={item} />
             ))}
-          </div>  
+          </div>
         </Panel>
       </Collapse>
     </div>
