@@ -2,14 +2,10 @@ import apiRequest from 'src/api/apiRequest';
 
 export const checkUsernameExist = async (username: string) => {
   try {
-    const res = await apiRequest.post('api/auth/checkUsernameExists', {
+    const res = await apiRequest.post('api/users/checkUsernameExists', {
       username,
     });
-    if (res && !res.data) {
-      return res.data;
-    } else {
-      return 'Error';
-    }
+    return res.data;
   } catch (err) {
     console.log(err);
   }
@@ -17,14 +13,10 @@ export const checkUsernameExist = async (username: string) => {
 
 export const checkEmailExist = async (email: string) => {
   try {
-    const res = await apiRequest.post('api/auth/checkEmailExists', {
+    const res = await apiRequest.post('api/users/checkEmailExists', {
       email,
     });
-    if (res && !res.data) {
-      return res.data;
-    } else {
-      return 'Error';
-    }
+    return res.data;
   } catch (err) {
     console.log(err);
   }
