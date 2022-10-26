@@ -25,7 +25,14 @@ export const login = async (
     const res = await apiRequest.post('api/auth/login', user);
     dispatch(loginSuccess(res.data.access_token));
     dispatch(rememberOnSubmit(!!isRemember));
-    navigate('/dashboard');
+    notification.success({
+      message: 'Success',
+      description: 'Đăng nhập thành công.',
+      duration: 2,
+    });
+    setTimeout(() => {
+      navigate('/dashboard');
+    }, 1500);
   } catch (err) {
     dispatch(loginFailed());
     notification.error({
