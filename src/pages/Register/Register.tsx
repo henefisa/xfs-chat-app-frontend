@@ -1,18 +1,22 @@
-import * as React from 'react';
-import { Form } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
 import {
+  HeartFilled,
+  LockOutlined,
   MailOutlined,
   UserOutlined,
-  LockOutlined,
-  HeartFilled,
 } from '@ant-design/icons';
+import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
 import Title from '@common/Title/Title';
-import Button from '@common/Button/Button';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
-import { register } from '../../services/registerService';
+import { Form } from 'antd';
+import * as React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  checkEmailExist,
+  checkUsernameExist,
+} from 'src/services/checkUserService';
 import { useAppDispatch } from 'src/store/hooks';
+import { register } from '../../services/registerService';
 
 import './Register.scss';
 
@@ -61,6 +65,19 @@ const Register: React.FC = () => {
                   message: 'Enter proper email!',
                 },
                 { required: true, message: 'Required!' },
+                {
+                  validator: async (rule, value) => {
+                    let isExist = false;
+                    if (value) {
+                      isExist = await checkEmailExist(value);
+                    }
+                    if (isExist) {
+                      return Promise.reject('Email is exist!');
+                    } else {
+                      return Promise.resolve();
+                    }
+                  },
+                },
               ]}
             >
               <WrapperInput
@@ -74,7 +91,22 @@ const Register: React.FC = () => {
               name="username"
               label="Username"
               labelCol={{ span: 24 }}
-              rules={[{ required: true, message: 'Required!' }]}
+              rules={[
+                { required: true, message: 'Required!' },
+                {
+                  validator: async (rule, value) => {
+                    let isExist = false;
+                    if (value) {
+                      isExist = await checkUsernameExist(value);
+                    }
+                    if (isExist) {
+                      return Promise.reject('Username is exist!');
+                    } else {
+                      return Promise.resolve();
+                    }
+                  },
+                },
+              ]}
             >
               <WrapperInput
                 PrefixIcon={UserOutlined}
