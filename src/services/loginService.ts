@@ -23,18 +23,9 @@ export const login = async (
   dispatch(loginStart());
   try {
     const res = await apiRequest.post('api/auth/login', user);
-    if (res.data.access_token) {
-      dispatch(loginSuccess(res.data.access_token));
-      dispatch(rememberOnSubmit(!!isRemember));
-      navigate('/dashboard');
-    } else {
-      dispatch(loginFailed());
-      notification.error({
-        message: 'Error',
-        description: 'Đăng nhập thất bại!',
-        duration: 2.5,
-      });
-    }
+    dispatch(loginSuccess(res.data.access_token));
+    dispatch(rememberOnSubmit(!!isRemember));
+    navigate('/dashboard');
   } catch (err) {
     dispatch(loginFailed());
     notification.error({
