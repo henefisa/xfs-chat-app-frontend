@@ -4,7 +4,6 @@ import MessagesTable from '../MessagesTable/MessagesTable';
 
 import './ChatMain.scss';
 
-
 const ChatMain = () => {
     return (
         <div className="chatPanel">

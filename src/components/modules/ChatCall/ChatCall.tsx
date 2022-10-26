@@ -11,7 +11,7 @@ import Button from '@common/Button/Button';
 
 import './ChatCall.scss';
 
-interface ChatCallProps {
+interface IChatCallProps {
     onClose(): void;
     title: string;
 }
@@ -19,7 +19,7 @@ interface ChatCallProps {
 
 
 
-const ChatCall: React.FC<ChatCallProps> = ({ onClose, title }) => {
+const ChatCall: React.FC<IChatCallProps> = ({ onClose, title }) => {
     return (
         <div className="modal-chat-call">
             <div className="modal-overlay">

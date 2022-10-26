@@ -15,14 +15,14 @@ import './ChatBottom.scss';
 
 const ChatBottom = () => {
   return (
-    <div className="bottom-chat">
-      <div className="bottom-chat__type-chat">
+    <div className="chat-bottom">
+      <div className="chat-bottom__type-chat">
         <Input
           className="type-chat__input"
           placeholder="Enter Message..."
         />
       </div>
-      <div className="bottom-chat__items-chat">
+      <div className="chat-bottom__items-chat">
         <div className="items-chat__emoji-btn">
           <Button className="emoji-btn__button button--send">
             <SmileOutlined className="custom-send-icon" />

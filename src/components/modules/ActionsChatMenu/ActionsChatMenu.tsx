@@ -9,6 +9,7 @@ import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 
 import './ActionsChatMenu.scss';
+import clsx from 'clsx';
 
 interface IActionsChatMenuProps extends MenuProps { }
 
@@ -48,8 +49,8 @@ const menu: MenuProps['items'] = [
     }
 ]
 
-const ActionsChatMenu: React.FC<IActionsChatMenuProps> = () => {
-    return <Menu className="chat-menu" items={menu} />;
+const ActionsChatMenu: React.FC<IActionsChatMenuProps> = ({ className, ...rest}) => {
+    return <Menu className={clsx("chat-menu", className)} {...rest} items={menu} />;
 }
 
 export default ActionsChatMenu;

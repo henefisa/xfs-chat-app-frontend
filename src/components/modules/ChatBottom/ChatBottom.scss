@@ -1,11 +1,11 @@
 @use '../../../assets/styles/variables' as v;
 
-.bottom-chat {
+.chat-bottom {
     display: flex;
     flex-direction: row;
     padding: 1.5rem;
     border-top: 0.5px solid rgba($color: #495057, $alpha: 0.1);
-    .bottom-chat__type-chat{
+    .chat-bottom__type-chat{
         width: 80%;
         padding: 0px 12px;
         .type-chat__input {
@@ -22,7 +22,7 @@
         }
         
     }
-    .bottom-chat__items-chat {
+    .chat-bottom__items-chat {
         width: 20%;
         display: flex;
         flex-direction: row;

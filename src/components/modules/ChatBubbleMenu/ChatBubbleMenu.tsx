@@ -11,6 +11,7 @@ import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 
 import './ChatBubbleMenu.scss';
+import clsx from 'clsx';
 
 interface IChatBubbleMenuProps extends MenuProps {
     position: string;
@@ -63,8 +64,8 @@ const menu: MenuProps['items'] = [
     }
 ]
 
-const ChatBubbleMenu: React.FC<IChatBubbleMenuProps> = ({ position }) => {
-  return <Menu className={`chat-bubble-menu ${position}`} items={menu} />
+const ChatBubbleMenu: React.FC<IChatBubbleMenuProps> = ({ className, position, ...rest }) => {
+  return <Menu className={clsx(`chat-bubble-menu ${position}`, className)} {...rest} items={menu} />
 }
 
 export default ChatBubbleMenu;

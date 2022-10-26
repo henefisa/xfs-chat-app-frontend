@@ -9,14 +9,15 @@ import Dropdown from '@common/Dropdown/Dropdown';
 import ChatBubbleMenu from '../ChatBubbleMenu/ChatBubbleMenu';
 
 import './MessagesTable.scss';
+import clsx from 'clsx';
 
-interface MessagesTableProps {
+interface IMessagesTableProps {
     position: string;
 }
 
-const MessagesTable: React.FC<MessagesTableProps> = ({ position }) => {
+const MessagesTable: React.FC<IMessagesTableProps> = ({ position }) => {
     return (
-        <div className={`messages-table messages-table--${position}`} >
+        <div className={clsx("messages-table", `messages-table--${position}`)} >
             <div className="messages-table__avatar">
                 <Avatar
                     path="https://scontent.fdad3-1.fna.fbcdn.net/v/t39.30808-6/277551484_1607305416300980_1426726336589949572_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=NDE6kmkwFQ8AX9-U3bh&_nc_ht=scontent.fdad3-1.fna&oh=00_AT8SGcvhT_y6-Lc16cMBv0OwsUOg0x7ef7Yp1yb_1teoEQ&oe=635BDBD2"
@@ -26,8 +27,8 @@ const MessagesTable: React.FC<MessagesTableProps> = ({ position }) => {
                 />
             </div>
             <div className="messages-table__chat-content">
-                <div className={`messages-table__chat-content-user messages-table__chat-content-user--${position}`}>
-                    <div className={`messages-table__chat-content-bubble messages-table__chat-content-bubble--${position}`}>
+                <div className={clsx("messages-table__chat-content-user", `messages-table__chat-content-user--${position}`)}>
+                    <div className={clsx("messages-table__chat-content-bubble", `messages-table__chat-content-bubble--${position}`)}>
                         hi...Good Morning!
                         <div className="messages-table__chat-content-bubble-time">
                             <ClockCircleOutlined className="custom-icon-chat-time" />
@@ -39,7 +40,7 @@ const MessagesTable: React.FC<MessagesTableProps> = ({ position }) => {
                             overlay={<ChatBubbleMenu position={(position === 'left') ? 'left' : 'right'} />}
                             trigger={['click']}
                             placement="bottom"
-                            className={`dropdown-chat-menu dropdown-chat-menu--${position}`}
+                            className={clsx("dropdown-chat-menu", `dropdown-chat-menu--${position}`)}
                         >
                             <MoreOutlined className="custom-icon-chat-bubble-more" />
                         </Dropdown>
