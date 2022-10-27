@@ -15,21 +15,19 @@ import userReducer from './userSlice';
 import authReducer from './authSlice';
 
 const loginPersistConfig = {
-  key: 'auth',
+  key: 'login',
   version: 1,
   storage,
-  whitelist: ['auth'],
+  whitelist: ['login'],
 };
 
 const rootReducer = combineReducers({
   user: userReducer,
-  auth: authReducer,
+  auth: persistReducer(loginPersistConfig, authReducer),
 });
 
-const persistedReducer = persistReducer(loginPersistConfig, rootReducer);
-
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
