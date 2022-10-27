@@ -4,11 +4,11 @@ import Avatar from '../../Avatar/Avatar';
 import '../Carousel.scss';
 
 interface CarouselItemProps {
-  path: string,
-  name: string
+  path: string;
+  name: string;
 }
 
-const CarouselItem: React.FC<CarouselItemProps> = ({path, name}) => {
+const CarouselItem: React.FC<CarouselItemProps> = ({ path, name }) => {
   return (
     <div className="carousel-item">
       <div className="carousel-item__avatar">

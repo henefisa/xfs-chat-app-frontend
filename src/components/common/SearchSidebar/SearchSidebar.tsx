@@ -6,16 +6,13 @@ import { SearchOutlined } from '@ant-design/icons';
 import './SearchSidebar.scss';
 
 interface SearchSidebarProps {
-  placeholder : string
+  placeholder: string;
 }
 
-const SearchSidebar: React.FC<SearchSidebarProps> = ({placeholder}) => {
+const SearchSidebar: React.FC<SearchSidebarProps> = ({ placeholder }) => {
   return (
     <div className="search-sidebar">
-      <Input
-        className="search-sidebar__input"
-        placeholder={placeholder}
-      />
+      <Input className="search-sidebar__input" placeholder={placeholder} />
       <span>
         <SearchOutlined className="search-sidebar__icon" />
       </span>
