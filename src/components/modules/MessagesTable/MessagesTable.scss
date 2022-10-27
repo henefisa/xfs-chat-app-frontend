@@ -1,0 +1,142 @@
+@use '../../../assets/styles/variables' as v;
+
+
+.messages-table {
+
+    display: flex;
+
+    &--right {
+        flex-direction: row-reverse;
+
+        .chat-content__username {
+            margin: 10px;
+            text-align: end;
+        }
+
+        .dropdown-chat-menu--right {
+            position: relative;
+        }
+
+    }
+
+    &--left {
+
+        .dropdown-chat-menu--left {
+            position: relative;
+        }
+    }
+
+    .messages-table__avatar {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+    }
+
+    .chat-content__username {
+        font-size: 14px;
+        font-weight: 500;
+        color: v.$text-color;
+        margin-bottom: 4px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .messages-table__chat-content {
+        display: flex;
+        flex-direction: column;
+
+        .messages-table__chat-content-bubble {
+            margin: 0px 10px;
+        }
+    }
+
+    .messages-table__chat-content-user {
+        &--right {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        &--left {
+            display: flex;
+            flex-direction: row;
+        }
+    }
+
+
+
+
+    .messages-table__chat-content-bubble {
+        padding: 14px 18px;
+        background: #f5f7fb;
+        border-radius: 9px;
+        position: relative;
+        font-size: 15px;
+        animation: fadeIn 1s ease-in;
+
+        &:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-bottom: 0;
+            margin-top: -10px;
+        }
+
+        &--left {
+            &:after {
+                left: 0;
+                border-top-color: #f5f7fb;
+                border-left: 0;
+                margin-top: 6px;
+            }
+
+            .messages-table__chat-content-bubble-time {
+                color: #7a7f9a;
+                text-align: right;
+            }
+        }
+
+        &--right {
+            background: v.$primary;
+            color: #fff;
+
+            &:after {
+                right: 0;
+                border-top-color: v.$primary;
+                border-right: 0;
+                margin-top: 6px;
+            }
+
+            .messages-table__chat-content-bubble-time {
+                color: hsla(0, 0%, 100%, .5);
+                text-align: left;
+            }
+
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .messages-table__chat-content-bubble-time {
+            margin-top: 10px;
+            font-size: 12px;
+
+            .custom-icon-chat-time {
+                padding: 4px;
+            }
+        }
+
+        .custom-icon-chat-bubble-more {
+            font-size: 15px;
+        }
+
+    }
+}
