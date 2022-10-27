@@ -8,12 +8,12 @@ import './ChatUI.scss';
 
 const ChatUI = () => {
   return (
-    <div className='chat-ui'>
-      <ChatHeader/>
+    <div className="chat-ui">
+      <ChatHeader />
       <ChatMain />
-      <ChatBottom/>
+      <ChatBottom />
     </div>
-  )
-}
+  );
+};
 
 export default ChatUI;

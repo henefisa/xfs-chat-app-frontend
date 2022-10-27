@@ -1,24 +1,24 @@
 import { NavigateFunction } from 'react-router-dom';
 import { AppDispatch } from '../store';
 import {
-	loginStart,
-	loginSuccess,
-	loginFailed,
-	rememberOnSubmit,
+  loginStart,
+  loginSuccess,
+  loginFailed,
+  rememberOnSubmit,
 } from 'src/store/loginSlice';
 import { notification } from 'antd';
 import apiRequest from 'src/api/apiRequest';
 
 interface IUser {
-	username: string;
-	password: string;
+  username: string;
+  password: string;
 }
 
 export const login = async (
-	user: IUser,
-	isRemember: boolean,
-	dispatch: AppDispatch,
-	navigate: NavigateFunction
+  user: IUser,
+  isRemember: boolean,
+  dispatch: AppDispatch,
+  navigate: NavigateFunction
 ) => {
   dispatch(loginStart());
   try {

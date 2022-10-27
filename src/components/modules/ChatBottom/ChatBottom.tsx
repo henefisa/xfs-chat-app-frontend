@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   SmileOutlined,
   PaperClipOutlined,
@@ -11,16 +11,11 @@ import Input from '@common/Input/Input';
 
 import './ChatBottom.scss';
 
-
-
 const ChatBottom = () => {
   return (
     <div className="chat-bottom">
       <div className="chat-bottom__type-chat">
-        <Input
-          className="type-chat__input"
-          placeholder="Enter Message..."
-        />
+        <Input className="type-chat__input" placeholder="Enter Message..." />
       </div>
       <div className="chat-bottom__items-chat">
         <div className="items-chat__emoji-btn">
@@ -45,7 +40,7 @@ const ChatBottom = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ChatBottom;
