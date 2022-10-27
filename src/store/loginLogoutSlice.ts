@@ -62,6 +62,7 @@ export const {
 export const selectCurrentAccesToken = (state: RootState) =>
   state.loginLogout.login.currentAccessToken;
 
+export const selectLogin = (state: RootState) => state.loginLogout.login;
 export const selectIsRemember = (state: RootState) =>
   state.loginLogout.login.isRemember;
 export const selectisLoggedIn = (state: RootState) =>
