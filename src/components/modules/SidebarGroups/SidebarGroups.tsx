@@ -93,7 +93,7 @@ const SidebarGroups: React.FC = () => {
 				</div>
 			</div>
 			<div
-				className={clsx("overlay-modal", {"active": toggleModal})}
+				className={clsx('overlay-modal', { active: toggleModal })}
 				onClick={(e) => {
 					if (e.target === e.currentTarget) {
 						setToggleModal(false);
@@ -168,7 +168,7 @@ const SidebarGroups: React.FC = () => {
 					</div>
 				</div>
 			</div>
-			<div className={clsx("overlay-backdrop", {"active": toggleModal})}></div>
+			<div className={clsx('overlay-backdrop', { active: toggleModal })}></div>
 		</>
 	);
 };
