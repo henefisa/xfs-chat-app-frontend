@@ -18,7 +18,7 @@ const SidebarChats: React.FC = () => {
           <SearchSidebar placeholder="Search messages or users" />
         </div>
       </div>
-      <div className="charts__carousel--wrapper">
+      <div className="charts__carousel">
         <Carousel>
           <CarouselItem
             path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
@@ -47,7 +47,7 @@ const SidebarChats: React.FC = () => {
         </Carousel>
       </div>
       <div className="charts-recent">
-        <Title level={5} className="charts-recent__title">
+        <Title level={5} className="title">
           Recent
         </Title>
         <div className="conversation-list">
