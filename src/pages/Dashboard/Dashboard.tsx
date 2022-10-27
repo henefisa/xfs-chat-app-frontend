@@ -1,6 +1,7 @@
 import * as React from 'react';
 import NavDashboard from '@modules/NavDashboard/NavDashboard';
 import SidebarDashboard from '@modules/SidebarDashboard/SidebarDashboard';
+import ChatUI from '@modules/ChatUI/ChatUI';
 
 import './Dashboard.scss';
 
@@ -9,7 +10,7 @@ const Dashboard: React.FC = () => {
     <div className="dashboard-page">
       <NavDashboard />
       <SidebarDashboard />
-      <div className="chat-ui">Chat UI</div>
+      <ChatUI />
     </div>
   );
 };
