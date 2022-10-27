@@ -14,8 +14,8 @@ const BlockGroup: React.FC<BlockGroupProps> = ({ avtTitle, name, pill }) => {
 				<span>{avtTitle}</span>
 			</div>
 			<div className="block-group__name">
-				<div className="block-group__name--title">{name}</div>
-				<div className="block-group__name--pill">{pill}</div>
+				<div className="title">{name}</div>
+				<div className="pill">{pill}</div>
 			</div>
 		</div>
 	);

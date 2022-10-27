@@ -4,10 +4,10 @@ import Tooltip from '@common/Tooltip/Tooltip';
 import { UsergroupAddOutlined, CloseOutlined } from '@ant-design/icons';
 
 import './SidebarGroups.scss';
-import SearchSidebar from 'src/components/common/SearchSidebar/SearchSidebar';
-import BlockGroup from 'src/components/common/BlockGroup/BlockGroup';
-import Input from 'src/components/common/Input/Input';
-import Button from 'src/components/common/Button/Button';
+import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
+import BlockGroup from '@common/BlockGroup/BlockGroup';
+import Input from '@common/Input/Input';
+import Button from '@common/Button/Button';
 import clsx from 'clsx';
 
 const contacts = [
