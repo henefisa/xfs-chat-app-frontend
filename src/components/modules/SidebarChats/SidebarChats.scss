@@ -1,0 +1,44 @@
+@use '../../../../src/assets/styles/variables' as v;
+
+.sidebar-charts {
+  .header-charts {
+    padding: 24px 24px 0;
+
+    .title {
+      color: v.$text-color;
+      font-size: 21px;
+      font-weight: 600;
+      margin: 0 0 24px;
+    }
+
+    .search-box {
+      margin-bottom: 16px;
+    }
+  }
+
+  .charts__carousel--wrapper {
+    padding: 0 24px 24px;
+  }
+
+  .charts-recent {
+    padding: 0 8px;
+
+    .charts-recent__title {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 0 16px;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .conversation-list {
+      height: calc(100vh - 280px);
+      overflow: hidden scroll;
+
+      &::-webkit-scrollbar,
+      .simplebar-hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}
