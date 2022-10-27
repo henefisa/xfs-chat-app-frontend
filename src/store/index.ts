@@ -12,20 +12,18 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import userReducer from './userSlice';
-import reigterReducer from './registerSlice';
-import loginLogoutReducer from './loginLogoutSlice';
+import authReducer from './authSlice';
 
 const loginPersistConfig = {
-  key: 'loginLogout',
+  key: 'auth',
   version: 1,
   storage,
-  whitelist: ['loginLogout'],
+  whitelist: ['auth'],
 };
 
 const rootReducer = combineReducers({
   user: userReducer,
-  register: reigterReducer,
-  loginLogout: loginLogoutReducer,
+  auth: authReducer,
 });
 
 const persistedReducer = persistReducer(loginPersistConfig, rootReducer);

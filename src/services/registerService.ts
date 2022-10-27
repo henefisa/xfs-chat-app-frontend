@@ -6,7 +6,7 @@ import {
   registerStart,
   registerSuccess,
   registerFailed,
-} from '../store/registerSlice';
+} from '../store/authSlice';
 
 interface IUser {
   email: string;

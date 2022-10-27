@@ -6,12 +6,12 @@ import * as React from 'react';
 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { selectLogin } from 'src/store/loginLogoutSlice';
+import { selectLoginStore } from 'src/store/authSlice';
 
 import './Dashboard.scss';
 
 const Dashboard: React.FC = () => {
-  const loginStore = useSelector(selectLogin);
+  const loginStore = useSelector(selectLoginStore);
   const navigate = useNavigate();
 
   React.useEffect(() => {

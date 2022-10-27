@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '.';
 
-export const loginLogoutSlice = createSlice({
-  name: 'loginLogout',
+export const authSlice = createSlice({
+  name: 'authSlice',
   initialState: {
     login: {
       isFetching: false,
@@ -10,6 +10,11 @@ export const loginLogoutSlice = createSlice({
       isRemember: false,
       isLoggedIn: false,
       error: false,
+    },
+    register: {
+      isFetching: false,
+      error: false,
+      success: false,
     },
     logout: {
       isFetching: false,
@@ -33,6 +38,19 @@ export const loginLogoutSlice = createSlice({
     rememberOnSubmit: (state, action: PayloadAction<boolean>) => {
       state.login.isRemember = action.payload;
     },
+    registerStart: (state) => {
+      state.register.isFetching = false;
+    },
+    registerSuccess: (state) => {
+      state.register.isFetching = false;
+      state.register.error = false;
+      state.register.success = true;
+    },
+    registerFailed: (state) => {
+      state.register.isFetching = false;
+      state.register.error = true;
+      state.register.success = false;
+    },
     logoutStart: (state) => {
       state.logout.isFetching = true;
     },
@@ -54,18 +72,14 @@ export const {
   loginSuccess,
   loginFailed,
   rememberOnSubmit,
+  registerStart,
+  registerSuccess,
+  registerFailed,
   logoutStart,
   logoutSuccess,
   logoutFailed,
-} = loginLogoutSlice.actions;
+} = authSlice.actions;
 
-export const selectCurrentAccesToken = (state: RootState) =>
-  state.loginLogout.login.currentAccessToken;
+export const selectLoginStore = (state: RootState) => state.auth.login;
 
-export const selectLogin = (state: RootState) => state.loginLogout.login;
-export const selectIsRemember = (state: RootState) =>
-  state.loginLogout.login.isRemember;
-export const selectisLoggedIn = (state: RootState) =>
-  state.loginLogout.login.isLoggedIn;
-
-export default loginLogoutSlice.reducer;
+export default authSlice.reducer;

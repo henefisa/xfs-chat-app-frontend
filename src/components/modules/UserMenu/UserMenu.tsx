@@ -8,7 +8,7 @@ import * as React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/store/hooks';
-import { logoutStart, logoutSuccess } from 'src/store/loginLogoutSlice';
+import { logoutStart, logoutSuccess } from 'src/store/authSlice';
 
 import Button from '@common/Button/Button';
 import Title from '@common/Title/Title';
