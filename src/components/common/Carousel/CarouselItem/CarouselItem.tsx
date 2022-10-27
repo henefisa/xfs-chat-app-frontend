@@ -20,7 +20,7 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ path, name }) => {
         />
         <span className="carousel-item__status" />
       </div>
-      <h5>Patrick</h5>
+      <h5>{name}</h5>
     </div>
   );
 };
