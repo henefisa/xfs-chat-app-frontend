@@ -13,19 +13,19 @@ import storage from 'redux-persist/lib/storage';
 
 import userReducer from './userSlice';
 import reigterReducer from './registerSlice';
-import loginReducer from './loginSlice';
+import loginLogoutReducer from './loginLogoutSlice';
 
 const loginPersistConfig = {
-  key: 'login',
+  key: 'loginLogout',
   version: 1,
   storage,
-  whitelist: ['login'],
+  whitelist: ['loginLogout'],
 };
 
 const rootReducer = combineReducers({
   user: userReducer,
   register: reigterReducer,
-  login: loginReducer,
+  loginLogout: loginLogoutReducer,
 });
 
 const persistedReducer = persistReducer(loginPersistConfig, rootReducer);
