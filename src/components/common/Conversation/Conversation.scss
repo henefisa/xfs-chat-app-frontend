@@ -25,15 +25,15 @@
 			width: 10px;
 		}
 
-		.conversation-item__status.online {
+		.conversation-item__status--online {
 			background-color: #06d6a0;
 		}
 
-		.conversation-item__status.off {
+		.conversation-item__status--off {
 			background-color: #ffd166;
 		}
 
-		.conversation-item__status.hide {
+		.conversation-item__status--hide {
 			background-color: transparent;
 			border: none;
 		}

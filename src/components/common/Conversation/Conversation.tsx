@@ -26,7 +26,7 @@ const Conversation: React.FC<ConversationProps> = ({
           imgWidth={35.2}
           className="avatar"
         />
-        <span className="conversation-item__status online" />
+        <span className="conversation-item__status--online" />
       </div>
       <div className="conversation-item__content">
         <Title className="title">{name}</Title>
