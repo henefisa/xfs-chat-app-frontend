@@ -15,18 +15,17 @@ const SidebarChats: React.FC = () => {
           <Title level={4}>Chats</Title>
         </div>
         <div className="search-box">
-          <SearchSidebar />
+          <SearchSidebar placeholder="Search messages or users"/>
         </div>
       </div>
       <div className="charts__carousel--wrapper">
         <Carousel>
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
+          <CarouselItem path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick"/>
+          <CarouselItem path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick"/>
+          <CarouselItem path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick"/>
+          <CarouselItem path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick"/>
+          <CarouselItem path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick"/>
+          <CarouselItem path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick"/>
         </Carousel>
       </div>
       <div className="charts-recent">
@@ -34,15 +33,15 @@ const SidebarChats: React.FC = () => {
           Recent
         </Title>
         <div className="conversation-list">
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
+          <Conversation path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick Hendricks"/>
+          <Conversation path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick Hendricks"/>
+          <Conversation path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick Hendricks"/>
+          <Conversation path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick Hendricks"/>
+          <Conversation path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick Hendricks"/>
+          <Conversation path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick Hendricks"/>
+          <Conversation path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick Hendricks"/>
+          <Conversation path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick Hendricks"/>
+          <Conversation path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg" name="Patrick Hendricks"/>
         </div>
       </div>
     </div>

@@ -1,0 +1,58 @@
+@use '../../../../src/assets/styles/variables' as v;
+
+
+.block-group {
+    padding: 15px 20px;
+    border-radius: 4px;
+    transition: all .4s;
+    display: flex;
+    align-items: center;
+
+    .block-group__avatar {
+        width: 35.2px;
+        height: 35.2px;
+        margin-right: 16px;
+
+        span {
+            align-items: center;
+            background-color: rgba(114,105,239,.25);
+            color: rgb(114,105,239);
+            display: flex;
+            font-weight: 500;
+            height: 100%;
+            justify-content: center;
+            width: 100%;
+            border-radius: 50%;
+            font-size: 15px;
+        }
+    }
+
+    .block-group__name {
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .block-group__name--title {
+            font-size: 14px;
+            font-weight: 600;
+            color: v.$text-color;
+        }
+
+        .block-group__name--pill {
+            background-color: rgba(239,71,111,.18);
+            color: #ef476f;
+            border-radius: 4px;
+            display: inline-block;
+            font-size: 10.5px;
+            font-weight: 500;
+            line-height: 1;
+            padding: 2.625px 6.3px ;
+        }
+    }
+
+    &:hover {
+        background-color: v.$card-background-hover;
+        cursor: pointer;
+    }
+}
