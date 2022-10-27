@@ -76,7 +76,7 @@ const SidebarGroups: React.FC = () => {
               placement="bottom"
               tooltipTitle="Create group"
             >
-              <UsergroupAddOutlined className="sidebar-groups__header--icon" />
+              <UsergroupAddOutlined className="icon" />
             </Tooltip>
           </div>
         </div>
@@ -114,7 +114,7 @@ const SidebarGroups: React.FC = () => {
               <div className="title">Group Name</div>
               <Input className="input" placeholder="Enter Group Name" />
             </div>
-            <div className="dialog__body--group-members">
+            <div className="group-members">
               <div className="group-members__title">Group Members</div>
               <div
                 className={clsx('group-members__select-members', {
