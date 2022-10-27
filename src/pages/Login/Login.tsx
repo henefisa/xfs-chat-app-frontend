@@ -1,14 +1,16 @@
-import * as React from 'react';
-import { Form } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
-import { UserOutlined, LockOutlined, HeartFilled } from '@ant-design/icons';
-import Card from '@common/Card/Card';
-import Title from '@common/Title/Title';
+import { HeartFilled, LockOutlined, UserOutlined } from '@ant-design/icons';
 import Button from '@common/Button/Button';
+import Card from '@common/Card/Card';
 import InputCheckbox from '@common/Input/InputCheckbox';
+import Title from '@common/Title/Title';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
-import { useAppDispatch } from 'src/store/hooks';
+import { Form } from 'antd';
+import * as React from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from 'src/services/loginService';
+import { selectLoginStore } from 'src/store/authSlice';
+import { useAppDispatch } from 'src/store/hooks';
 
 import './Login.scss';
 
@@ -19,8 +21,24 @@ interface IFormFields {
 }
 
 const LoginPage: React.FC = () => {
+  const loginStore = useSelector(selectLoginStore);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    if (loginStore.currentAccessToken && loginStore.isLoggedIn) {
+      timeoutId = setTimeout(() => {
+        navigate('/dashboard');
+      }, 1500);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   const handleFinish = (values: IFormFields) => {
     const { isRemember, ...user } = values;

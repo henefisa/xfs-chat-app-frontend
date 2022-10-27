@@ -5,7 +5,7 @@ import {
   loginSuccess,
   loginFailed,
   rememberOnSubmit,
-} from 'src/store/loginSlice';
+} from 'src/store/authSlice';
 import { notification } from 'antd';
 import apiRequest from 'src/api/apiRequest';
 
