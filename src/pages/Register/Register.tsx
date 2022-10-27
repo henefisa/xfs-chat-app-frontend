@@ -44,14 +44,10 @@ const Register: React.FC = () => {
         return;
       }
       case 'email': {
-        console.log(23);
-
         isExist = await checkEmailExist(value);
         break;
       }
       case 'username': {
-        console.log(123);
-
         isExist = await checkUsernameExist(value);
 
         break;
