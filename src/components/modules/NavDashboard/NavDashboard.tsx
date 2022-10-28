@@ -111,7 +111,7 @@ const NavDashboard: React.FC = () => {
           >
             <Avatar
               path={userProfileStore.avatar ? userProfileStore.avatar : ''}
-              userName={
+              username={
                 userProfileStore.username
                   ? userProfileStore.username.charAt(0).toUpperCase()
                   : ''
