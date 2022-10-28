@@ -10,7 +10,7 @@ const CarouselItem: React.FC = () => {
         <Avatar
           path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
           imgWidth={35.2}
-          userName="Patrick"
+          username="Patrick"
           className="custom-avatar"
         />
         <span className="carousel-item__status" />

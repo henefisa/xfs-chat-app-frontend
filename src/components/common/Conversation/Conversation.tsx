@@ -10,7 +10,7 @@ const Conversation: React.FC = () => {
       <div className="conversation__avatar">
         <Avatar
           path="http://chatvia-light.react.themesbrand.com/static/media/avatar-4.b23e41d9c09997efbc21.jpg"
-          userName="Doris Brown"
+          username="Doris Brown"
           imgWidth={35.2}
           className="avatar"
         />

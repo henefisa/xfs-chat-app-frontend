@@ -6,14 +6,14 @@ import './Avatar.scss';
 
 interface IAvatarProps extends AvatarProps {
   path?: string;
-  userName: string;
+  username: string;
   imgWidth: number;
   className?: string;
 }
 
 const Avatar: React.FC<IAvatarProps> = ({
   path,
-  userName,
+  username,
   imgWidth,
   className,
   ...rest
@@ -25,7 +25,7 @@ const Avatar: React.FC<IAvatarProps> = ({
       size={imgWidth}
       {...rest}
     >
-      {userName}
+      {username}
     </AAvatar>
   );
 };
