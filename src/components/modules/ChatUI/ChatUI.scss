@@ -1,5 +1,19 @@
 .chat-ui {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
+    .chat-ui-main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        &--true {
+            width: 65%;
+        }
+    }
+   
+    .chat-ui-profile {
+        display: flex;
+        width: 35%;
+    }
 }

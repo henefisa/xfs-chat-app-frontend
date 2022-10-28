@@ -12,10 +12,11 @@ import './MessagesTable.scss';
 import clsx from 'clsx';
 
 interface IMessagesTableProps {
+    messages: string;
     position: string;
 }
 
-const MessagesTable: React.FC<IMessagesTableProps> = ({ position }) => {
+const MessagesTable: React.FC<IMessagesTableProps> = ({ messages, position }) => {
     return (
         <div className={clsx("messages-table", `messages-table--${position}`)} >
             <div className="messages-table__avatar">
@@ -29,7 +30,7 @@ const MessagesTable: React.FC<IMessagesTableProps> = ({ position }) => {
             <div className="messages-table__chat-content">
                 <div className={clsx("messages-table__chat-content-user", `messages-table__chat-content-user--${position}`)}>
                     <div className={clsx("messages-table__chat-content-bubble", `messages-table__chat-content-bubble--${position}`)}>
-                        hi...Good Morning!
+                        {messages}
                         <div className="messages-table__chat-content-bubble-time">
                             <ClockCircleOutlined className="custom-icon-chat-time" />
                             10:30

@@ -16,6 +16,8 @@ import './SidebarProfile.scss';
 
 const { Panel } = Collapse;
 
+
+
 const userInfo = [
   { title: 'Name', desc: 'Patricia Smith' },
   { title: 'Email', desc: 'admin@mgail.com' },
@@ -46,7 +48,10 @@ const listAttachedFile = [
   },
 ];
 
+
+
 const SidebarProfile: React.FC = () => {
+
   return (
     <div className="sidebar-profile">
       <div className="header-profile">

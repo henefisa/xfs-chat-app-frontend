@@ -12,16 +12,10 @@ const ChatMain = () => {
                     Today
                 </div>
             </div>
-            <MessagesTable position='right' />
-            <MessagesTable position='left' />
-            <MessagesTable position='left' />
-            <MessagesTable position='right' />
-            <MessagesTable position='left' />
-            <MessagesTable position='right' />
-            <MessagesTable position='left' />
-            <MessagesTable position='left' />
-            <MessagesTable position='right' />
-            <MessagesTable position='left' />
+            <MessagesTable messages='hi' position='right' />
+            <MessagesTable messages='hi' position='left' />
+            <MessagesTable messages='hi' position='left' />
+            <MessagesTable messages='hi' position='right' />
         </div>
     )
 }

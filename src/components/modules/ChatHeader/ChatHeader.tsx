@@ -19,6 +19,10 @@ import ChatCall from '../ChatCall/ChatCall';
 
 import './ChatHeader.scss'
 
+interface IChatHeader {
+    setOpen: any,
+  }
+
 
 const ItemsChat = [
     {
@@ -43,7 +47,7 @@ const ItemsChat = [
 
 const activeIndex = 0;
 
-const ChatHeader = () => {
+const ChatHeader: React.FC<IChatHeader> = ({setOpen}) => {
 
     const [id, setId] = React.useState(-1)
 
@@ -70,6 +74,9 @@ const ChatHeader = () => {
                     return (
                         <Button key={index} className="items-chat__btn"
                             onClick={() => {
+                                if(index === 3) {
+                                    setOpen(true)
+                                }
                                 if (id === index) {
                                     setId(-1)
                                 }
@@ -116,6 +123,7 @@ const ChatHeader = () => {
                     id === 2 &&
                     <ChatCall title='Video' onClose={() => setId(-1)} />
                 }
+               
 
             </div>
 
