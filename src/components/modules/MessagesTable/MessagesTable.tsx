@@ -50,9 +50,33 @@ const MessagesTable: React.FC<IMessagesTableProps> = ({ messages, position }) =>
                 <Title level={5} className="chat-content__username">
                     Danh Huy
                 </Title>
+
             </div>
+          </div>
+          <div className="chat-content-bubble-more">
+            <Dropdown
+              overlay={
+                <ChatBubbleMenu
+                  position={position === 'left' ? 'left' : 'right'}
+                />
+              }
+              trigger={['click']}
+              placement="bottom"
+              className={clsx(
+                'dropdown-chat-menu',
+                `dropdown-chat-menu--${position}`
+              )}
+            >
+              <MoreOutlined className="custom-icon-chat-bubble-more" />
+            </Dropdown>
+          </div>
         </div>
-    )
-}
+        <Title level={5} className="chat-content__username">
+          Danh Huy
+        </Title>
+      </div>
+    </div>
+  );
+};
 
 export default MessagesTable;

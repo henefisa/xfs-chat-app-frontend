@@ -1,13 +1,17 @@
-import * as React from 'react';
-import { Menu, MenuProps } from 'antd';
 import {
-  SettingOutlined,
-  ProfileOutlined,
   LogoutOutlined,
+  ProfileOutlined,
+  SettingOutlined,
 } from '@ant-design/icons';
+import { Menu, MenuProps, notification } from 'antd';
+import * as React from 'react';
 
-import Title from '@common/Title/Title';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from 'src/store/hooks';
+import { logoutStart, logoutSuccess } from 'src/store/authSlice';
+import { deleteUserProfile } from 'src/store/userSlice';
 import Button from '@common/Button/Button';
+import Title from '@common/Title/Title';
 
 import './UserMenu.scss';
 
@@ -53,7 +57,42 @@ const menu: MenuProps['items'] = [
 ];
 
 const UserMenu: React.FC<IMenuProps> = () => {
-  return <Menu className="user-menu" items={menu} />;
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logoutStart());
+    dispatch(logoutSuccess());
+    dispatch(deleteUserProfile());
+    notification.success({
+      message: 'Success',
+      description: 'Đăng xuất thành công.',
+      duration: 2,
+    });
+    setTimeout(() => {
+      navigate('/login');
+    }, 1500);
+  };
+
+  const hanldeClickItem: MenuProps['onClick'] = (e) => {
+    switch (e.key) {
+      case '0': {
+        break;
+      }
+      case '1': {
+        break;
+      }
+      case '2': {
+        handleLogout();
+        break;
+      }
+      default: {
+        throw new Error('Error');
+      }
+    }
+  };
+
+  return <Menu className="user-menu" items={menu} onClick={hanldeClickItem} />;
 };
 
 export default UserMenu;

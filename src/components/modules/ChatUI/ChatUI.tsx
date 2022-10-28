@@ -21,8 +21,9 @@ const ChatUI = () => {
           <UserInfoChat setClose={setOpen}/>
         </div>
       }
+
     </div>
-  )
-}
+  );
+};
 
 export default ChatUI;

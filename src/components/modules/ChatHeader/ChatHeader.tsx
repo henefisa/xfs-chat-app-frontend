@@ -1,11 +1,11 @@
-import * as React from 'react'
+import * as React from 'react';
 import {
-    SearchOutlined,
-    PhoneOutlined,
-    VideoCameraOutlined,
-    UserOutlined,
-    EllipsisOutlined,
-    CheckCircleFilled,
+  SearchOutlined,
+  PhoneOutlined,
+  VideoCameraOutlined,
+  UserOutlined,
+  EllipsisOutlined,
+  CheckCircleFilled,
 } from '@ant-design/icons';
 
 import ActionsChatMenu from '../ActionsChatMenu/ActionsChatMenu';
@@ -25,25 +25,23 @@ interface IChatHeader {
 
 
 const ItemsChat = [
-    {
-        icon: SearchOutlined,
-        tooltipTitle: 'Search',
-    },
-    {
-        icon: PhoneOutlined,
-        tooltipTitle: 'VoiceCall',
-    },
-    {
-        icon: VideoCameraOutlined,
-        tooltipTitle: 'VideoCall',
-    },
-    {
-        icon: UserOutlined,
-        tooltipTitle: 'UserInfo',
-    }
-]
-
-
+  {
+    icon: SearchOutlined,
+    tooltipTitle: 'Search',
+  },
+  {
+    icon: PhoneOutlined,
+    tooltipTitle: 'VoiceCall',
+  },
+  {
+    icon: VideoCameraOutlined,
+    tooltipTitle: 'VideoCall',
+  },
+  {
+    icon: UserOutlined,
+    tooltipTitle: 'UserInfo',
+  },
+];
 
 const activeIndex = 0;
 
@@ -126,9 +124,17 @@ const ChatHeader: React.FC<IChatHeader> = ({setOpen}) => {
                
 
             </div>
-
         </div>
-    )
-}
+        {id === 0 && (
+          <div className="chat-header__search-chat">
+            <Input className="search-chat__input" placeholder="Search..." />
+          </div>
+        )}
+        {id === 1 && <ChatCall title="Audio" onClose={() => setId(-1)} />}
+        {id === 2 && <ChatCall title="Video" onClose={() => setId(-1)} />}
+      </div>
+    </div>
+  );
+};
 
 export default ChatHeader;
