@@ -5,15 +5,10 @@ import {
   getProfileStart,
   getProfileSuccess,
 } from 'src/store/userSlice';
-export const getUserProfile = async (
-  dispatch: AppDispatch,
-  accessToken: string
-) => {
+export const getUserProfile = async (dispatch: AppDispatch) => {
   dispatch(getProfileStart());
   try {
-    const res = await apiRequest.get('api/users/profile', {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    const res = await apiRequest.get('api/users/profile');
     dispatch(getProfileSuccess(res.data));
   } catch (err) {
     dispatch(getProfileFailed());

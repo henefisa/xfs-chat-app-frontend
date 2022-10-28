@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
         navigate('/login');
       }, 1500);
     } else {
-      getUserProfile(dispatch, loginStore.currentAccessToken);
+      getUserProfile(dispatch);
     }
 
     return () => {
