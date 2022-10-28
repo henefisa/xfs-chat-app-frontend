@@ -57,6 +57,7 @@ export const authSlice = createSlice({
     logoutSuccess: (state) => {
       state.logout.isFetching = false;
       state.login.currentAccessToken = '';
+      state.login.isRemember = false;
       state.login.isLoggedIn = false;
       state.logout.error = false;
     },
