@@ -88,7 +88,7 @@
     .dialog__body {
       padding: 24px;
 
-      .dialog__body--group-name {
+      .group-name {
         margin-bottom: 24px;
 
         .title {
@@ -109,13 +109,13 @@
       }
 
       .group-members {
-        .group-members__title {
+        .title {
           margin-bottom: 8px;
           font-size: 15px;
           font-weight: 500;
         }
 
-        .group-members__select-members {
+        .select-members {
           height: 36px;
           overflow: hidden;
           transition: 0.5s;
@@ -157,6 +157,21 @@
               padding: 8px;
               overflow: auto;
               height: 166px;
+
+              &::-webkit-scrollbar {
+                width: 7.5px;
+                background-color: white;
+              }
+
+              &::-webkit-scrollbar-track {
+                display: none;
+              }
+
+              &::-webkit-scrollbar-thumb {
+                height: 22px;
+                background: rgba(0, 0, 0, 0.15);
+                border-radius: 10px;
+              }
 
               .firt-character {
                 padding: 16px;
@@ -209,7 +224,7 @@
         }
       }
 
-      .dialog__body--desc {
+      .dialog__desc {
         padding-top: 20px;
         .title {
           line-height: 1.2;
@@ -250,13 +265,13 @@
       justify-content: flex-end;
       padding: 0 12px 16px;
 
-      .dialog__footer--btn-close,
-      .dialog__footer--btn-create {
+      .btn-close,
+      .btn-create {
         font-size: 15px;
         margin-top: 16px;
       }
 
-      .dialog__footer--btn-close {
+      .btn-close {
         margin-right: 8px;
         background-color: transparent;
         box-shadow: none;
@@ -264,7 +279,7 @@
         border: none;
         outline: none;
       }
-      .dialog__footer--btn-create {
+      .btn-create {
         color: white;
       }
     }

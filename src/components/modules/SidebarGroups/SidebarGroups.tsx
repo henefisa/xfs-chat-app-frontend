@@ -110,14 +110,14 @@ const SidebarGroups: React.FC = () => {
             </button>
           </div>
           <div className="dialog__body">
-            <div className="dialog__body--group-name">
+            <div className="group-name">
               <div className="title">Group Name</div>
               <Input className="input" placeholder="Enter Group Name" />
             </div>
             <div className="group-members">
-              <div className="group-members__title">Group Members</div>
+              <div className="title">Group Members</div>
               <div
-                className={clsx('group-members__select-members', {
+                className={clsx('select-members', {
                   [`select-contacts--open`]: active,
                 })}
               >
@@ -151,7 +151,7 @@ const SidebarGroups: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="dialog__body--desc">
+            <div className="dialog__desc">
               <div className="title">Description</div>
               <textarea
                 className="description"
@@ -160,13 +160,10 @@ const SidebarGroups: React.FC = () => {
             </div>
           </div>
           <div className="dialog__footer">
-            <Button
-              className="dialog__footer--btn-close"
-              onClick={() => setToggleModal(false)}
-            >
+            <Button className="btn-close" onClick={() => setToggleModal(false)}>
               Close
             </Button>
-            <Button className="dialog__footer--btn-create">Create Group</Button>
+            <Button className="btn-create">Create Group</Button>
           </div>
         </div>
       </div>
