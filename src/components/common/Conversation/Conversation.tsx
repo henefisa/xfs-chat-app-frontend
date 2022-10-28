@@ -22,7 +22,7 @@ const Conversation: React.FC<ConversationProps> = ({
       <div className="conversation-item__avatar">
         <Avatar
           path={path}
-          userName="Doris Brown"
+          username="Doris Brown"
           imgWidth={35.2}
           className="avatar"
         />

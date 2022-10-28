@@ -15,7 +15,7 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ path, name }) => {
         <Avatar
           path={path}
           imgWidth={35.2}
-          userName="Patrick"
+          username="Patrick"
           className="custom-avatar"
         />
         <span className="carousel-item__status" />
