@@ -2,7 +2,7 @@ import * as React from 'react';
 import './Carousel.scss';
 
 interface Children {
-  children: any;
+  children: React.ReactNode;
 }
 
 const Carousel: React.FC<Children> = ({ children }) => {
