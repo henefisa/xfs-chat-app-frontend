@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getUserProfile } from 'src/services/getUserProfileService';
-import { selectLoginStore } from 'src/store/authSlice';
+import { logoutSuccess, selectLoginStore } from 'src/store/authSlice';
 
 import './Dashboard.scss';
 
@@ -15,6 +15,20 @@ const Dashboard: React.FC = () => {
   const loginStore = useSelector(selectLoginStore);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleDeleteLocalStorage = () => {
+    if (
+      !loginStore.isRemember &&
+      loginStore.currentAccessToken &&
+      loginStore.isLoggedIn
+    ) {
+      dispatch(logoutSuccess());
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('beforeunload', handleDeleteLocalStorage);
+  }, []);
 
   React.useEffect(() => {
     let timeoutId: NodeJS.Timeout;
