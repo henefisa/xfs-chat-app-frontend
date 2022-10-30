@@ -8,7 +8,7 @@ import { Form } from 'antd';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from 'src/services/loginService';
+import * as authService from 'src/services/authService';
 import { selectLoginStore } from 'src/store/authSlice';
 import { useAppDispatch } from 'src/store/hooks';
 
@@ -27,23 +27,15 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
     if (loginStore.currentAccessToken && loginStore.isLoggedIn) {
-      timeoutId = setTimeout(() => {
-        navigate('/dashboard');
-      }, 1500);
+      navigate('/dashboard');
     }
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
   }, []);
 
-  const handleFinish = (values: IFormFields) => {
+  const handleFinish = async (values: IFormFields) => {
     const { isRemember, ...user } = values;
 
-    login(user, isRemember, dispatch, navigate);
+    await authService.login(user, isRemember, dispatch, navigate);
   };
 
   return (

@@ -69,9 +69,7 @@ const UserMenu: React.FC<IMenuProps> = () => {
       description: 'Đăng xuất thành công.',
       duration: 2,
     });
-    setTimeout(() => {
-      navigate('/login');
-    }, 1500);
+    navigate('/login');
   };
 
   const hanldeClickItem: MenuProps['onClick'] = (e) => {

@@ -11,12 +11,9 @@ import WrapperInput from '@modules/WrapperInput/WrapperInput';
 import { Form } from 'antd';
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  checkEmailExist,
-  checkUsernameExist,
-} from 'src/services/checkUserService';
+import { checkEmailExist, checkUsernameExist } from 'src/services/userService';
 import { useAppDispatch } from 'src/store/hooks';
-import { register } from '../../services/registerService';
+import * as authService from 'src/services/authService';
 
 import './Register.scss';
 
@@ -33,8 +30,8 @@ const Register: React.FC = () => {
 
   const typingTimeoutRef = React.useRef<NodeJS.Timeout>();
 
-  const handleFinish = (values: IFormFields) => {
-    register(values, dispatch, navigate);
+  const handleFinish = async (values: IFormFields) => {
+    await authService.register(values, dispatch, navigate);
   };
 
   const handleUserExist = async (fieldName: string, value: string) => {

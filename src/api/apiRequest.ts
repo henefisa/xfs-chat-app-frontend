@@ -1,4 +1,7 @@
+import { notification } from 'antd';
 import axios, { AxiosError } from 'axios';
+import { NavigateFunction } from 'react-router-dom';
+import getAccessTokenFromStorage from 'src/utils/getAccessToken';
 
 const apiRequest = axios.create({
   baseURL: import.meta.env.VITE_APP_API_BASE_URL,
@@ -7,37 +10,49 @@ const apiRequest = axios.create({
   },
 });
 
-apiRequest.interceptors.request.use(
-  (config) => {
-    config.headers = config.headers ?? {};
+export const initInterceptor = (navigate: NavigateFunction) => {
+  apiRequest.interceptors.request.use(
+    (config) => {
+      config.headers = config.headers ?? {};
 
-    let accessToken: string;
-    const loginStore = localStorage.getItem('persist:login');
+      const accessToken = getAccessTokenFromStorage();
 
-    if (loginStore) {
-      accessToken = JSON.parse(
-        JSON.parse(loginStore)?.login
-      )?.currentAccessToken;
-    } else {
-      accessToken = '';
+      config.headers.Authorization = accessToken ? `Bearer ${accessToken}` : '';
+
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
     }
+  );
 
-    config.headers.Authorization = accessToken ? `Bearer ${accessToken}` : '';
+  apiRequest.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error: AxiosError) => {
+      const status = error.response?.status;
 
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+      switch (status) {
+        case 401: {
+          notification.error({
+            message: 'Error',
+            description: 'Đăng nhập thất bại!',
+            duration: 2,
+          });
 
-apiRequest.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error: AxiosError) => {
-    return Promise.reject(error);
-  }
-);
+          navigate('/login');
+
+          break;
+        }
+        default: {
+          throw new Error('Unknow error');
+        }
+      }
+
+      return Promise.reject(error);
+    }
+  );
+};
 
 export default apiRequest;
