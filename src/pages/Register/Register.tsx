@@ -9,11 +9,12 @@ import Card from '@common/Card/Card';
 import Title from '@common/Title/Title';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 import { Form } from 'antd';
+import { FieldData } from 'rc-field-form/es/interface';
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import * as authService from 'src/services/authService';
 import { checkEmailExist, checkUsernameExist } from 'src/services/userService';
 import { useAppDispatch } from 'src/store/hooks';
-import * as authService from 'src/services/authService';
 
 import './Register.scss';
 
@@ -68,6 +69,21 @@ const Register: React.FC = () => {
     }
   };
 
+  const handleFieldChange = (changedFields: FieldData[]) => {
+    if (changedFields[0].value) {
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+
+      typingTimeoutRef.current = setTimeout(() => {
+        handleUserExist(
+          changedFields[0].name.toString(),
+          changedFields[0].value
+        );
+      }, 700);
+    }
+  };
+
   return (
     <div className="register-page">
       <div className="logo">
@@ -91,20 +107,7 @@ const Register: React.FC = () => {
           <Form
             onFinish={handleFinish}
             form={registerForm}
-            onFieldsChange={(changedFields) => {
-              if (changedFields[0].value) {
-                if (typingTimeoutRef.current) {
-                  clearTimeout(typingTimeoutRef.current);
-                }
-
-                typingTimeoutRef.current = setTimeout(() => {
-                  handleUserExist(
-                    changedFields[0].name.toString(),
-                    changedFields[0].value
-                  );
-                }, 700);
-              }
-            }}
+            onFieldsChange={handleFieldChange}
           >
             <Form.Item
               name="email"
