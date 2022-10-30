@@ -15,34 +15,90 @@ const SidebarChats: React.FC = () => {
           <Title level={4}>Chats</Title>
         </div>
         <div className="search-box">
-          <SearchSidebar />
+          <SearchSidebar placeholder="Search messages or users" />
         </div>
       </div>
-      <div className="charts__carousel--wrapper">
+      <div className="charts__carousel">
         <Carousel>
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
+          <CarouselItem
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick"
+          />
+          <CarouselItem
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick"
+          />
+          <CarouselItem
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick"
+          />
+          <CarouselItem
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick"
+          />
+          <CarouselItem
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick"
+          />
+          <CarouselItem
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick"
+          />
         </Carousel>
       </div>
       <div className="charts-recent">
-        <Title level={5} className="charts-recent__title">
+        <Title level={5} className="title">
           Recent
         </Title>
         <div className="conversation-list">
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
-          <Conversation />
+          <Conversation
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick Hendricks"
+            time="10:20"
+            unread="2"
+          />
+          <Conversation
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick Hendricks"
+            time="10:20"
+            unread="2"
+          />
+          <Conversation
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick Hendricks"
+            time="10:20"
+            unread="2"
+          />
+          <Conversation
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick Hendricks"
+            time="10:20"
+            unread="2"
+          />
+          <Conversation
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick Hendricks"
+            time="10:20"
+            unread="2"
+          />
+          <Conversation
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick Hendricks"
+            time="10:20"
+            unread="2"
+          />
+          <Conversation
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick Hendricks"
+            time="10:20"
+            unread="2"
+          />
+          <Conversation
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+            name="Patrick Hendricks"
+            time="10:20"
+            unread="2"
+          />
         </div>
       </div>
     </div>

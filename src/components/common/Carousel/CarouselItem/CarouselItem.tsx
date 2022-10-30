@@ -1,21 +1,26 @@
 import * as React from 'react';
 import Avatar from '../../Avatar/Avatar';
 
-import './CarouselItem.scss';
+import '../Carousel.scss';
 
-const CarouselItem: React.FC = () => {
+interface CarouselItemProps {
+  path: string;
+  name: string;
+}
+
+const CarouselItem: React.FC<CarouselItemProps> = ({ path, name }) => {
   return (
     <div className="carousel-item">
       <div className="carousel-item__avatar">
         <Avatar
-          path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+          path={path}
           imgWidth={35.2}
-          userName="Patrick"
+          username="Patrick"
           className="custom-avatar"
         />
         <span className="carousel-item__status" />
       </div>
-      <h5>Patrick</h5>
+      <h5>{name}</h5>
     </div>
   );
 };

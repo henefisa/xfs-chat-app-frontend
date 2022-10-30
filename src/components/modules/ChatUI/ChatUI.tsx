@@ -8,21 +8,21 @@ import './ChatUI.scss';
 import clsx from 'clsx';
 
 const ChatUI = () => {
-	const [open, setOpen] = useState(false);
-	return (
-		<div className="chat-ui">
-			<div className={clsx('chat-ui__main ', `chat-ui__main--${open}`)}>
-				<ChatHeader setOpen={setOpen} />
-				<ChatMain />
-				<ChatBottom />
-			</div>
-			{open && (
-				<div className="chat-ui__profile">
-					<UserInfoChat setClose={setOpen} />
-				</div>
-			)}
-		</div>
-	);
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="chat-ui">
+      <div className={clsx('chat-ui__main ', `chat-ui__main--${open}`)}>
+        <ChatHeader setOpen={setOpen} />
+        <ChatMain />
+        <ChatBottom />
+      </div>
+      {open && (
+        <div className="chat-ui__profile">
+          <UserInfoChat setClose={setOpen} />
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default ChatUI;

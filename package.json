@@ -27,8 +27,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "format": "prettier --check --write src/**/*.ts",
-    "lint": "eslint \"{src,test}/**/*.ts\" --fix"
+    "format": "prettier --check --write src/**/*.{ts,tsx}",
+    "lint": "eslint \"{src,test}/**/*.{ts,tsx}\" --fix"
   },
   "eslintConfig": {
     "extends": [

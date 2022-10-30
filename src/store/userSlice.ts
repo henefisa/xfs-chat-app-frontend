@@ -1,23 +1,43 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '.';
+import { IUser } from '../models';
+
+interface IUserProfile extends IUser {
+  avatar?: string | null;
+}
 
 export const userSlice = createSlice({
-	name: 'user',
-	initialState: {
-		username: '',
-		password: '',
-	},
-	reducers: {
-		usernameChange: (state, action: PayloadAction<string>) => {
-			state.username = action.payload;
-		},
-		passwordChange: (state, action: PayloadAction<string>) => {
-			state.password = action.payload;
-		},
-	},
+  name: 'user',
+  initialState: {
+    profile: { isFetching: false, error: false, userProfile: <IUserProfile>{} },
+  },
+  reducers: {
+    getProfileStart: (state) => {
+      state.profile.isFetching = true;
+    },
+    getProfileSuccess: (state, action: PayloadAction<IUserProfile>) => {
+      state.profile.isFetching = false;
+      state.profile.error = false;
+      state.profile.userProfile = action.payload;
+    },
+    getProfileFailed: (state) => {
+      state.profile.isFetching = false;
+      state.profile.error = true;
+    },
+    deleteUserProfile: (state) => {
+      state.profile.userProfile = <IUserProfile>{};
+    },
+  },
 });
 
-export const { usernameChange, passwordChange } = userSlice.actions;
-export const selectUser = (state: RootState) => state.user;
+export const {
+  getProfileStart,
+  getProfileSuccess,
+  getProfileFailed,
+  deleteUserProfile,
+} = userSlice.actions;
+
+export const selectUserProfile = (state: RootState) =>
+  state.user.profile.userProfile;
 
 export default userSlice.reducer;

@@ -1,18 +1,22 @@
-import * as React from 'react';
-import { Form } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
 import {
+  HeartFilled,
+  LockOutlined,
   MailOutlined,
   UserOutlined,
-  LockOutlined,
-  HeartFilled,
 } from '@ant-design/icons';
+import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
 import Title from '@common/Title/Title';
-import Button from '@common/Button/Button';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
-import { register } from '../../services/registerService';
+import { Form } from 'antd';
+import * as React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  checkEmailExist,
+  checkUsernameExist,
+} from 'src/services/checkUserService';
 import { useAppDispatch } from 'src/store/hooks';
+import { register } from '../../services/registerService';
 
 import './Register.scss';
 
@@ -23,11 +27,48 @@ interface IFormFields {
 }
 
 const Register: React.FC = () => {
+  const [registerForm] = Form.useForm();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const typingTimeoutRef = React.useRef<NodeJS.Timeout>();
+
   const handleFinish = (values: IFormFields) => {
     register(values, dispatch, navigate);
+  };
+
+  const handleUserExist = async (fieldName: string, value: string) => {
+    let isExist = false;
+    switch (fieldName) {
+      case 'password': {
+        return;
+      }
+      case 'email': {
+        isExist = await checkEmailExist(value);
+        break;
+      }
+      case 'username': {
+        isExist = await checkUsernameExist(value);
+
+        break;
+      }
+      default: {
+        throw new Error('Error');
+      }
+    }
+
+    if (isExist) {
+      registerForm.setFields([
+        {
+          name: fieldName,
+          errors: [
+            `${
+              fieldName.charAt(0).toUpperCase() + fieldName.slice(1)
+            } already exist!`,
+          ],
+        },
+      ]);
+    }
   };
 
   return (
@@ -50,7 +91,24 @@ const Register: React.FC = () => {
       </Title>
       <Card>
         <div className="form-container">
-          <Form onFinish={handleFinish}>
+          <Form
+            onFinish={handleFinish}
+            form={registerForm}
+            onFieldsChange={(changedFields) => {
+              if (changedFields[0].value) {
+                if (typingTimeoutRef.current) {
+                  clearTimeout(typingTimeoutRef.current);
+                }
+
+                typingTimeoutRef.current = setTimeout(() => {
+                  handleUserExist(
+                    changedFields[0].name.toString(),
+                    changedFields[0].value
+                  );
+                }, 700);
+              }
+            }}
+          >
             <Form.Item
               name="email"
               label="Email"
@@ -58,7 +116,7 @@ const Register: React.FC = () => {
               rules={[
                 {
                   type: 'email',
-                  message: 'Enter proper email!',
+                  message: 'Invalid email!',
                 },
                 { required: true, message: 'Required!' },
               ]}
