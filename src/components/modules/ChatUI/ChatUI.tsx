@@ -13,6 +13,7 @@ const ChatUI = () => {
     <div className="chat-ui">
       <div className={clsx('chat-ui__main ', `chat-ui__main--${open}`)}>
         <ChatHeader setOpen={setOpen} />
+
         <ChatMain />
         <ChatBottom />
       </div>
