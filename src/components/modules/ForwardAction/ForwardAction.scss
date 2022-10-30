@@ -1,0 +1,19 @@
+@use '../../../assets/styles/variables' as v;
+
+.forward-action {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	z-index: 3;
+	.forward-action__modal-overlay {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.4);
+	}
+	.forward-action__main {
+		width: 500px;
+		height: 380px;
+		background-color: white;
+	}
+}

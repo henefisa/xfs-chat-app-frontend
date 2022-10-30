@@ -1,79 +1,76 @@
 @use '../../../assets/styles/variables' as v;
 
 .chat-bottom {
-    display: flex;
-    flex-direction: row;
-    padding: 1.5rem;
-    border-top: 0.5px solid rgba($color: #495057, $alpha: 0.1);
+	display: flex;
+	flex-direction: row;
+	padding: 1.5rem;
+	border-top: 0.5px solid rgba($color: #495057, $alpha: 0.1);
 
-    .chat-bottom__type-chat {
-        width: 80%;
-        padding: 0px 12px;
+	.chat-bottom__type-chat {
+		width: 80%;
+		padding: 0px 12px;
 
-        .type-chat__input {
-            outline: none;
-            border: none;
-            border-radius: 0.4rem;
-            font-weight: 400;
-            line-height: 1.5;
-            background-color: #e3eaf2;
+		.type-chat__input {
+			outline: none;
+			border: none;
+			border-radius: 0.4rem;
+			font-weight: 400;
+			line-height: 1.5;
+			background-color: #e3eaf2;
+		}
 
-        }
+		::placeholder {
+			color: #7a7f9a;
+		}
+	}
 
-        ::placeholder {
-            color: #7a7f9a;
-        }
+	.chat-bottom__items-chat {
+		width: 20%;
+		display: flex;
+		flex-direction: row;
+		justify-content: end;
+		padding: 0px 12px;
 
-    }
+		.emoji-btn__button,
+		.attached-file-btn__button,
+		.images-btn__button {
+			border: none;
+			background-color: transparent;
+			padding: 0.5rem 1rem;
+			border-radius: 0.4rem;
 
-    .chat-bottom__items-chat {
-        width: 20%;
-        display: flex;
-        flex-direction: row;
-        justify-content: end;
-        padding: 0px 12px;
+			.custom-send-icon {
+				font-size: 16px;
+				color: #7269ef;
+			}
+		}
+	}
 
-        .button--send {
-            border: none;
-            background-color: transparent;
-            padding: 0.5rem 1rem;
-            border-radius: 0.4rem;
+	.items-chat__send-chat {
+		.send-chat__button {
+			border: none;
+			height: 100%;
+			border-radius: 0.4rem;
+			padding: 0.5rem 1rem;
 
-            .custom-send-icon {
-                font-size: 16px;
-                color: #7269ef;
-            }
-        }
+			.custom-send-chat {
+				font-size: 16px;
+			}
+		}
 
-    }
+		svg[data-icon='send'] {
+			color: #fff;
+		}
+	}
 
-    .items-chat__send-chat {
-
-        .button-send-chat {
-            border: none;
-            height: 100%;
-            border-radius: 0.4rem;
-            padding: 0.5rem 1rem;
-
-            .custom-send-chat {
-                font-size: 16px;
-            }
-        }
-
-        svg[data-icon="send"] {
-            color: #fff;
-        }
-    }
-
-    .items-chat__emoji-btn {
-        .EmojiPickerReact {
-            height: 338px;
-            width: 282px;
-            position: fixed;
-            z-index: 2;
-            bottom: 23px;
-            right: 230px;
-        }
-    }
-
+	.items-chat__emoji-btn {
+		.EmojiPickerReact {
+			height: 338px;
+			width: 282px;
+			position: fixed;
+			z-index: 2;
+			bottom: 23px;
+			right: 230px;
+		}
+	}
 }
