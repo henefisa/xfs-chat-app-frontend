@@ -1,48 +1,49 @@
 @use '../../../assets/styles/variables' as v;
 
 .messages-table {
-	display: flex;
+  display: flex;
 
-	&--right {
-		flex-direction: row-reverse;
+  &--right {
+    flex-direction: row-reverse;
 
-		.messages-table-content__username {
-			margin: 10px;
-			text-align: end;
-		}
+    .username {
+      margin: 10px;
+      text-align: end;
+    }
 
-		.dropdown-chat-menu--right {
-			position: relative;
-		}
-	}
+    .dropdown-chat-menu--right {
+      position: relative;
+    }
+  }
 
-	&--left {
-		.dropdown-chat-menu--left {
-			position: relative;
-		}
-	}
+  &--left {
+    .dropdown-chat-menu--left {
+      position: relative;
+    }
+  }
 
-	.messages-table__avatar {
-		display: flex;
-		flex-direction: column;
-		justify-content: end;
-	}
+  .avatar {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin: 5px 0;
+  }
 
-	.messages-table-content__username {
-		font-size: 14px;
-		font-weight: 500;
-		color: v.$text-color;
-		margin-bottom: 4px;
-		margin-left: 10px;
-		margin-top: 10px;
-	}
+  .username {
+    font-size: 14px;
+    font-weight: 500;
+    color: v.$text-color;
+    margin-bottom: 4px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
 
-	.messages-table__content {
-		display: flex;
-		flex-direction: column;
-		margin: 10px 0px;
-		.messages-table-content__bubble {
-			margin: 5px 0px;
-		}
-	}
+  .messages-table__body {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px;
+    .bubble {
+      margin: 5px 0px;
+    }
+  }
 }

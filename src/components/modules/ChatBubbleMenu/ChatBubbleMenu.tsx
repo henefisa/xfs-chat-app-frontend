@@ -9,7 +9,6 @@ import {
 
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
-import ForwardAction from '../ForwardAction/ForwardAction';
 import './ChatBubbleMenu.scss';
 import clsx from 'clsx';
 

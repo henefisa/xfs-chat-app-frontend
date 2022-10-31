@@ -15,26 +15,16 @@ const MessagesContent: React.FC<IMessagesContent> = ({
   messages,
 }) => {
   return (
-    <div className="messages-content__chat-content">
-      <div
-        className={clsx(
-          'messages-content__chat-content-user',
-          `messages-content__chat-content-user--${position}`
-        )}
-      >
-        <div
-          className={clsx(
-            'messages-content__chat-content-bubble',
-            `messages-content__chat-content-bubble--${position}`
-          )}
-        >
+    <div className="messages">
+      <div className={clsx('bubble-chat', `bubble-chat--${position}`)}>
+        <div className={clsx('content', `content--${position}`)}>
           {messages}
-          <div className="messages-content__chat-content-bubble-time">
-            <ClockCircleOutlined className="custom-icon-chat-time" />
+          <div className="content--time">
+            <ClockCircleOutlined className="custom-icon-time" />
             10:30
           </div>
         </div>
-        <div className="chat-content-bubble-more">
+        <div className="bubble-chat--actions">
           <Dropdown
             overlay={
               <ChatBubbleMenu
@@ -48,7 +38,7 @@ const MessagesContent: React.FC<IMessagesContent> = ({
               `dropdown-chat-menu--${position}`
             )}
           >
-            <MoreOutlined className="custom-icon-chat-bubble-more" />
+            <MoreOutlined className="custom-icon-actions" />
           </Dropdown>
         </div>
       </div>

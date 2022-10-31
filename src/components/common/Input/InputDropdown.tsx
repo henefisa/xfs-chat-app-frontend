@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Menu, MenuProps } from 'antd';
 
-import Input from '../Input';
+import Input from './Input';
 import './InputDropdown.scss';
 import clsx from 'clsx';
 

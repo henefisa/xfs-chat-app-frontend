@@ -15,7 +15,7 @@ import Dropdown from '@common/Dropdown/Dropdown';
 import Title from '@common/Title/Title';
 import { Button } from 'antd';
 import ChatCall from '../ChatCall/ChatCall';
-import InputDropdown from 'src/components/common/Input/InputDropdown/InputDropdown';
+import InputDropdown from '@common/Input/InputDropdown';
 
 import './ChatHeader.scss';
 
@@ -45,7 +45,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
 
   return (
     <div className="chat-header">
-      <div className="chat-header__profile-avatar">
+      <div className="profile-avatar">
         <Avatar
           path="https://scontent.fdad3-1.fna.fbcdn.net/v/t39.30808-6/277551484_1607305416300980_1426726336589949572_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=NDE6kmkwFQ8AX9-U3bh&_nc_ht=scontent.fdad3-1.fna&oh=00_AT8SGcvhT_y6-Lc16cMBv0OwsUOg0x7ef7Yp1yb_1teoEQ&oe=635BDBD2"
           imgWidth={35}
@@ -59,13 +59,13 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
           <CheckCircleFilled className="status__icon" />
         </div>
       </div>
-      <div className="chat-header__items-chat">
-        <div className="chat-header__search">
+      <div className="items-chat">
+        <div className="items-chat__search">
           <Dropdown
             overlay={<InputDropdown />}
             trigger={['click']}
             placement="bottomRight"
-            className={'asdfdfs'}
+            className={'chat-header-search__dropdown'}
           >
             <SearchOutlined className="custom-chat-icon" />
           </Dropdown>
@@ -98,7 +98,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
             </Button>
           );
         })}
-        <div className="chat-header__actions">
+        <div className="actions">
           <div className="actions__item">
             <Dropdown
               overlay={<ActionsChatMenu />}

@@ -15,23 +15,23 @@ import './ChatBottom.scss';
 
 const ChatBottom: React.FC = () => {
   const [emoji, setEmoji] = useState(false);
-  const inpuFileRef = React.createRef<HTMLInputElement>();
-  const inpuImgRef = React.createRef<HTMLInputElement>();
+  const inputFileRef = React.createRef<HTMLInputElement>();
+  const inputImgRef = React.createRef<HTMLInputElement>();
 
   const toggleFile = () => {
-    inpuFileRef.current?.click();
+    inputFileRef.current?.click();
   };
   const toggleImg = () => {
-    inpuImgRef.current?.click();
+    inputImgRef.current?.click();
   };
 
   return (
     <div className="chat-bottom">
-      <div className="chat-bottom__type-chat">
+      <div className="type-chat">
         <Input className="type-chat__input" placeholder="Enter Message..." />
       </div>
-      <div className="chat-bottom__items-chat">
-        <div className="items-chat__emoji-btn">
+      <div className="items-chat">
+        <div className="emoji-btn">
           <Button
             className="emoji-btn__button"
             onClick={() => setEmoji(!emoji)}
@@ -40,20 +40,20 @@ const ChatBottom: React.FC = () => {
           </Button>
           {emoji && <Emoji height={338} width={282} />}
         </div>
-        <div className="items-chat__attached-file-btn">
-          <input type="file" ref={inpuFileRef} hidden />
+        <div className="attached-file-btn">
+          <input type="file" ref={inputFileRef} hidden />
           <Button className="attached-file-btn__button" onClick={toggleFile}>
             <PaperClipOutlined className="custom-send-icon" />
           </Button>
         </div>
-        <div className="items-chat__images-btn">
-          <input type="file" ref={inpuImgRef} hidden accept="image/*" />
+        <div className="images-btn">
+          <input type="file" ref={inputImgRef} hidden accept="image/*" />
           <Button className="images-btn__button" onClick={toggleImg}>
             <PictureOutlined className="custom-send-icon" />
           </Button>
         </div>
-        <div className="items-chat__send-chat">
-          <Button className="send-chat__button">
+        <div className="send-btn">
+          <Button className="send-btn__button">
             <SendOutlined className="custom-send-chat" />
           </Button>
         </div>
