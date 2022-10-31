@@ -90,8 +90,8 @@ const SidebarProfile: React.FC = () => {
           className="user-info__panel"
           header={
             <div className="panel-header">
-              <UserOutlined className="panel-icon" />
-              <Title level={5} className="panel-title">
+              <UserOutlined className="panel-header__icon" />
+              <Title level={5} className="panel-header__title">
                 About
               </Title>
             </div>
@@ -117,8 +117,8 @@ const SidebarProfile: React.FC = () => {
           className="attached__panel"
           header={
             <div className="panel-header">
-              <PaperClipOutlined className="panel-icon" />
-              <Title level={5} className="panel-title">
+              <PaperClipOutlined className="panel-header__icon" />
+              <Title level={5} className="panel-header__title">
                 Attached Files
               </Title>
             </div>
