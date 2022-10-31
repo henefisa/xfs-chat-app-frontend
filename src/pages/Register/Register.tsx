@@ -70,10 +70,10 @@ const Register: React.FC = () => {
   };
 
   const handleFieldChange = (changedFields: FieldData[]) => {
-    if (changedFields[0].value) {
-      if (typingTimeoutRef.current) {
-        clearTimeout(typingTimeoutRef.current);
-      }
+    if (!changedFields[0].value) {
+      return;
+    } else {
+      clearTimeout(typingTimeoutRef.current);
 
       typingTimeoutRef.current = setTimeout(() => {
         handleUserExist(

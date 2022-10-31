@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import getAccessTokenFromStorage from 'src/utils/getAccessToken';
+import { Route, Routes } from 'react-router-dom';
+import RequireAuth from './RequireAuth';
 import routes from './routesPath';
 
 const Router: React.FC = () => {
@@ -27,17 +27,6 @@ const Router: React.FC = () => {
       })}
     </Routes>
   );
-};
-
-interface IRequireAuthProps {
-  children: React.ReactElement;
-  redirectTo: string;
-}
-
-const RequireAuth: React.FC<IRequireAuthProps> = ({ children, redirectTo }) => {
-  const accessToken = getAccessTokenFromStorage();
-
-  return accessToken ? children : <Navigate to={redirectTo} />;
 };
 
 export default Router;

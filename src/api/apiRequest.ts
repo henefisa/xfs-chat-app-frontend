@@ -42,11 +42,7 @@ export const initInterceptor = (navigate: NavigateFunction) => {
           });
 
           navigate('/login');
-
           break;
-        }
-        default: {
-          throw new Error('Unknow error');
         }
       }
 
