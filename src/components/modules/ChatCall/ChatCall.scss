@@ -24,7 +24,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    .items {
+    .modal__body-items {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -40,7 +40,7 @@
         }
       }
 
-      .title-username {
+      .username {
         font-size: 16px;
         font-weight: 500;
         color: v.$text-color;
@@ -48,18 +48,13 @@
       }
     }
 
-    .modal-body-item__title {
-      display: flex;
+    .title-action {
       align-items: center;
-      justify-content: center;
       gap: 6px;
-
-      .title-action {
-        color: #7a7f9a;
-        font-size: 15px;
-        font-weight: 400;
-        margin: 0;
-      }
+      color: #7a7f9a;
+      font-size: 15px;
+      font-weight: 400;
+      margin: 0;
     }
 
     .actions {

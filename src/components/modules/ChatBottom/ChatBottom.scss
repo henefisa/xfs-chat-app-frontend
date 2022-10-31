@@ -24,16 +24,16 @@
     }
   }
 
-  .items-chat {
+  .chat-actions {
     width: 20%;
     display: flex;
     flex-direction: row;
     justify-content: end;
     padding: 0px 12px;
 
-    .emoji__btn,
+    .emoji-chat__btn,
     .attached-file__btn,
-    .images__btn {
+    .attached-images__btn {
       border: none;
       background-color: transparent;
       padding: 0.5rem 1rem;
@@ -46,7 +46,7 @@
     }
   }
 
-  .send {
+  .chat-actions__send {
     .send__btn {
       border: none;
       height: 100%;
@@ -63,7 +63,7 @@
     }
   }
 
-  .emoji {
+  .chat-actions__emoji {
     .EmojiPickerReact {
       height: 338px;
       width: 282px;

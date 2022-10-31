@@ -15,8 +15,7 @@
       flex-direction: row;
     }
   }
-  .content {
-    margin: 0px 10px;
+  .bubble-chat__content {
     padding: 14px 18px;
     background: #f5f7fb;
     border-radius: 9px;
@@ -35,6 +34,7 @@
     }
 
     &--left {
+      margin-left: 10px;
       &:after {
         left: 0;
         border-top-color: #f5f7fb;
@@ -51,7 +51,7 @@
     &--right {
       background: v.$primary;
       color: #fff;
-
+      margin-right: 10px;
       &:after {
         right: 0;
         border-top-color: v.$primary;

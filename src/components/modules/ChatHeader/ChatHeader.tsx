@@ -45,37 +45,37 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
 
   return (
     <div className="chat-header">
-      <div className="profile-avatar">
+      <div className="chat-header--left">
         <Avatar
           path="https://scontent.fdad3-1.fna.fbcdn.net/v/t39.30808-6/277551484_1607305416300980_1426726336589949572_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=NDE6kmkwFQ8AX9-U3bh&_nc_ht=scontent.fdad3-1.fna&oh=00_AT8SGcvhT_y6-Lc16cMBv0OwsUOg0x7ef7Yp1yb_1teoEQ&oe=635BDBD2"
           imgWidth={35}
           username="A"
-          className="custom-avatar"
+          className="user-avatar"
         />
         <Title level={5} className="username">
           Danh Huy
         </Title>
-        <div className="status">
+        <div className="user-status">
           <CheckCircleFilled className="status__icon" />
         </div>
       </div>
-      <div className="items-chat">
-        <div className="search">
+      <div className="chat-header--right">
+        <div className="search-actions">
           <Dropdown
             overlay={<InputDropdown />}
             trigger={['click']}
             placement="bottomRight"
-            className={'chat-header-search__dropdown'}
+            className={'search-actions__dropdown'}
           >
             <SearchOutlined className="custom-chat-icon" />
           </Dropdown>
         </div>
         {ItemsChat.map((item, index) => {
-          const ChatIcon = item.icon;
+          const ChatActionItem = item.icon;
           return (
             <Button
               key={index}
-              className="items-chat__btn"
+              className="actions__btn"
               onClick={() => {
                 if (index === 2) {
                   setOpen(true);
@@ -93,22 +93,20 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
                 tooltipTitle={item.tooltipTitle}
                 isActive={index === activeIndex ? true : false}
               >
-                <ChatIcon />
+                <ChatActionItem />
               </Tooltip>
             </Button>
           );
         })}
-        <div className="actions">
-          <div className="actions__item">
-            <Dropdown
-              overlay={<ActionsChatMenu />}
-              trigger={['click']}
-              placement="bottom"
-              className="custom-dropdown-menu"
-            >
-              <EllipsisOutlined className="custom-chat-icon" />
-            </Dropdown>
-          </div>
+        <div className="detail-actions">
+          <Dropdown
+            overlay={<ActionsChatMenu />}
+            trigger={['click']}
+            placement="bottom"
+            className="custom-dropdown-menu"
+          >
+            <EllipsisOutlined className="custom-chat-icon" />
+          </Dropdown>
         </div>
         {id === 0 && <ChatCall title="Audio" onClose={() => setId(-1)} />}
         {id === 1 && <ChatCall title="Video" onClose={() => setId(-1)} />}
