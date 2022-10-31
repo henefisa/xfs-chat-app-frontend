@@ -5,7 +5,6 @@ import {
 } from '@ant-design/icons';
 import { Menu, MenuProps, notification } from 'antd';
 import * as React from 'react';
-
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/store/hooks';
 import { logoutStart, logoutSuccess } from 'src/store/authSlice';

@@ -24,13 +24,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    .modal-body__item {
+    .items {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
 
-      .avatar {
+      .custom-avatar {
         padding: 4px;
         background-color: #f0eff5;
         margin-bottom: 24px;
@@ -40,7 +40,7 @@
         }
       }
 
-      .title--username {
+      .title-username {
         font-size: 16px;
         font-weight: 500;
         color: v.$text-color;
@@ -54,7 +54,7 @@
       justify-content: center;
       gap: 6px;
 
-      .title--action {
+      .title-action {
         color: #7a7f9a;
         font-size: 15px;
         font-weight: 400;
@@ -62,31 +62,32 @@
       }
     }
 
-    .modal-body-item__btn {
+    .actions {
       display: flex;
       margin: 0px 0px 4px;
       flex-direction: row;
       justify-content: center;
       align-items: center;
 
-      .btn {
+      .btn--close,
+      .btn--suscess {
         padding: 0px 4px;
         margin: 0px 8px;
 
-        .btn__button--close {
+        .custom-btn--close {
           background-color: #ef476f;
           border-color: #ef476f;
           color: #fff;
         }
-        .btn__button--suscess {
+        .custom-btn--suscess {
           background-color: #06d6a0;
           border-color: #06d6a0;
           color: #fff;
         }
       }
 
-      .btn__button--close,
-      .btn__button--suscess {
+      .custom-btn--close,
+      .custom-btn--suscess {
         width: 48px;
         height: 48px;
         border: 1px solid transparent;

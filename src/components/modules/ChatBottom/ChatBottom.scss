@@ -31,9 +31,9 @@
     justify-content: end;
     padding: 0px 12px;
 
-    .emoji-btn__button,
-    .attached-file-btn__button,
-    .images-btn__button {
+    .emoji__btn,
+    .attached-file__btn,
+    .images__btn {
       border: none;
       background-color: transparent;
       padding: 0.5rem 1rem;
@@ -46,8 +46,8 @@
     }
   }
 
-  .send-btn {
-    .send-chat__button {
+  .send {
+    .send__btn {
       border: none;
       height: 100%;
       border-radius: 0.4rem;
@@ -63,7 +63,7 @@
     }
   }
 
-  .emoji-btn {
+  .emoji {
     .EmojiPickerReact {
       height: 338px;
       width: 282px;

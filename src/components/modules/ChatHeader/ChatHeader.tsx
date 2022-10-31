@@ -60,7 +60,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
         </div>
       </div>
       <div className="items-chat">
-        <div className="items-chat__search">
+        <div className="search">
           <Dropdown
             overlay={<InputDropdown />}
             trigger={['click']}

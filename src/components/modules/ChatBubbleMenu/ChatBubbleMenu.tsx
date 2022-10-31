@@ -6,11 +6,11 @@ import {
   RightSquareOutlined,
   DeleteOutlined,
 } from '@ant-design/icons';
-
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
-import './ChatBubbleMenu.scss';
 import clsx from 'clsx';
+
+import './ChatBubbleMenu.scss';
 
 interface IChatBubbleMenuProps extends MenuProps {
   position: string;
