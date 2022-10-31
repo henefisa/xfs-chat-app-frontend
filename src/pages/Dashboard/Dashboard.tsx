@@ -4,7 +4,6 @@ import SidebarDashboard from '@modules/SidebarDashboard/SidebarDashboard';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { getUserProfile } from 'src/services/userService';
-import getAccessTokenFromStorage from 'src/utils/getAccessToken';
 
 import './Dashboard.scss';
 
@@ -12,10 +11,7 @@ const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    const accessToken = getAccessTokenFromStorage();
-    if (accessToken) {
-      getUserProfile(dispatch);
-    }
+    getUserProfile(dispatch);
   }, []);
 
   return (
