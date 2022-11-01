@@ -26,7 +26,8 @@ export const login = async (
   dispatch(loginStart());
   try {
     const res = await apiRequest.post('api/auth/login', user);
-    dispatch(loginSuccess(res.data.access_token));
+    localStorage.setItem('access_token', res.data.access_token);
+    dispatch(loginSuccess());
     dispatch(rememberOnSubmit(!!isRemember));
 
     notification.success({

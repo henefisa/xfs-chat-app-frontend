@@ -6,10 +6,8 @@ import Title from '@common/Title/Title';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 import { Form } from 'antd';
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authService from 'src/services/authService';
-import { selectLoginStore } from 'src/store/authSlice';
 import { useAppDispatch } from 'src/store/hooks';
 
 import './Login.scss';
@@ -21,15 +19,15 @@ interface IFormFields {
 }
 
 const LoginPage: React.FC = () => {
-  const loginStore = useSelector(selectLoginStore);
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (loginStore.currentAccessToken && loginStore.isLoggedIn) {
-      navigate('/dashboard');
-    }
+    const accessToken = localStorage.getItem('access_token') || '';
+
+    if (!accessToken) return;
+
+    navigate('/dashboard');
   }, []);
 
   const handleFinish = async (values: IFormFields) => {

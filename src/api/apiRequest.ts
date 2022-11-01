@@ -1,7 +1,6 @@
 import { notification } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { NavigateFunction } from 'react-router-dom';
-import getAccessTokenFromStorage from 'src/utils/getAccessToken';
 
 const apiRequest = axios.create({
   baseURL: import.meta.env.VITE_APP_API_BASE_URL,
@@ -15,9 +14,9 @@ export const initInterceptor = (navigate: NavigateFunction) => {
     (config) => {
       config.headers = config.headers ?? {};
 
-      const accessToken = getAccessTokenFromStorage();
+      const accessToken = localStorage.getItem('access_token') || '';
 
-      config.headers.Authorization = accessToken ? `Bearer ${accessToken}` : '';
+      config.headers.Authorization = `Bearer ${accessToken}`;
 
       return config;
     },

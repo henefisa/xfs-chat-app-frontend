@@ -2,11 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '.';
 
 export const authSlice = createSlice({
-  name: 'authSlice',
+  name: 'auth',
   initialState: {
     login: {
       isFetching: false,
-      currentAccessToken: '',
       isRemember: false,
       isLoggedIn: false,
       error: false,
@@ -25,9 +24,8 @@ export const authSlice = createSlice({
     loginStart: (state) => {
       state.login.isFetching = true;
     },
-    loginSuccess: (state, action: PayloadAction<string>) => {
+    loginSuccess: (state) => {
       state.login.isFetching = false;
-      state.login.currentAccessToken = action.payload;
       state.login.isLoggedIn = true;
       state.login.error = false;
     },
@@ -56,7 +54,6 @@ export const authSlice = createSlice({
     },
     logoutSuccess: (state) => {
       state.logout.isFetching = false;
-      state.login.currentAccessToken = '';
       state.login.isRemember = false;
       state.login.isLoggedIn = false;
       state.logout.error = false;

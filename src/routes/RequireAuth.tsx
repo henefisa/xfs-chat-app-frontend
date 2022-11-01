@@ -1,16 +1,20 @@
 import * as React from 'react';
-import { Navigate } from 'react-router-dom';
-import getAccessTokenFromStorage from 'src/utils/getAccessToken';
+import { useDispatch } from 'react-redux';
+import { getUserProfile } from 'src/services/userService';
 
 interface IRequireAuthProps {
   children: React.ReactElement;
   redirectTo: string;
 }
 
-const RequireAuth: React.FC<IRequireAuthProps> = ({ children, redirectTo }) => {
-  const accessToken = getAccessTokenFromStorage();
+const RequireAuth: React.FC<IRequireAuthProps> = ({ children }) => {
+  const dispatch = useDispatch();
 
-  return accessToken ? children : <Navigate to={redirectTo} />;
+  React.useEffect(() => {
+    getUserProfile(dispatch);
+  }, []);
+
+  return children;
 };
 
 export default RequireAuth;

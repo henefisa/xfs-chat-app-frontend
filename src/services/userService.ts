@@ -37,5 +37,6 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
   } catch (err) {
     dispatch(getProfileFailed());
     dispatch(logoutSuccess());
+    localStorage.setItem('access_token', '');
   }
 };

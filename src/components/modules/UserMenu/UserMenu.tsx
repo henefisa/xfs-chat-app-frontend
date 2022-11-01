@@ -63,6 +63,7 @@ const UserMenu: React.FC<IMenuProps> = () => {
   const handleLogout = () => {
     dispatch(logoutStart());
     dispatch(logoutSuccess());
+    localStorage.setItem('access_token', '');
     dispatch(deleteUserProfile());
     notification.success({
       message: 'Success',
