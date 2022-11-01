@@ -9,6 +9,7 @@ function App() {
   React.useLayoutEffect(() => {
     initInterceptor(navigate);
   }, []);
+
   return <Router />;
 }
 

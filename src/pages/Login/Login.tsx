@@ -9,6 +9,7 @@ import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authService from 'src/services/authService';
 import { useAppDispatch } from 'src/store/hooks';
+import { getAccessToken } from 'src/utils/getTokenFromLocal';
 
 import './Login.scss';
 
@@ -23,7 +24,7 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    const accessToken = localStorage.getItem('access_token') || '';
+    const accessToken = getAccessToken();
 
     if (!accessToken) return;
 

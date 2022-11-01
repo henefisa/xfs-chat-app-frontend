@@ -16,7 +16,6 @@ export const authSlice = createSlice({
       success: false,
     },
     logout: {
-      isFetching: false,
       error: false,
     },
   },
@@ -24,10 +23,11 @@ export const authSlice = createSlice({
     loginStart: (state) => {
       state.login.isFetching = true;
     },
-    loginSuccess: (state) => {
+    loginSuccess: (state, action: PayloadAction<string>) => {
       state.login.isFetching = false;
       state.login.isLoggedIn = true;
       state.login.error = false;
+      localStorage.setItem('token', JSON.stringify(action.payload));
     },
     loginFailed: (state) => {
       state.login.isFetching = false;
@@ -49,17 +49,13 @@ export const authSlice = createSlice({
       state.register.error = true;
       state.register.success = false;
     },
-    logoutStart: (state) => {
-      state.logout.isFetching = true;
-    },
     logoutSuccess: (state) => {
-      state.logout.isFetching = false;
       state.login.isRemember = false;
       state.login.isLoggedIn = false;
       state.logout.error = false;
+      localStorage.removeItem('token');
     },
     logoutFailed: (state) => {
-      state.logout.isFetching = false;
       state.logout.error = true;
     },
   },
@@ -73,7 +69,6 @@ export const {
   registerStart,
   registerSuccess,
   registerFailed,
-  logoutStart,
   logoutSuccess,
   logoutFailed,
 } = authSlice.actions;

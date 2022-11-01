@@ -1,6 +1,7 @@
 import { notification } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { NavigateFunction } from 'react-router-dom';
+import { getAccessToken } from 'src/utils/getTokenFromLocal';
 
 const apiRequest = axios.create({
   baseURL: import.meta.env.VITE_APP_API_BASE_URL,
@@ -14,7 +15,7 @@ export const initInterceptor = (navigate: NavigateFunction) => {
     (config) => {
       config.headers = config.headers ?? {};
 
-      const accessToken = localStorage.getItem('access_token') || '';
+      const accessToken = getAccessToken();
 
       config.headers.Authorization = `Bearer ${accessToken}`;
 

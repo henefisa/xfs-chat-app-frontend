@@ -1,3 +1,4 @@
+import { notification } from 'antd';
 import apiRequest from 'src/api/apiRequest';
 import { AppDispatch } from 'src/store';
 import { logoutSuccess } from 'src/store/authSlice';
@@ -14,7 +15,11 @@ export const checkUsernameExist = async (username: string) => {
     });
     return res.data;
   } catch (err) {
-    console.log(err);
+    notification.error({
+      message: 'Error',
+      description: 'Có lỗi xảy ra!',
+      duration: 1.5,
+    });
   }
 };
 
@@ -25,7 +30,11 @@ export const checkEmailExist = async (email: string) => {
     });
     return res.data;
   } catch (err) {
-    console.log(err);
+    notification.error({
+      message: 'Error',
+      description: 'Có lỗi xảy ra!',
+      duration: 1.5,
+    });
   }
 };
 
@@ -37,6 +46,5 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
   } catch (err) {
     dispatch(getProfileFailed());
     dispatch(logoutSuccess());
-    localStorage.setItem('access_token', '');
   }
 };
