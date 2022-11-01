@@ -6,14 +6,14 @@
   display: flex;
   z-index: 3;
 
-  .modal__overlay {
+  .modal-overlay {
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
   }
 
-  .modal__body {
+  .modal-body {
     width: 498px;
     height: 353px;
     background-color: white;
