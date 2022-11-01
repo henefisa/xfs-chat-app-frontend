@@ -31,7 +31,7 @@
     justify-content: end;
     padding: 0px 12px;
 
-    .emoji-chat__btn,
+    .emoji__btn,
     .attached-file__btn,
     .attached-images__btn {
       border: none;
@@ -44,22 +44,21 @@
         color: #7269ef;
       }
     }
-  }
+    .chat-actions__send {
+      .send__btn {
+        border: none;
+        height: 100%;
+        border-radius: 0.4rem;
+        padding: 0.5rem 1rem;
 
-  .chat-actions__send {
-    .send__btn {
-      border: none;
-      height: 100%;
-      border-radius: 0.4rem;
-      padding: 0.5rem 1rem;
-
-      .custom-send-chat {
-        font-size: 16px;
+        .custom-send-chat {
+          font-size: 16px;
+        }
       }
-    }
 
-    svg[data-icon='send'] {
-      color: #fff;
+      svg[data-icon='send'] {
+        color: #fff;
+      }
     }
   }
 

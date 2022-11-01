@@ -31,7 +31,7 @@ const ChatBottom: React.FC = () => {
       </div>
       <div className="chat-actions">
         <div className="chat-actions__emoji">
-          <Button className="emoji-chat__btn" onClick={() => setEmoji(!emoji)}>
+          <Button className="emoji__btn" onClick={() => setEmoji(!emoji)}>
             <SmileOutlined className="custom-send-icon" />
           </Button>
           {emoji && <Emoji height={338} width={282} />}

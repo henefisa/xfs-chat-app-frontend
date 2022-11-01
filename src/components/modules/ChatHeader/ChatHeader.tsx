@@ -23,7 +23,7 @@ interface IChatHeader {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ItemsChat = [
+const listActionChat = [
   {
     icon: PhoneOutlined,
     tooltipTitle: 'VoiceCall',
@@ -70,7 +70,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
             <SearchOutlined className="custom-chat-icon" />
           </Dropdown>
         </div>
-        {ItemsChat.map((item, index) => {
+        {listActionChat.map((item, index) => {
           const ChatActionItem = item.icon;
           return (
             <Button
