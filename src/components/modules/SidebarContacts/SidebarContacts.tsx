@@ -7,13 +7,16 @@ import {
   CloseOutlined,
 } from '@ant-design/icons';
 
-import './SidebarContacts.scss';
 import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Dropdown from '@common/Dropdown/Dropdown';
 import ContactMenu from '../ContactMenu/ContactMenu';
 import clsx from 'clsx';
-import Input from 'src/components/common/Input/Input';
-import Button from 'src/components/common/Button/Button';
+import Input from '@common/Input/Input';
+import Button from '@common/Button/Button';
+import Title from '@common/Title/Title';
+
+import './SidebarContacts.scss';
+
 
 const contacts = [
   {
@@ -70,9 +73,9 @@ const SidebarContacts: React.FC = () => {
     <>
       <div className="sidebar-contacts">
         <div className="sidebar-contacts__header">
-          <div className="title">Contacts</div>
+          <Title className="title">Contacts</Title>
           <div className="contact-add" onClick={() => setToggleModal(true)}>
-            <Tooltip className="" placement="bottom" tooltipTitle="Add contact">
+            <Tooltip placement="bottom" tooltipTitle="Add contact">
               <UsergroupAddOutlined className="icon" />
             </Tooltip>
           </div>
@@ -114,7 +117,7 @@ const SidebarContacts: React.FC = () => {
       >
         <div className="overlay-modal__dialog">
           <div className="dialog__title">
-            <h5>Add Contacts</h5>
+            <Title className="title" level={5}>Add Contacts</Title>
             <button onClick={() => setToggleModal(false)}>
               <CloseOutlined />
             </button>
