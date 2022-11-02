@@ -29,7 +29,9 @@ const Conversation: React.FC<ConversationProps> = ({
         <span className="conversation-item__status--online" />
       </div>
       <div className="conversation-item__content">
-        <Title className="title">{name}</Title>
+        <div className="title">
+          <Title>{name}</Title>
+        </div>
         <p className="message typing">
           Typing
           <span className="animate-typing">

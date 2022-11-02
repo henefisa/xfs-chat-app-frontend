@@ -19,6 +19,8 @@ import Tooltip from '@common/Tooltip/Tooltip';
 import LanguageMenu from '../LanguageMenu/LanguageMenu';
 import UserMenu from '../UserMenu/UserMenu';
 import { selectUserProfile } from 'src/store/userSlice';
+import { useAppDispatch } from 'src/store/hooks';
+import { updateNabarAction } from 'src/store/navbarAction';
 
 import './NavDashboard.scss';
 
@@ -45,11 +47,11 @@ const navBarMenu = [
   },
 ];
 
-const activeIndex = 0;
-
 const NavDashboard: React.FC = () => {
+  const dispatch = useAppDispatch();
   // Viết tạm state dark/light theme
   const [isDark, setIsDark] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const userProfileStore = useSelector(selectUserProfile);
 
   const handleThemeChange = () => {
@@ -66,7 +68,14 @@ const NavDashboard: React.FC = () => {
         {navBarMenu.map((item, index) => {
           const MenuIcon = item.icon;
           return (
-            <Button key={index} className="menu__item">
+            <Button
+              key={index}
+              className="menu__item"
+              onClick={() => {
+                dispatch(updateNabarAction(item.tooltipTitle));
+                setActiveIndex(index);
+              }}
+            >
               <Tooltip
                 className="custom-nav-icon"
                 placement="top"

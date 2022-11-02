@@ -47,7 +47,7 @@ const SidebarChats: React.FC = () => {
         </Carousel>
       </div>
       <div className="charts-recent">
-        <Title level={5} className="title">
+        <Title level={5} className="charts-recent__title">
           Recent
         </Title>
         <div className="conversation-list">

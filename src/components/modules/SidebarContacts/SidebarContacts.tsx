@@ -17,7 +17,6 @@ import Title from '@common/Title/Title';
 
 import './SidebarContacts.scss';
 
-
 const contacts = [
   {
     firtCharacter: 'A',
@@ -73,7 +72,10 @@ const SidebarContacts: React.FC = () => {
     <>
       <div className="sidebar-contacts">
         <div className="sidebar-contacts__header">
-          <Title className="title">Contacts</Title>
+          {/* <Title className="contacts-title">Contacts</Title> */}
+          <div className="title">
+            <Title level={4}>Contacts</Title>
+          </div>
           <div className="contact-add" onClick={() => setToggleModal(true)}>
             <Tooltip placement="bottom" tooltipTitle="Add contact">
               <UsergroupAddOutlined className="icon" />
@@ -117,7 +119,9 @@ const SidebarContacts: React.FC = () => {
       >
         <div className="overlay-modal__dialog">
           <div className="dialog__title">
-            <Title className="title" level={5}>Add Contacts</Title>
+            <Title className="title" level={5}>
+              Add Contacts
+            </Title>
             <button onClick={() => setToggleModal(false)}>
               <CloseOutlined />
             </button>

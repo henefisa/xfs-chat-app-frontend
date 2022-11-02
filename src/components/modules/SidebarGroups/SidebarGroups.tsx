@@ -3,12 +3,14 @@ import Tooltip from '@common/Tooltip/Tooltip';
 
 import { UsergroupAddOutlined, CloseOutlined } from '@ant-design/icons';
 
-import './SidebarGroups.scss';
 import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import BlockGroup from '@common/BlockGroup/BlockGroup';
 import Input from '@common/Input/Input';
 import Button from '@common/Button/Button';
 import clsx from 'clsx';
+import Title from '@common/Title/Title';
+
+import './SidebarGroups.scss';
 
 const contacts = [
   {
@@ -66,7 +68,9 @@ const SidebarGroups: React.FC = () => {
     <>
       <div className="sidebar-groups">
         <div className="sidebar-groups__header">
-          <div className="title">Groups</div>
+          <div className="title">
+            <Title level={4}>Groups</Title>
+          </div>
           <div className="group-create" onClick={() => setToggleModal(true)}>
             <Tooltip
               className=""
