@@ -30,6 +30,16 @@
     flex-direction: row;
     justify-content: end;
     padding: 0px 12px;
+    .choose-emoji {
+      .EmojiPickerReact {
+        height: 338px;
+        width: 282px;
+        position: fixed;
+        z-index: 2;
+        bottom: 23px;
+        right: 230px;
+      }
+    }
     .choose-emoji,
     .attached-file,
     .attached-images {
@@ -61,14 +71,5 @@
         color: #fff;
       }
     }
-  }
-
-  .EmojiPickerReact {
-    height: 338px;
-    width: 282px;
-    position: fixed;
-    z-index: 2;
-    bottom: 23px;
-    right: 230px;
   }
 }
