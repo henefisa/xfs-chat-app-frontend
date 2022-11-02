@@ -249,7 +249,8 @@
           }
 
           &:focus {
-            border-color: v.$input-border;
+            border-color: #40a9ff;
+            border-right-width: 1px;
             box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
           }
         }
