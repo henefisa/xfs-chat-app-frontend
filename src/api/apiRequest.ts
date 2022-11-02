@@ -1,4 +1,7 @@
-import axios from 'axios';
+import { notification } from 'antd';
+import axios, { AxiosError } from 'axios';
+import { NavigateFunction } from 'react-router-dom';
+import { getAccessToken } from 'src/utils/getTokenFromLocal';
 
 const apiRequest = axios.create({
   baseURL: import.meta.env.VITE_APP_API_BASE_URL,
@@ -7,21 +10,45 @@ const apiRequest = axios.create({
   },
 });
 
-apiRequest.interceptors.request.use((config) => {
-  config.headers = config.headers ?? {};
+export const initInterceptor = (navigate: NavigateFunction) => {
+  apiRequest.interceptors.request.use(
+    (config) => {
+      config.headers = config.headers ?? {};
 
-  const loginStore = localStorage.getItem('persist:login');
-  let accessToken: string;
+      const accessToken = getAccessToken();
 
-  if (loginStore) {
-    accessToken = JSON.parse(JSON.parse(loginStore)?.login)?.currentAccessToken;
-  } else {
-    accessToken = '';
-  }
+      config.headers.Authorization = `Bearer ${accessToken}`;
 
-  config.headers.Authorization = accessToken ? `Bearer ${accessToken}` : '';
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
 
-  return config;
-});
+  apiRequest.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error: AxiosError) => {
+      const status = error.response?.status;
+
+      switch (status) {
+        case 401: {
+          notification.error({
+            message: 'Error',
+            description: 'Đăng nhập thất bại!',
+            duration: 2,
+          });
+
+          navigate('/login');
+          break;
+        }
+      }
+
+      return Promise.reject(error);
+    }
+  );
+};
 
 export default apiRequest;

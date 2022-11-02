@@ -8,7 +8,7 @@ import * as React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/store/hooks';
-import { logoutStart, logoutSuccess } from 'src/store/authSlice';
+import { logoutSuccess } from 'src/store/authSlice';
 import { deleteUserProfile } from 'src/store/userSlice';
 import Button from '@common/Button/Button';
 import Title from '@common/Title/Title';
@@ -61,7 +61,6 @@ const UserMenu: React.FC<IMenuProps> = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logoutStart());
     dispatch(logoutSuccess());
     dispatch(deleteUserProfile());
     notification.success({
@@ -69,9 +68,7 @@ const UserMenu: React.FC<IMenuProps> = () => {
       description: 'Đăng xuất thành công.',
       duration: 2,
     });
-    setTimeout(() => {
-      navigate('/login');
-    }, 1500);
+    navigate('/login');
   };
 
   const hanldeClickItem: MenuProps['onClick'] = (e) => {

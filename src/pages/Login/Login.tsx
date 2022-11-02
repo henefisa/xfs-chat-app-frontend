@@ -6,11 +6,10 @@ import Title from '@common/Title/Title';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 import { Form } from 'antd';
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from 'src/services/loginService';
-import { selectLoginStore } from 'src/store/authSlice';
+import * as authService from 'src/services/authService';
 import { useAppDispatch } from 'src/store/hooks';
+import { getAccessToken } from 'src/utils/getTokenFromLocal';
 
 import './Login.scss';
 
@@ -21,29 +20,21 @@ interface IFormFields {
 }
 
 const LoginPage: React.FC = () => {
-  const loginStore = useSelector(selectLoginStore);
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    const accessToken = getAccessToken();
 
-    if (loginStore.currentAccessToken && loginStore.isLoggedIn) {
-      timeoutId = setTimeout(() => {
-        navigate('/dashboard');
-      }, 1500);
-    }
+    if (!accessToken) return;
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    navigate('/dashboard');
   }, []);
 
-  const handleFinish = (values: IFormFields) => {
+  const handleFinish = async (values: IFormFields) => {
     const { isRemember, ...user } = values;
 
-    login(user, isRemember, dispatch, navigate);
+    await authService.login(user, isRemember, dispatch, navigate);
   };
 
   return (
