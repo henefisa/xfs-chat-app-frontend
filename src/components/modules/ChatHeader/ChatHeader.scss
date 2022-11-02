@@ -8,7 +8,7 @@
   border-bottom: 0.5px solid rgba($color: #495057, $alpha: 0.1);
   justify-content: space-between;
 
-  .chat-header--left {
+  .user-info {
     display: flex;
     align-items: center;
   }
@@ -37,7 +37,7 @@
     align-items: center;
   }
 
-  .actions__btn {
+  .group-aciton__btn {
     border: none;
     width: 40px;
     height: 40px;
@@ -47,11 +47,11 @@
     }
   }
 
-  .actions__btn:hover {
+  .group-aciton__btn:hover {
     color: #000;
   }
 
-  .chat-header--right {
+  .group-aciton {
     display: flex;
     align-items: center;
     .search-actions {

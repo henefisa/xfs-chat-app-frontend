@@ -30,26 +30,35 @@ const ChatBottom: React.FC = () => {
         <Input className="type-chat__input" placeholder="Enter Message..." />
       </div>
       <div className="chat-actions">
-        <div className="chat-actions__emoji">
-          <Button className="emoji__btn" onClick={() => setEmoji(!emoji)}>
+        <div className="choose-emoji">
+          <Button
+            className="choose-emoji__btn custom-btn"
+            onClick={() => setEmoji(!emoji)}
+          >
             <SmileOutlined className="custom-send-icon" />
           </Button>
           {emoji && <Emoji height={338} width={282} />}
         </div>
-        <div className="chat-actions__attached-file">
+        <div className="attached-file">
           <input type="file" ref={inputFileRef} hidden />
-          <Button className="attached-file__btn" onClick={toggleFile}>
+          <Button
+            className="attached-file__btn custom-btn"
+            onClick={toggleFile}
+          >
             <PaperClipOutlined className="custom-send-icon" />
           </Button>
         </div>
-        <div className="chat-actions__attached-images">
+        <div className="attached-images">
           <input type="file" ref={inputImgRef} hidden accept="image/*" />
-          <Button className="attached-images__btn" onClick={toggleImg}>
+          <Button
+            className="attached-images__btn custom-btn"
+            onClick={toggleImg}
+          >
             <PictureOutlined className="custom-send-icon" />
           </Button>
         </div>
-        <div className="chat-actions__send">
-          <Button className="send__btn">
+        <div className="send-chat">
+          <Button className="send-chat__btn">
             <SendOutlined className="custom-send-chat" />
           </Button>
         </div>

@@ -8,18 +8,22 @@ import './ChatUI.scss';
 import clsx from 'clsx';
 
 const ChatUI = () => {
-  const [open, setOpen] = useState(false);
+  const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
   return (
     <div className="chat-ui">
-      <div className={clsx('chat-ui__main ', `chat-ui__main--${open}`)}>
-        <ChatHeader setOpen={setOpen} />
-
+      <div
+        className={clsx(
+          'chat-ui__main ',
+          `chat-ui__main--${isUserProfileOpen}`
+        )}
+      >
+        <ChatHeader setOpen={setIsUserProfileOpen} />
         <ChatMain />
         <ChatBottom />
       </div>
-      {open && (
+      {isUserProfileOpen && (
         <div className="chat-ui__profile">
-          <UserInfoChat setClose={setOpen} />
+          <UserInfoChat setClose={setIsUserProfileOpen} />
         </div>
       )}
     </div>

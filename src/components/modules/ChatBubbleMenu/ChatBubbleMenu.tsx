@@ -66,7 +66,7 @@ const ChatBubbleMenu: React.FC<IChatBubbleMenuProps> = ({
 }) => {
   return (
     <Menu
-      className={clsx(`chat-bubble-menu ${position}`, className)}
+      className={clsx('chat-bubble-menu', position, className)}
       {...rest}
       items={menu}
       onClick={onClick}

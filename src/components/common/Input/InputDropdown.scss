@@ -1,19 +1,19 @@
-.input-dropdwn__search-chat {
-	height: 53px;
-	width: 238px;
-	padding: 8px;
-	border-radius: 0.4rem;
-	border: 0.5px solid rgba($color: #53565a, $alpha: 0.1);
-	.input-dropdwn__input {
-		outline: none;
-		border: none;
-		border-radius: 0.4rem;
-		font-weight: 400;
-		line-height: 1.5;
-		background-color: #e3eaf2;
+.dropdown-search {
+  height: 53px;
+  width: 238px;
+  padding: 8px;
+  border-radius: 0.4rem;
+  border: 0.5px solid rgba($color: #53565a, $alpha: 0.1);
+  .dropdown-search__input {
+    outline: none;
+    border: none;
+    border-radius: 0.4rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #e3eaf2;
 
-		::placeholder {
-			color: #7a7f9a;
-		}
-	}
+    ::placeholder {
+      color: #7a7f9a;
+    }
+  }
 }

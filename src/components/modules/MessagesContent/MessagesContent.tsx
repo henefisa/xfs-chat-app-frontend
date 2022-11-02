@@ -24,7 +24,7 @@ const MessagesContent: React.FC<IMessagesContent> = ({
           )}
         >
           {messages}
-          <div className="time">
+          <div className="chat-time">
             <ClockCircleOutlined className="custom-icon-time" />
             10:30
           </div>
@@ -38,10 +38,7 @@ const MessagesContent: React.FC<IMessagesContent> = ({
             }
             trigger={['click']}
             placement="bottom"
-            className={clsx(
-              'dropdown-chat-menu',
-              `dropdown-chat-menu--${position}`
-            )}
+            className={clsx('dropdown-chat', `dropdown-chat--${position}`)}
           >
             <MoreOutlined className="custom-icon-actions" />
           </Dropdown>

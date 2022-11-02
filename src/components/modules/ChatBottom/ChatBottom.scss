@@ -30,22 +30,23 @@
     flex-direction: row;
     justify-content: end;
     padding: 0px 12px;
+    .choose-emoji,
+    .attached-file,
+    .attached-images {
+      .custom-btn {
+        border: none;
+        background-color: transparent;
+        padding: 0.5rem 1rem;
+        border-radius: 0.4rem;
 
-    .emoji__btn,
-    .attached-file__btn,
-    .attached-images__btn {
-      border: none;
-      background-color: transparent;
-      padding: 0.5rem 1rem;
-      border-radius: 0.4rem;
-
-      .custom-send-icon {
-        font-size: 16px;
-        color: #7269ef;
+        .custom-send-icon {
+          font-size: 16px;
+          color: #7269ef;
+        }
       }
     }
-    .chat-actions__send {
-      .send__btn {
+    .send-chat {
+      .send-chat__btn {
         border: none;
         height: 100%;
         border-radius: 0.4rem;
@@ -62,14 +63,12 @@
     }
   }
 
-  .chat-actions__emoji {
-    .EmojiPickerReact {
-      height: 338px;
-      width: 282px;
-      position: fixed;
-      z-index: 2;
-      bottom: 23px;
-      right: 230px;
-    }
+  .EmojiPickerReact {
+    height: 338px;
+    width: 282px;
+    position: fixed;
+    z-index: 2;
+    bottom: 23px;
+    right: 230px;
   }
 }

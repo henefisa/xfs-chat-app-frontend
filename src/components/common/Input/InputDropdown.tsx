@@ -10,8 +10,8 @@ interface IMenuProps extends MenuProps {}
 const menu: MenuProps['items'] = [
   {
     label: (
-      <div className={clsx('input-dropdwn__search-chat')}>
-        <Input className="input-dropdwn__input" placeholder="Search..." />
+      <div className="dropdown-search">
+        <Input className="dropdown-search__input" placeholder="Search..." />
       </div>
     ),
     key: 0,

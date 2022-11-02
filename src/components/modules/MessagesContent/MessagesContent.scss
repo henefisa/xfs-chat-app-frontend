@@ -5,13 +5,12 @@
   flex-direction: column;
 
   .bubble-chat {
+    display: flex;
     &--right {
-      display: flex;
       flex-direction: row-reverse;
     }
 
     &--left {
-      display: flex;
       flex-direction: row;
     }
   }
@@ -42,7 +41,7 @@
         margin-top: 6px;
       }
 
-      .time {
+      .chat-time {
         color: #7a7f9a;
         text-align: right;
       }
@@ -59,7 +58,7 @@
         margin-top: 6px;
       }
 
-      .content--time {
+      .chat-time {
         color: hsla(0, 0%, 100%, 0.5);
         text-align: left;
       }
@@ -75,7 +74,7 @@
       }
     }
 
-    .time {
+    .chat-time {
       margin-top: 10px;
       font-size: 12px;
 
@@ -84,8 +83,13 @@
       }
     }
 
-    .custom-icon-actions {
-      font-size: 15px;
+    .bubble-chat__actions {
+      .dropdown {
+        border: none;
+      }
+      .custom-icon-actions {
+        font-size: 15px;
+      }
     }
   }
 }
