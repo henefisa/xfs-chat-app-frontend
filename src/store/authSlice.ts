@@ -23,7 +23,10 @@ export const authSlice = createSlice({
     loginStart: (state) => {
       state.login.isFetching = true;
     },
-    loginSuccess: (state, action: PayloadAction<string>) => {
+    loginSuccess: (
+      state,
+      action: PayloadAction<{ access_token: string; refresh_token: string }>
+    ) => {
       state.login.isFetching = false;
       state.login.isLoggedIn = true;
       state.login.error = false;
