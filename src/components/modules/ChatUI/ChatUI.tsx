@@ -3,7 +3,6 @@ import ChatHeader from '../ChatHeader/ChatHeader';
 import ChatBottom from '../ChatBottom/ChatBottom';
 import ChatMain from '../ChatMain/ChatMain';
 import UserInfoChat from '../UserInfoChat/UserInfoChat';
-import ForwardAction from '../ForwardAction/ForwardAction';
 import clsx from 'clsx';
 
 import './ChatUI.scss';
