@@ -50,22 +50,22 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
           path="https://scontent.fdad3-1.fna.fbcdn.net/v/t39.30808-6/277551484_1607305416300980_1426726336589949572_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=NDE6kmkwFQ8AX9-U3bh&_nc_ht=scontent.fdad3-1.fna&oh=00_AT8SGcvhT_y6-Lc16cMBv0OwsUOg0x7ef7Yp1yb_1teoEQ&oe=635BDBD2"
           imgWidth={35}
           username="A"
-          className="user-avatar"
+          className="user-info__avatar"
         />
-        <Title level={5} className="username">
+        <Title level={5} className="user-info__name">
           Danh Huy
         </Title>
-        <div className="user-status">
+        <div className="user-info__status">
           <CheckCircleFilled className="status__icon" />
         </div>
       </div>
       <div className="group-aciton">
-        <div className="search-actions">
+        <div className="search-action">
           <Dropdown
             overlay={<InputDropdown />}
             trigger={['click']}
             placement="bottomRight"
-            className={'search-actions__dropdown'}
+            className={'search-action__dropdown'}
           >
             <SearchOutlined className="custom-chat-icon" />
           </Dropdown>
@@ -75,7 +75,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
           return (
             <Button
               key={index}
-              className="group-aciton__btn"
+              className="group-action__btn"
               onClick={() => {
                 if (index === 2) {
                   setOpen(true);

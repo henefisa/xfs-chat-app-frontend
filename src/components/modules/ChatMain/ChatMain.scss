@@ -2,5 +2,20 @@
 
 .chatmain {
   padding: 24px;
-  overflow-y: scroll;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 7.5px;
+    background-color: white;
+  }
+
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 22px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+  }
 }

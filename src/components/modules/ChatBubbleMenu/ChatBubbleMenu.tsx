@@ -9,6 +9,8 @@ import {
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import clsx from 'clsx';
+import ForwardAction from '../ForwardAction/ForwardAction';
+import ForwardForm from '../ForwardForm/ForwardForm';
 
 import './ChatBubbleMenu.scss';
 
@@ -36,12 +38,7 @@ const menu: MenuProps['items'] = [
     key: 1,
   },
   {
-    label: (
-      <Button className="menu-item">
-        <Title className="menu-item__title">Forward</Title>
-        <RightSquareOutlined className="custom-menu-icon" />
-      </Button>
-    ),
+    label: <ForwardForm />,
     key: 2,
   },
   {
@@ -55,10 +52,6 @@ const menu: MenuProps['items'] = [
   },
 ];
 
-const onClick: MenuProps['onClick'] = ({ key }) => {
-  message.info(`Click on item ${key}`);
-};
-
 const ChatBubbleMenu: React.FC<IChatBubbleMenuProps> = ({
   className,
   position,
@@ -69,7 +62,6 @@ const ChatBubbleMenu: React.FC<IChatBubbleMenuProps> = ({
       className={clsx('chat-bubble-menu', position, className)}
       {...rest}
       items={menu}
-      onClick={onClick}
     />
   );
 };

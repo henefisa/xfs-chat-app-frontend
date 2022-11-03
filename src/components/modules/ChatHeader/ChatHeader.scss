@@ -13,7 +13,7 @@
     align-items: center;
   }
 
-  .username {
+  .user-info__name {
     font-size: 16px;
     font-weight: 500;
     color: v.$text-color;
@@ -21,7 +21,7 @@
     margin-left: 10px;
   }
 
-  .user-status {
+  .user-info__status {
     margin-bottom: 5px;
     padding: 0 5px;
 
@@ -37,7 +37,7 @@
     align-items: center;
   }
 
-  .group-aciton__btn {
+  .group-action__btn {
     border: none;
     width: 40px;
     height: 40px;
@@ -54,7 +54,7 @@
   .group-aciton {
     display: flex;
     align-items: center;
-    .search-actions {
+    .search-action {
       .custom-chat-icon {
         font-size: 20px;
       }

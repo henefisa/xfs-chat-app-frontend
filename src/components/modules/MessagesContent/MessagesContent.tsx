@@ -31,11 +31,7 @@ const MessagesContent: React.FC<IMessagesContent> = ({
         </div>
         <div className="bubble-chat__actions">
           <Dropdown
-            overlay={
-              <ChatBubbleMenu
-                position={position === 'left' ? 'left' : 'right'}
-              />
-            }
+            overlay={<ChatBubbleMenu position={position} />}
             trigger={['click']}
             placement="bottom"
             className={clsx('dropdown-chat', `dropdown-chat--${position}`)}

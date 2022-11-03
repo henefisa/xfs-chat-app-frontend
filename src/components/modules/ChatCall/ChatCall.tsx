@@ -32,10 +32,13 @@ const ChatCall: React.FC<IChatCallProps> = ({ onClose, title }) => {
           </Title>
         </div>
         <div className="actions">
-          <Button className="actions__btn--close" onClick={onClose}>
+          <Button
+            className="actions__btn actions__btn--close"
+            onClick={onClose}
+          >
             <CloseOutlined className="custom-icon" />
           </Button>
-          <Button className="actions__btn--suscess">
+          <Button className="actions__btn actions__btn--success">
             <PhoneOutlined className="custom-icon" />
           </Button>
         </div>

@@ -71,7 +71,7 @@
         border-color: #ef476f;
         color: #fff;
       }
-      .actions__btn--suscess {
+      .actions__btn--success {
         padding: 0px 4px;
         margin: 0px 8px;
         background-color: #06d6a0;
@@ -79,8 +79,7 @@
         color: #fff;
       }
 
-      .actions__btn--close,
-      .actions__btn--suscess {
+      Button {
         width: 48px;
         height: 48px;
         border: 1px solid transparent;
