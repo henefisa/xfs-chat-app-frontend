@@ -77,7 +77,7 @@ const SidebarContacts: React.FC = () => {
           </Title>
           <div className="contact-add" onClick={() => setToggleModal(true)}>
             <Tooltip placement="bottom" tooltipTitle="Add contact">
-              <UsergroupAddOutlined className="icon" />
+              <UsergroupAddOutlined className="contact-add__icon" />
             </Tooltip>
           </div>
         </div>

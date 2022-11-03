@@ -1,14 +1,23 @@
-import { HeartFilled, LockOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  HeartFilled,
+  Loading3QuartersOutlined,
+  LockOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
 import InputCheckbox from '@common/Input/InputCheckbox';
+import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
+
 import { Form } from 'antd';
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authService from 'src/services/authService';
-import { useAppDispatch } from 'src/store/hooks';
+import { selectisFetching } from 'src/store/authSlice';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import debounce from 'src/utils/debounce';
 import { getAccessToken } from 'src/utils/getTokenFromLocal';
 
 import './Login.scss';
@@ -23,6 +32,8 @@ const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const isLoading = useAppSelector(selectisFetching);
+
   React.useEffect(() => {
     const accessToken = getAccessToken();
 
@@ -31,10 +42,14 @@ const LoginPage: React.FC = () => {
     navigate('/dashboard');
   }, []);
 
-  const handleFinish = async (values: IFormFields) => {
+  const debounceClickLogin = React.useMemo(() => {
+    return debounce(authService.login, 1000);
+  }, []);
+
+  const handleFinish = (values: IFormFields) => {
     const { isRemember, ...user } = values;
 
-    await authService.login(user, isRemember, dispatch, navigate);
+    debounceClickLogin(user, isRemember, dispatch, navigate);
   };
 
   return (
@@ -100,7 +115,19 @@ const LoginPage: React.FC = () => {
             </Form.Item>
             <Form.Item className="button-item">
               <Button htmlType="submit" type="primary" className="login-button">
-                Sign in
+                {isLoading ? (
+                  <Spin
+                    className="spinner"
+                    spinIcon={
+                      <Loading3QuartersOutlined
+                        className="spinner__icon"
+                        spin
+                      />
+                    }
+                  />
+                ) : (
+                  'Sign in'
+                )}
               </Button>
             </Form.Item>
           </Form>

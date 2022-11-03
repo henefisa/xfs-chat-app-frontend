@@ -1,0 +1,7 @@
+@use '../../../assets/styles/variables' as v;
+
+.ant-spin.spin {
+  .anticon {
+    color: v.$white;
+  }
+}
