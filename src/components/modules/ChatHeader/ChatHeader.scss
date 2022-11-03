@@ -55,12 +55,16 @@
     display: flex;
     align-items: center;
     .search-action {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       .custom-chat-icon {
         font-size: 20px;
-      }
-      .ant-dropdown-trigger.dropdown.custom-dropdown-menu {
-        width: 40px;
-        height: 40px;
+        svg[data-icon='search'] {
+          color: black;
+        }
       }
     }
     .custom-chat-icon {
@@ -71,11 +75,25 @@
         color: black;
       }
     }
-  }
-  .detail-actions {
-    .ant-dropdown-trigger.dropdown.custom-dropdown-menu {
+
+    .group-action__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .detail-actions {
       width: 40px;
       height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .custom-chat-icon {
+        font-size: 20px;
+        svg[data-icon='ellipsis'] {
+          color: black;
+        }
+      }
     }
   }
 }
