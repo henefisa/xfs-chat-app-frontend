@@ -8,13 +8,16 @@ import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
 import Title from '@common/Title/Title';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
+
 import { Form } from 'antd';
 import { FieldData } from 'rc-field-form/es/interface';
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import * as authService from 'src/services/authService';
 import { checkEmailExist, checkUsernameExist } from 'src/services/userService';
 import { useAppDispatch } from 'src/store/hooks';
+import debounce from 'src/utils/debounce';
 
 import './Register.scss';
 
@@ -29,10 +32,12 @@ const Register: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const typingTimeoutRef = React.useRef<NodeJS.Timeout>();
+  const debounceClickRegister = React.useMemo(() => {
+    return debounce(authService.register, 1000);
+  }, []);
 
-  const handleFinish = async (values: IFormFields) => {
-    await authService.register(values, dispatch, navigate);
+  const handleFinish = (values: IFormFields) => {
+    debounceClickRegister(values, dispatch, navigate);
   };
 
   const handleUserExist = async (fieldName: string, value: string) => {
@@ -69,14 +74,17 @@ const Register: React.FC = () => {
     }
   };
 
+  const debounceHandleUserExist = React.useMemo(() => {
+    return debounce(handleUserExist, 700);
+  }, []);
+
   const handleFieldChange = (changedFields: FieldData[]) => {
     if (!changedFields[0].value) return;
 
-    clearTimeout(typingTimeoutRef.current);
-
-    typingTimeoutRef.current = setTimeout(() => {
-      handleUserExist(changedFields[0].name.toString(), changedFields[0].value);
-    }, 700);
+    debounceHandleUserExist(
+      changedFields[0].name.toString(),
+      changedFields[0].value
+    );
   };
 
   return (
