@@ -32,7 +32,7 @@ const ChatBottom: React.FC = () => {
       <div className="chat-actions">
         <div className="choose-emoji">
           <Button
-            className="choose-emoji__btn"
+            className="choose-emoji__btn general-btn"
             onClick={() => setEmoji(!emoji)}
           >
             <SmileOutlined className="custom-send-icon" />
@@ -41,13 +41,19 @@ const ChatBottom: React.FC = () => {
         </div>
         <div className="attached-file">
           <input type="file" ref={inputFileRef} hidden />
-          <Button className="attached-file__btn" onClick={toggleFile}>
+          <Button
+            className="attached-file__btn general-btn"
+            onClick={toggleFile}
+          >
             <PaperClipOutlined className="custom-send-icon" />
           </Button>
         </div>
         <div className="attached-images">
           <input type="file" ref={inputImgRef} hidden accept="image/*" />
-          <Button className="attached-images__btn" onClick={toggleImg}>
+          <Button
+            className="attached-images__btn general-btn"
+            onClick={toggleImg}
+          >
             <PictureOutlined className="custom-send-icon" />
           </Button>
         </div>

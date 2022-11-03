@@ -2,7 +2,7 @@ import { Modal } from 'antd';
 import Title from '@common/Title/Title';
 import React, { useState } from 'react';
 import Button from '@common/Button/Button';
-import { CloseOutlined } from '@ant-design/icons';
+import { RightSquareOutlined, CloseOutlined } from '@ant-design/icons';
 
 import './ForwardForm.scss';
 
@@ -61,31 +61,28 @@ const ForwardForm: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
+  const handleClose = () => {
     setIsModalOpen(false);
   };
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Open Modal
+      <Button className="forward-btn" onClick={showModal}>
+        <Title className="forward-btn__title">Forward</Title>
+        <RightSquareOutlined className="forward-btn__icon" />
       </Button>
-      <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Modal open={isModalOpen}>
         <div className="modal-content">
           <div className="modal-header">
             <Title level={4} className="modal-header__title">
               Forward to...
             </Title>
-            <Button className="modal-header__btn">
+            <Button className="modal-header__btn" onClick={handleClose}>
               <CloseOutlined className="custom-icon" />
             </Button>
           </div>
           <div className="modal-body">
-            <div className="simplebar-content">
+            <div className="modal-body__content">
               {contacts.map((contact, index) => (
                 <div key={index}>
                   <div className="firt-character">{contact.firtCharacter}</div>

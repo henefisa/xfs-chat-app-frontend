@@ -58,9 +58,6 @@
       .custom-chat-icon {
         font-size: 20px;
       }
-      .dropdown-input.ant-dropdown-menu-item {
-        padding: 0;
-      }
       .ant-dropdown-trigger.dropdown.custom-dropdown-menu {
         width: 40px;
         height: 40px;
@@ -80,5 +77,16 @@
       width: 40px;
       height: 40px;
     }
+  }
+}
+
+.ant-dropdown {
+  .ant-dropdown-menu {
+    padding: 0;
+  }
+
+  .ant-dropdown-menu-item,
+  .ant-dropdown-menu-submenu-title {
+    padding: 0;
   }
 }

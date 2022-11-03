@@ -38,10 +38,19 @@ const listActionChat = [
   },
 ];
 
-const activeIndex = 0;
-
 const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const [id, setId] = React.useState(-1);
+
+  const handleSubmit = (index: number) => {
+    if (index === 2) {
+      setOpen(true);
+    }
+    if (id === index) {
+      setId(-1);
+    } else {
+      setId(index);
+    }
+  };
 
   return (
     <div className="chat-header">
@@ -76,22 +85,12 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
             <Button
               key={index}
               className="group-action__btn"
-              onClick={() => {
-                if (index === 2) {
-                  setOpen(true);
-                }
-                if (id === index) {
-                  setId(-1);
-                } else {
-                  setId(index);
-                }
-              }}
+              onClick={() => handleSubmit(index)}
             >
               <Tooltip
                 className="custom-chat-icon"
                 placement="top"
                 tooltipTitle={item.tooltipTitle}
-                isActive={index === activeIndex ? true : false}
               >
                 <ChatActionItem />
               </Tooltip>
@@ -102,8 +101,8 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
           <Dropdown
             overlay={<ActionsChatMenu />}
             trigger={['click']}
-            placement="bottom"
-            className="custom-dropdown-menu"
+            placement="bottomLeft"
+            className="detail-actions__menu"
           >
             <EllipsisOutlined className="custom-chat-icon" />
           </Dropdown>
