@@ -12,6 +12,7 @@ import WrapperInput from '@modules/WrapperInput/WrapperInput';
 import { Form } from 'antd';
 import { FieldData } from 'rc-field-form/es/interface';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 
 import * as authService from 'src/services/authService';
@@ -31,6 +32,8 @@ const Register: React.FC = () => {
   const [registerForm] = Form.useForm();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const { t } = useTranslation('register');
 
   const debounceClickRegister = React.useMemo(() => {
     return debounce(authService.register, 1000);
@@ -65,9 +68,10 @@ const Register: React.FC = () => {
         {
           name: fieldName,
           errors: [
-            `${
-              fieldName.charAt(0).toUpperCase() + fieldName.slice(1)
-            } already exist!`,
+            `${t('error-exist-message', {
+              first: fieldName.charAt(0).toUpperCase(),
+              second: fieldName.slice(1),
+            })}`,
           ],
         },
       ]);
@@ -100,10 +104,10 @@ const Register: React.FC = () => {
         </Title>
       </div>
       <Title className="heading" level={4}>
-        Sign up
+        {t('title')}
       </Title>
       <Title className="sub-heading" level={5}>
-        Get your Chatvia account now.
+        {t('sub-title')}
       </Title>
       <Card>
         <div className="form-container">
@@ -114,46 +118,50 @@ const Register: React.FC = () => {
           >
             <Form.Item
               name="email"
-              label="Email"
+              label={t('email-label')}
               labelCol={{ span: 24 }}
               rules={[
                 {
                   type: 'email',
-                  message: 'Invalid email!',
+                  message: `${t('email-error-type-message')}`,
                 },
-                { required: true, message: 'Required!' },
+                { required: true, message: `${t('error-required-message')}` },
               ]}
             >
               <WrapperInput
                 PrefixIcon={MailOutlined}
                 inputType="email"
                 className="input-email"
-                placeholder="Enter email"
+                placeholder={t('email-placeholder')}
               />
             </Form.Item>
             <Form.Item
               name="username"
-              label="Username"
+              label={t('username-label')}
               labelCol={{ span: 24 }}
-              rules={[{ required: true, message: 'Required!' }]}
+              rules={[
+                { required: true, message: `${t('error-required-message')}` },
+              ]}
             >
               <WrapperInput
                 PrefixIcon={UserOutlined}
                 inputType="text"
                 className="input-username"
-                placeholder="Enter Username"
+                placeholder={t('username-placeholder')}
               />
             </Form.Item>
             <Form.Item
               name="password"
-              label="Password"
+              label={t('password-label')}
               labelCol={{ span: 24 }}
-              rules={[{ required: true, message: 'Required!' }]}
+              rules={[
+                { required: true, message: `${t('error-required-message')}` },
+              ]}
             >
               <WrapperInput
                 PrefixIcon={LockOutlined}
                 inputType="password"
-                placeholder="Enter Password"
+                placeholder={t('password-placeholder')}
               />
             </Form.Item>
             <Form.Item className="button-item">
@@ -162,14 +170,14 @@ const Register: React.FC = () => {
                 type="primary"
                 className="register-button"
               >
-                Sign up
+                {t('title')}
               </Button>
             </Form.Item>
             <div className="terms-item">
               <Title className="terms-item__title" level={5}>
-                By registering you agree to the Chatvia{' '}
+                {t('terms-title')}
                 <Link to="#" className="terms-item__link">
-                  Terms of Use
+                  {t('terms-link')}
                 </Link>
               </Title>
             </div>
@@ -179,15 +187,15 @@ const Register: React.FC = () => {
 
       <div className="register-page__footer">
         <Title className="ask-account" level={5}>
-          {/*eslint-disable react/no-unescaped-entities*/}
-          Already have an account ?{' '}
+          {t('ask-account')}
           <Link to="/login" className="ask-account__login-link">
-            Signin
+            {t('link-title')}
           </Link>
         </Title>
         <Title className="author" level={5}>
-          © 2022 Chat App. Crafted with{' '}
-          <HeartFilled className="author__heart-icon" /> by RVK Team
+          {t('author-title')}
+          <HeartFilled className="author__heart-icon" />
+          {t('author')}
         </Title>
       </div>
     </div>

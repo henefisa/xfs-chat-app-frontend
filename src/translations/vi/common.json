@@ -1,0 +1,56 @@
+{
+  "login": {
+    "title": "Đăng nhập",
+    "sub-title": "Đăng nhập để sử dụng ChatApp",
+    "username-label": "Tên đăng nhập",
+    "username-placeholder": "Nhập tên của bạn",
+    "username-error-message": "Vui lòng nhập tên đăng nhập!",
+    "password-label": "Mật khẩu",
+    "password-placeholder": "Nhập mật khẩu của bạn",
+    "password-error-message": "Vui lòng nhập mật khẩu!",
+    "forgot-password": "Quên mật khẩu?",
+    "remember-label": "Duy trì đăng nhập",
+    "ask-acount": "Bạn chưa có tài khoản? ",
+    "link-title": "Đăng kí tại đây",
+    "author-title": "© 2022 Chat App. Thiết kế ",
+    "author": " bởi RVK Team"
+  },
+  "register": {
+    "title": "Đăng ký",
+    "sub-title": "Đăng ký tài khoản ChatApp ngay bây giờ",
+    "email-label": "Email",
+    "email-placeholder": "Nhập email",
+    "error-required-message": "Vui lòng nhập trường này!",
+    "email-error-type-message": "Email không hợp lệ!",
+    "username-label": "Tên đăng nhập",
+    "username-placeholder": "Nhập tên đăng nhập",
+    "password-label": "Mật khẩu",
+    "password-placeholder": "Nhập mật khẩu",
+    "terms-title": "Bằng cách đăng ký bạn đồng ý với ChatApp về các ",
+    "terms-link": "Điều khoản sử dụng",
+    "ask-account": "Bạn đã có tài khoản rồi? ",
+    "link-title": "Đăng nhập",
+    "author-title": "© 2022 Chat App. Thiết kế ",
+    "author": " bởi RVK Team",
+    "error-exist-message": "{{first}}{{second}} đã tồn tại!"
+  },
+  "dashboard": {
+    "navbar": {
+      "profile": "Hồ sơ",
+      "chat": "Chats",
+      "groups": "Nhóm",
+      "contacts": "Liên hệ",
+      "settings": "Cài đặt",
+      "dark-light": "Sáng / Tối",
+      "user-menu": {
+        "profile": "Hồ sơ",
+        "setting": "Cài đặt",
+        "logout": "Đăng xuất"
+      },
+      "language-menu": {
+        "en": "Tiếng Anh",
+        "vi": "Tiếng Việt"
+      }
+    }
+  }
+}
