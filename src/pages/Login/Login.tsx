@@ -1,4 +1,9 @@
-import { HeartFilled, LockOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  HeartFilled,
+  LockOutlined,
+  UserOutlined,
+  Loading3QuartersOutlined,
+} from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
 import InputCheckbox from '@common/Input/InputCheckbox';
@@ -7,8 +12,10 @@ import WrapperInput from '@modules/WrapperInput/WrapperInput';
 import { Form } from 'antd';
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Spin from '@common/Spin/Spin';
 import * as authService from 'src/services/authService';
-import { useAppDispatch } from 'src/store/hooks';
+import { selectisFetching } from 'src/store/authSlice';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { getAccessToken } from 'src/utils/getTokenFromLocal';
 
 import './Login.scss';
@@ -22,6 +29,8 @@ interface IFormFields {
 const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const isLoading = useAppSelector(selectisFetching);
 
   React.useEffect(() => {
     const accessToken = getAccessToken();
@@ -100,7 +109,19 @@ const LoginPage: React.FC = () => {
             </Form.Item>
             <Form.Item className="button-item">
               <Button htmlType="submit" type="primary" className="login-button">
-                Sign in
+                {isLoading ? (
+                  <Spin
+                    className="spinner"
+                    spinIcon={
+                      <Loading3QuartersOutlined
+                        className="spinner__icon"
+                        spin
+                      />
+                    }
+                  />
+                ) : (
+                  'Sign in'
+                )}
               </Button>
             </Form.Item>
           </Form>
