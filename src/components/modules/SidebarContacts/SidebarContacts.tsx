@@ -117,25 +117,25 @@ const SidebarContacts: React.FC = () => {
         }}
       >
         <div className="overlay-modal__dialog">
-          <div className="dialog__title">
-            <Title className="title" level={5}>
+          <div className="dialog-header">
+            <Title className="dialog-header__title" level={5}>
               Add Contacts
             </Title>
             <button onClick={() => setToggleModal(false)}>
               <CloseOutlined />
             </button>
           </div>
-          <div className="dialog__body">
-            <div className="email">
+          <div className="dialog-body">
+            <div className="dialog-body__email">
               <label>Email</label>
               <Input className="input" placeholder="Enter email" />
             </div>
-            <div className="message">
+            <div className="dialog-body__message">
               <label>Invatation Message</label>
               <textarea placeholder="Enter Message" />
             </div>
           </div>
-          <div className="dialog__footer">
+          <div className="dialog-footer">
             <Button className="btn-close" onClick={() => setToggleModal(false)}>
               Close
             </Button>

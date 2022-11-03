@@ -70,7 +70,7 @@ const NavDashboard: React.FC = () => {
           return (
             <Button
               key={index}
-              className="menu__item"
+              className="menu-dashboard__item"
               onClick={() => {
                 dispatch(updateNavbar(item.tooltipTitle));
                 setActiveIndex(index);
