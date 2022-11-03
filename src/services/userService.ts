@@ -1,7 +1,6 @@
 import { notification } from 'antd';
 import apiRequest from 'src/api/apiRequest';
 import { AppDispatch } from 'src/store';
-import { logoutSuccess } from 'src/store/authSlice';
 import {
   getProfileFailed,
   getProfileStart,
@@ -45,6 +44,5 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
     dispatch(getProfileSuccess(res.data));
   } catch (err) {
     dispatch(getProfileFailed());
-    dispatch(logoutSuccess());
   }
 };

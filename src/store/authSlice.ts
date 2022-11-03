@@ -77,5 +77,7 @@ export const {
 } = authSlice.actions;
 
 export const selectLoginStore = (state: RootState) => state.auth.login;
+export const selectisFetching = (state: RootState) =>
+  state.auth.login.isFetching;
 
 export default authSlice.reducer;
