@@ -2,7 +2,7 @@ import { notification } from 'antd';
 import apiRequest from 'src/api/apiRequest';
 import { getRefreshToken } from 'src/utils/getTokenFromLocal';
 
-export const refresh = async () => {
+export const refreshAccessToken = async () => {
   try {
     const refreshToken = getRefreshToken();
     const res = await apiRequest.post('api/auth/refresh-token', {

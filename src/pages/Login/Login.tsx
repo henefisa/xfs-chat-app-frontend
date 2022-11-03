@@ -30,8 +30,7 @@ const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  // const isLoading = useAppSelector(selectisFetching);
-  const isLoading = true;
+  const isLoading = useAppSelector(selectisFetching);
 
   React.useEffect(() => {
     const accessToken = getAccessToken();

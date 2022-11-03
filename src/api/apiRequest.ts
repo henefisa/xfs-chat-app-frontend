@@ -1,7 +1,7 @@
 import { notification } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { NavigateFunction } from 'react-router-dom';
-import { refresh } from 'src/services/tokenService';
+import { refreshAccessToken } from 'src/services/tokenService';
 import { AppDispatch } from 'src/store';
 import { logoutSuccess } from 'src/store/authSlice';
 import getIsRemember from 'src/utils/getIsRemember';
@@ -60,19 +60,11 @@ export const initInterceptor = (
             dispatch(logoutSuccess());
             navigate('/login');
 
-            notification.error({
-              message: 'Error',
-              description: 'Có lỗi xảy ra!',
-              duration: 2,
-            });
-
-            console.log(2);
-
             return Promise.reject(error);
           }
 
           // Remember -> Refresh Token
-          const isRefreshSuccess = await refresh();
+          const isRefreshSuccess = await refreshAccessToken();
 
           if (!isRefreshSuccess) {
             // Refresh token error
