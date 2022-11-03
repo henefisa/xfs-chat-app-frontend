@@ -10,15 +10,15 @@ import {
 } from '@ant-design/icons';
 import * as React from 'react';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
 import Dropdown from '@common/Dropdown/Dropdown';
 import Tooltip from '@common/Tooltip/Tooltip';
+import { useAppSelector } from 'src/store/hooks';
+import { selectUserProfile } from 'src/store/userSlice';
 import LanguageMenu from '../LanguageMenu/LanguageMenu';
 import UserMenu from '../UserMenu/UserMenu';
-import { selectUserProfile } from 'src/store/userSlice';
 
 import './NavDashboard.scss';
 
@@ -50,7 +50,7 @@ const activeIndex = 0;
 const NavDashboard: React.FC = () => {
   // Viết tạm state dark/light theme
   const [isDark, setIsDark] = useState(false);
-  const userProfileStore = useSelector(selectUserProfile);
+  const userProfileStore = useAppSelector(selectUserProfile);
 
   const handleThemeChange = () => {
     setIsDark(!isDark);

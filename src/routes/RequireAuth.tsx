@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
 import { getUserProfile } from 'src/services/userService';
+import { useAppDispatch } from 'src/store/hooks';
 
 interface IRequireAuthProps {
   children: React.ReactElement;
@@ -8,7 +8,7 @@ interface IRequireAuthProps {
 }
 
 const RequireAuth: React.FC<IRequireAuthProps> = ({ children }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     getUserProfile(dispatch);
