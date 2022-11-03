@@ -10,7 +10,6 @@ import './SidebarDashboard.scss';
 
 const SidebarDashboard: React.FC = () => {
   const navbarAction = useAppSelector(selectNavBar);
-  console.log(navbarAction);
 
   return (
     <div className="sidebar">
