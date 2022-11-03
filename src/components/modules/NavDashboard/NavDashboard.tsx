@@ -64,7 +64,7 @@ const NavDashboard: React.FC = () => {
         <img className="logo__img" src="/images/logos/logo.svg" alt="Logo" />
       </div>
 
-      <div className="menu">
+      <div className="menu-dashboard">
         {navBarMenu.map((item, index) => {
           const MenuIcon = item.icon;
           return (

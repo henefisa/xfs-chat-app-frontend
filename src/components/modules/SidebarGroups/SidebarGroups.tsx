@@ -77,7 +77,7 @@ const SidebarGroups: React.FC = () => {
               placement="bottom"
               tooltipTitle="Create group"
             >
-              <UsergroupAddOutlined className="icon" />
+              <UsergroupAddOutlined className="group-create__icon" />
             </Tooltip>
           </div>
         </div>

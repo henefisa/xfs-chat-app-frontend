@@ -96,11 +96,11 @@
           align-items: center;
           gap: 6px;
 
-          .panel-icon {
+          .panel-header__icon {
             color: v.$text-color;
           }
 
-          .panel-title {
+          .panel-header__title {
             margin: 0;
             font-size: 14px;
             color: v.$text-color;
