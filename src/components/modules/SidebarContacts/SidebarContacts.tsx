@@ -72,10 +72,9 @@ const SidebarContacts: React.FC = () => {
     <>
       <div className="sidebar-contacts">
         <div className="sidebar-contacts__header">
-          {/* <Title className="contacts-title">Contacts</Title> */}
-          <div className="title">
-            <Title level={4}>Contacts</Title>
-          </div>
+          <Title className="contact-title" level={4}>
+            Contacts
+          </Title>
           <div className="contact-add" onClick={() => setToggleModal(true)}>
             <Tooltip placement="bottom" tooltipTitle="Add contact">
               <UsergroupAddOutlined className="icon" />

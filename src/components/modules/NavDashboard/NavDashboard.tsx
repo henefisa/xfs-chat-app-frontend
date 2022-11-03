@@ -20,7 +20,7 @@ import LanguageMenu from '../LanguageMenu/LanguageMenu';
 import UserMenu from '../UserMenu/UserMenu';
 import { selectUserProfile } from 'src/store/userSlice';
 import { useAppDispatch } from 'src/store/hooks';
-import { updateNabarAction } from 'src/store/navbarAction';
+import { updateNavbar } from 'src/store/navbarSlice';
 
 import './NavDashboard.scss';
 
@@ -72,7 +72,7 @@ const NavDashboard: React.FC = () => {
               key={index}
               className="menu__item"
               onClick={() => {
-                dispatch(updateNabarAction(item.tooltipTitle));
+                dispatch(updateNavbar(item.tooltipTitle));
                 setActiveIndex(index);
               }}
             >

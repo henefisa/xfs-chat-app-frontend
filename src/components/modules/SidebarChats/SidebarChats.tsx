@@ -11,9 +11,9 @@ const SidebarChats: React.FC = () => {
   return (
     <div className="sidebar-charts">
       <div className="header-charts">
-        <div className="title">
-          <Title level={4}>Chats</Title>
-        </div>
+        <Title className="header-charts__title" level={4}>
+          Chats
+        </Title>
         <div className="search-box">
           <SearchSidebar placeholder="Search messages or users" />
         </div>

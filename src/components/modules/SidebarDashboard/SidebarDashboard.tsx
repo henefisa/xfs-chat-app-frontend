@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
-import { selectActionNavBar } from 'src/store/navbarAction';
+import { selectNavBar } from 'src/store/navbarSlice';
+import { useAppSelector } from 'src/store/hooks';
 import SidebarProfile from '../SidebarProfile/SidebarProfile';
 import SidebarContacts from '../SidebarContacts/SidebarContacts';
 import SidebarGroups from '../SidebarGroups/SidebarGroups';
@@ -9,7 +9,7 @@ import SidebarChats from '../SidebarChats/SidebarChats';
 import './SidebarDashboard.scss';
 
 const SidebarDashboard: React.FC = () => {
-  const navbarAction = useSelector(selectActionNavBar);
+  const navbarAction = useAppSelector(selectNavBar);
   console.log(navbarAction);
 
   return (
