@@ -11,9 +11,9 @@ const SidebarChats: React.FC = () => {
   return (
     <div className="sidebar-charts">
       <div className="header-charts">
-        <div className="title">
-          <Title level={4}>Chats</Title>
-        </div>
+        <Title className="header-charts__title" level={4}>
+          Chats
+        </Title>
         <div className="search-box">
           <SearchSidebar placeholder="Search messages or users" />
         </div>
@@ -47,7 +47,7 @@ const SidebarChats: React.FC = () => {
         </Carousel>
       </div>
       <div className="charts-recent">
-        <Title level={5} className="title">
+        <Title level={5} className="charts-recent__title">
           Recent
         </Title>
         <div className="conversation-list">
