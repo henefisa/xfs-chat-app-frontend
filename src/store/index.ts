@@ -13,6 +13,7 @@ import storage from 'redux-persist/lib/storage';
 
 import userReducer from './userSlice';
 import authReducer from './authSlice';
+import navbarReducer from './navbarSlice';
 
 const loginPersistConfig = {
   key: 'login',
@@ -24,6 +25,7 @@ const loginPersistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   auth: persistReducer(loginPersistConfig, authReducer),
+  navbar: navbarReducer,
 });
 
 const store = configureStore({

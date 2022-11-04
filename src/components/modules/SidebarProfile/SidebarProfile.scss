@@ -7,22 +7,22 @@
     justify-content: space-between;
     padding: 24px;
 
-    .title {
+    .profile-heading {
       color: v.$text-color;
       font-size: 21px;
       font-weight: 600;
       margin: 0;
     }
 
-    .actions {
-      .actions__menu-icon {
+    .action-menu {
+      .actions-menu__icon {
         color: #7a7f9a;
         font-size: 22px;
       }
     }
   }
 
-  .profile-avatar {
+  .user-info {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,7 +38,7 @@
       }
     }
 
-    .title.username {
+    .title.user-info__name {
       font-size: 16px;
       font-weight: 500;
       color: v.$text-color;
@@ -46,18 +46,18 @@
     }
   }
 
-  .status {
+  .user-info__status {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
 
-    .status__icon {
+    .status-icon {
       color: #08d6a1;
       font-size: 10px;
     }
 
-    .status__name {
+    .status-title {
       color: #7a7f9a;
       font-size: 15px;
       font-weight: 400;
@@ -65,7 +65,7 @@
     }
   }
 
-  .description {
+  .user-description {
     padding: 24px;
     padding-top: 0;
     margin: 0;
@@ -74,7 +74,7 @@
     font-weight: 400;
   }
 
-  .ant-collapse.user-info,
+  .ant-collapse.user-profile,
   .ant-collapse.attached {
     margin: 0 24px;
     margin-bottom: 8px;
@@ -82,7 +82,7 @@
     border: 1px solid #f0eff5;
     border-radius: 6px;
 
-    .user-info__panel,
+    .user-profile__panel,
     .attached__panel {
       .ant-collapse-header {
         padding: 12px 20px;
@@ -96,11 +96,11 @@
           align-items: center;
           gap: 6px;
 
-          .panel-icon {
+          .panel-header__icon {
             color: v.$text-color;
           }
 
-          .panel-title {
+          .panel-header__title {
             margin: 0;
             font-size: 14px;
             color: v.$text-color;
@@ -118,22 +118,22 @@
             padding: 20px;
             margin: 0;
 
-            .info-item {
-              .info-item__title {
+            .profile-item {
+              .profile-item__title {
                 font-size: 15px;
                 color: #7a7f9a;
                 font-weight: 400;
                 margin-bottom: 4px;
               }
 
-              .info-item__desc {
+              .profile-item__desc {
                 font-size: 14px;
                 color: v.$text-color;
                 margin: 0;
               }
             }
 
-            .info-item + .info-item {
+            .profile-item + .profile-item {
               margin-top: 24px;
             }
           }
