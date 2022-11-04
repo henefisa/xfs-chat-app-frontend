@@ -1,4 +1,22 @@
 {
+  "notification": {
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "login": {
+      "login-success": "Logged in successfully!",
+      "login-error": "Login failed!"
+    },
+    "logout": {
+      "logout-success": "Logout successfully!",
+      "logout-error": "Logout failed!"
+    },
+    "register" : {
+      "register-success": "Sign up successfully!",
+      "register-error": "Sign up failed!"
+    },
+    "normal-error-message": "An error occurred!"
+  },
   "login": {
     "title": "Sign in",
     "sub-title": "Sign in to continue to ChatApp",

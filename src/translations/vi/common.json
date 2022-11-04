@@ -1,4 +1,22 @@
 {
+  "notification": {
+    "error": "Lỗi",
+    "success": "Thành công",
+    "warning": "Cảnh báo",
+    "login": {
+      "login-success": "Đăng nhập thành công!",
+      "login-error": "Đăng nhập thất bại!"
+    },
+    "logout": {
+      "logout-success": "Đăng xuất thành công!",
+      "logout-error": "Đăng xuất thất bại!"
+    },
+    "register" : {
+      "register-success": "Đăng ký thành công!",
+      "register-error": "Đăng ký thất bại!"
+    },
+    "normal-error-message": "Có lỗi xảy ra!"
+  },
   "login": {
     "title": "Đăng nhập",
     "sub-title": "Đăng nhập để sử dụng ChatApp",
@@ -53,4 +71,5 @@
       }
     }
   }
+  
 }

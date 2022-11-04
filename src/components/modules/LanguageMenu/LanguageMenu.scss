@@ -23,7 +23,7 @@
       padding-left: 28px;
       box-shadow: unset;
 
-      &.active {
+      &.language-item--active {
         background-color: v.$primary;
 
         .language-item__title {

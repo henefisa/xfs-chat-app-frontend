@@ -1,4 +1,5 @@
 import { notification } from 'antd';
+import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
 import { AppDispatch } from 'src/store';
 import {
@@ -7,7 +8,10 @@ import {
   getProfileSuccess,
 } from 'src/store/userSlice';
 
-export const checkUsernameExist = async (username: string) => {
+export const checkUsernameExist = async (
+  username: string,
+  t: TFunction<'notification', undefined>
+) => {
   try {
     const res = await apiRequest.post('api/users/check-username-exists', {
       username,
@@ -15,14 +19,17 @@ export const checkUsernameExist = async (username: string) => {
     return res.data;
   } catch (err) {
     notification.error({
-      message: 'Error',
-      description: 'Có lỗi xảy ra!',
+      message: t('error'),
+      description: t('normal-error-message'),
       duration: 1.5,
     });
   }
 };
 
-export const checkEmailExist = async (email: string) => {
+export const checkEmailExist = async (
+  email: string,
+  t: TFunction<'notification', undefined>
+) => {
   try {
     const res = await apiRequest.post('api/users/check-email-exists', {
       email,
@@ -30,8 +37,8 @@ export const checkEmailExist = async (email: string) => {
     return res.data;
   } catch (err) {
     notification.error({
-      message: 'Error',
-      description: 'Có lỗi xảy ra!',
+      message: t('error'),
+      description: t('normal-error-message'),
       duration: 1.5,
     });
   }

@@ -1,59 +1,91 @@
-import * as React from 'react';
-import clsx from 'clsx';
 import { Menu, MenuProps } from 'antd';
+import clsx from 'clsx';
+import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
-import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
+import Title from '@common/Title/Title';
 
 import './LanguageMenu.scss';
 
 interface IMenuProps extends MenuProps {}
 
-const languages = [
-  {
-    flag: '/images/flags/EL_flag.jpeg',
-    name: 'English',
-  },
-  {
-    flag: '/images/flags/Spanish_flag.jpeg',
-    name: 'Spanish',
-  },
-  {
-    flag: '/images/flags/German_flag.jpeg',
-    name: 'German',
-  },
-  {
-    flag: '/images/flags/Italy_flag.jpeg',
-    name: 'Italian',
-  },
-  {
-    flag: '/images/flags/Russian_flag.jpeg',
-    name: 'Russian',
-  },
-];
-
-const languageIndex = 0;
-
-const items = languages.map((item, index) => {
-  return {
-    label: (
-      <Button
-        className={clsx('language-item', {
-          active: languageIndex === index ? true : false,
-        })}
-      >
-        <img className="language-item__img" src={item.flag} alt="Flag" />
-        <Title className="language-item__title" level={5}>
-          {item.name}
-        </Title>
-      </Button>
-    ),
-    key: index,
-  };
-});
-
 const LanguageMenu: React.FC<IMenuProps> = () => {
-  return <Menu className="language-menu" items={items} />;
+  const { t, i18n } = useTranslation('dashboard', {
+    keyPrefix: 'navbar.language-menu',
+  });
+
+  const getKeyState = () => {
+    const key = localStorage.getItem('language');
+    if (!key) return '0';
+
+    return key === 'en' ? '0' : '1';
+  };
+
+  const [keySelected, setKeySelected] = React.useState<string>(getKeyState());
+
+  const languages = React.useMemo(() => {
+    return [
+      {
+        flag: '/images/flags/EL_flag.jpeg',
+        name: t('en'),
+      },
+      {
+        flag: '/images/flags/VN_flag.png',
+        name: t('vi'),
+      },
+    ];
+  }, [keySelected]);
+
+  const items = React.useMemo(() => {
+    return languages.map((item, index) => {
+      return {
+        label: (
+          <Button
+            className={clsx('language-item', {
+              [`language-item--active`]:
+                keySelected === `${index}` ? true : false,
+            })}
+          >
+            <img className="language-item__img" src={item.flag} alt="Flag" />
+            <Title className="language-item__title" level={5}>
+              {item.name}
+            </Title>
+          </Button>
+        ),
+        key: index,
+      };
+    });
+  }, [keySelected]);
+
+  const handleChangeLanguage = (key: string) => {
+    switch (key) {
+      case '0': {
+        i18n.changeLanguage('en');
+        localStorage.setItem('language', 'en');
+        break;
+      }
+      case '1': {
+        i18n.changeLanguage('vi');
+        localStorage.setItem('language', 'vi');
+        break;
+      }
+    }
+  };
+
+  const handleClickLanguageMenu: MenuProps['onClick'] = ({ key }) => {
+    setKeySelected(key);
+
+    handleChangeLanguage(key);
+  };
+
+  return (
+    <Menu
+      className="language-menu"
+      items={items}
+      onClick={handleClickLanguageMenu}
+    />
+  );
 };
 
 export default LanguageMenu;

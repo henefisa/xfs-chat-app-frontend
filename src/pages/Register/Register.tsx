@@ -34,13 +34,14 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
 
   const { t } = useTranslation('register');
+  const { t: t1 } = useTranslation('notification');
 
   const debounceClickRegister = React.useMemo(() => {
     return debounce(authService.register, 1000);
   }, []);
 
   const handleFinish = (values: IFormFields) => {
-    debounceClickRegister(values, dispatch, navigate);
+    debounceClickRegister(values, dispatch, navigate, t1);
   };
 
   const handleUserExist = async (fieldName: string, value: string) => {
@@ -50,11 +51,11 @@ const Register: React.FC = () => {
         return;
       }
       case 'email': {
-        isExist = await checkEmailExist(value);
+        isExist = await checkEmailExist(value, t1);
         break;
       }
       case 'username': {
-        isExist = await checkUsernameExist(value);
+        isExist = await checkUsernameExist(value, t1);
 
         break;
       }

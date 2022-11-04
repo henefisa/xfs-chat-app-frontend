@@ -34,6 +34,7 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const { t } = useTranslation('login');
+  const { t: t1 } = useTranslation('notification');
 
   const isLoading = useAppSelector(selectisFetching);
 
@@ -52,7 +53,7 @@ const LoginPage: React.FC = () => {
   const handleFinish = (values: IFormFields) => {
     const { isRemember, ...user } = values;
 
-    debounceClickLogin(user, isRemember, dispatch, navigate);
+    debounceClickLogin(user, isRemember, dispatch, navigate, t1);
   };
 
   return (

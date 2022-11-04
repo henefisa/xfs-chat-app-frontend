@@ -1,4 +1,5 @@
 import { notification } from 'antd';
+import { TFunction } from 'i18next';
 import { NavigateFunction } from 'react-router-dom';
 import apiRequest from 'src/api/apiRequest';
 import {
@@ -21,7 +22,8 @@ export const login = async (
   user: IUserLogin,
   isRemember: boolean,
   dispatch: AppDispatch,
-  navigate: NavigateFunction
+  navigate: NavigateFunction,
+  t: TFunction<'notification', undefined>
 ) => {
   dispatch(loginStart());
   try {
@@ -30,8 +32,8 @@ export const login = async (
     dispatch(rememberOnSubmit(!!isRemember));
 
     notification.success({
-      message: 'Success',
-      description: 'Đăng nhập thành công!',
+      message: t('success'),
+      description: t('login.login-success'),
       duration: 1.5,
     });
 
@@ -50,15 +52,16 @@ interface IUserRegister {
 export const register = async (
   user: IUserRegister,
   dispatch: AppDispatch,
-  navigate: NavigateFunction
+  navigate: NavigateFunction,
+  t: TFunction<'notification', undefined>
 ) => {
   dispatch(registerStart());
   try {
     await apiRequest.post('api/auth/register', user);
     dispatch(registerSuccess());
     notification.success({
-      message: 'Success',
-      description: 'Bạn đã đăng kí thành công.',
+      message: t('success'),
+      description: t('register.register-success'),
       duration: 2,
     });
 
@@ -66,8 +69,8 @@ export const register = async (
   } catch (err) {
     dispatch(registerFailed());
     notification.error({
-      message: 'Error',
-      description: 'Đăng kí thất bại!',
+      message: t('error'),
+      description: t('register.register-error'),
       duration: 2,
     });
   }

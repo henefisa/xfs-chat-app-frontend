@@ -1,8 +1,11 @@
 import { notification } from 'antd';
+import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
 import { getRefreshToken } from 'src/utils/getTokenFromLocal';
 
-export const refreshAccessToken = async () => {
+export const refreshAccessToken = async (
+  t: TFunction<'notification', undefined>
+) => {
   try {
     const refreshToken = getRefreshToken();
     const res = await apiRequest.post('api/auth/refresh-token', {
@@ -14,9 +17,9 @@ export const refreshAccessToken = async () => {
     return true;
   } catch (err) {
     notification.error({
-      message: 'Error',
-      description: 'Có lỗi xảy ra!',
-      duration: 5,
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 2,
     });
 
     return false;
