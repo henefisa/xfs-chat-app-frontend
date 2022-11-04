@@ -2,24 +2,24 @@
 
 .sidebar-groups {
   .sidebar-groups__header {
-    padding: 24px 24px 20px;
+    padding: 24px;
     display: flex;
     justify-content: space-between;
 
-    .title {
-      font-size: 21px;
+    .group-title {
       color: v.$text-color;
+      font-size: 21px;
       font-weight: 600;
+      margin: 0;
     }
 
     .group-create {
       width: 56px;
-      height: 31px;
       display: flex;
       justify-content: center;
       align-items: center;
 
-      .icon {
+      .group-create__icon {
         font-size: 20px;
         color: v.$icon-color;
         cursor: pointer;
@@ -249,7 +249,8 @@
           }
 
           &:focus {
-            border-color: v.$input-border;
+            border-color: #40a9ff;
+            border-right-width: 1px;
             box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
           }
         }

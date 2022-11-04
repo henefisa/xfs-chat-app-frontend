@@ -25,13 +25,13 @@
     }
   }
 
-  .menu {
+  .menu-dashboard {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
-    .menu__item {
+    .menu-dashboard__item {
       padding: 0;
       background-color: v.$white;
       border: unset;

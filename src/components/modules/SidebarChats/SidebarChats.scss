@@ -4,7 +4,7 @@
   .header-charts {
     padding: 24px 24px 0;
 
-    .title {
+    .header-charts__title {
       color: v.$text-color;
       font-size: 21px;
       font-weight: 600;
@@ -23,12 +23,13 @@
   .charts-recent {
     padding: 0 8px;
 
-    .title {
+    .charts-recent__title {
       font-size: 16px;
       font-weight: 600;
       padding: 0 16px;
       margin-bottom: 16px;
       line-height: 1.2;
+      color: v.$text-color;
     }
 
     .conversation-list {
