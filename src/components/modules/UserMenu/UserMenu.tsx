@@ -24,7 +24,7 @@ const UserMenu: React.FC<IMenuProps> = () => {
   const navigate = useNavigate();
 
   const { t } = useTranslation('dashboard', { keyPrefix: 'navbar.user-menu' });
-  const { t: t1 } = useTranslation('notification');
+  const { t: t1 } = useTranslation(['common', 'notification']);
 
   const menu: MenuProps['items'] = React.useMemo(() => {
     return [
@@ -72,7 +72,7 @@ const UserMenu: React.FC<IMenuProps> = () => {
     dispatch(deleteUserProfile());
     notification.success({
       message: t1('success'),
-      description: t1('logout.logout-success'),
+      description: t1('logout.success', { ns: 'notification' }),
       duration: 2,
     });
     navigate('/login');

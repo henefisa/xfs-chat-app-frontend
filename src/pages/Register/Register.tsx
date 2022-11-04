@@ -36,8 +36,7 @@ const Register: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { t } = useTranslation('register');
-  const { t: t1 } = useTranslation('notification');
+  const { t } = useTranslation(['register', 'common', 'notification']);
 
   const isLoading = useAppSelector(selectisFetchingRegister);
 
@@ -60,7 +59,7 @@ const Register: React.FC = () => {
   }, []);
 
   const handleFinish = (values: IFormFields) => {
-    debounceClickRegister(values, dispatch, navigate, t1);
+    debounceClickRegister(values, dispatch, navigate, t);
   };
 
   const handleUserExist = async (fieldName: string, value: string) => {
@@ -70,11 +69,11 @@ const Register: React.FC = () => {
         return;
       }
       case 'email': {
-        isExist = await checkEmailExist(value, t1);
+        isExist = await checkEmailExist(value, t);
         break;
       }
       case 'username': {
-        isExist = await checkUsernameExist(value, t1);
+        isExist = await checkUsernameExist(value, t);
 
         break;
       }

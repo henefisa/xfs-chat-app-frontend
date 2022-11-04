@@ -10,7 +10,7 @@ import {
 
 export const checkUsernameExist = async (
   username: string,
-  t: TFunction<'notification', undefined>
+  t: TFunction<('register' | 'common' | 'notification')[], undefined>
 ) => {
   try {
     const res = await apiRequest.post('api/users/check-username-exists', {
@@ -28,7 +28,7 @@ export const checkUsernameExist = async (
 
 export const checkEmailExist = async (
   email: string,
-  t: TFunction<'notification', undefined>
+  t: TFunction<('register' | 'common' | 'notification')[], undefined>
 ) => {
   try {
     const res = await apiRequest.post('api/users/check-email-exists', {

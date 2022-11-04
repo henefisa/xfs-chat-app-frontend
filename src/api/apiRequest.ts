@@ -18,7 +18,7 @@ const apiRequest = axios.create({
 export const initInterceptor = (
   navigate: NavigateFunction,
   dispatch: AppDispatch,
-  t: TFunction<'notification', undefined>
+  t: TFunction<('common' | 'notification')[], undefined>
 ) => {
   apiRequest.interceptors.request.use(
     (config) => {
@@ -50,7 +50,7 @@ export const initInterceptor = (
             // Login Failed
             notification.error({
               message: t('error'),
-              description: t('login.login-error'),
+              description: t('login.error', { ns: 'notification' }),
               duration: 2,
             });
 

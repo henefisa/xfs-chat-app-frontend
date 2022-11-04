@@ -4,7 +4,7 @@ import apiRequest from 'src/api/apiRequest';
 import { getRefreshToken } from 'src/utils/getTokenFromLocal';
 
 export const refreshAccessToken = async (
-  t: TFunction<'notification', undefined>
+  t: TFunction<('common' | 'notification')[], undefined>
 ) => {
   try {
     const refreshToken = getRefreshToken();

@@ -11,9 +11,7 @@ import './LanguageMenu.scss';
 interface IMenuProps extends MenuProps {}
 
 const LanguageMenu: React.FC<IMenuProps> = () => {
-  const { t, i18n } = useTranslation('dashboard', {
-    keyPrefix: 'navbar.language-menu',
-  });
+  const { t, i18n } = useTranslation('languages');
 
   const getKeyState = () => {
     const key = localStorage.getItem('language');

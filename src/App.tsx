@@ -8,7 +8,7 @@ import { useAppDispatch } from './store/hooks';
 function App() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { t } = useTranslation('notification');
+  const { t } = useTranslation(['common', 'notification']);
 
   React.useLayoutEffect(() => {
     initInterceptor(navigate, dispatch, t);

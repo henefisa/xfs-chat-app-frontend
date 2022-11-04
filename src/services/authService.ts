@@ -23,7 +23,7 @@ export const login = async (
   isRemember: boolean,
   dispatch: AppDispatch,
   navigate: NavigateFunction,
-  t: TFunction<'notification', undefined>
+  t: TFunction<('login' | 'common' | 'notification')[], undefined>
 ) => {
   dispatch(loginStart());
   try {
@@ -32,8 +32,8 @@ export const login = async (
     dispatch(rememberOnSubmit(!!isRemember));
 
     notification.success({
-      message: t('success'),
-      description: t('login.login-success'),
+      message: t('success', { ns: 'common' }),
+      description: t('login.success', { ns: 'notification' }),
       duration: 1.5,
     });
 
@@ -53,15 +53,15 @@ export const register = async (
   user: IUserRegister,
   dispatch: AppDispatch,
   navigate: NavigateFunction,
-  t: TFunction<'notification', undefined>
+  t: TFunction<('register' | 'common' | 'notification')[], undefined>
 ) => {
   dispatch(registerStart());
   try {
     await apiRequest.post('api/auth/register', user);
     dispatch(registerSuccess());
     notification.success({
-      message: t('success'),
-      description: t('register.register-success'),
+      message: t('success', { ns: 'common' }),
+      description: t('register.success', { ns: 'notification' }),
       duration: 2,
     });
 
@@ -69,8 +69,8 @@ export const register = async (
   } catch (err) {
     dispatch(registerFailed());
     notification.error({
-      message: t('error'),
-      description: t('register.register-error'),
+      message: t('error', { ns: 'common' }),
+      description: t('register.error', { ns: 'notification' }),
       duration: 2,
     });
   }

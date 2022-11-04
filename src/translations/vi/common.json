@@ -1,21 +1,27 @@
 {
-  "notification": {
+  "common": {
     "error": "Lỗi",
     "success": "Thành công",
     "warning": "Cảnh báo",
+    "normal-error-message": "Có lỗi xảy ra!"    
+  },
+  "languages": {
+    "en": "Tiếng Anh",
+    "vi": "Tiếng Việt"
+  },
+  "notification": {
     "login": {
-      "login-success": "Đăng nhập thành công!",
-      "login-error": "Đăng nhập thất bại!"
+      "success": "Đăng nhập thành công!",
+      "error": "Đăng nhập thất bại!"
     },
     "logout": {
-      "logout-success": "Đăng xuất thành công!",
-      "logout-error": "Đăng xuất thất bại!"
+      "success": "Đăng xuất thành công!",
+      "error": "Đăng xuất thất bại!"
     },
     "register" : {
-      "register-success": "Đăng ký thành công!",
-      "register-error": "Đăng ký thất bại!"
-    },
-    "normal-error-message": "Có lỗi xảy ra!"
+      "success": "Đăng ký thành công!",
+      "error": "Đăng ký thất bại!"
+    }
   },
   "login": {
     "title": "Đăng nhập",
@@ -64,12 +70,7 @@
         "profile": "Hồ sơ",
         "setting": "Cài đặt",
         "logout": "Đăng xuất"
-      },
-      "language-menu": {
-        "en": "Tiếng Anh",
-        "vi": "Tiếng Việt"
       }
     }
   }
-  
 }
