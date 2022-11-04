@@ -16,7 +16,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authService from 'src/services/authService';
-import { selectisFetching } from 'src/store/authSlice';
+import { selectisFetchingRegister } from 'src/store/authSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import debounce from 'src/utils/debounce';
 import { getAccessToken } from 'src/utils/getTokenFromLocal';
@@ -36,7 +36,7 @@ const LoginPage: React.FC = () => {
   const { t } = useTranslation('login');
   const { t: t1 } = useTranslation('notification');
 
-  const isLoading = useAppSelector(selectisFetching);
+  const isLoading = useAppSelector(selectisFetchingRegister);
 
   React.useEffect(() => {
     const accessToken = getAccessToken();

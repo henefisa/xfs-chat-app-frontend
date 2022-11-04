@@ -1,23 +1,26 @@
 import {
   HeartFilled,
+  Loading3QuartersOutlined,
   LockOutlined,
   MailOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
+import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 
 import { Form } from 'antd';
 import { FieldData } from 'rc-field-form/es/interface';
+import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-
 import * as authService from 'src/services/authService';
 import { checkEmailExist, checkUsernameExist } from 'src/services/userService';
-import { useAppDispatch } from 'src/store/hooks';
+import { selectisFetchingRegister } from 'src/store/authSlice';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import debounce from 'src/utils/debounce';
 
 import './Register.scss';
@@ -36,8 +39,24 @@ const Register: React.FC = () => {
   const { t } = useTranslation('register');
   const { t: t1 } = useTranslation('notification');
 
+  const isLoading = useAppSelector(selectisFetchingRegister);
+
   const debounceClickRegister = React.useMemo(() => {
     return debounce(authService.register, 1000);
+  }, []);
+
+  const handleFinishFailed = ({ values }: ValidateErrorEntity<IFormFields>) => {
+    if (values.email) {
+      handleUserExist('email', values.email);
+    }
+
+    if (values.username) {
+      handleUserExist('username', values.username);
+    }
+  };
+
+  const debounceOnFinishFaild = React.useMemo(() => {
+    return debounce(handleFinishFailed, 1000);
   }, []);
 
   const handleFinish = (values: IFormFields) => {
@@ -113,8 +132,9 @@ const Register: React.FC = () => {
       <Card>
         <div className="form-container">
           <Form
-            onFinish={handleFinish}
             form={registerForm}
+            onFinish={handleFinish}
+            onFinishFailed={debounceOnFinishFaild}
             onFieldsChange={handleFieldChange}
           >
             <Form.Item
@@ -171,7 +191,19 @@ const Register: React.FC = () => {
                 type="primary"
                 className="register-button"
               >
-                {t('title')}
+                {isLoading ? (
+                  <Spin
+                    className="spinner"
+                    spinIcon={
+                      <Loading3QuartersOutlined
+                        className="spinner__icon"
+                        spin
+                      />
+                    }
+                  />
+                ) : (
+                  t('title')
+                )}
               </Button>
             </Form.Item>
             <div className="terms-item">
