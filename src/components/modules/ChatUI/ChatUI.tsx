@@ -12,10 +12,9 @@ const ChatUI = () => {
   return (
     <div className="chat-ui">
       <div
-        className={clsx(
-          'chat-ui__main ',
-          `chat-ui__main--${isUserProfileOpen}`
-        )}
+        className={clsx('chat-ui__main ', {
+          [`chat-ui__main--active`]: isUserProfileOpen,
+        })}
       >
         <ChatHeader setOpen={setIsUserProfileOpen} />
         <ChatMain />
