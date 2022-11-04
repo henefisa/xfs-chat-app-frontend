@@ -41,17 +41,6 @@ const listActionChat = [
 const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const [id, setId] = React.useState(-1);
 
-  const handleSubmit = (index: number) => {
-    if (index === 2) {
-      setOpen(true);
-    }
-    if (id === index) {
-      setId(-1);
-    } else {
-      setId(index);
-    }
-  };
-
   return (
     <div className="chat-header">
       <div className="user-info">
@@ -80,12 +69,23 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
           </Dropdown>
         </div>
         {listActionChat.map((item, index) => {
+          const handleClick = (index: number) => {
+            if (index === 2) {
+              setOpen(true);
+            }
+            if (id === index) {
+              setId(-1);
+            } else {
+              setId(index);
+            }
+          };
+
           const ChatActionItem = item.icon;
           return (
             <Button
               key={index}
               className="group-action__btn"
-              onClick={() => handleSubmit(index)}
+              onClick={() => handleClick(index)}
             >
               <Tooltip
                 className="custom-chat-icon"
