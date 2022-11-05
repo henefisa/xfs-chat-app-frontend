@@ -56,7 +56,7 @@ const NavDashboard: React.FC = () => {
         tooltipTitle: t('settings'),
       },
     ];
-  }, [localStorage.getItem('language')]);
+  }, [t]);
 
   const handleThemeChange = () => {
     setIsDark(!isDark);

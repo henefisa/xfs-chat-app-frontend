@@ -4,7 +4,7 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 
-import { Menu, MenuProps, notification } from 'antd';
+import { MenuProps, notification } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -14,12 +14,13 @@ import { deleteUserProfile } from 'src/store/userSlice';
 
 import Button from '@common/Button/Button';
 import Title from '@common/Title/Title';
+import Menu from '@common/Menu/Menu';
 
 import './UserMenu.scss';
 
-interface IMenuProps extends MenuProps {}
+interface IUserMenuProps extends MenuProps {}
 
-const UserMenu: React.FC<IMenuProps> = () => {
+const UserMenu: React.FC<IUserMenuProps> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -65,7 +66,7 @@ const UserMenu: React.FC<IMenuProps> = () => {
         key: 2,
       },
     ];
-  }, [localStorage.getItem('language')]);
+  }, [t]);
 
   const handleLogout = () => {
     dispatch(logoutSuccess());

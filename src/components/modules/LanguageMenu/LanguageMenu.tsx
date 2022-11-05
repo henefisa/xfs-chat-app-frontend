@@ -1,23 +1,28 @@
-import { Menu, MenuProps } from 'antd';
+import { MenuProps } from 'antd';
 import clsx from 'clsx';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '@common/Button/Button';
 import Title from '@common/Title/Title';
+import Menu from '@common/Menu/Menu';
 
 import './LanguageMenu.scss';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { changeLanguage, selectLanguage } from 'src/store/languageSlice';
 
-interface IMenuProps extends MenuProps {}
+interface ILanguageProps extends MenuProps {}
 
-const LanguageMenu: React.FC<IMenuProps> = () => {
+const LanguageMenu: React.FC<ILanguageProps> = () => {
   const { t, i18n } = useTranslation('languages');
 
-  const getKeyState = () => {
-    const key = localStorage.getItem('language');
-    if (!key) return '0';
+  const dispatch = useAppDispatch();
+  const languageStorage = useAppSelector(selectLanguage);
 
-    return key === 'en' ? '0' : '1';
+  const getKeyState = () => {
+    if (!languageStorage.languageCode) return '0';
+
+    return languageStorage.languageCode === 'en' ? '0' : '1';
   };
 
   const [keySelected, setKeySelected] = React.useState<string>(getKeyState());
@@ -54,18 +59,18 @@ const LanguageMenu: React.FC<IMenuProps> = () => {
         key: index,
       };
     });
-  }, [keySelected]);
+  }, [t]);
 
   const handleChangeLanguage = (key: string) => {
     switch (key) {
       case '0': {
         i18n.changeLanguage('en');
-        localStorage.setItem('language', 'en');
+        dispatch(changeLanguage('en'));
         break;
       }
       case '1': {
         i18n.changeLanguage('vi');
-        localStorage.setItem('language', 'vi');
+        dispatch(changeLanguage('vi'));
         break;
       }
     }
