@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 import axios, { AxiosError } from 'axios';
+import { TFunction } from 'i18next';
 import { NavigateFunction } from 'react-router-dom';
 import { refreshAccessToken } from 'src/services/tokenService';
 import { AppDispatch } from 'src/store';
@@ -16,7 +17,8 @@ const apiRequest = axios.create({
 
 export const initInterceptor = (
   navigate: NavigateFunction,
-  dispatch: AppDispatch
+  dispatch: AppDispatch,
+  t: TFunction<('common' | 'notification')[], undefined>
 ) => {
   apiRequest.interceptors.request.use(
     (config) => {
@@ -47,8 +49,8 @@ export const initInterceptor = (
           if (originalRequest.url === 'api/auth/login') {
             // Login Failed
             notification.error({
-              message: 'Error',
-              description: 'Đăng nhập thất bại!',
+              message: t('error'),
+              description: t('login.error', { ns: 'notification' }),
               duration: 2,
             });
 
@@ -64,7 +66,7 @@ export const initInterceptor = (
           }
 
           // Remember -> Refresh Token
-          const isRefreshSuccess = await refreshAccessToken();
+          const isRefreshSuccess = await refreshAccessToken(t);
 
           if (!isRefreshSuccess) {
             // Refresh token error

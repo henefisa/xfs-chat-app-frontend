@@ -14,6 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import userReducer from './userSlice';
 import authReducer from './authSlice';
 import navbarReducer from './navbarSlice';
+import languageReducer from './languageSlice';
 
 const loginPersistConfig = {
   key: 'login',
@@ -22,10 +23,17 @@ const loginPersistConfig = {
   whitelist: ['login'],
 };
 
+const languagePersistConfig = {
+  key: 'language',
+  version: 2,
+  storage,
+};
+
 const rootReducer = combineReducers({
   user: userReducer,
   auth: persistReducer(loginPersistConfig, authReducer),
   navbar: navbarReducer,
+  language: persistReducer(languagePersistConfig, languageReducer),
 });
 
 const store = configureStore({

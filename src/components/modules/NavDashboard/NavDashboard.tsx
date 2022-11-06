@@ -8,13 +8,14 @@ import {
   UsergroupAddOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import * as React from 'react';
-import { useState } from 'react';
-
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
 import Dropdown from '@common/Dropdown/Dropdown';
 import Tooltip from '@common/Tooltip/Tooltip';
+
+import * as React from 'react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';
 import LanguageMenu from '../LanguageMenu/LanguageMenu';
@@ -24,35 +25,38 @@ import { updateNavbar } from 'src/store/navbarSlice';
 
 import './NavDashboard.scss';
 
-const navBarMenu = [
-  {
-    icon: UserOutlined,
-    tooltipTitle: 'Profile',
-  },
-  {
-    icon: MessageOutlined,
-    tooltipTitle: 'Chats',
-  },
-  {
-    icon: UsergroupAddOutlined,
-    tooltipTitle: 'Groups',
-  },
-  {
-    icon: ContactsOutlined,
-    tooltipTitle: 'Contacts',
-  },
-  {
-    icon: SettingOutlined,
-    tooltipTitle: 'Settings',
-  },
-];
-
 const NavDashboard: React.FC = () => {
   const dispatch = useAppDispatch();
   // Viết tạm state dark/light theme
   const [isDark, setIsDark] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const userProfileStore = useAppSelector(selectUserProfile);
+  const { t } = useTranslation('dashboard', { keyPrefix: 'navbar' });
+
+  const navBarMenu = React.useMemo(() => {
+    return [
+      {
+        icon: UserOutlined,
+        tooltipTitle: t('profile'),
+      },
+      {
+        icon: MessageOutlined,
+        tooltipTitle: t('chat'),
+      },
+      {
+        icon: UsergroupAddOutlined,
+        tooltipTitle: t('groups'),
+      },
+      {
+        icon: ContactsOutlined,
+        tooltipTitle: t('contacts'),
+      },
+      {
+        icon: SettingOutlined,
+        tooltipTitle: t('settings'),
+      },
+    ];
+  }, [t]);
 
   const handleThemeChange = () => {
     setIsDark(!isDark);
@@ -70,7 +74,7 @@ const NavDashboard: React.FC = () => {
           return (
             <Button
               key={index}
-              className="menu-dashboard__item"
+              className="menu-dashboard__btn"
               onClick={() => {
                 dispatch(updateNavbar(item.tooltipTitle));
                 setActiveIndex(index);
@@ -89,8 +93,8 @@ const NavDashboard: React.FC = () => {
         })}
       </div>
 
-      <div className="actions">
-        <div className="actions__item">
+      <div className="actions-dashboard">
+        <div className="actions-dashboard__item">
           <Dropdown
             overlay={<LanguageMenu />}
             trigger={['click']}
@@ -100,18 +104,18 @@ const NavDashboard: React.FC = () => {
             <GlobalOutlined />
           </Dropdown>
         </div>
-        <div className="actions__item">
-          <Button className="actions__button" onClick={handleThemeChange}>
+        <div className="actions-dashboard__item">
+          <Button className="btn-theme" onClick={handleThemeChange}>
             <Tooltip
               className="custom-nav-icon"
-              tooltipTitle="Dark / Light Mode"
+              tooltipTitle={t('dark-light')}
               placement="right"
             >
               {isDark ? <ApiOutlined /> : <AlertOutlined />}
             </Tooltip>
           </Button>
         </div>
-        <div className="actions__item">
+        <div className="actions-dashboard__item">
           <Dropdown
             overlay={<UserMenu />}
             trigger={['click']}

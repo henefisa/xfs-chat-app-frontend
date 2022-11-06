@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Menu, MenuProps } from 'antd';
+import { MenuProps } from 'antd';
 
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
+import Menu from '@common/Menu/Menu';
 
 import './ProfileMenu.scss';
 

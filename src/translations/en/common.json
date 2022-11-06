@@ -1,0 +1,76 @@
+{
+  "common": {
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "normal-error-message": "An error occurred!"
+  },
+  "languages": {
+    "en": "English",
+    "vi": "Vietnamese"
+  },
+  "notification": {
+    "login": {
+      "success": "Logged in successfully!",
+      "error": "Login failed!"
+    },
+    "logout": {
+      "success": "Logout successfully!",
+      "error": "Logout failed!"
+    },
+    "register" : {
+      "success": "Sign up successfully!",
+      "error": "Sign up failed!"
+    }
+  },
+  "login": {
+    "title": "Sign in",
+    "sub-title": "Sign in to continue to ChatApp",
+    "username-label": "Username",
+    "username-placeholder": "Enter your username",
+    "username-error-message": "Please enter your username!",
+    "password-label": "Password",
+    "password-placeholder": "Enter your password",
+    "password-error-message": "Please enter your password!",
+    "forgot-password": "Forgot password?",
+    "remember-label": "Remember me",
+    "ask-acount": "Don't have an account? ",
+    "link-title": "Signup now",
+    "author-title": "© 2022 Chat App. Crafted with ",
+    "author": " by RVK Team"
+  },
+  "register": {
+    "title": "Sign up",
+    "sub-title": "Get your ChatApp account now",
+    "email-label": "Email",
+    "email-placeholder": "Enter email",
+    "error-required-message": "Required!",
+    "email-error-type-message": "Invalid email!",
+    "username-label": "Username",
+    "username-placeholder": "Enter username",
+    "password-label": "Password",
+    "password-placeholder": "Enter password",
+    "terms-title": "By registering you agree to the ChatApp ",
+    "terms-link": "Terms of Use",
+    "ask-account": "Already have an account? ",
+    "link-title": "Signin",
+    "author-title": "© 2022 Chat App. Crafted with ",
+    "author": " by RVK Team",
+    "error-exist-message": "{{first}}{{second}} already exist!"
+  },
+  "dashboard": {
+    "navbar": {
+      "profile": "Profile",
+      "chat": "Chats",
+      "groups": "Groups",
+      "contacts": "Contacts",
+      "settings": "Settings",
+      "dark-light": "Dark / Light Mode",
+      "user-menu": {
+        "profile": "Profile",
+        "setting": "Settings",
+        "logout": "Logout"
+      }
+    }
+  }
+}
