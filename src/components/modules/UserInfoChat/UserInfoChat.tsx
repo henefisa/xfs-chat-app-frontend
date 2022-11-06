@@ -15,10 +15,10 @@ import './UserInfoChat.scss';
 
 const { Panel } = Collapse;
 
-const userInfo = [
-  { title: 'Name', desc: 'Patricia Smith' },
-  { title: 'Email', desc: 'admin@mgail.com' },
-  { title: 'Time', desc: '15:30 PM' },
+const userInfoChat = [
+  { title: 'Name', desc: 'Patricia Smiths' },
+  { title: 'Email', desc: 'admin123@mgail.com' },
+  { title: 'Time', desc: '6:30 PM' },
   { title: 'Location', desc: 'Danang, VN' },
 ];
 
@@ -26,22 +26,22 @@ const listAttachedFile = [
   {
     name: 'Admin-A.zip',
     type: 'zip',
-    size: '12.5 MB',
+    size: '12.9 MB',
   },
   {
     name: 'Image-1.jpg',
     type: 'jpg',
-    size: '4.2 MB',
+    size: '4.5 MB',
   },
   {
     name: 'Image-2.jpg',
     type: 'jpg',
-    size: '3.1 MB',
+    size: '3.6 MB',
   },
   {
     name: 'Landing-A.zip',
     type: 'zip',
-    size: '6.7 MB',
+    size: '6.4 MB',
   },
 ];
 
@@ -93,7 +93,7 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
           key="1"
         >
           <ul className="panel-inner">
-            {userInfo.map((item, index) => (
+            {userInfoChat.map((item, index) => (
               <li key={index} className="info-item">
                 <Title level={5} className="info-item__title">
                   {item.title}

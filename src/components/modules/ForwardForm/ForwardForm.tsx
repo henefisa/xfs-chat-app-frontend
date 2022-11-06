@@ -9,36 +9,36 @@ import './ForwardForm.scss';
 const contacts = [
   {
     firtCharacter: 'A',
-    names: ['Albert Rodarte', 'Allison Etter'],
+    names: ['Albert Rodartes', 'Allison Ettert'],
   },
   {
     firtCharacter: 'C',
-    names: ['Craig Smiley'],
+    names: ['Craig Smileys'],
   },
   {
     firtCharacter: 'D',
-    names: ['Daniel Clay', 'Doris Brown'],
+    names: ['Daniel Clay', 'Doris Browns'],
   },
   {
     firtCharacter: 'I',
-    names: ['Iris Wells'],
+    names: ['Iris Wellsy'],
   },
   {
     firtCharacter: 'J',
-    names: ['Juan Flakes', 'John Hall', 'Joy Southern'],
+    names: ['Juan Flakes', 'John Halls', 'Joy Southernt'],
   },
 
   {
     firtCharacter: 'M',
-    names: ['Mary Farmer', 'Mark Messer', 'Michael Hinton'],
+    names: ['Mary Farmers', 'Mark Messert', 'Michael Hintond'],
   },
   {
     firtCharacter: 'O',
-    names: ['Ossie Wilson'],
+    names: ['Ossie Wilsons'],
   },
   {
     firtCharacter: 'P',
-    names: ['Phillis Griffin', 'Paul Haynes'],
+    names: ['Phillis Griffina', 'Paul Haynesa'],
   },
   {
     firtCharacter: 'R',
@@ -46,11 +46,11 @@ const contacts = [
   },
   {
     firtCharacter: 'S',
-    names: ['Sara Muller', 'Simon Velez', 'Steve Walker'],
+    names: ['Sara Mullerz', 'Simon Velezs', 'Steve Walkert'],
   },
   {
     firtCharacter: 'H',
-    names: ['Hanah Mile'],
+    names: ['Hanah Miles'],
   },
 ];
 
@@ -88,7 +88,7 @@ const ForwardForm: React.FC = () => {
                   <div className="firt-character">{contact.firtCharacter}</div>
                   <ul className="contact-names">
                     {contact.names.map((name, index) => (
-                      <li key={index}>
+                      <li key={index} className="contact-names__items">
                         <input
                           className="contact-names__checkbox"
                           type="checkbox"
