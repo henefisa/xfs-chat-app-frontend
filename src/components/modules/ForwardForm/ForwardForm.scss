@@ -23,7 +23,8 @@
     background-color: white;
     border-radius: 0.4rem;
     margin: auto;
-    z-index: 4;
+    position: absolute;
+    z-index: 1000;
     .modal-header {
       padding: 16px;
       display: flex;
@@ -46,11 +47,11 @@
         }
       }
     }
-    .modal-body {
+    .modal-main {
       padding: 20px;
       display: flex;
       flex-direction: column;
-      .modal-body__content {
+      .modal-main__content {
         padding: 8px;
         overflow: auto;
         max-height: 210px;

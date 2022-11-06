@@ -1,22 +1,27 @@
 import {
   HeartFilled,
+  Loading3QuartersOutlined,
   LockOutlined,
   MailOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
+import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
+
 import { Form } from 'antd';
+import { FieldData } from 'rc-field-form/es/interface';
+import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  checkEmailExist,
-  checkUsernameExist,
-} from 'src/services/checkUserService';
-import { useAppDispatch } from 'src/store/hooks';
-import { register } from '../../services/registerService';
+import * as authService from 'src/services/authService';
+import { checkEmailExist, checkUsernameExist } from 'src/services/userService';
+import { selectisFetchingRegister } from 'src/store/authSlice';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import debounce from 'src/utils/debounce';
 
 import './Register.scss';
 
@@ -31,10 +36,30 @@ const Register: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const typingTimeoutRef = React.useRef<NodeJS.Timeout>();
+  const { t } = useTranslation(['register', 'common', 'notification']);
+
+  const isLoading = useAppSelector(selectisFetchingRegister);
+
+  const debounceClickRegister = React.useMemo(() => {
+    return debounce(authService.register, 1000);
+  }, []);
+
+  const handleFinishFailed = ({ values }: ValidateErrorEntity<IFormFields>) => {
+    if (values.email) {
+      handleUserExist('email', values.email);
+    }
+
+    if (values.username) {
+      handleUserExist('username', values.username);
+    }
+  };
+
+  const debounceOnFinishFaild = React.useMemo(() => {
+    return debounce(handleFinishFailed, 1000);
+  }, []);
 
   const handleFinish = (values: IFormFields) => {
-    register(values, dispatch, navigate);
+    debounceClickRegister(values, dispatch, navigate, t);
   };
 
   const handleUserExist = async (fieldName: string, value: string) => {
@@ -44,11 +69,11 @@ const Register: React.FC = () => {
         return;
       }
       case 'email': {
-        isExist = await checkEmailExist(value);
+        isExist = await checkEmailExist(value, t);
         break;
       }
       case 'username': {
-        isExist = await checkUsernameExist(value);
+        isExist = await checkUsernameExist(value, t);
 
         break;
       }
@@ -62,13 +87,27 @@ const Register: React.FC = () => {
         {
           name: fieldName,
           errors: [
-            `${
-              fieldName.charAt(0).toUpperCase() + fieldName.slice(1)
-            } already exist!`,
+            `${t('error-exist-message', {
+              first: fieldName.charAt(0).toUpperCase(),
+              second: fieldName.slice(1),
+            })}`,
           ],
         },
       ]);
     }
+  };
+
+  const debounceHandleUserExist = React.useMemo(() => {
+    return debounce(handleUserExist, 700);
+  }, []);
+
+  const handleFieldChange = (changedFields: FieldData[]) => {
+    if (!changedFields[0].value) return;
+
+    debounceHandleUserExist(
+      changedFields[0].name.toString(),
+      changedFields[0].value
+    );
   };
 
   return (
@@ -84,73 +123,65 @@ const Register: React.FC = () => {
         </Title>
       </div>
       <Title className="heading" level={4}>
-        Sign up
+        {t('title')}
       </Title>
       <Title className="sub-heading" level={5}>
-        Get your Chatvia account now.
+        {t('sub-title')}
       </Title>
       <Card>
         <div className="form-container">
           <Form
-            onFinish={handleFinish}
             form={registerForm}
-            onFieldsChange={(changedFields) => {
-              if (changedFields[0].value) {
-                if (typingTimeoutRef.current) {
-                  clearTimeout(typingTimeoutRef.current);
-                }
-
-                typingTimeoutRef.current = setTimeout(() => {
-                  handleUserExist(
-                    changedFields[0].name.toString(),
-                    changedFields[0].value
-                  );
-                }, 700);
-              }
-            }}
+            onFinish={handleFinish}
+            onFinishFailed={debounceOnFinishFaild}
+            onFieldsChange={handleFieldChange}
           >
             <Form.Item
               name="email"
-              label="Email"
+              label={t('email-label')}
               labelCol={{ span: 24 }}
               rules={[
                 {
                   type: 'email',
-                  message: 'Invalid email!',
+                  message: `${t('email-error-type-message')}`,
                 },
-                { required: true, message: 'Required!' },
+                { required: true, message: `${t('error-required-message')}` },
               ]}
             >
               <WrapperInput
                 PrefixIcon={MailOutlined}
                 inputType="email"
                 className="input-email"
-                placeholder="Enter email"
+                placeholder={t('email-placeholder')}
               />
             </Form.Item>
             <Form.Item
               name="username"
-              label="Username"
+              label={t('username-label')}
               labelCol={{ span: 24 }}
-              rules={[{ required: true, message: 'Required!' }]}
+              rules={[
+                { required: true, message: `${t('error-required-message')}` },
+              ]}
             >
               <WrapperInput
                 PrefixIcon={UserOutlined}
                 inputType="text"
                 className="input-username"
-                placeholder="Enter Username"
+                placeholder={t('username-placeholder')}
               />
             </Form.Item>
             <Form.Item
               name="password"
-              label="Password"
+              label={t('password-label')}
               labelCol={{ span: 24 }}
-              rules={[{ required: true, message: 'Required!' }]}
+              rules={[
+                { required: true, message: `${t('error-required-message')}` },
+              ]}
             >
               <WrapperInput
                 PrefixIcon={LockOutlined}
                 inputType="password"
-                placeholder="Enter Password"
+                placeholder={t('password-placeholder')}
               />
             </Form.Item>
             <Form.Item className="button-item">
@@ -159,14 +190,26 @@ const Register: React.FC = () => {
                 type="primary"
                 className="register-button"
               >
-                Sign up
+                {isLoading ? (
+                  <Spin
+                    className="spinner"
+                    spinIcon={
+                      <Loading3QuartersOutlined
+                        className="spinner__icon"
+                        spin
+                      />
+                    }
+                  />
+                ) : (
+                  t('title')
+                )}
               </Button>
             </Form.Item>
             <div className="terms-item">
               <Title className="terms-item__title" level={5}>
-                By registering you agree to the Chatvia{' '}
+                {t('terms-title')}
                 <Link to="#" className="terms-item__link">
-                  Terms of Use
+                  {t('terms-link')}
                 </Link>
               </Title>
             </div>
@@ -176,15 +219,15 @@ const Register: React.FC = () => {
 
       <div className="register-page__footer">
         <Title className="ask-account" level={5}>
-          {/*eslint-disable react/no-unescaped-entities*/}
-          Already have an account ?{' '}
+          {t('ask-account')}
           <Link to="/login" className="ask-account__login-link">
-            Signin
+            {t('link-title')}
           </Link>
         </Title>
         <Title className="author" level={5}>
-          © 2022 Chat App. Crafted with{' '}
-          <HeartFilled className="author__heart-icon" /> by RVK Team
+          {t('author-title')}
+          <HeartFilled className="author__heart-icon" />
+          {t('author')}
         </Title>
       </div>
     </div>

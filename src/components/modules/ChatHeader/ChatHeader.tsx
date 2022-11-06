@@ -23,23 +23,31 @@ interface IChatHeader {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const listActionChat = [
-  {
-    icon: PhoneOutlined,
-    tooltipTitle: 'VoiceCall',
-  },
-  {
-    icon: VideoCameraOutlined,
-    tooltipTitle: 'VideoCall',
-  },
-  {
-    icon: UserOutlined,
-    tooltipTitle: 'UserInfo',
-  },
-];
-
 const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const [id, setId] = React.useState(-1);
+  const listActionChat = [
+    {
+      icon: PhoneOutlined,
+      tooltipTitle: 'VoiceCall',
+      handleClick: function () {
+        setId(0);
+      },
+    },
+    {
+      icon: VideoCameraOutlined,
+      tooltipTitle: 'VideoCall',
+      handleClick: function () {
+        setId(1);
+      },
+    },
+    {
+      icon: UserOutlined,
+      tooltipTitle: 'UserInfo',
+      handleClick: function () {
+        setOpen(true);
+      },
+    },
+  ];
 
   return (
     <div className="chat-header">
@@ -69,23 +77,12 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
           </Dropdown>
         </div>
         {listActionChat.map((item, index) => {
-          const handleClick = (index: number) => {
-            if (index === 2) {
-              setOpen(true);
-            }
-            if (id === index) {
-              setId(-1);
-            } else {
-              setId(index);
-            }
-          };
-
           const ChatActionItem = item.icon;
           return (
             <Button
               key={index}
               className="group-action__btn"
-              onClick={() => handleClick(index)}
+              onClick={item.handleClick}
             >
               <Tooltip
                 className="custom-chat-icon"
@@ -107,8 +104,12 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
             <EllipsisOutlined className="custom-chat-icon" />
           </Dropdown>
         </div>
-        {id === 0 && <ChatCall title="Audio" onClose={() => setId(-1)} />}
-        {id === 1 && <ChatCall title="Video" onClose={() => setId(-1)} />}
+        {id === 0 && (
+          <ChatCall title="Audio" onClose={() => setId(-1)} isOpen={true} />
+        )}
+        {id === 1 && (
+          <ChatCall title="Video" onClose={() => setId(-1)} isOpen={true} />
+        )}
       </div>
     </div>
   );

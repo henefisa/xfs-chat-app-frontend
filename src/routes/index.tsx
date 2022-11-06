@@ -1,17 +1,31 @@
 import * as React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { HomePage, LoginPage, RegisterPage, DashboardPage } from 'src/pages';
+import { Route, Routes } from 'react-router-dom';
+import RequireAuth from './RequireAuth';
+import routes from './routesPath';
 
 const Router: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      {routes.map((item, index) => {
+        const Component: React.FC = item.component;
+
+        return (
+          <Route
+            key={index}
+            path={item.path}
+            element={
+              item.private ? (
+                <RequireAuth redirectTo="/login">
+                  <Component />
+                </RequireAuth>
+              ) : (
+                <Component />
+              )
+            }
+          />
+        );
+      })}
+    </Routes>
   );
 };
 

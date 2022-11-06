@@ -1,16 +1,25 @@
-import { HeartFilled, LockOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  HeartFilled,
+  Loading3QuartersOutlined,
+  LockOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
 import InputCheckbox from '@common/Input/InputCheckbox';
+import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
+
 import { Form } from 'antd';
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from 'src/services/loginService';
-import { selectLoginStore } from 'src/store/authSlice';
-import { useAppDispatch } from 'src/store/hooks';
+import * as authService from 'src/services/authService';
+import { selectisFetchingRegister } from 'src/store/authSlice';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import debounce from 'src/utils/debounce';
+import { getAccessToken } from 'src/utils/getTokenFromLocal';
 
 import './Login.scss';
 
@@ -21,29 +30,29 @@ interface IFormFields {
 }
 
 const LoginPage: React.FC = () => {
-  const loginStore = useSelector(selectLoginStore);
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const { t } = useTranslation(['login', 'common', 'notification']);
+
+  const isLoading = useAppSelector(selectisFetchingRegister);
+
   React.useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    const accessToken = getAccessToken();
 
-    if (loginStore.currentAccessToken && loginStore.isLoggedIn) {
-      timeoutId = setTimeout(() => {
-        navigate('/dashboard');
-      }, 1500);
-    }
+    if (!accessToken) return;
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    navigate('/dashboard');
+  }, []);
+
+  const debounceClickLogin = React.useMemo(() => {
+    return debounce(authService.login, 1000);
   }, []);
 
   const handleFinish = (values: IFormFields) => {
     const { isRemember, ...user } = values;
 
-    login(user, isRemember, dispatch, navigate);
+    debounceClickLogin(user, isRemember, dispatch, navigate, t);
   };
 
   return (
@@ -59,27 +68,27 @@ const LoginPage: React.FC = () => {
         </Title>
       </div>
       <Title className="heading" level={4}>
-        Sign in
+        {t('title')}
       </Title>
       <Title className="sub-heading" level={5}>
-        Sign in to continue to Chatvia.
+        {t('sub-title')}
       </Title>
       <Card>
         <div className="form-container">
           <Form onFinish={handleFinish}>
             <Form.Item
               name="username"
-              label="Username"
+              label={t('username-label')}
               labelCol={{ span: 24 }}
               rules={[
-                { required: true, message: 'Please Enter Your Username' },
+                { required: true, message: `${t('username-error-message')}` },
               ]}
             >
               <WrapperInput
                 PrefixIcon={UserOutlined}
                 inputType="text"
                 className="input-username"
-                placeholder="Enter Your Username"
+                placeholder={t('username-placeholder')}
               />
             </Form.Item>
             <div className="password-item">
@@ -87,29 +96,41 @@ const LoginPage: React.FC = () => {
                 to="/forgot-password"
                 className="password-item__forgot-link"
               >
-                Forgot password?
+                {t('forgot-password')}
               </Link>
               <Form.Item
                 name="password"
-                label="Password"
+                label={t('password-label')}
                 labelCol={{ span: 24 }}
                 rules={[
-                  { required: true, message: 'Please Enter Your Password' },
+                  { required: true, message: `${t('password-error-message')}` },
                 ]}
               >
                 <WrapperInput
                   PrefixIcon={LockOutlined}
                   inputType="password"
-                  placeholder="Enter Your Password"
+                  placeholder={t('password-placeholder')}
                 />
               </Form.Item>
             </div>
             <Form.Item name="isRemember" valuePropName="checked">
-              <InputCheckbox label="Remember me" />
+              <InputCheckbox label={t('remember-label')} />
             </Form.Item>
             <Form.Item className="button-item">
               <Button htmlType="submit" type="primary" className="login-button">
-                Sign in
+                {isLoading ? (
+                  <Spin
+                    className="spinner"
+                    spinIcon={
+                      <Loading3QuartersOutlined
+                        className="spinner__icon"
+                        spin
+                      />
+                    }
+                  />
+                ) : (
+                  t('title')
+                )}
               </Button>
             </Form.Item>
           </Form>
@@ -118,15 +139,15 @@ const LoginPage: React.FC = () => {
 
       <div className="login-page__footer">
         <Title className="ask-account" level={5}>
-          {/*eslint-disable react/no-unescaped-entities*/}
-          Don't have an account ?{' '}
+          {t('ask-acount')}
           <Link to="/register" className="ask-account__register-link">
-            Signup now
+            {t('link-title')}
           </Link>
         </Title>
         <Title className="author" level={5}>
-          © 2022 Chat App. Crafted with{' '}
-          <HeartFilled className="author__heart-icon" /> by RVK Team
+          {t('author-title')}
+          <HeartFilled className="author__heart-icon" />
+          {t('author')}
         </Title>
       </div>
     </div>

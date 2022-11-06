@@ -1,17 +1,17 @@
 @use '../../../assets/styles/variables' as v;
 
-.sidebar-profile {
-  .header-profile {
+.sidebar-user {
+  .header-user {
     display: flex;
     justify-content: end;
     padding: 24px;
-    .header-profile__btn {
+    .header-user__btn {
       background-color: #fff;
       border: none;
     }
   }
 
-  .profile-avatar {
+  .user-avatar {
     display: flex;
     flex-direction: column;
     align-items: center;

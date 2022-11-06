@@ -1,4 +1,12 @@
-import axios from 'axios';
+import { notification } from 'antd';
+import axios, { AxiosError } from 'axios';
+import { TFunction } from 'i18next';
+import { NavigateFunction } from 'react-router-dom';
+import { refreshAccessToken } from 'src/services/tokenService';
+import { AppDispatch } from 'src/store';
+import { logoutSuccess } from 'src/store/authSlice';
+import getIsRemember from 'src/utils/getIsRemember';
+import { getAccessToken } from 'src/utils/getTokenFromLocal';
 
 const apiRequest = axios.create({
   baseURL: import.meta.env.VITE_APP_API_BASE_URL,
@@ -7,21 +15,83 @@ const apiRequest = axios.create({
   },
 });
 
-apiRequest.interceptors.request.use((config) => {
-  config.headers = config.headers ?? {};
+export const initInterceptor = (
+  navigate: NavigateFunction,
+  dispatch: AppDispatch,
+  t: TFunction<('common' | 'notification')[], undefined>
+) => {
+  apiRequest.interceptors.request.use(
+    (config) => {
+      config.headers = config.headers ?? {};
 
-  const loginStore = localStorage.getItem('persist:login');
-  let accessToken: string;
+      const accessToken = getAccessToken();
 
-  if (loginStore) {
-    accessToken = JSON.parse(JSON.parse(loginStore)?.login)?.currentAccessToken;
-  } else {
-    accessToken = '';
-  }
+      config.headers.Authorization = `Bearer ${accessToken}`;
 
-  config.headers.Authorization = accessToken ? `Bearer ${accessToken}` : '';
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
 
-  return config;
-});
+  apiRequest.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    async (error: AxiosError) => {
+      const status = error.response?.status;
+      const originalRequest = error.config ?? {};
+      const isRemember = getIsRemember();
+
+      switch (status) {
+        case 401: {
+          if (originalRequest.url === 'api/auth/login') {
+            // Login Failed
+            notification.error({
+              message: t('error'),
+              description: t('login.error', { ns: 'notification' }),
+              duration: 2,
+            });
+
+            return Promise.reject(error);
+          }
+
+          // Not remember -> not refresh token -> getUserProfile error -> logout -> back to /login
+          if (!isRemember) {
+            dispatch(logoutSuccess());
+            navigate('/login');
+
+            return Promise.reject(error);
+          }
+
+          // Remember -> Refresh Token
+          const isRefreshSuccess = await refreshAccessToken(t);
+
+          if (!isRefreshSuccess) {
+            // Refresh token error
+            dispatch(logoutSuccess());
+            navigate('/login');
+
+            return Promise.reject(error);
+          }
+
+          // Refresh token success
+          originalRequest.headers = originalRequest.headers ?? {};
+
+          originalRequest.headers[
+            'Authorization'
+          ] = `Bearer ${getAccessToken()}`;
+
+          navigate('/login');
+
+          return axios(originalRequest);
+        }
+      }
+
+      return Promise.reject(error);
+    }
+  );
+};
 
 export default apiRequest;

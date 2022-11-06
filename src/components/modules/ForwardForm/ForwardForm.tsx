@@ -81,8 +81,8 @@ const ForwardForm: React.FC = () => {
               <CloseOutlined className="custom-icon" />
             </Button>
           </div>
-          <div className="modal-body">
-            <div className="modal-body__content">
+          <div className="modal-main">
+            <div className="modal-main__content">
               {contacts.map((contact, index) => (
                 <div key={index}>
                   <div className="firt-character">{contact.firtCharacter}</div>

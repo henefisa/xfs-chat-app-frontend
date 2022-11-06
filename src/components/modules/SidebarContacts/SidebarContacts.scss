@@ -1,0 +1,241 @@
+@use '../../../../src/assets/styles/variables' as v;
+
+.sidebar-contacts {
+  .sidebar-contacts__header {
+    padding: 24px 24px 0;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    .contact-title {
+      color: v.$text-color;
+      font-size: 21px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .contact-add {
+      width: 56px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .contact-add__icon {
+        font-size: 20px;
+        color: v.$icon-color;
+        cursor: pointer;
+      }
+    }
+  }
+  .sidebar-contacts__search {
+    padding: 0 24px 24px;
+  }
+
+  .sidebar-contacts__unstyled {
+    padding: 24px;
+    height: calc(100vh - 160px);
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 7.5px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-track {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: 22px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+    }
+
+    .firt-character {
+      padding: 16px;
+      color: rgb(114, 105, 239);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .contact-names {
+      list-style: none;
+      cursor: pointer;
+
+      li {
+        padding: 10px 20px;
+        line-height: 1.8;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+
+        .contact-names__label {
+          font-weight: 600;
+          font-size: 14px;
+          color: v.$text-color;
+          cursor: pointer;
+        }
+
+        .icon {
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          color: v.$text-color;
+        }
+      }
+    }
+  }
+}
+
+.overlay-modal {
+  height: 100%;
+  left: 0;
+  outline: 0;
+  position: fixed;
+  top: -10%;
+  width: 100%;
+  opacity: 0;
+  z-index: 1055;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-out;
+  pointer-events: none;
+
+  &.overlay-modal--active {
+    top: 0;
+    opacity: 1;
+    pointer-events: visible;
+  }
+
+  .overlay-modal__dialog {
+    width: 500px;
+    background-color: v.$white;
+    border: 1px solid #f0eff5;
+    border-radius: 8px;
+    z-index: 100000;
+
+    .dialog-header {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #f0eff5;
+
+      .dialog-header__title {
+        font-weight: 600;
+        color: v.$text-color;
+        margin: 0;
+      }
+
+      button {
+        border: none;
+        background-color: transparent;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    }
+
+    .dialog-body {
+      padding: 24px;
+
+      .dialog-body__email {
+        margin-bottom: 24px;
+
+        label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 500;
+          font-size: 15px;
+        }
+
+        .input {
+          border-radius: 4px;
+          font-size: 14px;
+          &::placeholder {
+            color: v.$text-sub-color;
+          }
+        }
+      }
+
+      .dialog-body__message {
+        label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 500;
+          font-size: 15px;
+        }
+
+        textarea {
+          width: 100%;
+          height: 81px;
+          padding: 8px 16px;
+          font-size: 14px;
+          outline: none;
+          border: 1px solid v.$input-border;
+          transition: all 0.3s;
+
+          &::placeholder {
+            color: v.$text-sub-color;
+          }
+
+          &:hover {
+            border-color: #40a9ff;
+            border-right-width: 1px;
+          }
+
+          &:focus {
+            border-color: #40a9ff;
+            border-right-width: 1px;
+            box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+          }
+        }
+      }
+    }
+
+    .dialog-footer {
+      align-items: center;
+      border-top: 1px solid #f0eff5;
+      display: flex;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      padding: 0 12px 16px;
+
+      .btn-close,
+      .btn-invite {
+        font-size: 15px;
+        margin-top: 16px;
+      }
+
+      .btn-close {
+        margin-right: 8px;
+        background-color: transparent;
+        box-shadow: none;
+        color: v.$button;
+        border: none;
+        outline: none;
+      }
+      .btn-invite {
+        color: white;
+      }
+    }
+  }
+}
+
+.overlay-backdrop {
+  background-color: #000;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  opacity: 0;
+  z-index: 1050;
+  transition: opacity 0.15s linear;
+  pointer-events: none;
+
+  &.overlay-backdrop--active {
+    opacity: 0.5;
+  }
+}
