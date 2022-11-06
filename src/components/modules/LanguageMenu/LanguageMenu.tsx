@@ -20,9 +20,16 @@ const LanguageMenu: React.FC<ILanguageProps> = () => {
   const languageStorage = useAppSelector(selectLanguage);
 
   const getKeyState = () => {
-    if (!languageStorage.languageCode) return '0';
-
-    return languageStorage.languageCode === 'en' ? '0' : '1';
+    switch (languageStorage.languageCode) {
+      case 'en': {
+        return '0';
+      }
+      case 'vi': {
+        return '1';
+      }
+      default:
+        return '0';
+    }
   };
 
   const [keySelected, setKeySelected] = React.useState<string>(getKeyState());
