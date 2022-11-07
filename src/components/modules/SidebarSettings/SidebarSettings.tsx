@@ -5,8 +5,9 @@ import Dropdown from '@common/Dropdown/Dropdown';
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
 import SettingsMenu from '../SettingsStatusMenu/SettingsStatusMenu';
-import { Collapse, Divider, Switch } from 'antd';
+import { Collapse, Divider } from 'antd';
 import PrivacyMenu from '../PrivacyMenu/PrivacyMenu';
+import Switch from '@common/Switch/Switch';
 
 import './SidebarSettings.scss';
 
