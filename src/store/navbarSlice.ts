@@ -3,7 +3,7 @@ import { RootState } from '.';
 
 export const navbarSlice = createSlice({
   name: 'navbar',
-  initialState: 'Profile',
+  initialState: 0,
   reducers: {
     updateNavbar: (state, action) => {
       return action.payload;

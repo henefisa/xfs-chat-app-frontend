@@ -46,6 +46,11 @@
     }
   }
 
+  .content-profile {
+    overflow: auto;
+    height: calc(100vh - 315px);
+  }
+
   .user-info__status {
     display: flex;
     align-items: center;

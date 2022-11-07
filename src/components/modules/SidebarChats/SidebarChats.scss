@@ -1,10 +1,10 @@
 @use '../../../../src/assets/styles/variables' as v;
 
-.sidebar-charts {
-  .header-charts {
+.sidebar-chats {
+  .header-chats {
     padding: 24px 24px 0;
 
-    .header-charts__title {
+    .header-chats__title {
       color: v.$text-color;
       font-size: 21px;
       font-weight: 600;
@@ -16,14 +16,14 @@
     }
   }
 
-  .charts__carousel {
+  .chats__carousel {
     padding: 0 24px 24px;
   }
 
-  .charts-recent {
+  .chats-recent {
     padding: 0 8px;
 
-    .charts-recent__title {
+    .chats-recent__title {
       font-size: 16px;
       font-weight: 600;
       padding: 0 16px;
