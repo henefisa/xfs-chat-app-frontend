@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { Modal as AModal } from 'antd';
+import { ModalProps, Modal as AModal } from 'antd';
 
 import './Modal.scss';
 
-const Modal: React.FC = () => {
-  return <AModal className="modal" />;
+interface IModalProps extends ModalProps {}
+
+const Modal: React.FC<IModalProps> = ({ ...rest }) => {
+  return <AModal {...rest} />;
 };
 
 export default Modal;
