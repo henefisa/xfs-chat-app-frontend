@@ -7,6 +7,7 @@ import Button from '@common/Button/Button';
 import SettingsMenu from '../SettingsStatusMenu/SettingsStatusMenu';
 import { Collapse, Divider } from 'antd';
 import PrivacyMenu from '../PrivacyMenu/PrivacyMenu';
+import Switch from '@common/Switch/Switch';
 
 import './SidebarSettings.scss';
 
@@ -117,14 +118,7 @@ const SidebarSettings: React.FC = () => {
                       {item.title}
                     </Title>
                     {item.check ? (
-                      <div>
-                        <input
-                          type="checkbox"
-                          id={`check${index}`}
-                          className="check-input"
-                        />
-                        <label htmlFor={`check${index}`}></label>
-                      </div>
+                      <Switch defaultChecked={true} />
                     ) : (
                       <Dropdown
                         overlay={<PrivacyMenu />}
@@ -167,14 +161,7 @@ const SidebarSettings: React.FC = () => {
                 <Title level={5} className="security-item__title">
                   Show security notification
                 </Title>
-                <div>
-                  <input
-                    type="checkbox"
-                    id="check-show-security"
-                    className="check-input"
-                  />
-                  <label htmlFor="check-show-security"></label>
-                </div>
+                <Switch defaultChecked={true} />
               </li>
             </ul>
           </Panel>
