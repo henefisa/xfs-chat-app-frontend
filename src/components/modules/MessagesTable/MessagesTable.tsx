@@ -1,15 +1,10 @@
 import React from 'react';
-
-import { ClockCircleOutlined, MoreOutlined } from '@ant-design/icons';
-
 import Avatar from '@common/Avatar/Avatar';
 import Title from '@common/Title/Title';
-import Dropdown from '@common/Dropdown/Dropdown';
-
-import ChatBubbleMenu from '../ChatBubbleMenu/ChatBubbleMenu';
+import MessagesContent from '../MessagesContent/MessagesContent';
+import clsx from 'clsx';
 
 import './MessagesTable.scss';
-import clsx from 'clsx';
 
 interface IMessagesTableProps {
   position: string;
@@ -26,44 +21,14 @@ const MessagesTable: React.FC<IMessagesTableProps> = ({ position }) => {
           className="custom-avatar"
         />
       </div>
-      <div className="messages-table__chat-content">
-        <div
-          className={clsx(
-            'messages-table__chat-content-user',
-            `messages-table__chat-content-user--${position}`
-          )}
-        >
-          <div
-            className={clsx(
-              'messages-table__chat-content-bubble',
-              `messages-table__chat-content-bubble--${position}`
-            )}
-          >
-            hi...Good Morning!
-            <div className="messages-table__chat-content-bubble-time">
-              <ClockCircleOutlined className="custom-icon-chat-time" />
-              10:30
-            </div>
-          </div>
-          <div className="chat-content-bubble-more">
-            <Dropdown
-              overlay={
-                <ChatBubbleMenu
-                  position={position === 'left' ? 'left' : 'right'}
-                />
-              }
-              trigger={['click']}
-              placement="bottom"
-              className={clsx(
-                'dropdown-chat-menu',
-                `dropdown-chat-menu--${position}`
-              )}
-            >
-              <MoreOutlined className="custom-icon-chat-bubble-more" />
-            </Dropdown>
-          </div>
+      <div className="messages-table__body">
+        <div className="bubble">
+          <MessagesContent
+            messages="please, save this pictures to your file and give it to me after you have done with editing!"
+            position={position}
+          />
         </div>
-        <Title level={5} className="chat-content__username">
+        <Title level={5} className="username">
           Danh Huy
         </Title>
       </div>

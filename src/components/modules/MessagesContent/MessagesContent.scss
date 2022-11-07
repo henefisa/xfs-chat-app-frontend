@@ -1,0 +1,95 @@
+@use '../../../assets/styles/variables' as v;
+
+.messages {
+  display: flex;
+  flex-direction: column;
+
+  .bubble-chat {
+    display: flex;
+    &--right {
+      flex-direction: row-reverse;
+    }
+
+    &--left {
+      flex-direction: row;
+    }
+  }
+  .bubble-chat__content {
+    padding: 14px 18px;
+    background: #f5f7fb;
+    border-radius: 9px;
+    position: relative;
+    font-size: 15px;
+    animation: fadeIn 1s ease-in;
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 20px solid transparent;
+      border-bottom: 0;
+      margin-top: -10px;
+    }
+
+    &--left {
+      margin-left: 10px;
+      &:after {
+        left: 0;
+        border-top-color: #f5f7fb;
+        border-left: 0;
+        margin-top: 6px;
+      }
+
+      .chat-time {
+        color: #7a7f9a;
+        text-align: right;
+      }
+    }
+
+    &--right {
+      background: v.$primary;
+      color: #fff;
+      margin-right: 10px;
+      &:after {
+        right: 0;
+        border-top-color: v.$primary;
+        border-right: 0;
+        margin-top: 6px;
+      }
+
+      .chat-time {
+        color: hsla(0, 0%, 100%, 0.5);
+        text-align: left;
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .chat-time {
+      margin-top: 10px;
+      font-size: 12px;
+
+      .custom-icon-time {
+        padding: 4px;
+      }
+    }
+
+    .bubble-chat__actions {
+      .dropdown {
+        border: none;
+      }
+      .custom-icon-actions {
+        font-size: 15px;
+      }
+    }
+  }
+}

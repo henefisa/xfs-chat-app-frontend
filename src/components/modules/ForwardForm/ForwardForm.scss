@@ -1,0 +1,158 @@
+.ant-modal-root {
+  .ant-modal-close {
+    display: none;
+  }
+  .ant-modal {
+    width: 500px;
+    height: 380px;
+    border-radius: 0.4rem;
+    align-items: center;
+
+    .ant-modal-content {
+      background-color: transparent;
+      box-shadow: none;
+    }
+    .ant-modal-footer {
+      display: none;
+    }
+  }
+
+  .modal-content {
+    width: 500px;
+    height: 380px;
+    background-color: white;
+    border-radius: 0.4rem;
+    margin: auto;
+    position: absolute;
+    z-index: 1000;
+    .modal-header {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 0.5px solid rgba($color: #495057, $alpha: 0.1);
+      .modal-header__title {
+        line-height: 1.5;
+        margin-bottom: 0;
+      }
+      .modal-header__btn {
+        height: 30px;
+        width: 30px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        border: none;
+        .custom-icon {
+          color: black;
+          font-size: 16px;
+        }
+      }
+    }
+    .modal-main {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      .modal-main__content {
+        padding: 8px;
+        overflow: auto;
+        max-height: 210px;
+        &::-webkit-scrollbar {
+          width: 7.5px;
+          background-color: white;
+        }
+
+        &::-webkit-scrollbar-track {
+          display: none;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          height: 22px;
+          background: rgba(0, 0, 0, 0.15);
+          border-radius: 10px;
+        }
+
+        .firt-character {
+          padding: 16px;
+          color: rgb(114, 105, 239);
+          font-size: 15px;
+        }
+
+        .contact-list {
+          list-style: none;
+
+          .contact-names {
+            padding: 16px;
+
+            .contact-names__checkbox {
+              width: 15px;
+              height: 15px;
+              border-radius: 4px;
+              margin-right: 8px;
+              margin-top: 2px;
+              background-color: #f7f7ff;
+              background-position: 50%;
+              background-repeat: no-repeat;
+              background-size: contain;
+              border: 1px solid rgba(0, 0, 0, 0.25);
+              transition: background-color 0.15s ease-in-out,
+                background-position 0.15s ease-in-out,
+                border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+              vertical-align: top;
+              cursor: pointer;
+
+              &:checked[type='checkbox'] {
+                background-image: url();
+              }
+
+              &:checked {
+                background-color: #7269ef;
+                border-color: #7269ef;
+              }
+            }
+
+            .contact-names__label {
+              font-weight: 500;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+      .modal-footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        padding: 12px;
+        .modal-footer__btn {
+          padding: 8px 16px;
+          border-radius: 0.4rem;
+          align-items: center;
+          color: white;
+        }
+      }
+    }
+  }
+}
+.ant-btn.forward-btn {
+  height: 36px;
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: unset;
+  &:hover {
+    background: transparent;
+    border-color: transparent;
+  }
+  .forward-btn__title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 400;
+  }
+  .forward-btn__icon {
+    color: #7a7f9a;
+    font-size: 15px;
+  }
+}

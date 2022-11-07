@@ -1,0 +1,13 @@
+.ant-modal-root {
+  .ant-modal-close {
+    display: none;
+  }
+  .ant-modal {
+    width: 500px;
+    border-radius: 0.4rem;
+    align-items: center;
+    .ant-modal-footer {
+      display: none;
+    }
+  }
+}

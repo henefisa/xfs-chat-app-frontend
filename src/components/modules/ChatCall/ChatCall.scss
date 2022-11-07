@@ -1,105 +1,107 @@
 @use '../../../assets/styles/variables' as v;
 
-
-.modal-chat-call {
-    position: fixed;
-    inset: 0;
+.ant-modal-root {
+  animation: none;
+  .ant-modal-close {
+    display: none;
+  }
+  .ant-modal {
+    width: 500px;
+    height: 380px;
+    border-radius: 0.4rem;
+    .ant-modal-content {
+      background-color: transparent;
+      box-shadow: none;
+    }
+    .ant-modal-footer {
+      display: none;
+    }
+  }
+  .modal-body {
+    width: 500px;
+    height: 350px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 0.4rem;
     display: flex;
-    z-index: 3;
-    .modal-overlay {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: down ease 0.5s;
+
+    .modal-body__items {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .custom-avatar {
+        padding: 4px;
+        background-color: #f0eff5;
+        margin-bottom: 24px;
+
+        img {
+          border-radius: 50%;
+        }
+      }
+
+      .username {
+        font-size: 16px;
+        font-weight: 500;
+        color: v.$text-color;
+        margin-bottom: 4px;
+      }
     }
 
-    .modal-main {
-        width: 498px;
-        height: 353px;
-        background-color: white;
-        margin: auto;
-        position: relative;
-        padding: 40px;
-        border-radius: 0.4rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        .chat-call {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            .chat-call__avatar {
-                padding: 4px;
-                background-color: #f0eff5;
-                margin-bottom: 24px;
-
-                img {
-                    border-radius: 50%;
-                }
-            }
-
-            .title.chat-call__username {
-                font-size: 16px;
-                font-weight: 500;
-                color: v.$text-color;
-                margin-bottom: 4px;
-            }
-        }
-
-        .chat-call__title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-
-            .chat-call__text {
-                color: #7a7f9a;
-                font-size: 15px;
-                font-weight: 400;
-                margin: 0;
-            }
-        }
-
-        .btn-chat-call {
-            display: flex;
-            margin: 0px 0px 4px;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-
-            .btn-chat-call--close {
-                padding: 0px 8px;
-                margin: 0px 16px;
-
-                .btn-chat-call__button--close {
-                    background-color: #ef476f;
-                    border-color: #ef476f;
-                    color: #fff;
-                }
-            }
-
-            .btn-chat-call--suscess {
-                .btn-chat-call__button--suscess {
-                    background-color: #06d6a0;
-                    border-color: #06d6a0;
-                    color: #fff;
-                }
-            }
-
-            .btn-chat-call__button {
-                width: 48px;
-                height: 48px;
-                border: 1px solid transparent;
-                border-radius: 50%;
-                padding: 0.5rem 1rem;
-
-            }
-
-        }
-
-
+    .title-action {
+      align-items: center;
+      gap: 6px;
+      color: #7a7f9a;
+      font-size: 15px;
+      font-weight: 400;
+      margin: 0;
     }
+
+    .actions {
+      display: flex;
+      flex: 1;
+      margin: 0px 0px 4px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .actions__btn {
+        width: 48px;
+        height: 48px;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        padding: 0.5rem 1rem;
+        margin: 0px 12px;
+        align-self: flex-end;
+        &--close {
+          background-color: #ef476f;
+          border-color: #ef476f;
+          color: #fff;
+        }
+
+        &--success {
+          background-color: #06d6a0;
+          border-color: #06d6a0;
+          color: #fff;
+        }
+      }
+    }
+
+    @keyframes down {
+      from {
+        transform: translateY(-100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  }
 }
