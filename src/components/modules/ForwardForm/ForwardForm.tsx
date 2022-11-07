@@ -86,9 +86,9 @@ const ForwardForm: React.FC = () => {
               {contacts.map((contact, index) => (
                 <div key={index}>
                   <div className="firt-character">{contact.firtCharacter}</div>
-                  <ul className="contact-names">
+                  <ul className="contact-list">
                     {contact.names.map((name, index) => (
-                      <li key={index} className="contact-names__items">
+                      <li key={index} className="contact-names">
                         <input
                           className="contact-names__checkbox"
                           type="checkbox"
