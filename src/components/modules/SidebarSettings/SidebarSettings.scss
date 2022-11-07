@@ -5,8 +5,8 @@
     min-width: 28px;
     width: 30px;
     height: 15px;
-    border: 1px solid rgba(0,0,0,.25);
-    background-color: #f7f7f7;  
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    background-color: #f7f7f7;
 
     .ant-switch-handle {
       width: 11px;
@@ -15,8 +15,8 @@
       left: 1px;
 
       &::before {
-      background-color: #b9b9bf;
-      box-shadow: none;
+        background-color: #b9b9bf;
+        box-shadow: none;
       }
     }
   }
@@ -26,8 +26,8 @@
 
     .ant-switch-handle {
       &::before {
-      background-color: black;
-      box-shadow: none;
+        background-color: black;
+        box-shadow: none;
       }
     }
   }

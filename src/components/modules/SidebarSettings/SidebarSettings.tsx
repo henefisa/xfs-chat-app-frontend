@@ -117,7 +117,7 @@ const SidebarSettings: React.FC = () => {
                       {item.title}
                     </Title>
                     {item.check ? (
-                      <Switch defaultChecked={true}/>
+                      <Switch defaultChecked={true} />
                     ) : (
                       <Dropdown
                         overlay={<PrivacyMenu />}
@@ -160,7 +160,7 @@ const SidebarSettings: React.FC = () => {
                 <Title level={5} className="security-item__title">
                   Show security notification
                 </Title>
-                <Switch defaultChecked={true}/>
+                <Switch defaultChecked={true} />
               </li>
             </ul>
           </Panel>
