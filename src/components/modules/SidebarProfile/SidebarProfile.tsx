@@ -81,61 +81,67 @@ const SidebarProfile: React.FC = () => {
         </div>
       </div>
       <Divider />
-      <Title className="user-description" level={5}>
-        If several languages coalesce, the grammar of the resulting language is
-        more simple and regular than that of the individual.
-      </Title>
-      <Collapse
-        bordered={false}
-        expandIconPosition="end"
-        className="user-profile"
-      >
-        <Panel
-          className="user-profile__panel"
-          header={
-            <div className="panel-header">
-              <UserOutlined className="panel-header__icon" />
-              <Title level={5} className="panel-header__title">
-                About
-              </Title>
-            </div>
-          }
-          key="1"
+      <div className="content-profile">
+        <Title className="user-description" level={5}>
+          If several languages coalesce, the grammar of the resulting language
+          is more simple and regular than that of the individual.
+        </Title>
+        <Collapse
+          bordered={false}
+          expandIconPosition="end"
+          className="user-profile"
         >
-          <ul className="panel-inner">
-            {userInfo.map((item, index) => (
-              <li key={index} className="profile-item">
-                <Title level={5} className="profile-item__title">
-                  {item.title}
+          <Panel
+            className="user-profile__panel"
+            header={
+              <div className="panel-header">
+                <UserOutlined className="panel-header__icon" />
+                <Title level={5} className="panel-header__title">
+                  About
                 </Title>
-                <Title level={5} className="profile-item__desc">
-                  {item.desc}
-                </Title>
-              </li>
-            ))}
-          </ul>
-        </Panel>
-      </Collapse>
-      <Collapse bordered={false} expandIconPosition="end" className="attached">
-        <Panel
-          className="attached__panel"
-          header={
-            <div className="panel-header">
-              <PaperClipOutlined className="panel-header__icon" />
-              <Title level={5} className="panel-header__title">
-                Attached Files
-              </Title>
-            </div>
-          }
-          key="1"
+              </div>
+            }
+            key="1"
+          >
+            <ul className="panel-inner">
+              {userInfo.map((item, index) => (
+                <li key={index} className="profile-item">
+                  <Title level={5} className="profile-item__title">
+                    {item.title}
+                  </Title>
+                  <Title level={5} className="profile-item__desc">
+                    {item.desc}
+                  </Title>
+                </li>
+              ))}
+            </ul>
+          </Panel>
+        </Collapse>
+        <Collapse
+          bordered={false}
+          expandIconPosition="end"
+          className="attached"
         >
-          <div className="list-file">
-            {listAttachedFile.map((item, index) => (
-              <AttachedFileItem key={index} item={item} />
-            ))}
-          </div>
-        </Panel>
-      </Collapse>
+          <Panel
+            className="attached__panel"
+            header={
+              <div className="panel-header">
+                <PaperClipOutlined className="panel-header__icon" />
+                <Title level={5} className="panel-header__title">
+                  Attached Files
+                </Title>
+              </div>
+            }
+            key="1"
+          >
+            <div className="list-file">
+              {listAttachedFile.map((item, index) => (
+                <AttachedFileItem key={index} item={item} />
+              ))}
+            </div>
+          </Panel>
+        </Collapse>
+      </div>
     </div>
   );
 };

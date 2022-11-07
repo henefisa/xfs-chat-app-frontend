@@ -1,28 +1,21 @@
 import * as React from 'react';
 import { MenuProps } from 'antd';
-import Menu from '@common/Menu/Menu';
-
-import {
-  ShareAltOutlined,
-  StopOutlined,
-  DeleteOutlined,
-} from '@ant-design/icons';
 
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
+import Menu from '@common/Menu/Menu';
 
-import './ContactMenu.scss';
+import './PrivacyMenu.scss';
 
-interface IContactMenuProps extends MenuProps {}
+interface IPrivacyMenuProps extends MenuProps {}
 
 const menu: MenuProps['items'] = [
   {
     label: (
       <Button className="menu-item">
         <Title className="menu-item__title" level={5}>
-          Share
+          Everyone
         </Title>
-        <ShareAltOutlined className="icon" />
       </Button>
     ),
     key: 0,
@@ -31,9 +24,8 @@ const menu: MenuProps['items'] = [
     label: (
       <Button className="menu-item">
         <Title className="menu-item__title" level={5}>
-          Block
+          Selected
         </Title>
-        <StopOutlined className="icon" />
       </Button>
     ),
     key: 1,
@@ -42,17 +34,16 @@ const menu: MenuProps['items'] = [
     label: (
       <Button className="menu-item">
         <Title className="menu-item__title" level={5}>
-          Remove
+          Nobody
         </Title>
-        <DeleteOutlined className="icon" />
       </Button>
     ),
     key: 2,
   },
 ];
 
-const ContactMenu: React.FC<IContactMenuProps> = () => {
-  return <Menu className="contact-menu" items={menu} />;
+const PrivacyMenu: React.FC<IPrivacyMenuProps> = () => {
+  return <Menu className="privacy-menu" items={menu} />;
 };
 
-export default ContactMenu;
+export default PrivacyMenu;

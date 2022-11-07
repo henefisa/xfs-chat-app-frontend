@@ -1,0 +1,300 @@
+@use '../../../assets/styles/variables' as v;
+
+.sidebar-settings {
+  input[type='checkbox'].check-input {
+    opacity: 0;
+    position: absolute;
+    left: -9000px;
+    top: -9000px;
+  }
+
+  input[type='checkbox'].check-input + label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  input[type='checkbox'].check-input + label::before {
+    content: '';
+    width: 28px;
+    height: 15px;
+    background-color: #f7f7f7;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 1em;
+    transition: background-color 200ms ease-in-out;
+  }
+
+  input[type='checkbox'].check-input + label::after {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    content: '';
+    height: 11px;
+    width: 11px;
+    left: 3px;
+    background-color: #b9b9bf;
+    color: white;
+    border-radius: 1em;
+    transition: background-color 200ms ease-in-out, transform 200ms ease-in-out;
+  }
+
+  input[type='checkbox'].check-input:focus + label::before {
+    outline: 2px solid #b9b4f7;
+    border: 0.5px solid v.$checkbox-bg;
+  }
+
+  input[type='checkbox'].check-input:focus,
+  + label::before {
+    outline: 2px solid #b9b4f7;
+    border: 0.5px solid v.$checkbox-bg;
+  }
+
+  input[type='checkbox'].check-input:focus + label::after,
+  .input[type='checkbox'].check-input:checked + label::after {
+    background-color: black;
+  }
+
+  input[type='checkbox'].check-input:checked + label::before {
+    background-color: v.$checkbox-bg;
+  }
+
+  input[type='checkbox'].check-input:checked + label::after {
+    transform: translateX(100%);
+    background-color: v.$white;
+  }
+
+  .sidebar-settings__title {
+    padding: 24px 24px 0;
+    color: #495057;
+    font-size: 21px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .user-info {
+    padding: 24px;
+    text-align: center;
+
+    .user-info__avatar {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 24px;
+
+      .avatar-btn {
+        position: absolute;
+        bottom: -4px;
+        right: 0;
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        background-color: #e6ebf5;
+        border: 2px solid transparent;
+
+        &:focus {
+          border: 2px solid #dee2e8;
+        }
+
+        &__icon {
+          color: #212529;
+        }
+      }
+    }
+    .user-info__name {
+      color: v.$text-color;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .user-info__status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      .status-current {
+        font-size: 15px;
+        color: v.$text-sub-color;
+      }
+
+      .status-icon {
+        font-size: 10px;
+        margin-left: 6px;
+        color: v.$icon-color;
+      }
+    }
+  }
+
+  .sidebar-settings__content {
+    padding: 0 24px 24px;
+    height: calc(100vh - 336px);
+    overflow: auto;
+
+    .ant-collapse.info,
+    .ant-collapse.privacy,
+    .ant-collapse.security,
+    .ant-collapse.help {
+      margin-bottom: 8px;
+      background-color: v.$white;
+      border: 1px solid #f0eff5;
+      border-radius: 6px;
+
+      .info__panel,
+      .privacy__panel,
+      .security__panel,
+      .help__panel {
+        .ant-collapse-header {
+          padding: 12px 20px;
+
+          .ant-collapse-arrow {
+            font-size: 10px;
+          }
+
+          .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            .panel-header__icon {
+              color: v.$text-color;
+            }
+
+            .panel-header__title {
+              margin: 0;
+              font-size: 14px;
+              color: v.$text-color;
+            }
+          }
+        }
+
+        .ant-motion-collapse,
+        .ant-collapse-content.ant-collapse-content-active {
+          .ant-collapse-content-box {
+            padding: 0;
+
+            .panel-inner {
+              list-style: none;
+              padding: 20px;
+              margin: 0;
+              position: relative;
+
+              .btn-edit {
+                position: absolute;
+                right: 24px;
+                top: 24px;
+                padding: 4px 8px;
+                background-color: v.$card-background-hover;
+                font-size: 13.125px;
+                line-height: 1.4;
+                border: 2px solid transparent;
+                border-radius: 3px;
+
+                &:focus {
+                  border: 2px solid #dee2e8;
+                }
+              }
+
+              .info-item {
+                .info-item__title {
+                  font-size: 15px;
+                  color: #7a7f9a;
+                  font-weight: 400;
+                  margin-bottom: 4px;
+                }
+
+                .info-item__desc {
+                  font-size: 14px;
+                  color: v.$text-color;
+                  margin: 0;
+                }
+              }
+
+              .info-item + .info-item {
+                margin-top: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .privacy {
+      .divider {
+        margin: 16px 0;
+      }
+      .privacy-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .privacy-item__title {
+          font-size: 13px;
+          color: v.$text-color;
+          margin: 0;
+        }
+
+        .privacy-item__btn {
+          padding: 3px 8px;
+          background-color: #e6ebf5;
+          font-size: 13.125px;
+          border: 2px solid transparent;
+
+          &:hover {
+            color: v.$text-color;
+            opacity: 0.9;
+          }
+
+          &:focus {
+            border: 2px solid #dee2e8;
+            color: v.$text-color;
+          }
+
+          .btn-icon {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+
+    .security {
+      .panel-inner {
+        .security-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .security-item__title {
+            font-size: 13px;
+            color: v.$text-color;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .help {
+      .panel-inner {
+        .help-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+
+          .help-item__title {
+            font-size: 13px;
+            color: v.$text-color;
+            font-weight: 600;
+            margin: 0;
+          }
+        }
+        .divider {
+          margin: 16px 0;
+        }
+      }
+    }
+  }
+}

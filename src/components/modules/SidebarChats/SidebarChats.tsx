@@ -1,24 +1,24 @@
 import * as React from 'react';
-import Carousel from 'src/components/common/Carousel/Carousel';
-import CarouselItem from 'src/components/common/Carousel/CarouselItem/CarouselItem';
-import Conversation from 'src/components/common/Conversation/Conversation';
-import SearchSidebar from 'src/components/common/SearchSidebar/SearchSidebar';
-import Title from 'src/components/common/Title/Title';
+import Carousel from '@common/Carousel/Carousel';
+import CarouselItem from '@common/Carousel/CarouselItem/CarouselItem';
+import Conversation from '@common/Conversation/Conversation';
+import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
+import Title from '@common/Title/Title';
 
 import './SidebarChats.scss';
 
 const SidebarChats: React.FC = () => {
   return (
-    <div className="sidebar-charts">
-      <div className="header-charts">
-        <Title className="header-charts__title" level={4}>
+    <div className="sidebar-chats">
+      <div className="header-chats">
+        <Title className="header-chats__title" level={4}>
           Chats
         </Title>
         <div className="search-box">
           <SearchSidebar placeholder="Search messages or users" />
         </div>
       </div>
-      <div className="charts__carousel">
+      <div className="chats__carousel">
         <Carousel>
           <CarouselItem
             path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
@@ -46,8 +46,8 @@ const SidebarChats: React.FC = () => {
           />
         </Carousel>
       </div>
-      <div className="charts-recent">
-        <Title level={5} className="charts-recent__title">
+      <div className="chats-recent">
+        <Title level={5} className="chats-recent__title">
           Recent
         </Title>
         <div className="conversation-list">
