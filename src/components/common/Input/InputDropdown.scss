@@ -1,3 +1,5 @@
+@use '../../../assets/styles/variables' as v;
+
 .dropdown-search {
   height: 53px;
   width: 238px;
@@ -12,7 +14,7 @@
     line-height: 1.5;
     background-color: #e3eaf2;
 
-    ::placeholder {
+    &::placeholder {
       color: #7a7f9a;
     }
   }

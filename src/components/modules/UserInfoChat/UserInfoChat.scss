@@ -1,6 +1,7 @@
 @use '../../../assets/styles/variables' as v;
 
 .sidebar-user {
+  border-left: 4px solid rgba($color: #495057, $alpha: 0.1);
   .header-user {
     display: flex;
     justify-content: end;
@@ -33,6 +34,11 @@
       color: v.$text-color;
       margin-bottom: 4px;
     }
+  }
+
+  .content-profile {
+    overflow: auto;
+    height: calc(100vh - 315px);
   }
 
   .status {
@@ -135,5 +141,16 @@
     padding: 15px 20px;
     overflow-y: auto;
     max-height: 326px;
+  }
+}
+.ant-btn.header-user__btn {
+  &[ant-click-animating-without-extra-node='true']::after,
+  .ant-click-animating-node {
+    box-shadow: unset;
+    animation: unset;
+  }
+  &:hover,
+  &:focus {
+    color: v.$button-hover-border;
   }
 }
