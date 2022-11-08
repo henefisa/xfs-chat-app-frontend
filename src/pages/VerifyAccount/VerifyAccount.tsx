@@ -30,7 +30,7 @@ const VerifyAccount: React.FC = () => {
 
         <OtpInput
           value={otp}
-          onChange={(otp: any) => setOtp(otp)}
+          onChange={(otp: string) => setOtp(otp)}
           numInputs={6}
           separator={<span>-</span>}
           containerStyle={{
