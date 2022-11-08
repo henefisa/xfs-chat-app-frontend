@@ -79,6 +79,12 @@
         &:hover {
           border: none;
           outline: none;
+          color: v.$text-color;
+          opacity: 0.8;
+        }
+
+        &:focus {
+          color: v.$text-color;
         }
       }
 
