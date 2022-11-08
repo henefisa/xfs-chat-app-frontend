@@ -25,7 +25,7 @@ const privacy = [
   { title: 'Last seen', check: true },
   { title: 'Status' },
   { title: 'Read receipts', check: true },
-  { title: 'Groupss' },
+  { title: 'Groups' },
 ];
 
 const help = [

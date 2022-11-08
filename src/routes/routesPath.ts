@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DashboardPage, HomePage, LoginPage } from 'src/pages';
+import { DashboardPage, HomePage, LoginPage, VerifyAccount } from 'src/pages';
 import Register from 'src/pages/Register/Register';
 
 interface IRoute {
@@ -20,6 +20,10 @@ const routes: IRoute[] = [
   {
     path: '/register',
     component: Register,
+  },
+  {
+    path: '/verify-account',
+    component: VerifyAccount,
   },
   {
     path: '/dashboard',
