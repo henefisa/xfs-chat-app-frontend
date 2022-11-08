@@ -17,12 +17,11 @@
     font-size: 16px;
     font-weight: 500;
     color: v.$text-color;
-    margin-bottom: 4px;
     margin-left: 10px;
+    margin-bottom: 0;
   }
 
   .user-info__status {
-    margin-bottom: 5px;
     padding: 0 5px;
 
     .status__icon {
@@ -60,6 +59,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      &:hover {
+        content: 'Search';
+      }
       .custom-chat-icon {
         font-size: 20px;
         svg[data-icon='search'] {
@@ -101,10 +103,30 @@
 .ant-dropdown {
   .ant-dropdown-menu {
     padding: 0;
+    border-radius: 0.4rem;
   }
 
   .ant-dropdown-menu-item,
   .ant-dropdown-menu-submenu-title {
     padding: 0;
+    &[ant-click-animating-without-extra-node='true']::after,
+    .ant-click-animating-node {
+      box-shadow: unset;
+      animation: unset;
+    }
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+.ant-btn.group-action__btn {
+  &[ant-click-animating-without-extra-node='true']::after,
+  .ant-click-animating-node {
+    box-shadow: unset;
+    animation: unset;
+  }
+  &:hover,
+  &:focus {
+    color: v.$button-hover-border;
   }
 }
