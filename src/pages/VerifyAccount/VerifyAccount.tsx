@@ -63,24 +63,14 @@ const VerifyAccount: React.FC = () => {
 
   return (
     <div className="otp-page">
-      <div className="logo">
-        <img
-          className="logo__img"
-          src="/images/logos/logo.svg"
-          alt="Chat App Logo"
-        />
-        <Title className="app-name" level={4}>
-          RVK Chat App
-        </Title>
-      </div>
+      <Logo />
       <div className="otp-check">
-        <Title className="heading" level={4}>
+        <Title className="otp-check__heading" level={4}>
           Verification
         </Title>
-        <Title className="sub-heading" level={5}>
+        <Title className="otp-check__sub-heading" level={5}>
           Enter the verification code we just sent you on your email address
         </Title>
-
         <OtpInput
           value={otp}
           onChange={(otp: string) => setOtp(otp)}
@@ -109,7 +99,6 @@ const VerifyAccount: React.FC = () => {
             Resend
           </Button>
         </Title>
-
         <div className="otp-check__btn">
           <Button className="btn-reset" onClick={() => setOtp('')}>
             Reset
@@ -133,6 +122,7 @@ const VerifyAccount: React.FC = () => {
         <Title className="author" level={5}>
           © 2022 Chat App. Crafted with{' '}
           <HeartFilled className="author__heart-icon" /> by RVK Team
+
         </Title>
       </div>
     </div>

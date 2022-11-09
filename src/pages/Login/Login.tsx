@@ -9,6 +9,7 @@ import Card from '@common/Card/Card';
 import InputCheckbox from '@common/Input/InputCheckbox';
 import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
+import Logo from '@common/Logo/Logo';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 
 import { Form } from 'antd';
@@ -70,16 +71,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="login-page">
-      <div className="logo">
-        <img
-          className="logo__img"
-          src="/images/logos/logo.svg"
-          alt="Chat App Logo"
-        />
-        <Title className="app-name" level={4}>
-          RVK Chat App
-        </Title>
-      </div>
+      <Logo />
       <Title className="heading" level={4}>
         {t('title')}
       </Title>
