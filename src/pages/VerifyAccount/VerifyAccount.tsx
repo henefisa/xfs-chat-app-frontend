@@ -1,8 +1,9 @@
 import * as React from 'react';
-import Title from '@common/Title/Title';
-import OtpInput from 'react-otp-input';
 import { HeartFilled } from '@ant-design/icons';
+import OtpInput from 'react-otp-input';
+import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
+import Logo from '@common/Logo/Logo';
 
 import './VerifyAccount.scss';
 
@@ -10,21 +11,12 @@ const VerifyAccount: React.FC = () => {
   const [otp, setOtp] = React.useState('');
   return (
     <div className="otp-page">
-      <div className="logo">
-        <img
-          className="logo__img"
-          src="/images/logos/logo.svg"
-          alt="Chat App Logo"
-        />
-        <Title className="app-name" level={4}>
-          RVK Chat App
-        </Title>
-      </div>
+      <Logo />
       <div className="otp-check">
-        <Title className="heading" level={4}>
+        <Title className="otp-check__heading" level={4}>
           Verification
         </Title>
-        <Title className="sub-heading" level={5}>
+        <Title className="otp-check__sub-heading" level={5}>
           Enter the verification code we just sent you on your email address
         </Title>
 
