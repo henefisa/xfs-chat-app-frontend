@@ -54,6 +54,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        box-shadow: none;
 
         .custom-send-icon {
           font-size: 16px;
@@ -69,6 +70,7 @@
         height: 100%;
         border-radius: 0.4rem;
         padding: 0.5rem 1rem;
+        box-shadow: none;
 
         .custom-send-chat {
           width: 16px;
