@@ -19,7 +19,7 @@
       "error": "Logout failed!"
     },
     "register" : {
-      "success": "Sign up successfully!",
+      "success": "Sign up successfully. OTP has been sent to email!",
       "error": "Sign up failed!"
     }
   },
@@ -72,5 +72,10 @@
         "logout": "Logout"
       }
     }
+  },
+  "verify-account": {
+    "receive-otp": "OTP has been sent to email!",
+    "check-otp-error": "OTP code is incorrect!",
+    "check-otp-success": "Authentication successful!"
   }
 }
