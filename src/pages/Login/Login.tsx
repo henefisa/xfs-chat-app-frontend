@@ -38,11 +38,24 @@ const LoginPage: React.FC = () => {
   const isLoading = useAppSelector(selectisFetchingRegister);
 
   React.useEffect(() => {
-    const accessToken = getAccessToken();
+    const handleLoginWhenRemember = async () => {
+      const accessToken = getAccessToken();
 
-    if (!accessToken) return;
+      if (!accessToken) return;
 
-    navigate('/dashboard');
+      const isActivate: boolean | undefined =
+        await authService.checkUserActivate(t);
+      if (isActivate === undefined) return;
+
+      if (!isActivate) {
+        navigate('/verify-account');
+        return;
+      }
+
+      navigate('/dashboard');
+    };
+
+    handleLoginWhenRemember();
   }, []);
 
   const debounceClickLogin = React.useMemo(() => {

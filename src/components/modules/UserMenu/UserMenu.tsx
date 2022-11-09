@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { logoutSuccess } from 'src/store/authSlice';
 import { useAppDispatch } from 'src/store/hooks';
 import { deleteUserProfile } from 'src/store/userSlice';
+import { logout } from 'src/services/authService';
 
 import Button from '@common/Button/Button';
 import Title from '@common/Title/Title';
@@ -68,7 +69,8 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
     ];
   }, [t]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await logout(t1);
     dispatch(logoutSuccess());
     dispatch(deleteUserProfile());
     notification.success({
