@@ -62,6 +62,7 @@ export const logout = async (
       message: t('error'),
       description: t('normal-error-message'),
       duration: 1.5,
+      key: '1',
     });
   }
 };
@@ -113,6 +114,7 @@ export const checkUserActivate = async (
       message: t('error', { ns: 'common' }),
       description: t('normal-error-message', { ns: 'common' }),
       duration: 1.5,
+      key: '1',
     });
   }
 };
@@ -132,6 +134,7 @@ export const getOtp = async (
       message: t('error'),
       description: t('normal-error-message'),
       duration: 1.5,
+      key: '1',
     });
   }
 };
@@ -149,6 +152,7 @@ export const checkOtp = async (
       message: t('error'),
       description: t('normal-error-message'),
       duration: 1.5,
+      key: '1',
     });
   }
 };

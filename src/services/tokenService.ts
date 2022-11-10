@@ -19,7 +19,8 @@ export const refreshAccessToken = async (
     notification.error({
       message: t('error'),
       description: t('normal-error-message'),
-      duration: 2,
+      duration: 1.5,
+      key: '1',
     });
 
     return false;
