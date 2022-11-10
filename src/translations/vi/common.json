@@ -12,14 +12,15 @@
   "notification": {
     "login": {
       "success": "Đăng nhập thành công!",
-      "error": "Đăng nhập thất bại!"
+      "error": "Đăng nhập thất bại!",
+      "warning": "Bạn cần phải xác thực tài khoản!"
     },
     "logout": {
       "success": "Đăng xuất thành công!",
       "error": "Đăng xuất thất bại!"
     },
     "register" : {
-      "success": "Đăng ký thành công!",
+      "success": "Đăng ký thành công. OTP đã được gửi đến email!",
       "error": "Đăng ký thất bại!"
     }
   },
@@ -72,5 +73,10 @@
         "logout": "Đăng xuất"
       }
     }
+  },
+  "verify-account": {
+    "receive-otp": "OTP đã được gửi đến email!",
+    "check-otp-error": "Mã OTP không đúng!",
+    "check-otp-success": "Xác thực thành công!"
   }
 }

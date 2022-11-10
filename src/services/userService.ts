@@ -22,6 +22,7 @@ export const checkUsernameExist = async (
       message: t('error'),
       description: t('normal-error-message'),
       duration: 1.5,
+      key: '1',
     });
   }
 };
@@ -40,6 +41,7 @@ export const checkEmailExist = async (
       message: t('error'),
       description: t('normal-error-message'),
       duration: 1.5,
+      key: '1',
     });
   }
 };
