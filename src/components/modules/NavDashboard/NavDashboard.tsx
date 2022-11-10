@@ -7,6 +7,7 @@ import {
   SettingOutlined,
   UsergroupAddOutlined,
   UserOutlined,
+  SearchOutlined,
 } from '@ant-design/icons';
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
@@ -50,6 +51,10 @@ const NavDashboard: React.FC = () => {
       {
         icon: ContactsOutlined,
         tooltipTitle: t('contacts'),
+      },
+      {
+        icon: SearchOutlined,
+        tooltipTitle: t('search'),
       },
       {
         icon: SettingOutlined,

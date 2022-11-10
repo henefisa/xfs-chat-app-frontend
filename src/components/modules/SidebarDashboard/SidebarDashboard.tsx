@@ -6,6 +6,7 @@ import SidebarContacts from '../SidebarContacts/SidebarContacts';
 import SidebarGroups from '../SidebarGroups/SidebarGroups';
 import SidebarChats from '../SidebarChats/SidebarChats';
 import SidebarSettings from '../SidebarSettings/SidebarSettings';
+import SidebarSearchFriend from '../SidebarSearchFriend/SidebarSearchFriend';
 
 import './SidebarDashboard.scss';
 
@@ -18,7 +19,8 @@ const SidebarDashboard: React.FC = () => {
       {navbarAction === 1 && <SidebarChats />}
       {navbarAction === 2 && <SidebarGroups />}
       {navbarAction === 3 && <SidebarContacts />}
-      {navbarAction === 4 && <SidebarSettings />}
+      {navbarAction === 4 && <SidebarSearchFriend />}
+      {navbarAction === 5 && <SidebarSettings />}
     </div>
   );
 };

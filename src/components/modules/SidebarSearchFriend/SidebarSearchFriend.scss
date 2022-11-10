@@ -1,0 +1,31 @@
+@use '../../../../src/assets/styles/variables' as v;
+
+.sidebar-search {
+  .header-search {
+    padding: 24px 24px 0;
+
+    .header-search__title {
+      color: v.$text-color;
+      font-size: 21px;
+      font-weight: 600;
+      margin: 0 0 24px;
+    }
+
+    .header-search__input {
+      margin-bottom: 16px;
+    }
+  }
+
+  .body-search {
+    padding: 0 8px;
+
+    .body-search__title {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 0 16px;
+      margin-bottom: 16px;
+      line-height: 1.2;
+      color: v.$text-color;
+    }
+  }
+}
