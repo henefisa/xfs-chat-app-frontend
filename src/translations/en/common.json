@@ -12,7 +12,8 @@
   "notification": {
     "login": {
       "success": "Logged in successfully!",
-      "error": "Login failed!"
+      "error": "Login failed!",
+      "warning": "You need to verify your account!"
     },
     "logout": {
       "success": "Logout successfully!",

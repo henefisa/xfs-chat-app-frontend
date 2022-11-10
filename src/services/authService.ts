@@ -36,6 +36,10 @@ export const login = async (
 
     if (!isActivate) {
       navigate('/verify-account');
+      notification.warning({
+        message: t('warning', { ns: 'common' }),
+        description: t('login.warning', { ns: 'notification' }),
+      });
       return;
     }
 

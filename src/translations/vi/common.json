@@ -12,7 +12,8 @@
   "notification": {
     "login": {
       "success": "Đăng nhập thành công!",
-      "error": "Đăng nhập thất bại!"
+      "error": "Đăng nhập thất bại!",
+      "warning": "Bạn cần phải xác thực tài khoản!"
     },
     "logout": {
       "success": "Đăng xuất thành công!",
