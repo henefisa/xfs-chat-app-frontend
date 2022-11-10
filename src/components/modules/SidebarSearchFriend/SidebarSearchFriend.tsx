@@ -1,4 +1,6 @@
+import { Loading3QuartersOutlined } from '@ant-design/icons';
 import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
+import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import ListFriendResult from '@modules/ListFriendResult/ListFriendResult';
 import * as React from 'react';
@@ -20,15 +22,19 @@ export interface IListUser extends IUser {
 const SidebarSearchFriend: React.FC<ISidebarSearchFriendProps> = () => {
   const { t } = useTranslation('common');
 
+  const [loading, setLoading] = React.useState<boolean>(false);
   const [listResult, setListResult] = React.useState<IListUser[]>([]);
 
   const handleGetFriends = async (keyword: string) => {
+    setLoading(true);
     if (!keyword) {
       setListResult([]);
+      setLoading(false);
       return;
     }
 
     const result = await getFriends(keyword, t);
+    setLoading(false);
     setListResult(result.users);
   };
 
@@ -52,7 +58,16 @@ const SidebarSearchFriend: React.FC<ISidebarSearchFriendProps> = () => {
         <Title level={5} className="body-search__title">
           Result
         </Title>
-        {listResult.length > 0 && <ListFriendResult listResult={listResult} />}
+        {loading ? (
+          <Spin
+            className="body-search__loading"
+            spinIcon={
+              <Loading3QuartersOutlined className="loading-icon" spin />
+            }
+          />
+        ) : (
+          listResult.length > 0 && <ListFriendResult listResult={listResult} />
+        )}
       </div>
     </div>
   );

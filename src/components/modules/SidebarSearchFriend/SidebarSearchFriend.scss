@@ -27,5 +27,15 @@
       line-height: 1.2;
       color: v.$text-color;
     }
+
+    .body-search__loading {
+      display: flex;
+      justify-content: center;
+
+      .loading-icon {
+        color: v.$primary;
+        font-size: 26px;
+      }
+    }
   }
 }
