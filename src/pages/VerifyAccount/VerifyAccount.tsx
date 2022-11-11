@@ -1,16 +1,17 @@
-import * as React from 'react';
-import Title from '@common/Title/Title';
-import OtpInput from 'react-otp-input';
-import Button from '@common/Button/Button';
 import { HeartFilled } from '@ant-design/icons';
+import Button from '@common/Button/Button';
 import Logo from '@common/Logo/Logo';
-import { checkOtp, getOtp, logout } from '../../services/authService';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import Title from '@common/Title/Title';
+import Language from '@modules/Language/Language';
 import { notification } from 'antd';
-import { useAppDispatch } from 'src/store/hooks';
+import * as React from 'react';
+import { useTranslation } from 'react-i18next';
+import OtpInput from 'react-otp-input';
+import { useNavigate } from 'react-router-dom';
 import { logoutSuccess } from 'src/store/authSlice';
+import { useAppDispatch } from 'src/store/hooks';
 import debounce from 'src/utils/debounce';
+import { checkOtp, getOtp, logout } from '../../services/authService';
 
 import './VerifyAccount.scss';
 
@@ -114,6 +115,7 @@ const VerifyAccount: React.FC = () => {
       </div>
 
       <div className="otp-page__footer">
+        <Language />
         <Title className="anothor-account-title" level={4}>
           Wanting to use another account?
           <Button className="btn-back-login" onClick={handleLogout}>

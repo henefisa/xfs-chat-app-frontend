@@ -7,11 +7,12 @@ import {
 } from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
+import Logo from '@common/Logo/Logo';
 import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
-import Logo from '@common/Logo/Logo';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 
+import Language from '@modules/Language/Language';
 import { Form } from 'antd';
 import { FieldData } from 'rc-field-form/es/interface';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
@@ -210,6 +211,7 @@ const Register: React.FC = () => {
       </Card>
 
       <div className="register-page__footer">
+        <Language />
         <Title className="ask-account" level={5}>
           {t('ask-account')}
           <Link to="/login" className="ask-account__login-link">
