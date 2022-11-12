@@ -55,3 +55,20 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
     dispatch(getProfileFailed());
   }
 };
+
+export const getFriends = async (
+  keyword: string,
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    const res = await apiRequest.get('api/users', { params: { q: keyword } });
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+  }
+};

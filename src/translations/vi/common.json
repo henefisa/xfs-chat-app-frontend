@@ -65,12 +65,19 @@
       "chat": "Chats",
       "groups": "Nhóm",
       "contacts": "Liên hệ",
+      "search": "Tìm kiếm",
       "settings": "Cài đặt",
       "dark-light": "Sáng / Tối",
       "user-menu": {
         "profile": "Hồ sơ",
         "setting": "Cài đặt",
         "logout": "Đăng xuất"
+      }
+    },
+    "sidebar": {
+      "search-friend": {
+        "add": "Thêm",
+        "cancel": "Hủy"
       }
     }
   },

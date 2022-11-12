@@ -65,12 +65,19 @@
       "chat": "Chats",
       "groups": "Groups",
       "contacts": "Contacts",
+      "search": "Search",
       "settings": "Settings",
       "dark-light": "Dark / Light Mode",
       "user-menu": {
         "profile": "Profile",
         "setting": "Settings",
         "logout": "Logout"
+      }
+    },
+    "sidebar": {
+      "search-friend": {
+        "add": "Add",
+        "cancel": "Cancel"
       }
     }
   },
