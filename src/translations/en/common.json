@@ -70,6 +70,7 @@
       "chat": "Chats",
       "groups": "Groups",
       "contacts": "Contacts",
+      "search": "Search",
       "settings": "Settings",
       "dark-light": "Dark / Light Mode",
       "user-menu": {
@@ -92,6 +93,10 @@
         "time": "Time",
         "location": "Location",
         "attached-file": "Attached Files"
+      },
+      "search-friend": {
+        "add": "Add",
+        "cancel": "Cancel"
       }
     }
   },

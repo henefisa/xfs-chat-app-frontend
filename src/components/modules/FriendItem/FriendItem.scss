@@ -1,0 +1,40 @@
+@use '../../../assets/styles/variables' as v;
+
+.friend-item {
+  width: 100%;
+  min-height: 63.5px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  .friend-item__avtar {
+    margin-right: 12px;
+  }
+
+  .friend-item__info {
+    flex: 1;
+    .friend-name {
+      margin: 0;
+      color: v.$text-color;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .friend-location {
+      margin: 0;
+      color: v.$text-sub-color;
+      font-size: 13px;
+      font-weight: 300;
+    }
+  }
+
+  .friend-item__action {
+    .add-friend-btn {
+      color: v.$white;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+  }
+}

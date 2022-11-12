@@ -70,6 +70,7 @@
       "chat": "Chats",
       "groups": "Nhóm",
       "contacts": "Liên hệ",
+      "search": "Tìm kiếm",
       "settings": "Cài đặt",
       "dark-light": "Sáng / Tối",
       "user-menu": {
@@ -92,6 +93,10 @@
         "time": "Thời gian",
         "location": "Vị trí",
         "attached-file": "File đã đính kèm"
+      },
+      "search-friend": {
+        "add": "Thêm",
+        "cancel": "Hủy"
       }
     }
   },
