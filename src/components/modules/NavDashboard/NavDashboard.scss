@@ -10,6 +10,21 @@
   box-shadow: 0 2px 4px rgb(15 34 58 / 12%);
   margin-right: 4px;
   background-color: v.$white;
+  overflow-y: overlay;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: v.$white;
+  }
+
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+  }
 
   .logo {
     height: 70px;

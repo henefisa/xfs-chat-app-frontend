@@ -3,9 +3,14 @@
     "error": "Error",
     "success": "Success",
     "warning": "Warning",
-    "normal-error-message": "An error occurred!"
+    "normal-error-message": "An error occurred!",
+    "edit": "Edit",
+    "update": "Update",
+    "action": "Action",
+    "another-action": "Another action"
   },
   "languages": {
+    "title": "Language",
     "en": "English",
     "vi": "Vietnamese"
   },
@@ -73,8 +78,22 @@
         "setting": "Settings",
         "logout": "Logout"
       }
-    },
+    }, 
     "sidebar": {
+      "profile": {
+        "heading": "My Profile",
+        "status": {
+          "online": "Online",
+          "offline": "Offline",
+          "busy": "Busy"
+        },
+        "about": "About",
+        "name": "Name",
+        "email": "Email",
+        "time": "Time",
+        "location": "Location",
+        "attached-file": "Attached Files"
+      },
       "search-friend": {
         "add": "Add",
         "cancel": "Cancel"

@@ -7,29 +7,6 @@
   color: v.$text-color;
   border: 1px solid v.$input-border;
   border-radius: 0;
-
-  &.input-username,
-  &.input-email {
-    &:hover {
-      border-color: v.$input-border;
-    }
-
-    &:focus,
-    &.ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input {
-      border-color: v.$input-border;
-      box-shadow: none;
-    }
-
-    &::placeholder {
-      font-size: 15px;
-      color: v.$input-placeholder;
-    }
-
-    &.ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:focus {
-      border-color: v.$input-border;
-      box-shadow: 0 0 0 2.4px rgb(239 71 111 / 25%);
-    }
-  }
 }
 
 .ant-form-item-explain.ant-form-item-explain-connected {
@@ -45,33 +22,6 @@
   height: auto;
   border: 1px solid v.$input-border;
   border-radius: 0;
-
-  &.input-password {
-    & > input {
-      color: v.$text-color;
-    }
-
-    & > input::placeholder {
-      font-size: 15px;
-      color: v.$input-placeholder;
-    }
-
-    &.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
-    &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper,
-    &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
-      border-color: v.$input-border;
-    }
-
-    &.ant-input-affix-wrapper:focus,
-    &.ant-input-affix-wrapper-focused {
-      box-shadow: none;
-    }
-
-    &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:focus,
-    &.ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper-focused {
-      box-shadow: 0 0 0 2.4px rgb(239 71 111 / 25%);
-    }
-  }
 }
 
 //Custom Checkbox styles
@@ -122,8 +72,4 @@
       transition: background-color 0.4s ease, box-shadow 0.4s ease;
     }
   }
-
-
 }
-
-

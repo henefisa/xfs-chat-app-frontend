@@ -1,5 +1,6 @@
 export const getAccessToken = (): string => {
-  const tokenStorage = localStorage.getItem('token');
+  const tokenStorage =
+    localStorage.getItem('token') ?? sessionStorage.getItem('token');
   if (!tokenStorage) return '';
 
   const accessToken = JSON.parse(tokenStorage).access_token;
@@ -9,7 +10,8 @@ export const getAccessToken = (): string => {
 };
 
 export const getRefreshToken = (): string => {
-  const tokenStorage = localStorage.getItem('token');
+  const tokenStorage =
+    localStorage.getItem('token') ?? sessionStorage.getItem('token');
   if (!tokenStorage) return '';
 
   const refreshToken = JSON.parse(tokenStorage).refresh_token;

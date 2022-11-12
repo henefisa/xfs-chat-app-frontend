@@ -3,9 +3,14 @@
     "error": "Lỗi",
     "success": "Thành công",
     "warning": "Cảnh báo",
-    "normal-error-message": "Có lỗi xảy ra!"    
+    "normal-error-message": "Có lỗi xảy ra!",
+    "edit": "Chỉnh sửa",
+    "update": "Cập nhật",
+    "action": "Hành động",
+    "another-action": "Hành động khác"
   },
   "languages": {
+    "title": "Ngôn ngữ",
     "en": "Tiếng Anh",
     "vi": "Tiếng Việt"
   },
@@ -73,8 +78,22 @@
         "setting": "Cài đặt",
         "logout": "Đăng xuất"
       }
-    },
+    }, 
     "sidebar": {
+      "profile": {
+        "heading": "Thông tin của tôi",
+        "status": {
+          "online": "Đang hoạt động",
+          "offline": "Không hoạt động",
+          "busy": "Đang bận"
+        },
+        "about": "Thông tin",
+        "name": "Tên",
+        "email": "Email",
+        "time": "Thời gian",
+        "location": "Vị trí",
+        "attached-file": "File đã đính kèm"
+      },
       "search-friend": {
         "add": "Thêm",
         "cancel": "Hủy"
