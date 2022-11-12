@@ -4,18 +4,20 @@ import CarouselItem from '@common/Carousel/CarouselItem/CarouselItem';
 import Conversation from '@common/Conversation/Conversation';
 import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Title from '@common/Title/Title';
+import { useTranslation } from 'react-i18next';
 
 import './SidebarChats.scss';
 
 const SidebarChats: React.FC = () => {
+  const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.chats' });
   return (
     <div className="sidebar-chats">
       <div className="header-chats">
         <Title className="header-chats__title" level={4}>
-          Chats
+          {t('Chats')}
         </Title>
         <div className="search-box">
-          <SearchSidebar placeholder="Search messages or users" />
+          <SearchSidebar placeholder={t('search-placeholder')} />
         </div>
       </div>
       <div className="chats__carousel">
@@ -48,7 +50,7 @@ const SidebarChats: React.FC = () => {
       </div>
       <div className="chats-recent">
         <Title level={5} className="chats-recent__title">
-          Recent
+          {t('recent')}
         </Title>
         <div className="conversation-list">
           <Conversation

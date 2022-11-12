@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Avatar from '../Avatar/Avatar';
 import Title from '../Title/Title';
+import { useTranslation } from 'react-i18next';
 
 import './Conversation.scss';
 
@@ -17,6 +18,7 @@ const Conversation: React.FC<ConversationProps> = ({
   time,
   unread,
 }) => {
+  const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.chats' });
   return (
     <div className="conversation-item">
       <div className="conversation-item__avatar">
@@ -33,7 +35,7 @@ const Conversation: React.FC<ConversationProps> = ({
           <Title>{name}</Title>
         </div>
         <p className="message typing">
-          Typing
+          {t('typing')}
           <span className="animate-typing">
             <span className="dot ms-1"></span>
             <span className="dot ms-1"></span>

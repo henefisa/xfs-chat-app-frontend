@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useDraggable } from 'react-use-draggable-scroll';
 import './Carousel.scss';
 
 interface Children {
@@ -6,7 +7,17 @@ interface Children {
 }
 
 const Carousel: React.FC<Children> = ({ children }) => {
-  return <div className="carousel">{children}</div>;
+  const ref =
+    React.useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
+  const { events: draggable } = useDraggable(ref, {
+    applyRubberBandEffect: true,
+  });
+
+  return (
+    <div className="carousel" {...draggable} ref={ref}>
+      {children}
+    </div>
+  );
 };
 
 export default Carousel;
