@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import FriendItem from '@modules/FriendItem/FriendItem';
 import Divider from '@common/Divider/Divider';
-import { IListUser } from '../SidebarSearchFriend/SidebarSearchFriend';
+import { IListUser } from '../SidebarSearchUsers/SidebarSearchUsers';
 
 import './ListFriendResult.scss';
 

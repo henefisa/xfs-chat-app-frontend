@@ -9,7 +9,7 @@ import './SearchSidebar.scss';
 interface SearchSidebarProps {
   placeholder: string;
   className?: string;
-  onChange?: (...args: string[]) => void;
+  onChange?: (value: string) => void;
 }
 
 const SearchSidebar: React.FC<SearchSidebarProps> = ({

@@ -9,9 +9,9 @@ import { IUser } from 'src/models';
 import { getFriends } from 'src/services/userService';
 import debounce from 'src/utils/debounce';
 
-import './SidebarSearchFriend.scss';
+import './SidebarSearchUsers.scss';
 
-interface ISidebarSearchFriendProps {}
+interface ISidebarSearchUsersProps {}
 
 export interface IListUser extends IUser {
   fullname: string;
@@ -19,7 +19,7 @@ export interface IListUser extends IUser {
   location: string;
 }
 
-const SidebarSearchFriend: React.FC<ISidebarSearchFriendProps> = () => {
+const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
   const { t } = useTranslation('common');
 
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -46,7 +46,7 @@ const SidebarSearchFriend: React.FC<ISidebarSearchFriendProps> = () => {
     <div className="sidebar-search">
       <div className="header-search">
         <Title className="header-search__title" level={4}>
-          Search Friend
+          Search Users
         </Title>
         <SearchSidebar
           className="header-search__input"
@@ -73,4 +73,4 @@ const SidebarSearchFriend: React.FC<ISidebarSearchFriendProps> = () => {
   );
 };
 
-export default SidebarSearchFriend;
+export default SidebarSearchUsers;
