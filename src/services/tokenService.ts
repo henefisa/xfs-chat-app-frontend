@@ -1,6 +1,7 @@
 import { notification } from 'antd';
 import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
+import getIsRemember from 'src/utils/getIsRemember';
 import { getRefreshToken } from 'src/utils/getTokenFromLocal';
 
 export const refreshAccessToken = async (
@@ -12,7 +13,13 @@ export const refreshAccessToken = async (
       refreshToken,
     });
 
-    localStorage.setItem('token', JSON.stringify(res.data));
+    const isRemember = getIsRemember();
+
+    if (isRemember) {
+      localStorage.setItem('token', JSON.stringify(res.data));
+    } else {
+      sessionStorage.setItem('token', JSON.stringify(res.data));
+    }
 
     return true;
   } catch (err) {

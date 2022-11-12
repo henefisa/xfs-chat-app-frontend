@@ -101,6 +101,7 @@ const LoginPage: React.FC = () => {
               <Link
                 to="/forgot-password"
                 className="password-item__forgot-link"
+                tabIndex={-1}
               >
                 {t('forgot-password')}
               </Link>
