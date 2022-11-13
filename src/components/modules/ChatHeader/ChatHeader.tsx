@@ -16,6 +16,7 @@ import Title from '@common/Title/Title';
 import { Button } from 'antd';
 import ChatCall from '../ChatCall/ChatCall';
 import InputDropdown from '@common/Input/InputDropdown';
+import { useTranslation } from 'react-i18next';
 
 import './ChatHeader.scss';
 
@@ -25,24 +26,28 @@ interface IChatHeader {
 
 const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const [id, setId] = React.useState(-1);
+  const { t } = useTranslation('chat-ui', { keyPrefix: 'chat-header' });
+  const handleClickuser = () => {
+    setOpen(true);
+  };
   const listActionChat = [
     {
       icon: PhoneOutlined,
-      tooltipTitle: 'VoiceCall',
+      tooltipTitle: t('voice-call'),
       handleClick: function () {
         setId(0);
       },
     },
     {
       icon: VideoCameraOutlined,
-      tooltipTitle: 'VideoCall',
+      tooltipTitle: t('video-call'),
       handleClick: function () {
         setId(1);
       },
     },
     {
       icon: UserOutlined,
-      tooltipTitle: 'UserInfo',
+      tooltipTitle: t('user-info'),
       handleClick: function () {
         setOpen(true);
       },
@@ -58,7 +63,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
           username="A"
           className="user-info__avatar"
         />
-        <Title level={5} className="user-info__name">
+        <Title level={5} className="user-info__name" onClick={handleClickuser}>
           Danh Huy
         </Title>
         <div className="user-info__status">
@@ -68,12 +73,15 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
       <div className="group-aciton">
         <div className="search-action">
           <Dropdown
+            autoFocus={true}
             overlay={<InputDropdown />}
             trigger={['click']}
             placement="bottomRight"
             className={'search-action__dropdown'}
           >
-            <SearchOutlined className="custom-chat-icon" />
+            <Tooltip tooltipTitle={t('search')} placement="bottom">
+              <SearchOutlined className="custom-chat-icon" />
+            </Tooltip>
           </Dropdown>
         </div>
         {listActionChat.map((item, index) => {
@@ -101,7 +109,9 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
             placement="bottomLeft"
             className="detail-actions__menu"
           >
-            <EllipsisOutlined className="custom-chat-icon" />
+            <Tooltip tooltipTitle={t('setting')} placement="bottom">
+              <EllipsisOutlined className="custom-chat-icon" />
+            </Tooltip>
           </Dropdown>
         </div>
         {id === 0 && (

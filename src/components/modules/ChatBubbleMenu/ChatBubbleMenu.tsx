@@ -6,6 +6,7 @@ import Button from '@common/Button/Button';
 import clsx from 'clsx';
 import ForwardForm from '../ForwardForm/ForwardForm';
 import Menu from '@common/Menu/Menu';
+import { useTranslation } from 'react-i18next';
 
 import './ChatBubbleMenu.scss';
 
@@ -14,11 +15,14 @@ interface IChatBubbleMenuProps extends MenuProps {
 }
 
 const ChatBubbleMenu: React.FC<IChatBubbleMenuProps> = ({ position }) => {
+  const { t } = useTranslation('chat-ui', {
+    keyPrefix: 'chat-main.chat-bubble-menu',
+  });
   const menu: MenuProps['items'] = [
     {
       label: (
         <Button className="menu-item">
-          <Title className="menu-item__title">Copy</Title>
+          <Title className="menu-item__title">{t('copy')}</Title>
           <CopyOutlined className="custom-menu-icon" />
         </Button>
       ),
@@ -27,7 +31,7 @@ const ChatBubbleMenu: React.FC<IChatBubbleMenuProps> = ({ position }) => {
     {
       label: (
         <Button className="menu-item">
-          <Title className="menu-item__title">Muted</Title>
+          <Title className="menu-item__title">{t('muted')}</Title>
           <SaveOutlined className="custom-menu-icon" />
         </Button>
       ),
@@ -40,7 +44,7 @@ const ChatBubbleMenu: React.FC<IChatBubbleMenuProps> = ({ position }) => {
     {
       label: (
         <Button className="menu-item">
-          <Title className="menu-item__title">Delete</Title>
+          <Title className="menu-item__title">{t('delete')}</Title>
           <DeleteOutlined className="custom-menu-icon" />
         </Button>
       ),

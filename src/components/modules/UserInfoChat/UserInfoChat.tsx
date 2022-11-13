@@ -10,46 +10,52 @@ import Title from '@common/Title/Title';
 import Avatar from '@common/Avatar/Avatar';
 import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
 import Button from '@common/Button/Button';
+import { useTranslation } from 'react-i18next';
 
 import './UserInfoChat.scss';
 
 const { Panel } = Collapse;
-
-const userInfoChat = [
-  { title: 'Name', desc: 'Patricia Smiths' },
-  { title: 'Email', desc: 'admin123@mgail.com' },
-  { title: 'Time', desc: '6:30 PM' },
-  { title: 'Location', desc: 'Danang, VN' },
-];
-
-const listAttachedFile = [
-  {
-    name: 'Admin-A.zip',
-    type: 'zip',
-    size: '12.9 MB',
-  },
-  {
-    name: 'Image-1.jpg',
-    type: 'jpg',
-    size: '4.5 MB',
-  },
-  {
-    name: 'Image-2.jpg',
-    type: 'jpg',
-    size: '3.6 MB',
-  },
-  {
-    name: 'Landing-A.zip',
-    type: 'zip',
-    size: '6.4 MB',
-  },
-];
 
 interface IUserInfoChat {
   setClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
+  const { t } = useTranslation('chat-ui', { keyPrefix: 'user-info-chat' });
+  const { t: t1 } = useTranslation('chat-ui', {
+    keyPrefix: 'user-info-chat.about',
+  });
+
+  const userInfoChat = [
+    { title: t1('name'), desc: 'Patricia Smiths' },
+    { title: 'Email', desc: 'admin123@mgail.com' },
+    { title: t1('time'), desc: '6:30 PM' },
+    { title: t1('location'), desc: 'Danang, VN' },
+  ];
+
+  const listAttachedFile = [
+    {
+      name: 'Admin-A.zip',
+      type: 'zip',
+      size: '12.9 MB',
+    },
+    {
+      name: 'Image-1.jpg',
+      type: 'jpg',
+      size: '4.5 MB',
+    },
+    {
+      name: 'Image-2.jpg',
+      type: 'jpg',
+      size: '3.6 MB',
+    },
+    {
+      name: 'Landing-A.zip',
+      type: 'zip',
+      size: '6.4 MB',
+    },
+  ];
+
   return (
     <div className="sidebar-user">
       <div className="header-user">
@@ -70,7 +76,7 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
         <div className="status">
           <CheckCircleFilled className="status__icon" />
           <Title level={5} className="status__name">
-            Active
+            {t('active')}
           </Title>
         </div>
       </div>
@@ -91,7 +97,7 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
               <div className="panel-header">
                 <UserOutlined className="panel-header__icon" />
                 <Title level={5} className="panel-header__title">
-                  About
+                  {t1('title')}
                 </Title>
               </div>
             }
@@ -122,7 +128,7 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
               <div className="panel-header">
                 <PaperClipOutlined className="panel-header__icon" />
                 <Title level={5} className="panel-header__title">
-                  Attached Files
+                  {t('attached-file')}
                 </Title>
               </div>
             }

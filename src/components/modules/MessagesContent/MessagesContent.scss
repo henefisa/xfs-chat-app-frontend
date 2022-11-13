@@ -3,7 +3,6 @@
 .messages {
   display: flex;
   flex-direction: column;
-
   .bubble-chat {
     display: flex;
     &--right {
@@ -21,7 +20,9 @@
     position: relative;
     font-size: 15px;
     animation: fadeIn 1s ease-in;
-
+    margin: auto;
+    max-width: 600px;
+    white-space: normal;
     &:after {
       content: '';
       position: absolute;
@@ -40,7 +41,6 @@
         border-left: 0;
         margin-top: 6px;
       }
-
       .chat-time {
         color: #7a7f9a;
         text-align: right;
