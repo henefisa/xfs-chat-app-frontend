@@ -84,7 +84,13 @@ const SidebarGroups: React.FC = () => {
         <div className="sidebar-groups__search">
           <SearchSidebar placeholder="Search groups..." />
         </div>
-        <div className="sidebar-groups__unstyled">
+        <div className="sidebar-groups__box">
+          <BlockGroup avtTitle="G" name="#General" pill="23+" />
+          <BlockGroup avtTitle="G" name="#General" pill="23+" />
+          <BlockGroup avtTitle="G" name="#General" pill="23+" />
+          <BlockGroup avtTitle="G" name="#General" pill="23+" />
+          <BlockGroup avtTitle="G" name="#General" pill="23+" />
+          <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />

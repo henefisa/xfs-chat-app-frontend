@@ -34,12 +34,7 @@
 
     .conversation-list {
       height: calc(100vh - 280px);
-      overflow: hidden scroll;
-
-      &::-webkit-scrollbar,
-      .simplebar-hide-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
+      overflow: auto;
     }
   }
 }

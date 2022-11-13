@@ -9,6 +9,16 @@
     font-size: 14px;
     line-height: 1.5;
     background-color: #e6ebf5;
+    border: 1px solid v.$input-border;
+
+    &:hover {
+      border: 1px solid #8c86dd;
+    }
+
+    &:focus {
+      border-color: #8c86dd;
+      box-shadow: 0 0 0 2px #cdcbef;
+    }
 
     &::placeholder {
       color: v.$text-sub-color;

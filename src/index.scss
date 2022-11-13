@@ -22,3 +22,18 @@ body {
 	color: v.$text-color;
 	text-rendering: optimizeSpeed;
 }
+
+::-webkit-scrollbar {
+	width: 7.5px;
+	background-color: transparent;
+  }
+  
+  ::-webkit-scrollbar-track {
+	display: none;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+	height: 22px;
+	background: rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+  }

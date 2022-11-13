@@ -4,6 +4,7 @@
   display: flex;
   width: 100%;
   overflow: scroll;
+  cursor: pointer;
 
   &::-webkit-scrollbar {
     display: none;
