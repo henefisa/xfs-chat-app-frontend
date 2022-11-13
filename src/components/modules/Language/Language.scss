@@ -1,0 +1,23 @@
+@use '../../../assets/styles/variables' as v;
+
+.language {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+
+  .language__title {
+    color: v.$text-color;
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0;
+  }
+
+  .language__menu.custom-dropdown-menu {
+    background-color: transparent;
+    font-size: 18px;
+    width: 24px;
+    height: 24px;
+  }
+}

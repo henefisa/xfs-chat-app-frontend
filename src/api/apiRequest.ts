@@ -5,7 +5,6 @@ import { NavigateFunction } from 'react-router-dom';
 import { refreshAccessToken } from 'src/services/tokenService';
 import { AppDispatch } from 'src/store';
 import { logoutSuccess } from 'src/store/authSlice';
-import getIsRemember from 'src/utils/getIsRemember';
 import { getAccessToken } from 'src/utils/getTokenFromLocal';
 
 const apiRequest = axios.create({
@@ -42,7 +41,6 @@ export const initInterceptor = (
     async (error: AxiosError) => {
       const status = error.response?.status;
       const originalRequest = error.config ?? {};
-      const isRemember = getIsRemember();
 
       switch (status) {
         case 401: {
@@ -57,15 +55,7 @@ export const initInterceptor = (
             return Promise.reject(error);
           }
 
-          // Not remember -> not refresh token -> getUserProfile error -> logout -> back to /login
-          if (!isRemember) {
-            dispatch(logoutSuccess());
-            navigate('/login');
-
-            return Promise.reject(error);
-          }
-
-          // Remember -> Refresh Token
+          // Refresh token
           const isRefreshSuccess = await refreshAccessToken(t);
 
           if (!isRefreshSuccess) {
@@ -77,6 +67,8 @@ export const initInterceptor = (
           }
 
           // Refresh token success
+          // Not remember -> getUserProfile error -> refresh token -> save token to sessionStorage
+          // Remember -> getUserProfile error -> refresh token -> save token to localStorage
           originalRequest.headers = originalRequest.headers ?? {};
 
           originalRequest.headers[

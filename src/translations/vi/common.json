@@ -3,23 +3,29 @@
     "error": "Lỗi",
     "success": "Thành công",
     "warning": "Cảnh báo",
-    "normal-error-message": "Có lỗi xảy ra!"    
+    "normal-error-message": "Có lỗi xảy ra!",
+    "edit": "Chỉnh sửa",
+    "update": "Cập nhật",
+    "action": "Hành động",
+    "another-action": "Hành động khác"
   },
   "languages": {
+    "title": "Ngôn ngữ",
     "en": "Tiếng Anh",
     "vi": "Tiếng Việt"
   },
   "notification": {
     "login": {
       "success": "Đăng nhập thành công!",
-      "error": "Đăng nhập thất bại!"
+      "error": "Đăng nhập thất bại!",
+      "warning": "Bạn cần phải xác thực tài khoản!"
     },
     "logout": {
       "success": "Đăng xuất thành công!",
       "error": "Đăng xuất thất bại!"
     },
     "register" : {
-      "success": "Đăng ký thành công!",
+      "success": "Đăng ký thành công. OTP đã được gửi đến email!",
       "error": "Đăng ký thất bại!"
     }
   },
@@ -64,12 +70,33 @@
       "chat": "Chats",
       "groups": "Nhóm",
       "contacts": "Liên hệ",
+      "search": "Tìm kiếm",
       "settings": "Cài đặt",
       "dark-light": "Sáng / Tối",
       "user-menu": {
         "profile": "Hồ sơ",
         "setting": "Cài đặt",
         "logout": "Đăng xuất"
+      }
+    }, 
+    "sidebar": {
+      "profile": {
+        "heading": "Thông tin của tôi",
+        "status": {
+          "online": "Đang hoạt động",
+          "offline": "Không hoạt động",
+          "busy": "Đang bận"
+        },
+        "about": "Thông tin",
+        "name": "Tên",
+        "email": "Email",
+        "time": "Thời gian",
+        "location": "Vị trí",
+        "attached-file": "File đã đính kèm"
+      },
+      "search-friend": {
+        "add": "Thêm",
+        "cancel": "Hủy"
       }
     }
   },
@@ -118,5 +145,9 @@
       },
       "attached-file": "Xem file phương tiện"
     }
+  "verify-account": {
+    "receive-otp": "OTP đã được gửi đến email!",
+    "check-otp-error": "Mã OTP không đúng!",
+    "check-otp-success": "Xác thực thành công!"
   }
 }
