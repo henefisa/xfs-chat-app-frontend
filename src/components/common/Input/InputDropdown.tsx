@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 import './InputDropdown.scss';
 
 const InputDropdown: React.FC = () => {
-  const { t } = useTranslation('chat-ui', { keyPrefix: 'chat-header' });
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-header',
+  });
   return (
     <div className="dropdown-search">
       <Input
