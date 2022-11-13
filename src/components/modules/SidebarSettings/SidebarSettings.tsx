@@ -5,8 +5,9 @@ import Dropdown from '@common/Dropdown/Dropdown';
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
 import SettingsMenu from '../SettingsStatusMenu/SettingsStatusMenu';
-import { Collapse, Divider } from 'antd';
+import { Collapse, Divider, InputRef } from 'antd';
 import PrivacyMenu from '../PrivacyMenu/PrivacyMenu';
+import Input from '@common/Input/Input';
 import Switch from '@common/Switch/Switch';
 
 import './SidebarSettings.scss';
@@ -35,6 +36,18 @@ const help = [
 ];
 
 const SidebarSettings: React.FC = () => {
+  const [disabled, setDisable] = React.useState(true);
+  const [userName, setUserName] = React.useState('Patricia Smith');
+  const inputName = React.useRef<InputRef>(null);
+
+  function handleName() {
+    setDisable(!disabled);
+  }
+
+  React.useEffect(() => {
+    inputName.current?.focus();
+  }, [disabled]);
+
   return (
     <div className="sidebar-settings">
       <Title level={4} className="sidebar-settings__title">
@@ -87,13 +100,23 @@ const SidebarSettings: React.FC = () => {
                     {item.title}
                   </Title>
                   <Title level={5} className="info-item__desc">
-                    {item.desc}
+                    {index === 0 ? (
+                      <Input
+                        className="user-name"
+                        ref={inputName}
+                        disabled={disabled}
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                      />
+                    ) : (
+                      item.desc
+                    )}
                   </Title>
                 </li>
               ))}
-              <Button className="btn-edit">
+              <Button className="btn-edit" onClick={handleName}>
                 <EditOutlined className="btn-edit__icon" />
-                Edit
+                {disabled ? 'Edit' : 'Update'}
               </Button>
             </ul>
           </Panel>

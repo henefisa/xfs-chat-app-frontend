@@ -31,8 +31,10 @@
     padding: 0 24px 24px;
   }
 
-  .sidebar-groups__unstyled {
+  .sidebar-groups__box {
     padding: 24px;
+    overflow: auto;
+    height: calc(100vh - 147px);
   }
 }
 
@@ -157,21 +159,6 @@
               padding: 8px;
               overflow: auto;
               height: 166px;
-
-              &::-webkit-scrollbar {
-                width: 7.5px;
-                background-color: white;
-              }
-
-              &::-webkit-scrollbar-track {
-                display: none;
-              }
-
-              &::-webkit-scrollbar-thumb {
-                height: 22px;
-                background: rgba(0, 0, 0, 0.15);
-                border-radius: 10px;
-              }
 
               .firt-character {
                 padding: 16px;

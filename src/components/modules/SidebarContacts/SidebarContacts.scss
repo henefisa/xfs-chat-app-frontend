@@ -36,21 +36,6 @@
     height: calc(100vh - 160px);
     overflow: auto;
 
-    &::-webkit-scrollbar {
-      width: 7.5px;
-      background-color: transparent;
-    }
-
-    &::-webkit-scrollbar-track {
-      display: none;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      height: 22px;
-      background: rgba(0, 0, 0, 0.15);
-      border-radius: 10px;
-    }
-
     .firt-character {
       padding: 16px;
       color: rgb(114, 105, 239);
