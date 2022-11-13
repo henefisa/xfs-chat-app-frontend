@@ -29,8 +29,13 @@ export const login = async (
   dispatch(loginStart());
   try {
     const res = await apiRequest.post('api/auth/login', user);
-    dispatch(loginSuccess(res.data));
+    dispatch(loginSuccess());
     dispatch(rememberOnSubmit(!!isRemember));
+    if (isRemember) {
+      localStorage.setItem('token', JSON.stringify(res.data));
+    } else {
+      sessionStorage.setItem('token', JSON.stringify(res.data));
+    }
 
     const isActivate: boolean = await checkUserActivate(t);
 
@@ -87,7 +92,8 @@ export const register = async (
   try {
     const res = await apiRequest.post('api/auth/register', user);
     dispatch(registerSuccess());
-    dispatch(loginSuccess(res.data));
+    dispatch(loginSuccess());
+    sessionStorage.setItem('token', JSON.stringify(res.data));
 
     notification.success({
       message: t('success', { ns: 'common' }),

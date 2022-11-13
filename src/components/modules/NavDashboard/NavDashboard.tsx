@@ -2,26 +2,25 @@ import {
   AlertOutlined,
   ApiOutlined,
   ContactsOutlined,
-  GlobalOutlined,
   MessageOutlined,
   SettingOutlined,
   UsergroupAddOutlined,
   UserOutlined,
+  SearchOutlined,
 } from '@ant-design/icons';
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
 import Dropdown from '@common/Dropdown/Dropdown';
 import Tooltip from '@common/Tooltip/Tooltip';
+import LanguageDropDown from '@modules/LanguageDropDown/LanguageDropDown';
+import UserMenu from '@modules/UserMenu/UserMenu';
 
 import * as React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from 'src/store/hooks';
-import { selectUserProfile } from 'src/store/userSlice';
-import LanguageMenu from '../LanguageMenu/LanguageMenu';
-import UserMenu from '../UserMenu/UserMenu';
-import { useAppDispatch } from 'src/store/hooks';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { updateNavbar } from 'src/store/navbarSlice';
+import { selectUserProfile } from 'src/store/userSlice';
 
 import './NavDashboard.scss';
 
@@ -54,6 +53,10 @@ const NavDashboard: React.FC = () => {
         icon: ContactsOutlined,
         tooltipTitle: t('contacts'),
         key: 'contacts',
+      },
+      {
+        icon: SearchOutlined,
+        tooltipTitle: t('search'),
       },
       {
         icon: SettingOutlined,
@@ -100,14 +103,7 @@ const NavDashboard: React.FC = () => {
 
       <div className="actions-dashboard">
         <div className="actions-dashboard__item">
-          <Dropdown
-            overlay={<LanguageMenu />}
-            trigger={['click']}
-            placement="topRight"
-            className="custom-dropdown-menu"
-          >
-            <GlobalOutlined />
-          </Dropdown>
+          <LanguageDropDown placement="topRight" />
         </div>
         <div className="actions-dashboard__item">
           <Button className="btn-theme" onClick={handleThemeChange}>
@@ -124,7 +120,7 @@ const NavDashboard: React.FC = () => {
           <Dropdown
             overlay={<UserMenu />}
             trigger={['click']}
-            placement="topRight"
+            placement="topLeft"
             className="custom-dropdown-menu"
           >
             <Avatar

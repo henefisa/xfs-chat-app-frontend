@@ -7,11 +7,12 @@ import {
 import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
 import InputCheckbox from '@common/Input/InputCheckbox';
+import Logo from '@common/Logo/Logo';
 import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
-import Logo from '@common/Logo/Logo';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 
+import Language from '@modules/Language/Language';
 import { Form } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -100,6 +101,7 @@ const LoginPage: React.FC = () => {
               <Link
                 to="/forgot-password"
                 className="password-item__forgot-link"
+                tabIndex={-1}
               >
                 {t('forgot-password')}
               </Link>
@@ -143,6 +145,7 @@ const LoginPage: React.FC = () => {
       </Card>
 
       <div className="login-page__footer">
+        <Language />
         <Title className="ask-account" level={5}>
           {t('ask-acount')}
           <Link to="/register" className="ask-account__register-link">

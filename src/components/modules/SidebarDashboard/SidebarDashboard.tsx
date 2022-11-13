@@ -6,6 +6,7 @@ import SidebarContacts from '../SidebarContacts/SidebarContacts';
 import SidebarGroups from '../SidebarGroups/SidebarGroups';
 import SidebarChats from '../SidebarChats/SidebarChats';
 import SidebarSettings from '../SidebarSettings/SidebarSettings';
+import SidebarSearchUsers from '../SidebarSearchUsers/SidebarSearchUsers';
 
 import './SidebarDashboard.scss';
 

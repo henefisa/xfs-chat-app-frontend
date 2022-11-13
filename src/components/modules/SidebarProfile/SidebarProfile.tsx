@@ -11,17 +11,11 @@ import Dropdown from '@common/Dropdown/Dropdown';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import Avatar from '@common/Avatar/Avatar';
 import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
+import { useTranslation } from 'react-i18next';
 
 import './SidebarProfile.scss';
 
 const { Panel } = Collapse;
-
-const userInfo = [
-  { title: 'Name', desc: 'Patricia Smith' },
-  { title: 'Email', desc: 'admin@mgail.com' },
-  { title: 'Time', desc: '15:30 PM' },
-  { title: 'Location', desc: 'Danang, VN' },
-];
 
 const listAttachedFile = [
   {
@@ -47,11 +41,22 @@ const listAttachedFile = [
 ];
 
 const SidebarProfile: React.FC = () => {
+  const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.profile' });
+
+  const userInfo = React.useMemo(() => {
+    return [
+      { title: t('name'), desc: 'Patricia Smith' },
+      { title: t('email'), desc: 'admin@mgail.com' },
+      { title: t('time'), desc: '15:30 PM' },
+      { title: t('location'), desc: 'Danang, VN' },
+    ];
+  }, [t]);
+
   return (
     <div className="sidebar-profile">
       <div className="header-profile">
         <Title level={4} className="profile-heading">
-          My Profile
+          {t('heading')}
         </Title>
         <div className="action-menu">
           <Dropdown
@@ -76,7 +81,7 @@ const SidebarProfile: React.FC = () => {
         <div className="user-info__status">
           <CheckCircleFilled className="status-icon" />
           <Title level={5} className="status-title">
-            Active
+            {t('status.online')}
           </Title>
         </div>
       </div>
@@ -97,7 +102,7 @@ const SidebarProfile: React.FC = () => {
               <div className="panel-header">
                 <UserOutlined className="panel-header__icon" />
                 <Title level={5} className="panel-header__title">
-                  About
+                  {t('about')}
                 </Title>
               </div>
             }
@@ -128,7 +133,7 @@ const SidebarProfile: React.FC = () => {
               <div className="panel-header">
                 <PaperClipOutlined className="panel-header__icon" />
                 <Title level={5} className="panel-header__title">
-                  Attached Files
+                  {t('attached-file')}
                 </Title>
               </div>
             }
