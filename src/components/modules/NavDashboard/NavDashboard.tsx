@@ -18,6 +18,7 @@ import UserMenu from '@modules/UserMenu/UserMenu';
 import * as React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import NavbarEnum from 'src/Enum/NavbarEnum';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { updateNavbar } from 'src/store/navbarSlice';
 import { selectUserProfile } from 'src/store/userSlice';
@@ -37,32 +38,32 @@ const NavDashboard: React.FC = () => {
       {
         icon: UserOutlined,
         tooltipTitle: t('profile'),
-        key: 'profile',
+        key: NavbarEnum.Profile,
       },
       {
         icon: MessageOutlined,
         tooltipTitle: t('chat'),
-        key: 'chat',
+        key: NavbarEnum.Chat,
       },
       {
         icon: UsergroupAddOutlined,
         tooltipTitle: t('groups'),
-        key: 'groups',
+        key: NavbarEnum.Groups,
       },
       {
         icon: ContactsOutlined,
         tooltipTitle: t('contacts'),
-        key: 'contacts',
+        key: NavbarEnum.Contacts,
       },
       {
         icon: SearchOutlined,
         tooltipTitle: t('search'),
-        key: 'search',
+        key: NavbarEnum.Search,
       },
       {
         icon: SettingOutlined,
         tooltipTitle: t('settings'),
-        key: 'settings',
+        key: NavbarEnum.Settings,
       },
     ];
   }, [t]);

@@ -7,6 +7,7 @@ import SidebarGroups from '../SidebarGroups/SidebarGroups';
 import SidebarChats from '../SidebarChats/SidebarChats';
 import SidebarSettings from '../SidebarSettings/SidebarSettings';
 import SidebarSearchUsers from '../SidebarSearchUsers/SidebarSearchUsers';
+import NavbarEnum from 'src/Enum/NavbarEnum';
 
 import './SidebarDashboard.scss';
 
@@ -15,12 +16,12 @@ const SidebarDashboard: React.FC = () => {
 
   return (
     <div className="sidebar">
-      {navbarAction === 'profile' && <SidebarProfile />}
-      {navbarAction === 'chat' && <SidebarChats />}
-      {navbarAction === 'groups' && <SidebarGroups />}
-      {navbarAction === 'contacts' && <SidebarContacts />}
-      {navbarAction === 'search' && <SidebarSearchUsers />}
-      {navbarAction === 'settings' && <SidebarSettings />}
+      {navbarAction === NavbarEnum.Profile && <SidebarProfile />}
+      {navbarAction === NavbarEnum.Chat && <SidebarChats />}
+      {navbarAction === NavbarEnum.Groups && <SidebarGroups />}
+      {navbarAction === NavbarEnum.Contacts && <SidebarContacts />}
+      {navbarAction === NavbarEnum.Search && <SidebarSearchUsers />}
+      {navbarAction === NavbarEnum.Settings && <SidebarSettings />}
     </div>
   );
 };

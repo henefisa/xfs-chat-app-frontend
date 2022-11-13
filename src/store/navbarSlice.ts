@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
+import NavbarEnum from 'src/Enum/NavbarEnum';
 
 export const navbarSlice = createSlice({
   name: 'navbar',
-  initialState: 'profile',
+  initialState: NavbarEnum.Profile,
   reducers: {
     updateNavbar: (state, action) => {
       return action.payload;
