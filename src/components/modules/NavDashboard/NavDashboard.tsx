@@ -37,26 +37,32 @@ const NavDashboard: React.FC = () => {
       {
         icon: UserOutlined,
         tooltipTitle: t('profile'),
+        key: 'profile',
       },
       {
         icon: MessageOutlined,
         tooltipTitle: t('chat'),
+        key: 'chat',
       },
       {
         icon: UsergroupAddOutlined,
         tooltipTitle: t('groups'),
+        key: 'groups',
       },
       {
         icon: ContactsOutlined,
         tooltipTitle: t('contacts'),
+        key: 'contacts',
       },
       {
         icon: SearchOutlined,
         tooltipTitle: t('search'),
+        key: 'search',
       },
       {
         icon: SettingOutlined,
         tooltipTitle: t('settings'),
+        key: 'settings',
       },
     ];
   }, [t]);
@@ -79,7 +85,7 @@ const NavDashboard: React.FC = () => {
               key={index}
               className="menu-dashboard__btn"
               onClick={() => {
-                dispatch(updateNavbar(index));
+                dispatch(updateNavbar(item.key));
                 setActiveIndex(index);
               }}
             >
