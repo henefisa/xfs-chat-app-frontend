@@ -4,7 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 20px 0;
   flex-direction: column;
 
   .otp-check {
@@ -83,10 +84,21 @@
     margin-top: 60px;
     text-align: center;
 
-    .author {
+    .author,
+    .anothor-account-title {
       font-size: 15px;
       font-weight: 400;
       color: v.$text-color;
+    }
+
+    .anothor-account-title {
+      .btn-back-login {
+        color: v.$primary;
+        padding: 4px 8px;
+        box-shadow: unset;
+        border: none;
+        background-color: unset;
+      }
     }
 
     .author__heart-icon {

@@ -21,9 +21,11 @@ interface IUserInfoChat {
 }
 
 const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
-  const { t } = useTranslation('chat-ui', { keyPrefix: 'user-info-chat' });
-  const { t: t1 } = useTranslation('chat-ui', {
-    keyPrefix: 'user-info-chat.about',
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.user-info-chat',
+  });
+  const { t: t1 } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.user-info-chat.about',
   });
 
   const userInfoChat = [

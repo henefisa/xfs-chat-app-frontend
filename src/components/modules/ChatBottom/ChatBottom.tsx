@@ -20,7 +20,9 @@ interface IChatbottom {
 }
 
 const ChatBottom: React.FC<IChatbottom> = ({ Messages }) => {
-  const { t } = useTranslation('chat-ui', { keyPrefix: 'chat-bottom' });
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-bottom',
+  });
   const inputFileRef = React.createRef<HTMLInputElement>();
   const inputImgRef = React.createRef<HTMLInputElement>();
   const [mess, setMess] = useState('');

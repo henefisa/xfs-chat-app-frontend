@@ -16,8 +16,8 @@ interface IChatCallProps {
 }
 
 const ChatCall: React.FC<IChatCallProps> = ({ onClose, title, isOpen }) => {
-  const { t } = useTranslation('chat-ui', {
-    keyPrefix: 'chat-header.chat-call',
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-header.chat-call',
   });
 
   return (

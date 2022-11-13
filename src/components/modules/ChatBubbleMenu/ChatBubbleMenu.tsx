@@ -15,8 +15,8 @@ interface IChatBubbleMenuProps extends MenuProps {
 }
 
 const ChatBubbleMenu: React.FC<IChatBubbleMenuProps> = ({ position }) => {
-  const { t } = useTranslation('chat-ui', {
-    keyPrefix: 'chat-main.chat-bubble-menu',
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-main.chat-bubble-menu',
   });
   const menu: MenuProps['items'] = [
     {

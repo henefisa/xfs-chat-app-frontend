@@ -15,8 +15,8 @@ import './ActionsChatMenu.scss';
 interface IActionsChatMenuProps extends MenuProps {}
 
 const ActionsChatMenu: React.FC<IActionsChatMenuProps> = () => {
-  const { t } = useTranslation('chat-ui', {
-    keyPrefix: 'chat-header.action-chat-menu',
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-header.action-chat-menu',
   });
   const menu: MenuProps['items'] = [
     {

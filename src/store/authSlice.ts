@@ -23,14 +23,10 @@ export const authSlice = createSlice({
     loginStart: (state) => {
       state.login.isFetching = true;
     },
-    loginSuccess: (
-      state,
-      action: PayloadAction<{ access_token: string; refresh_token: string }>
-    ) => {
+    loginSuccess: (state) => {
       state.login.isFetching = false;
       state.login.isLoggedIn = true;
       state.login.error = false;
-      localStorage.setItem('token', JSON.stringify(action.payload));
     },
     loginFailed: (state) => {
       state.login.isFetching = false;
@@ -57,6 +53,7 @@ export const authSlice = createSlice({
       state.login.isLoggedIn = false;
       state.logout.error = false;
       localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
     },
     logoutFailed: (state) => {
       state.logout.error = true;

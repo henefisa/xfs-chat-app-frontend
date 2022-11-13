@@ -26,7 +26,9 @@ interface IChatHeader {
 
 const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const [id, setId] = React.useState(-1);
-  const { t } = useTranslation('chat-ui', { keyPrefix: 'chat-header' });
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-header',
+  });
   const handleClickuser = () => {
     setOpen(true);
   };

@@ -57,8 +57,8 @@ const contacts = [
 
 const ForwardForm: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { t } = useTranslation('chat-ui', {
-    keyPrefix: 'chat-main.chat-bubble-menu.forward',
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-main.chat-bubble-menu.forward',
   });
 
   const showModal = () => {
