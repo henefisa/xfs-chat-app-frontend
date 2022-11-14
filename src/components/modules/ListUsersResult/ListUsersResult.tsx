@@ -1,7 +1,7 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
-import FriendItem from '@modules/FriendItem/FriendItem';
+import UserItem from '@modules/UserItem/UserItem';
 import Divider from '@common/Divider/Divider';
 import { IListUser } from '../SidebarSearchUsers/SidebarSearchUsers';
 
@@ -20,8 +20,8 @@ const ListUsersResult: React.FC<IListUsersResultProps> = ({
     <div className={clsx('list-result', className)}>
       {listResult.map((item, index) => (
         <React.Fragment key={item.u_id}>
-          <FriendItem
-            friendname={item.u_full_name || item.u_username}
+          <UserItem
+            username={item.u_full_name || item.u_username}
             path={item.u_avatar || ''}
             location={item.u_location || ''}
           />

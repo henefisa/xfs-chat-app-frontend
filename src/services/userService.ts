@@ -58,7 +58,7 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
 
 export const getUsers = async (
   keyword: string,
-  t: TFunction<'common', undefined>
+  t: TFunction<('common' | 'dashboard')[], undefined>
 ) => {
   try {
     const res = await apiRequest.get('api/users', { params: { q: keyword } });

@@ -34,7 +34,7 @@ export interface IListUser {
 }
 
 const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'dashboard']);
 
   const [loading, setLoading] = React.useState<boolean>(false);
   const [listResult, setListResult] = React.useState<IListUser[]>([]);
@@ -62,17 +62,19 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
     <div className="sidebar-search">
       <div className="header-search">
         <Title className="header-search__title" level={4}>
-          Search Users
+          {t('sidebar.search-user.title', { ns: 'dashboard' })}
         </Title>
         <SearchSidebar
           className="header-search__input"
-          placeholder="Search friend..."
+          placeholder={t('sidebar.search-user.search-placeholder', {
+            ns: 'dashboard',
+          })}
           onChange={debounceGetUsers}
         />
       </div>
       <div className="body-search">
         <Title level={5} className="body-search__title">
-          Result
+          {t('sidebar.search-user.result-title', { ns: 'dashboard' })}
         </Title>
         {loading ? (
           <Spin
