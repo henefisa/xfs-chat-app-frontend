@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useDraggable } from 'react-use-draggable-scroll';
+import { ScrollContainer } from 'react-indiana-drag-scroll';
 
 import './Carousel.scss';
 
@@ -8,17 +8,7 @@ interface Children {
 }
 
 const Carousel: React.FC<Children> = ({ children }) => {
-  const ref =
-    React.useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
-  const { events: draggable } = useDraggable(ref, {
-    applyRubberBandEffect: true,
-  });
-
-  return (
-    <div className="carousel" {...draggable} ref={ref}>
-      {children}
-    </div>
-  );
+  return <ScrollContainer className="carousel">{children}</ScrollContainer>;
 };
 
 export default Carousel;

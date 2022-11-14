@@ -3346,6 +3346,11 @@ react-i18next@^12.0.0:
     "@babel/runtime" "^7.14.5"
     html-parse-stringify "^3.0.1"
 
+react-indiana-drag-scroll@^3.0.1-alpha:
+  version "3.0.1-alpha"
+  resolved "https://registry.yarnpkg.com/react-indiana-drag-scroll/-/react-indiana-drag-scroll-3.0.1-alpha.tgz#190c29675788b8f1ac92a7a6be0aedb595fab71e"
+  integrity sha512-2GKaDBg5n118RxCRXiSpjOPOc5WJgmaWrgqZ9Qwtu4sEzIY2RGFEaQizmPWAZzEoYT8aSUEAKnTukuJAjZAFdg==
+
 react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
