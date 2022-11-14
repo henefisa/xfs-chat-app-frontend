@@ -99,11 +99,6 @@
         "cancel": "Cancel"
       }
     },
-    "verify-account": {
-      "receive-otp": "OTP has been sent to email!",
-      "check-otp-error": "OTP code is incorrect!",
-      "check-otp-success": "Authentication successful!"
-    },
     "chat-ui": {
       "chat-header": {
         "search": "Search",
@@ -152,5 +147,10 @@
       "chat-day-title": {
       }
     }
+  },
+  "verify-account": {
+    "receive-otp": "OTP has been sent to email!",
+    "check-otp-error": "OTP code is incorrect!",
+    "check-otp-success": "Authentication successful!"
   }
 }

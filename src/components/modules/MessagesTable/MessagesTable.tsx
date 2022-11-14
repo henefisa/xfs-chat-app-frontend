@@ -8,12 +8,12 @@ import './MessagesTable.scss';
 
 interface IMessagesTableProps {
   position: string;
-  Messages: string;
+  messages: string;
 }
 
 const MessagesTable: React.FC<IMessagesTableProps> = ({
   position,
-  Messages,
+  messages,
 }) => {
   return (
     <div className={clsx('messages-table', `messages-table--${position}`)}>
@@ -27,7 +27,7 @@ const MessagesTable: React.FC<IMessagesTableProps> = ({
       </div>
       <div className="messages-table__body">
         <div className="bubble">
-          <MessagesContent messages={Messages} position={position} />
+          <MessagesContent messages={messages} position={position} />
         </div>
         <Title level={5} className="username">
           Danh Huy

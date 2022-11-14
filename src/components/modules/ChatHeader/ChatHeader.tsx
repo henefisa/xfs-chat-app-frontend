@@ -32,29 +32,32 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const handleClickuser = () => {
     setOpen(true);
   };
-  const listActionChat = [
-    {
-      icon: PhoneOutlined,
-      tooltipTitle: t('voice-call'),
-      handleClick: function () {
-        setId(0);
+
+  const listActionChat = React.useMemo(() => {
+    return [
+      {
+        icon: PhoneOutlined,
+        tooltipTitle: t('voice-call'),
+        handleClick: function () {
+          setId(0);
+        },
       },
-    },
-    {
-      icon: VideoCameraOutlined,
-      tooltipTitle: t('video-call'),
-      handleClick: function () {
-        setId(1);
+      {
+        icon: VideoCameraOutlined,
+        tooltipTitle: t('video-call'),
+        handleClick: function () {
+          setId(1);
+        },
       },
-    },
-    {
-      icon: UserOutlined,
-      tooltipTitle: t('user-info'),
-      handleClick: function () {
-        setOpen(true);
+      {
+        icon: UserOutlined,
+        tooltipTitle: t('user-info'),
+        handleClick: function () {
+          setOpen(true);
+        },
       },
-    },
-  ];
+    ];
+  }, [t]);
 
   return (
     <div className="chat-header">

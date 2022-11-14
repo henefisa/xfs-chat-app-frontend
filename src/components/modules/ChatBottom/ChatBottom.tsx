@@ -11,25 +11,25 @@ import Input from '@common/Input/Input';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import Tooltip from '@common/Tooltip/Tooltip';
 import { useTranslation } from 'react-i18next';
-import Dropdown from 'src/components/common/Dropdown/Dropdown';
+import Dropdown from '@common/Dropdown/Dropdown';
 
 import './ChatBottom.scss';
 
-interface IChatbottom {
-  Messages: React.Dispatch<React.SetStateAction<string[]>>;
+interface IChatBottom {
+  setMessagesUser: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const ChatBottom: React.FC<IChatbottom> = ({ Messages }) => {
+const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-bottom',
   });
   const inputFileRef = React.createRef<HTMLInputElement>();
   const inputImgRef = React.createRef<HTMLInputElement>();
-  const [mess, setMess] = useState('');
+  const [messages, setMessages] = useState('');
 
   const handleClick = () => {
-    Messages((prev: string[]) => [...prev, mess]);
-    setMess('');
+    setMessagesUser((prev: string[]) => [...prev, messages]);
+    setMessages('');
   };
   const toggleFile = () => {
     inputFileRef.current?.click();
@@ -38,7 +38,7 @@ const ChatBottom: React.FC<IChatbottom> = ({ Messages }) => {
     inputImgRef.current?.click();
   };
   const onEmojiClick = (emojiObject: EmojiClickData) => {
-    setMess((prev: string) => prev + emojiObject.emoji);
+    setMessages((prev: string) => prev + emojiObject.emoji);
   };
 
   return (
@@ -47,8 +47,8 @@ const ChatBottom: React.FC<IChatbottom> = ({ Messages }) => {
         <Input
           className="type-chat__input"
           placeholder={t('enter-message')}
-          onChange={(e) => setMess(e.target.value)}
-          value={mess}
+          onChange={(e) => setMessages(e.target.value)}
+          value={messages}
           onPressEnter={handleClick}
         />
       </div>

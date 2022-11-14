@@ -6,21 +6,21 @@ import ChatDayTitle from '../ChatDayTitle/ChatDayTitle';
 import './ChatMain.scss';
 
 interface IChatMain {
-  Messages: string[];
+  messages: string[];
 }
-const ChatMain: React.FC<IChatMain> = ({ Messages }) => {
+const ChatMain: React.FC<IChatMain> = ({ messages }) => {
   const scrollRef = useRef<null | HTMLDivElement>(null);
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [Messages]);
+  }, [messages]);
   return (
     <div className="chatmain">
       <ChatDayTitle day="Today" />
-      {Messages.map((mess: string, index: React.Key | null | undefined) => {
-        if (mess != '')
+      {messages.map((messages: string, index: React.Key | null | undefined) => {
+        if (messages != '')
           return (
             <div ref={scrollRef}>
-              <MessagesTable key={index} position="right" Messages={mess} />
+              <MessagesTable key={index} position="right" messages={messages} />
             </div>
           );
       })}

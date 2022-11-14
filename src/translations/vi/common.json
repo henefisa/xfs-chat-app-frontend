@@ -99,11 +99,6 @@
         "cancel": "Hủy"
       }
     },
-    "verify-account": {
-      "receive-otp": "OTP đã được gửi đến email!",
-      "check-otp-error": "Mã OTP không đúng!",
-      "check-otp-success": "Xác thực thành công!"
-    },
     "chat-ui":{
       "chat-header": {
         "search": "Tìm kiếm",
@@ -150,5 +145,10 @@
         "attached-file": "Xem file phương tiện"
       }
     }
+  },
+  "verify-account": {
+    "receive-otp": "OTP đã được gửi đến email!",
+    "check-otp-error": "Mã OTP không đúng!",
+    "check-otp-success": "Xác thực thành công!"
   }
 }
