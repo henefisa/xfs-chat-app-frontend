@@ -2,21 +2,35 @@ import { Loading3QuartersOutlined } from '@ant-design/icons';
 import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
-import ListFriendResult from '@modules/ListFriendResult/ListFriendResult';
+import ListUsersResult from '@modules/ListUsersResult/ListUsersResult';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { IUser } from 'src/models';
-import { getFriends } from 'src/services/userService';
+import { getUsers } from 'src/services/userService';
 import debounce from 'src/utils/debounce';
 
 import './SidebarSearchUsers.scss';
 
 interface ISidebarSearchUsersProps {}
 
-export interface IListUser extends IUser {
-  fullname: string;
-  avatar: string;
-  location: string;
+export interface IListUser {
+  u_id: string;
+  u_created_at: string;
+  u_updated_at: string;
+  u_username: string;
+  u_email: string;
+  u_full_name: null | string;
+  u_avatar: null | string;
+  u_phone: null | string;
+  u_description: null | string;
+  u_location: null | string;
+  u_status: 'INACTIVE' | 'ACTIVE' | 'DEACTIVATE' | 'PENDING';
+  u_role: 'USER' | 'ADMIN';
+  user_friends_id: null | string;
+  user_friends_created_at: null | string;
+  user_friends_updated_at: null | string;
+  user_friends_status: null | string;
+  user_friends_userTargetId: null | string;
+  user_friends_ownerId: null | string;
 }
 
 const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
@@ -25,7 +39,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [listResult, setListResult] = React.useState<IListUser[]>([]);
 
-  const handleGetFriends = async (keyword: string) => {
+  const handleGetUsers = async (keyword: string) => {
     setLoading(true);
     if (!keyword) {
       setListResult([]);
@@ -33,13 +47,15 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
       return;
     }
 
-    const result = await getFriends(keyword, t);
+    const result = await getUsers(keyword, t);
     setLoading(false);
-    setListResult(result.users);
+
+    if (!result) return;
+    setListResult(result);
   };
 
-  const debounceGetFriends = React.useMemo(() => {
-    return debounce(handleGetFriends, 700);
+  const debounceGetUsers = React.useMemo(() => {
+    return debounce(handleGetUsers, 700);
   }, []);
 
   return (
@@ -51,7 +67,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
         <SearchSidebar
           className="header-search__input"
           placeholder="Search friend..."
-          onChange={debounceGetFriends}
+          onChange={debounceGetUsers}
         />
       </div>
       <div className="body-search">
@@ -66,7 +82,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
             }
           />
         ) : (
-          listResult.length > 0 && <ListFriendResult listResult={listResult} />
+          listResult.length > 0 && <ListUsersResult listResult={listResult} />
         )}
       </div>
     </div>

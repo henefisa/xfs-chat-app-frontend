@@ -56,7 +56,7 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
   }
 };
 
-export const getFriends = async (
+export const getUsers = async (
   keyword: string,
   t: TFunction<'common', undefined>
 ) => {

@@ -5,25 +5,25 @@ import FriendItem from '@modules/FriendItem/FriendItem';
 import Divider from '@common/Divider/Divider';
 import { IListUser } from '../SidebarSearchUsers/SidebarSearchUsers';
 
-import './ListFriendResult.scss';
+import './ListUsersResult.scss';
 
-interface IListFriendResultProps {
+interface IListUsersResultProps {
   className?: string;
   listResult: IListUser[];
 }
 
-const ListFriendResult: React.FC<IListFriendResultProps> = ({
+const ListUsersResult: React.FC<IListUsersResultProps> = ({
   className,
   listResult,
 }) => {
   return (
     <div className={clsx('list-result', className)}>
       {listResult.map((item, index) => (
-        <React.Fragment key={item.id}>
+        <React.Fragment key={item.u_id}>
           <FriendItem
-            friendname={item.fullname || item.username}
-            path={item.avatar || ''}
-            location={item.location || ''}
+            friendname={item.u_full_name || item.u_username}
+            path={item.u_avatar || ''}
+            location={item.u_location || ''}
           />
           {index < listResult.length - 1 && <Divider className="separate" />}
         </React.Fragment>
@@ -32,4 +32,4 @@ const ListFriendResult: React.FC<IListFriendResultProps> = ({
   );
 };
 
-export default ListFriendResult;
+export default ListUsersResult;
