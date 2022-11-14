@@ -30,11 +30,22 @@
   }
 
   .user-item__action {
-    .add-user-btn {
+    .add-user-btn,
+    .cancel-user-btn {
       color: v.$white;
       font-size: 12px;
       padding: 4px 10px;
       border-radius: 8px;
+    }
+
+    .cancel-user-btn {
+      color: v.$black;
+      background-color: #fcd664;
+      border-color: #fcd664;
+
+      &:hover {
+        background-color: #ffcb30;
+      }
     }
   }
 }

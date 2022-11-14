@@ -12,7 +12,7 @@ import './SidebarSearchUsers.scss';
 
 interface ISidebarSearchUsersProps {}
 
-export interface IListUser {
+export interface IUserItemResult {
   u_id: string;
   u_created_at: string;
   u_updated_at: string;
@@ -37,7 +37,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
   const { t } = useTranslation(['common', 'dashboard']);
 
   const [loading, setLoading] = React.useState<boolean>(false);
-  const [listResult, setListResult] = React.useState<IListUser[]>([]);
+  const [listResult, setListResult] = React.useState<IUserItemResult[]>([]);
 
   const handleGetUsers = async (keyword: string) => {
     setLoading(true);

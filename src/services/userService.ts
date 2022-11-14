@@ -72,3 +72,21 @@ export const getUsers = async (
     });
   }
 };
+
+export const sendFriendRequest = async (
+  id: string,
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    await apiRequest.post('api/friends', { userTarget: id });
+    return true;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+    return false;
+  }
+};
