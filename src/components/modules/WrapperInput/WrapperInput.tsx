@@ -1,8 +1,11 @@
-import * as React from 'react';
+import { InputRef } from 'antd';
 import clsx from 'clsx';
+import * as React from 'react';
 
-import Input from '@common/Input/Input';
-import InputPassword from '@common/Input/InputPassword';
+import Input, { IInputProps } from '@common/Input/Input';
+import InputPassword, {
+  IInputPasswordProps,
+} from '@common/Input/InputPassword';
 
 import './WrapperInput.scss';
 
@@ -28,7 +31,11 @@ const WrapperInput: React.FC<IWrapperInputProps> = ({
   inputOnChange,
   ...rest
 }) => {
-  let InputComp = Input;
+  let InputComp:
+    | React.ForwardRefExoticComponent<
+        IInputProps & React.RefAttributes<InputRef>
+      >
+    | React.FC<IInputPasswordProps> = Input;
   if (inputType === 'text' || inputType === 'email') {
     InputComp = Input;
   } else if (inputType === 'password') {

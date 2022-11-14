@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import './Input.scss';
 
-interface IInputProps extends InputProps {}
+export interface IInputProps extends InputProps {}
 
 type Ref = InputRef;
 
