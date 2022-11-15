@@ -9,6 +9,7 @@ import Input from '@common/Input/Input';
 import Button from '@common/Button/Button';
 import clsx from 'clsx';
 import Title from '@common/Title/Title';
+import { useTranslation } from 'react-i18next';
 
 import './SidebarGroups.scss';
 
@@ -63,26 +64,26 @@ const contacts = [
 const SidebarGroups: React.FC = () => {
   const [active, setActive] = React.useState(false);
   const [toggleModal, setToggleModal] = React.useState(false);
-
+  const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.groups' });
   return (
     <>
       <div className="sidebar-groups">
         <div className="sidebar-groups__header">
           <Title className="group-title" level={4}>
-            Groups
+            {t('groups')}
           </Title>
           <div className="group-create" onClick={() => setToggleModal(true)}>
             <Tooltip
               className=""
               placement="bottom"
-              tooltipTitle="Create group"
+              tooltipTitle={t('group-add-tooltip')}
             >
               <UsergroupAddOutlined className="group-create__icon" />
             </Tooltip>
           </div>
         </div>
         <div className="sidebar-groups__search">
-          <SearchSidebar placeholder="Search groups..." />
+          <SearchSidebar placeholder={t('search-placeholder')} />
         </div>
         <div className="sidebar-groups__box">
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
@@ -111,28 +112,31 @@ const SidebarGroups: React.FC = () => {
       >
         <div className="overlay-modal__dialog">
           <div className="dialog__title">
-            <h5>Create New Group</h5>
+            <h5>{t('modal-title')}</h5>
             <button onClick={() => setToggleModal(false)}>
               <CloseOutlined />
             </button>
           </div>
           <div className="dialog__body">
             <div className="group-name">
-              <div className="title">Group Name</div>
-              <Input className="input" placeholder="Enter Group Name" />
+              <div className="title">{t('modal-name-label')}</div>
+              <Input
+                className="input"
+                placeholder={t('modal-name-placeholder')}
+              />
             </div>
             <div className="group-members">
-              <div className="title">Group Members</div>
+              <div className="title">{t('modal-members-label')}</div>
               <div
                 className={clsx('select-members', {
                   [`select-contacts--open`]: active,
                 })}
               >
                 <button onClick={() => setActive(!active)}>
-                  Select Members
+                  {t('select-members')}
                 </button>
                 <div className={clsx('select-contacts')}>
-                  <div className="select-contacts__header">Contacts</div>
+                  <div className="select-contacts__header">{t('contacts')}</div>
                   <div className="select-contacts__add">
                     {contacts.map((contact, index) => (
                       <div key={index}>
@@ -159,18 +163,18 @@ const SidebarGroups: React.FC = () => {
               </div>
             </div>
             <div className="dialog__desc">
-              <div className="title">Description</div>
+              <div className="title">{t('modal-desc-label')}</div>
               <textarea
                 className="description"
-                placeholder="Enter Description"
+                placeholder={t('modal-desc-placeholder')}
               ></textarea>
             </div>
           </div>
           <div className="dialog__footer">
             <Button className="btn-close" onClick={() => setToggleModal(false)}>
-              Close
+              {t('btn-close')}
             </Button>
-            <Button className="btn-create">Create Group</Button>
+            <Button className="btn-create">{t('btn-create')}</Button>
           </div>
         </div>
       </div>
