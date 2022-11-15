@@ -8,36 +8,68 @@ import {
 } from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Input from '@common/Input/Input';
-import Emoji from 'emoji-picker-react';
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
+import Tooltip from '@common/Tooltip/Tooltip';
+import { useTranslation } from 'react-i18next';
+import Dropdown from '@common/Dropdown/Dropdown';
 
 import './ChatBottom.scss';
 
-const ChatBottom: React.FC = () => {
-  const [emoji, setEmoji] = useState(false);
+interface IChatBottom {
+  setMessagesUser: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-bottom',
+  });
   const inputFileRef = React.createRef<HTMLInputElement>();
   const inputImgRef = React.createRef<HTMLInputElement>();
+  const [messages, setMessages] = useState('');
 
+  const handleClick = () => {
+    setMessagesUser((prev: string[]) => [...prev, messages]);
+    setMessages('');
+  };
   const toggleFile = () => {
     inputFileRef.current?.click();
   };
   const toggleImg = () => {
     inputImgRef.current?.click();
   };
+  const onEmojiClick = (emojiObject: EmojiClickData) => {
+    setMessages((prev: string) => prev + emojiObject.emoji);
+  };
 
   return (
     <div className="chat-bottom">
       <div className="type-chat">
-        <Input className="type-chat__input" placeholder="Enter Message..." />
+        <Input
+          className="type-chat__input"
+          placeholder={t('enter-message')}
+          onChange={(e) => setMessages(e.target.value)}
+          value={messages}
+          onPressEnter={handleClick}
+        />
       </div>
       <div className="chat-actions">
         <div className="choose-emoji">
-          <Button
-            className="choose-emoji__btn general-btn"
-            onClick={() => setEmoji(!emoji)}
+          <Dropdown
+            overlay={
+              <EmojiPicker
+                height={338}
+                width={282}
+                onEmojiClick={onEmojiClick}
+              />
+            }
+            trigger={['click']}
+            placement="topLeft"
+            autoFocus={true}
           >
-            <SmileOutlined className="custom-send-icon" />
-          </Button>
-          {emoji && <Emoji height={338} width={282} />}
+            <Tooltip tooltipTitle={t('emoji')}>
+              <SmileOutlined className="custom-send-icon" />
+            </Tooltip>
+          </Dropdown>
         </div>
         <div className="attached-file">
           <input type="file" ref={inputFileRef} hidden />
@@ -45,7 +77,9 @@ const ChatBottom: React.FC = () => {
             className="attached-file__btn general-btn"
             onClick={toggleFile}
           >
-            <PaperClipOutlined className="custom-send-icon" />
+            <Tooltip tooltipTitle={t('attached-file')}>
+              <PaperClipOutlined className="custom-send-icon" />
+            </Tooltip>
           </Button>
         </div>
         <div className="attached-images">
@@ -54,11 +88,13 @@ const ChatBottom: React.FC = () => {
             className="attached-images__btn general-btn"
             onClick={toggleImg}
           >
-            <PictureOutlined className="custom-send-icon" />
+            <Tooltip tooltipTitle={t('attached-image')}>
+              <PictureOutlined className="custom-send-icon" />
+            </Tooltip>
           </Button>
         </div>
         <div className="send-chat">
-          <Button className="send-chat__btn">
+          <Button className="send-chat__btn" onClick={handleClick}>
             <SendOutlined className="custom-send-chat" />
           </Button>
         </div>

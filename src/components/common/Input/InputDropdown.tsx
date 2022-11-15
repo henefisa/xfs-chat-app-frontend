@@ -1,30 +1,20 @@
 import * as React from 'react';
-import { Menu, MenuProps } from 'antd';
 import Input from './Input';
-import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 import './InputDropdown.scss';
 
-interface IMenuProps extends MenuProps {}
-
-const menu: MenuProps['items'] = [
-  {
-    label: (
-      <div className="dropdown-search">
-        <Input className="dropdown-search__input" placeholder="Search..." />
-      </div>
-    ),
-    key: 0,
-  },
-];
-
-const InputDropdown: React.FC<IMenuProps> = ({ className, ...rest }) => {
+const InputDropdown: React.FC = () => {
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-header',
+  });
   return (
-    <Menu
-      className={clsx('input-dropdown', className)}
-      {...rest}
-      items={menu}
-    />
+    <div className="dropdown-search">
+      <Input
+        className="dropdown-search__input"
+        placeholder={t('search-dropdown')}
+      />
+    </div>
   );
 };
 
