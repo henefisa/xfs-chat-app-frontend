@@ -2,6 +2,10 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { initInterceptor } from './api/apiRequest';
+import {
+  defaultSocketContextState,
+  SocketContextProvider,
+} from './Context/Socket/Context';
 import Router from './routes';
 import { useAppDispatch } from './store/hooks';
 
@@ -14,7 +18,11 @@ function App() {
     initInterceptor(navigate, dispatch, t);
   }, []);
 
-  return <Router />;
+  return (
+    <SocketContextProvider value={defaultSocketContextState}>
+      <Router />
+    </SocketContextProvider>
+  );
 }
 
 export default App;
