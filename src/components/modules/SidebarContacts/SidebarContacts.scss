@@ -127,16 +127,26 @@
       .dialog-body__email {
         margin-bottom: 24px;
 
-        label {
+        .email__label {
           display: block;
           margin-bottom: 8px;
           font-weight: 500;
           font-size: 15px;
         }
 
-        .input {
+        .email__input {
           border-radius: 4px;
           font-size: 14px;
+          border: 1px solid v.$input-border;
+          &:hover {
+            border: 1px solid #8c86dd;
+          }
+      
+          &:focus {
+            border-color: #8c86dd;
+            box-shadow: 0 0 0 2px #cdcbef;
+          }
+      
           &::placeholder {
             color: v.$text-sub-color;
           }
@@ -144,35 +154,34 @@
       }
 
       .dialog-body__message {
-        label {
+        .message__label {
           display: block;
           margin-bottom: 8px;
           font-weight: 500;
           font-size: 15px;
         }
 
-        textarea {
+        .message__input {
           width: 100%;
           height: 81px;
           padding: 8px 16px;
           font-size: 14px;
           outline: none;
+          border-radius: 4px;
           border: 1px solid v.$input-border;
           transition: all 0.3s;
 
+          &:hover {
+            border: 1px solid #8c86dd;
+          }
+      
+          &:focus {
+            border-color: #8c86dd;
+            box-shadow: 0 0 0 2px #cdcbef;
+          }
+      
           &::placeholder {
             color: v.$text-sub-color;
-          }
-
-          &:hover {
-            border-color: #40a9ff;
-            border-right-width: 1px;
-          }
-
-          &:focus {
-            border-color: #40a9ff;
-            border-right-width: 1px;
-            box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
           }
         }
       }
