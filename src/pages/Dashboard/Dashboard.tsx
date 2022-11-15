@@ -7,9 +7,7 @@ import { SocketContext } from 'src/Context/Socket/Context';
 import './Dashboard.scss';
 
 const Dashboard: React.FC = () => {
-  const { socket } = React.useContext(SocketContext).SocketState;
-
-  console.log(socket);
+  const socket = React.useContext(SocketContext);
 
   React.useEffect(() => {
     socket.connect();
