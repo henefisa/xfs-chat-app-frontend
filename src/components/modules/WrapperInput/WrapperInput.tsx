@@ -36,10 +36,16 @@ const WrapperInput: React.FC<IWrapperInputProps> = ({
         IInputProps & React.RefAttributes<InputRef>
       >
     | React.FC<IInputPasswordProps> = Input;
-  if (inputType === 'text' || inputType === 'email') {
-    InputComp = Input;
-  } else if (inputType === 'password') {
-    InputComp = InputPassword;
+
+  switch (inputType) {
+    case 'text': {
+      InputComp = Input;
+      break;
+    }
+    case 'password': {
+      InputComp = InputPassword;
+      break;
+    }
   }
 
   return (
