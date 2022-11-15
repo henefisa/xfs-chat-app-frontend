@@ -3,7 +3,11 @@
     "error": "Error",
     "success": "Success",
     "warning": "Warning",
-    "normal-error-message": "An error occurred!"
+    "normal-error-message": "Có lỗi xảy ra!",
+    "edit": "Chỉnh sửa",
+    "update": "Cập nhật",
+    "action": "Hành động",
+    "another-action": "Hành động khác"
   },
   "languages": {
     "en": "English",
@@ -74,6 +78,20 @@
       }
     },
     "sidebar": {
+      "profile": {
+        "heading": "Thông tin của tôi",
+        "status": {
+          "online": "Đang hoạt động",
+          "offline": "Không hoạt động",
+          "busy": "Đang bận"
+        },
+        "about": "Thông tin",
+        "name": "Tên",
+        "email": "Email",
+        "time": "Thời gian",
+        "location": "Vị trí",
+        "attached-file": "File đã đính kèm"
+      },
       "chats": {
         "Chats": "Chats",
         "search-placeholder": "Search messages or users",
@@ -134,6 +152,10 @@
         "help-faq": "FAQS",
         "help-contact": "Contacts",
         "help-terms": "Terms & Privacy policy"
+      },
+      "search-friend": {
+        "add": "Thêm",
+        "cancel": "Hủy"
       }
     },
     "chat-ui": {
@@ -181,8 +203,7 @@
         },
         "attached-file": "Attached File"
       },
-      "chat-day-title": {
-      }
+      "chat-day-title": {}
     }
   },
   "verify-account": {
