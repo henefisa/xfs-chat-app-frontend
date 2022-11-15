@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import './Input.scss';
 
-interface IInputPasswordProps extends InputProps {}
+export interface IInputPasswordProps extends InputProps {}
 
 const InputPassword: React.FC<IInputPasswordProps> = ({
   className,
