@@ -3,14 +3,9 @@
     "error": "Error",
     "success": "Success",
     "warning": "Warning",
-    "normal-error-message": "An error occurred!",
-    "edit": "Edit",
-    "update": "Update",
-    "action": "Action",
-    "another-action": "Another action"
+    "normal-error-message": "An error occurred!"
   },
   "languages": {
-    "title": "Language",
     "en": "English",
     "vi": "Vietnamese"
   },
@@ -24,7 +19,7 @@
       "success": "Logout successfully!",
       "error": "Logout failed!"
     },
-    "register" : {
+    "register": {
       "success": "Sign up successfully. OTP has been sent to email!",
       "error": "Sign up failed!"
     }
@@ -70,7 +65,6 @@
       "chat": "Chats",
       "groups": "Groups",
       "contacts": "Contacts",
-      "search": "Search",
       "settings": "Settings",
       "dark-light": "Dark / Light Mode",
       "user-menu": {
@@ -78,25 +72,68 @@
         "setting": "Settings",
         "logout": "Logout"
       }
-    }, 
+    },
     "sidebar": {
-      "profile": {
-        "heading": "My Profile",
-        "status": {
-          "online": "Online",
-          "offline": "Offline",
-          "busy": "Busy"
-        },
-        "about": "About",
-        "name": "Name",
-        "email": "Email",
-        "time": "Time",
-        "location": "Location",
-        "attached-file": "Attached Files"
+      "chats": {
+        "Chats": "Chats",
+        "search-placeholder": "Search messages or users",
+        "typing": "Typing",
+        "recent": "Recent"
       },
-      "search-friend": {
-        "add": "Add",
-        "cancel": "Cancel"
+      "groups": {
+        "groups": "Groups",
+        "search-placeholder": "Enter Group Name",
+        "group-add-tooltip": "Create group",
+        "modal-title": "Create New Group",
+        "modal-name-label": "Group Name",
+        "modal-name-placeholder": "Enter Group Name",
+        "modal-members-label": "Group Members",
+        "select-members": "Select Members",
+        "contacts": "Contacts",
+        "modal-desc-label": "Description",
+        "modal-desc-placeholder": "Enter Description",
+        "btn-close": "Close",
+        "btn-create": "Create Group"
+      },
+      "contacts": {
+        "title": "Contacts",
+        "search-contacts": "Search user...",
+        "add-contacts": "Add Contacts",
+        "email-placeholder": "Enter email",
+        "invatation-mess": "Invatation Messages",
+        "mess-placeholder": "Enter Message",
+        "btn-close": "Close",
+        "btn-invite": "Invite Contacts",
+        "menu-share": "Share",
+        "menu-block": "Block",
+        "menu-remove": "Remove"
+      },
+      "settings": {
+        "settings": "Settings",
+        "available": "Available",
+        "busy": "Busy",
+        "info-title": "Personal Info",
+        "info-name": "Name",
+        "info-btn-edit": "Edit",
+        "info-btn-update": "Update",
+        "info-email": "Email",
+        "info-time": "Time",
+        "info-location": "Location",
+        "privacy-title": "Privacy",
+        "privacy-profile-photo": "Profile photo",
+        "privacy-last-seen": "Last seen",
+        "privacy-status": "Status",
+        "privacy-read-receipts": "Read receipts",
+        "privacy-groups": "Groups",
+        "btn-everyone": "Everyone",
+        "btn-selected": "Selected",
+        "btn-nobody": "Nobody",
+        "security-title": "Security",
+        "show-security-notification": "Show security notification",
+        "help-title": "Help",
+        "help-faq": "FAQS",
+        "help-contact": "Contacts",
+        "help-terms": "Terms & Privacy policy"
       }
     }
   },

@@ -7,6 +7,7 @@ import {
   StopOutlined,
   DeleteOutlined,
 } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
@@ -15,43 +16,47 @@ import './ContactMenu.scss';
 
 interface IContactMenuProps extends MenuProps {}
 
-const menu: MenuProps['items'] = [
-  {
-    label: (
-      <Button className="menu-item">
-        <Title className="menu-item__title" level={5}>
-          Share
-        </Title>
-        <ShareAltOutlined className="icon" />
-      </Button>
-    ),
-    key: 0,
-  },
-  {
-    label: (
-      <Button className="menu-item">
-        <Title className="menu-item__title" level={5}>
-          Block
-        </Title>
-        <StopOutlined className="icon" />
-      </Button>
-    ),
-    key: 1,
-  },
-  {
-    label: (
-      <Button className="menu-item">
-        <Title className="menu-item__title" level={5}>
-          Remove
-        </Title>
-        <DeleteOutlined className="icon" />
-      </Button>
-    ),
-    key: 2,
-  },
-];
-
 const ContactMenu: React.FC<IContactMenuProps> = () => {
+  const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
+
+  const menu: MenuProps['items'] = React.useMemo(() => {
+    return [
+      {
+        label: (
+          <Button className="menu-item">
+            <Title className="menu-item__title" level={5}>
+              {t('menu-share')}
+            </Title>
+            <ShareAltOutlined className="icon" />
+          </Button>
+        ),
+        key: 0,
+      },
+      {
+        label: (
+          <Button className="menu-item">
+            <Title className="menu-item__title" level={5}>
+              {t('menu-block')}
+            </Title>
+            <StopOutlined className="icon" />
+          </Button>
+        ),
+        key: 1,
+      },
+      {
+        label: (
+          <Button className="menu-item">
+            <Title className="menu-item__title" level={5}>
+              {t('menu-xóa')}
+            </Title>
+            <DeleteOutlined className="icon" />
+          </Button>
+        ),
+        key: 2,
+      },
+    ];
+  }, []);
+
   return <Menu className="contact-menu" items={menu} />;
 };
 

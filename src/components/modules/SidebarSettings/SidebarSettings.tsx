@@ -5,40 +5,22 @@ import Dropdown from '@common/Dropdown/Dropdown';
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
 import SettingsMenu from '../SettingsStatusMenu/SettingsStatusMenu';
-import { Collapse, Divider, InputRef } from 'antd';
+import { Collapse, Divider } from 'antd';
 import PrivacyMenu from '../PrivacyMenu/PrivacyMenu';
-import Input from '@common/Input/Input';
 import Switch from '@common/Switch/Switch';
+import Input from '@common/Input/Input';
+import type { InputRef } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 import './SidebarSettings.scss';
 
 const { Panel } = Collapse;
 
-const info = [
-  { title: 'Name', desc: 'Patricia Smith' },
-  { title: 'Email', desc: 'admin@mgail.com' },
-  { title: 'Time', desc: '15:30 PM' },
-  { title: 'Location', desc: 'Danang, VN' },
-];
-
-const privacy = [
-  { title: 'Profile photo' },
-  { title: 'Last seen', check: true },
-  { title: 'Status' },
-  { title: 'Read receipts', check: true },
-  { title: 'Groups' },
-];
-
-const help = [
-  { title: 'FAQs' },
-  { title: 'Contact' },
-  { title: 'Terms & Privacy policy' },
-];
-
 const SidebarSettings: React.FC = () => {
   const [disabled, setDisable] = React.useState(true);
   const [userName, setUserName] = React.useState('Patricia Smith');
   const inputName = React.useRef<InputRef>(null);
+  const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.settings' });
 
   function handleName() {
     setDisable(!disabled);
@@ -48,10 +30,37 @@ const SidebarSettings: React.FC = () => {
     inputName.current?.focus();
   }, [disabled]);
 
+  const info = React.useMemo(() => {
+    return [
+      { title: t('info-name'), desc: 'Patricia Smith' },
+      { title: t('info-email'), desc: 'admin@mgail.com' },
+      { title: t('info-time'), desc: '15:30 PM' },
+      { title: t('info-location'), desc: 'Danang, VN' },
+    ];
+  }, []);
+
+  const privacy = React.useMemo(() => {
+    return [
+      { title: t('privacy-profile-photo') },
+      { title: t('privacy-last-seen'), check: true },
+      { title: t('privacy-status') },
+      { title: t('privacy-read-receipts'), check: true },
+      { title: t('privacy-groups') },
+    ];
+  }, []);
+
+  const help = React.useMemo(() => {
+    return [
+      { title: t('help-faq') },
+      { title: t('help-contact') },
+      { title: t('help-terms') },
+    ];
+  }, []);
+
   return (
     <div className="sidebar-settings">
       <Title level={4} className="sidebar-settings__title">
-        Settings
+        {t('settings')}
       </Title>
       <div className="user-info">
         <div className="user-info__avatar">
@@ -74,7 +83,7 @@ const SidebarSettings: React.FC = () => {
           placement="bottomLeft"
         >
           <div className="user-info__status">
-            <div className="status-current">Available</div>
+            <div className="status-current">{t('available')}</div>
             <DownOutlined className="status-icon" />
           </div>
         </Dropdown>
@@ -87,7 +96,7 @@ const SidebarSettings: React.FC = () => {
             header={
               <div className="panel-header">
                 <Title level={5} className="panel-header__title">
-                  Personal Info
+                  {t('info-title')}
                 </Title>
               </div>
             }
@@ -116,7 +125,7 @@ const SidebarSettings: React.FC = () => {
               ))}
               <Button className="btn-edit" onClick={handleName}>
                 <EditOutlined className="btn-edit__icon" />
-                {disabled ? 'Edit' : 'Update'}
+                {disabled ? t('info-btn-edit') : t('info-btn-update')}
               </Button>
             </ul>
           </Panel>
@@ -127,7 +136,7 @@ const SidebarSettings: React.FC = () => {
             header={
               <div className="panel-header">
                 <Title level={5} className="panel-header__title">
-                  Privacy
+                  {t('privacy-title')}
                 </Title>
               </div>
             }
@@ -135,8 +144,8 @@ const SidebarSettings: React.FC = () => {
           >
             <ul className="panel-inner">
               {privacy.map((item, index) => (
-                <>
-                  <li className="privacy-item" key={index}>
+                <div key={index}>
+                  <li className="privacy-item">
                     <Title level={5} className="privacy-item__title">
                       {item.title}
                     </Title>
@@ -149,7 +158,7 @@ const SidebarSettings: React.FC = () => {
                         placement="bottomRight"
                       >
                         <Button className="privacy-item__btn">
-                          Everyone
+                          {t('btn-everyone')}
                           <DownOutlined className="btn-icon" />
                         </Button>
                       </Dropdown>
@@ -158,7 +167,7 @@ const SidebarSettings: React.FC = () => {
                   {index < privacy.length - 1 && (
                     <Divider className="divider" />
                   )}
-                </>
+                </div>
               ))}
             </ul>
           </Panel>
@@ -173,7 +182,7 @@ const SidebarSettings: React.FC = () => {
             header={
               <div className="panel-header">
                 <Title level={5} className="panel-header__title">
-                  Security
+                  {t('security-title')}
                 </Title>
               </div>
             }
@@ -182,7 +191,7 @@ const SidebarSettings: React.FC = () => {
             <ul className="panel-inner">
               <li className="security-item">
                 <Title level={5} className="security-item__title">
-                  Show security notification
+                  {t('show-security-notification')}
                 </Title>
                 <Switch defaultChecked={true} />
               </li>
@@ -195,7 +204,7 @@ const SidebarSettings: React.FC = () => {
             header={
               <div className="panel-header">
                 <Title level={5} className="panel-header__title">
-                  Help
+                  {t('help-title')}
                 </Title>
               </div>
             }
@@ -203,14 +212,14 @@ const SidebarSettings: React.FC = () => {
           >
             <ul className="panel-inner">
               {help.map((item, index) => (
-                <>
-                  <li className="help-item" key={index}>
+                <div key={index}>
+                  <li className="help-item">
                     <Title level={5} className="help-item__title">
                       {item.title}
                     </Title>
                   </li>
                   {index < help.length - 1 && <Divider className="divider" />}
-                </>
+                </div>
               ))}
             </ul>
           </Panel>
