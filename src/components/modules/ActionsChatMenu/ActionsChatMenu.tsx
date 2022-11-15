@@ -8,17 +8,21 @@ import {
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import Menu from '@common/Menu/Menu';
+import { useTranslation } from 'react-i18next';
 
 import './ActionsChatMenu.scss';
 
 interface IActionsChatMenuProps extends MenuProps {}
 
 const ActionsChatMenu: React.FC<IActionsChatMenuProps> = () => {
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-header.action-chat-menu',
+  });
   const menu: MenuProps['items'] = [
     {
       label: (
         <Button className="menu-item">
-          <Title className="menu-item__title">Archive</Title>
+          <Title className="menu-item__title">{t('archive')}</Title>
           <InboxOutlined className="custom-menu-icon" />
         </Button>
       ),
@@ -27,7 +31,7 @@ const ActionsChatMenu: React.FC<IActionsChatMenuProps> = () => {
     {
       label: (
         <Button className="menu-item">
-          <Title className="menu-item__title">Muted</Title>
+          <Title className="menu-item__title">{t('mute')}</Title>
           <AudioMutedOutlined className="custom-menu-icon" />
         </Button>
       ),
@@ -36,7 +40,7 @@ const ActionsChatMenu: React.FC<IActionsChatMenuProps> = () => {
     {
       label: (
         <Button className="menu-item">
-          <Title className="menu-item__title">Delete</Title>
+          <Title className="menu-item__title">{t('delete')}</Title>
           <DeleteOutlined className="custom-menu-icon" />
         </Button>
       ),

@@ -5,6 +5,7 @@ import Avatar from '@common/Avatar/Avatar';
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import Modal from '@common/Modal/Modal';
+import { useTranslation } from 'react-i18next';
 
 import './ChatCall.scss';
 
@@ -15,6 +16,10 @@ interface IChatCallProps {
 }
 
 const ChatCall: React.FC<IChatCallProps> = ({ onClose, title, isOpen }) => {
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-header.chat-call',
+  });
+
   return (
     <Modal transitionName="none" maskTransitionName="none" open={isOpen}>
       <div className="modal-body">
@@ -29,7 +34,7 @@ const ChatCall: React.FC<IChatCallProps> = ({ onClose, title, isOpen }) => {
             Danh Huy
           </Title>
           <Title level={5} className="title-action">
-            Start {title} Call
+            {title === 'Audio' ? t('start-voice-call') : t('start-video-call')}
           </Title>
         </div>
         <div className="actions">
