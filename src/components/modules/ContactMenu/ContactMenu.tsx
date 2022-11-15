@@ -47,7 +47,7 @@ const ContactMenu: React.FC<IContactMenuProps> = () => {
         label: (
           <Button className="menu-item">
             <Title className="menu-item__title" level={5}>
-              {t('menu-xóa')}
+              {t('menu-remove')}
             </Title>
             <DeleteOutlined className="icon" />
           </Button>
