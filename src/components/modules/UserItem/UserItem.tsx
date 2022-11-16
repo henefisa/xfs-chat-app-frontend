@@ -20,6 +20,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
     keyPrefix: 'sidebar.search-user',
   });
   const { t: t1 } = useTranslation('common');
+  console.log(user);
 
   const [isSend, setIsSend] = React.useState<boolean>(false);
 
@@ -33,34 +34,37 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
   return (
     <div className={clsx('user-item', className)}>
       <Avatar
-        path={user.u_avatar || ''}
+        path={user.avatar || ''}
         username={
-          user.u_full_name
-            ? user.u_full_name.charAt(0).toUpperCase()
-            : user.u_username.charAt(0).toUpperCase()
+          user.fullName
+            ? user.fullName.charAt(0).toUpperCase()
+            : user.username.charAt(0).toUpperCase()
         }
         imgWidth={35.2}
         className="user-item__avtar"
       />
       <div className="user-item__info">
         <Title className="user-name" level={5}>
-          {user.u_full_name ?? user.u_username}
+          {user.fullName ?? user.username}
         </Title>
         <Title className="user-location" level={5}>
-          {user.u_location || ''}
+          {user.location || ''}
         </Title>
       </div>
       <div className="user-item__action">
-        {user.user_friends_status === 'REQUESTED' || isSend ? (
+        {(user.friendStatus?.status === 'REQUESTED' || isSend) && (
           <Button className="cancel-user-btn">{t('cancel')}</Button>
-        ) : (
-          <Button
-            className="add-user-btn"
-            onClick={() => handleAddFriend(user.u_id)}
-          >
-            {t('add')}
-          </Button>
         )}
+
+        {user.friendStatus?.status !== 'REQUESTED' &&
+          user.friendStatus?.status !== 'ACCEPTED' && (
+            <Button
+              className="add-user-btn"
+              onClick={() => handleAddFriend(user.id)}
+            >
+              {t('add')}
+            </Button>
+          )}
       </div>
     </div>
   );

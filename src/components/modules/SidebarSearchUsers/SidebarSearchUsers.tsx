@@ -5,6 +5,7 @@ import Title from '@common/Title/Title';
 import ListUsersResult from '@modules/ListUsersResult/ListUsersResult';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { IUser } from 'src/models';
 import { getUsers } from 'src/services/userService';
 import debounce from 'src/utils/debounce';
 
@@ -12,25 +13,26 @@ import './SidebarSearchUsers.scss';
 
 interface ISidebarSearchUsersProps {}
 
-export interface IUserItemResult {
-  u_id: string;
-  u_created_at: string;
-  u_updated_at: string;
-  u_username: string;
-  u_email: string;
-  u_full_name: null | string;
-  u_avatar: null | string;
-  u_phone: null | string;
-  u_description: null | string;
-  u_location: null | string;
-  u_status: 'INACTIVE' | 'ACTIVE' | 'DEACTIVATE' | 'PENDING';
-  u_role: 'USER' | 'ADMIN';
-  user_friends_id: null | string;
-  user_friends_created_at: null | string;
-  user_friends_updated_at: null | string;
-  user_friends_status: null | string;
-  user_friends_userTargetId: null | string;
-  user_friends_ownerId: null | string;
+interface IFriendStatusState extends IUser {
+  status: 'REQUESTED' | 'ACCEPTED';
+  owner: {
+    id: string;
+  };
+  userTarget: {
+    id: string;
+  };
+}
+
+export interface IUserItemResult extends IUser {
+  email: string;
+  fullName: null | string;
+  avatar: null | string;
+  phone: null | string;
+  description: null | string;
+  location: null | string;
+  status: 'ACTIVE';
+  role: 'USER' | 'ADMIN';
+  friendStatus: null | IFriendStatusState;
 }
 
 const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
@@ -51,7 +53,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
     setLoading(false);
 
     if (!result) return;
-    setListResult(result);
+    setListResult(result.users);
   };
 
   const debounceGetUsers = React.useMemo(() => {

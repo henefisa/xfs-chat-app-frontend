@@ -19,7 +19,7 @@ const ListUsersResult: React.FC<IListUsersResultProps> = ({
   return (
     <div className={clsx('list-result', className)}>
       {listResult.map((item, index) => (
-        <React.Fragment key={item.u_id}>
+        <React.Fragment key={item.id}>
           <UserItem user={item} />
           {index < listResult.length - 1 && <Divider className="separate" />}
         </React.Fragment>
