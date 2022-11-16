@@ -18,7 +18,7 @@ const ChatMain: React.FC<IChatMain> = ({ messages }) => {
   return (
     <div className="chatmain">
       <ChatDayTitle day="Today" />
-      {messages.map((messages: string, index: React.Key | null | undefined) => {
+      {messages.map((messages: string, index: number) => {
         if (messages != '')
           return (
             <div key={index} ref={scrollRef}>
