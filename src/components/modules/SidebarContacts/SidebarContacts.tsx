@@ -126,13 +126,13 @@ const SidebarContacts: React.FC = () => {
             </button>
           </div>
           <div className="dialog-body">
-            <div className="dialog-body__email">
-              <Title className="email__label" level={5}>Email</Title>
-              <Input className="email__input" placeholder="Enter email" />
+            <div className="dialog-body__email">  
+              <Title className="email-label" level={5}>Email</Title>
+              <Input className="email-input" placeholder="Enter email" />
             </div>
             <div className="dialog-body__message">
-              <Title className="message__label" level={5}>Invatation Message</Title>
-              <textarea className="message__input" placeholder="Enter Message" />
+              <Title className="message-label" level={5}>Invatation Message</Title>
+              <textarea className="message-input" placeholder="Enter Message" />
             </div>
           </div>
           <div className="dialog-footer">

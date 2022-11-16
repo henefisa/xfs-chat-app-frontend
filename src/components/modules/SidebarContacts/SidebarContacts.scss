@@ -127,14 +127,14 @@
       .dialog-body__email {
         margin-bottom: 24px;
 
-        .email__label {
+        .email-label {
           display: block;
           margin-bottom: 8px;
           font-weight: 500;
           font-size: 15px;
         }
 
-        .email__input {
+        .email-input {
           border-radius: 4px;
           font-size: 14px;
           border: 1px solid v.$input-border;
@@ -154,14 +154,14 @@
       }
 
       .dialog-body__message {
-        .message__label {
+        .message-label {
           display: block;
           margin-bottom: 8px;
           font-weight: 500;
           font-size: 15px;
         }
 
-        .message__input {
+        .message-input {
           width: 100%;
           height: 81px;
           padding: 8px 16px;
