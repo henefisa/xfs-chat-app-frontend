@@ -3,6 +3,7 @@ import Title from '@common/Title/Title';
 import React, { useState } from 'react';
 import Button from '@common/Button/Button';
 import { RightSquareOutlined, CloseOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 import './ForwardForm.scss';
 
@@ -56,6 +57,9 @@ const contacts = [
 
 const ForwardForm: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-main.chat-bubble-menu.forward',
+  });
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -68,14 +72,14 @@ const ForwardForm: React.FC = () => {
   return (
     <>
       <Button className="forward-btn" onClick={showModal}>
-        <Title className="forward-btn__title">Forward</Title>
+        <Title className="forward-btn__title">{t('title-btn')}</Title>
         <RightSquareOutlined className="forward-btn__icon" />
       </Button>
       <Modal open={isModalOpen}>
         <div className="modal-content">
           <div className="modal-header">
             <Title level={4} className="modal-header__title">
-              Forward to...
+              {t('title')}
             </Title>
             <Button className="modal-header__btn" onClick={handleClose}>
               <CloseOutlined className="custom-icon" />
@@ -101,7 +105,7 @@ const ForwardForm: React.FC = () => {
               ))}
             </div>
             <div className="modal-footer">
-              <Button className="modal-footer__btn">Forward</Button>
+              <Button className="modal-footer__btn">{t('title-btn')}</Button>
             </div>
           </div>
         </div>

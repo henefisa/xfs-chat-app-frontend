@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import MessagesTable from '../MessagesTable/MessagesTable';
 import ChatDayTitle from '../ChatDayTitle/ChatDayTitle';
 
 import './ChatMain.scss';
 
-const ChatMain = () => {
+interface IChatMain {
+  messages: string[];
+}
+const ChatMain: React.FC<IChatMain> = ({ messages }) => {
+  const scrollRef = useRef<null | HTMLDivElement>(null);
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
   return (
     <div className="chatmain">
       <ChatDayTitle day="Today" />
-      <MessagesTable position="right" />
-      <MessagesTable position="left" />
-      <MessagesTable position="left" />
-      <MessagesTable position="right" />
+      {messages.map((messages: string, index: React.Key | null | undefined) => {
+        if (messages != '')
+          return (
+            <div ref={scrollRef}>
+              <MessagesTable key={index} position="right" messages={messages} />
+            </div>
+          );
+      })}
     </div>
   );
 };

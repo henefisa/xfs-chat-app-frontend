@@ -159,6 +159,52 @@
         "help-contact": "Liên hệ",
         "help-terms": "Điều khoản & Chính sách quyền riêng tư"
       }
+    },
+    "chat-ui":{
+      "chat-header": {
+        "search": "Tìm kiếm",
+        "search-dropdown": "Tìm kiếm...",
+        "voice-call": "Bắt đầu gọi thoại",
+        "video-call": "Bắt đầu gọi video",
+        "user-info": "Hồ sơ",
+        "action-chat-menu": {
+          "archive": "Lưu trữ",
+          "mute": "Chặn",
+          "delete": "Xóa"
+        },
+        "setting": "Cài đặt",
+        "chat-call": {
+          "start-voice-call": "Bắt đầu gọi thoại",
+          "start-video-call": "Bắt đầu gọi video"
+        }
+      },
+      "chat-main": {
+        "chat-bubble-menu": {
+          "copy": "Sao chép",
+          "muted": "Chặn",
+          "forward": {
+            "title-btn": "Chuyển tiếp",
+            "title": "Chuyển tiếp đến..."
+          },
+          "delete": "Xóa tin nhắn"
+        }
+      },
+      "chat-bottom": {
+        "enter-message": "Tin nhắn, @",
+        "emoji": "Biểu cảm",
+        "attached-file": "Đính kèm file",
+        "attached-image": "Đính kèm ảnh"
+      },
+      "user-info-chat": {
+        "active": "Hoạt động",
+        "about": {
+          "title": "Chi tiết hồ sơ",
+          "name": "Tên",
+          "time": "Thời gian",
+          "location": "Địa điểm"
+        },
+        "attached-file": "Xem file phương tiện"
+      }
     }
   },
   "verify-account": {

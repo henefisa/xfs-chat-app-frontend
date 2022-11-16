@@ -159,6 +159,54 @@
         "help-contact": "Contacts",
         "help-terms": "Terms & Privacy policy"
       }
+    },
+    "chat-ui": {
+      "chat-header": {
+        "search": "Search",
+        "search-dropdown": "Search...",
+        "voice-call": "VoiceCall",
+        "video-call": "VideoCall",
+        "user-info": "UserInfo",
+        "action-chat-menu": {
+          "archive": "Archive",
+          "mute": "Mute",
+          "delete": "Delete"
+        },
+        "setting": "Settings",
+        "chat-call": {
+          "start-voice-call": "Start Audio Call",
+          "start-video-call": "Start Video Call"
+        }
+      },
+      "chat-main": {
+        "chat-bubble-menu": {
+          "copy": "Copy",
+          "muted": "Mute",
+          "forward": {
+            "title-btn": "Forward",
+            "title": "Forward to..."
+          },
+          "delete": "Delete"
+        }
+      },
+      "chat-bottom": {
+        "enter-message": "Enter Message, @",
+        "emoji": "Emoji",
+        "attached-file": "Attached-File",
+        "attached-image": "Images"
+      },
+      "user-info-chat": {
+        "active": "Active",
+        "about": {
+          "title": "About",
+          "name": "Name",
+          "time": "Time",
+          "location": "Location"
+        },
+        "attached-file": "Attached File"
+      },
+      "chat-day-title": {
+      }
     }
   },
   "verify-account": {
