@@ -110,35 +110,35 @@ const SidebarGroups: React.FC = () => {
         }}
       >
         <div className="overlay-modal__dialog">
-          <div className="dialog__title">
-            <h5>Create New Group</h5>
-            <button onClick={() => setToggleModal(false)}>
+          <div className="dialog-header">
+            <Title className="dialog-header__title" level={5}>Create New Group</Title>
+            <Button className="dialog-header__btn"  onClick={() => setToggleModal(false)}>
               <CloseOutlined />
-            </button>
+            </Button>
           </div>
           <div className="dialog__body">
             <div className="group-name">
-              <div className="title">Group Name</div>
-              <Input className="input" placeholder="Enter Group Name" />
+              <Title className="group-name__title">Group Name</Title>
+              <Input className="group-name__input" placeholder="Enter Group Name" />
             </div>
             <div className="group-members">
-              <div className="title">Group Members</div>
+              <Title className="group-members__title" level={5}>Group Members</Title>
               <div
                 className={clsx('select-members', {
                   [`select-contacts--open`]: active,
                 })}
               >
-                <button onClick={() => setActive(!active)}>
+                <Button className="select-members__btn" onClick={() => setActive(!active)}>
                   Select Members
-                </button>
+                </Button>
                 <div className={clsx('select-contacts')}>
-                  <div className="select-contacts__header">Contacts</div>
+                  <Title className="select-contacts__header" level={5}>Contacts</Title>
                   <div className="select-contacts__add">
                     {contacts.map((contact, index) => (
                       <div key={index}>
-                        <div className="firt-character">
+                        <Title className="firt-character">
                           {contact.firtCharacter}
-                        </div>
+                        </Title>
                         <ul className="contact-names">
                           {contact.names.map((name, index) => (
                             <li key={index}>
@@ -146,9 +146,9 @@ const SidebarGroups: React.FC = () => {
                                 className="contact-names__checkbox"
                                 type="checkbox"
                               ></input>
-                              <label className="contact-names__label">
+                              <Title className="contact-names__label">
                                 {name}
-                              </label>
+                              </Title>
                             </li>
                           ))}
                         </ul>
@@ -158,10 +158,10 @@ const SidebarGroups: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="dialog__desc">
-              <div className="title">Description</div>
+            <div className="dialog-desc">
+              <Title className="dialog-desc__title">Description</Title>
               <textarea
-                className="description"
+                className="dialog-desc__input"
                 placeholder="Enter Description"
               ></textarea>
             </div>

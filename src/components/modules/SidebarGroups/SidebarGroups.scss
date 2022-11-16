@@ -62,27 +62,27 @@
   .overlay-modal__dialog {
     width: 500px;
     background-color: v.$white;
-    border: 1px solid #f0eff5;
     border-radius: 8px;
     z-index: 100000;
 
-    .dialog__title {
+    .dialog-header {
       padding: 16px;
       display: flex;
       justify-content: space-between;
-      border-bottom: #f0eff5;
+      border-bottom: 1px solid #f0eff5;
 
-      h5 {
+      .dialog-header__title {
         font-weight: 600;
         font-size: 18.75px;
         color: v.$text-color;
         margin: 0;
       }
 
-      button {
+      .dialog-header__btn {
         border: none;
         background-color: transparent;
         font-size: 16px;
+        padding: 0;
         cursor: pointer;
       }
     }
@@ -93,16 +93,27 @@
       .group-name {
         margin-bottom: 24px;
 
-        .title {
+        .group-name__title {
           margin-bottom: 8px;
           font-size: 15px;
           font-weight: 500;
+          color: v.$text-color;
         }
 
-        .input {
+        .group-name__input {
           border-radius: 4px;
           line-height: 1.4;
           font-size: 14px;
+          border: 1px solid v.$input-border;
+
+          &:hover {
+            border: 1px solid #8c86dd;
+          }
+
+          &:focus {
+            border-color: #8c86dd;
+            box-shadow: 0 0 0 2px #cdcbef;
+          }
 
           &::placeholder {
             color: v.$text-sub-color;
@@ -111,10 +122,11 @@
       }
 
       .group-members {
-        .title {
+        .group-members__title {
           margin-bottom: 8px;
           font-size: 15px;
           font-weight: 500;
+          color: v.$text-color;
         }
 
         .select-members {
@@ -126,7 +138,7 @@
             height: 261px;
           }
 
-          button {
+          .select-members__btn {
             padding: 4px 8px;
             border-radius: 4px;
             background-color: #e6ebf5;
@@ -164,13 +176,15 @@
                 padding: 16px;
                 color: rgb(114, 105, 239);
                 font-size: 15px;
+                margin: 0;
               }
 
               .contact-names {
                 list-style: none;
 
                 li {
-                  padding: 16px;
+                  padding: 10px 20px;
+                  display: flex;
 
                   .contact-names__checkbox {
                     width: 15px;
@@ -203,6 +217,8 @@
                   .contact-names__label {
                     font-weight: 500;
                     font-size: 15px;
+                    margin-bottom: 2px;
+                    color: v.$text-color;
                   }
                 }
               }
@@ -211,16 +227,17 @@
         }
       }
 
-      .dialog__desc {
+      .dialog-desc {
         padding-top: 20px;
-        .title {
+        .dialog-desc__title {
           line-height: 1.2;
           font-weight: 500;
           font-size: 15px;
           margin-bottom: 8px;
+          color: v.$text-color;
         }
 
-        .description {
+        .dialog-desc__input {
           width: 100%;
           padding: 8px 16px;
           border: none;
@@ -231,14 +248,16 @@
           transition: all 0.3s;
 
           &:hover {
-            border-color: #40a9ff;
-            border-right-width: 1px;
+            border: 1px solid #8c86dd;
           }
 
           &:focus {
-            border-color: #40a9ff;
-            border-right-width: 1px;
-            box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+            border-color: #8c86dd;
+            box-shadow: 0 0 0 2px #cdcbef;
+          }
+
+          &::placeholder {
+            color: v.$text-sub-color;
           }
         }
       }
