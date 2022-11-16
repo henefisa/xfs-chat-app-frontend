@@ -20,7 +20,6 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
     keyPrefix: 'sidebar.search-user',
   });
   const { t: t1 } = useTranslation('common');
-  console.log(user);
 
   const [isSend, setIsSend] = React.useState<boolean>(false);
 
