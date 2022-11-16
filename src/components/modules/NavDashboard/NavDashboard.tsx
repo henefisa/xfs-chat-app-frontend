@@ -14,11 +14,11 @@ import Dropdown from '@common/Dropdown/Dropdown';
 import Tooltip from '@common/Tooltip/Tooltip';
 import LanguageDropDown from '@modules/LanguageDropDown/LanguageDropDown';
 import UserMenu from '@modules/UserMenu/UserMenu';
+import ENavbar from 'src/interfaces/ENavbar';
 
 import * as React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ENavbar from 'src/interfaces/ENavbar';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { updateNavbar } from 'src/store/navbarSlice';
 import { selectUserProfile } from 'src/store/userSlice';
@@ -38,32 +38,32 @@ const NavDashboard: React.FC = () => {
       {
         icon: UserOutlined,
         tooltipTitle: t('profile'),
-        key: ENavbar.Profile,
+        key: ENavbar.PROFILE,
       },
       {
         icon: MessageOutlined,
         tooltipTitle: t('chat'),
-        key: ENavbar.Chat,
+        key: ENavbar.CHATS,
       },
       {
         icon: UsergroupAddOutlined,
         tooltipTitle: t('groups'),
-        key: ENavbar.Groups,
+        key: ENavbar.GROUPS,
       },
       {
         icon: ContactsOutlined,
         tooltipTitle: t('contacts'),
-        key: ENavbar.Contacts,
+        key: ENavbar.CONTACTS,
       },
       {
         icon: SearchOutlined,
         tooltipTitle: t('search'),
-        key: ENavbar.Search,
+        key: ENavbar.SEARCH,
       },
       {
         icon: SettingOutlined,
         tooltipTitle: t('settings'),
-        key: ENavbar.Settings,
+        key: ENavbar.SETTINGS,
       },
     ];
   }, [t]);

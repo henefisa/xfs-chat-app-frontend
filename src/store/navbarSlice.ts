@@ -4,7 +4,7 @@ import ENavbar from 'src/interfaces/ENavbar';
 
 export const navbarSlice = createSlice({
   name: 'navbar',
-  initialState: ENavbar.Profile,
+  initialState: ENavbar.PROFILE,
   reducers: {
     updateNavbar: (state, action) => {
       return action.payload;

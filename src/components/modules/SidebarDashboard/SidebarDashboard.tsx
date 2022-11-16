@@ -16,12 +16,12 @@ const SidebarDashboard: React.FC = () => {
 
   return (
     <div className="sidebar">
-      {navbarAction === ENavbar.Profile && <SidebarProfile />}
-      {navbarAction === ENavbar.Chat && <SidebarChats />}
-      {navbarAction === ENavbar.Groups && <SidebarGroups />}
-      {navbarAction === ENavbar.Contacts && <SidebarContacts />}
-      {navbarAction === ENavbar.Search && <SidebarSearchUsers />}
-      {navbarAction === ENavbar.Settings && <SidebarSettings />}
+      {navbarAction === ENavbar.PROFILE && <SidebarProfile />}
+      {navbarAction === ENavbar.CHATS && <SidebarChats />}
+      {navbarAction === ENavbar.GROUPS && <SidebarGroups />}
+      {navbarAction === ENavbar.CONTACTS && <SidebarContacts />}
+      {navbarAction === ENavbar.SEARCH && <SidebarSearchUsers />}
+      {navbarAction === ENavbar.SETTINGS && <SidebarSettings />}
     </div>
   );
 };
