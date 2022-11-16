@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IUserProfile } from 'src/models';
 import { RootState } from '.';
-import { IUser } from '../models';
-
-interface IUserProfile extends IUser {
-  avatar?: string | null;
-}
 
 export const userSlice = createSlice({
   name: 'user',
