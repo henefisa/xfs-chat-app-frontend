@@ -14,7 +14,7 @@ const SidebarChats: React.FC = () => {
     <div className="sidebar-chats">
       <div className="header-chats">
         <Title className="header-chats__title" level={4}>
-          {t('Chats')}
+          {t('title')}
         </Title>
         <div className="search-box">
           <SearchSidebar placeholder={t('search-placeholder')} />

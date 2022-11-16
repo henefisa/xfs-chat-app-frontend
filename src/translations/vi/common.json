@@ -99,13 +99,13 @@
         "cancel": "Hủy"
       },
       "chats": {
-        "Chats": "Nhắn tin",
+        "title": "Nhắn tin",
         "search-placeholder": "Tìm kiếm tin nhắn hoặc người dùng",
         "typing": "Đang nhắn",
         "recent": "Mới đây"
       },
       "groups": {
-        "groups": "Nhóm",
+        "title": "Nhóm",
         "search-placeholder": "Tìm kiếm nhóm",
         "group-add": "Thêm nhóm",
         "modal-title": "Thêm mới nhóm",
@@ -133,7 +133,7 @@
         "menu-remove": "Xóa"
       },
       "settings": {
-        "settings": "Cài đặt",
+        "title": "Cài đặt",
         "available": "Hoạt động",
         "busy": "Đang bận",
         "info-title": "Thông tin cá nhân",

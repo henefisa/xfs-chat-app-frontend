@@ -99,13 +99,13 @@
         "cancel": "Cancel"
       },
       "chats": {
-        "Chats": "Chats",
+        "title": "Chats",
         "search-placeholder": "Search messages or users",
         "typing": "Typing",
         "recent": "Recent"
       },
       "groups": {
-        "groups": "Groups",
+        "title": "Groups",
         "search-placeholder": "Enter Group Name",
         "group-add-tooltip": "Create group",
         "modal-title": "Create New Group",
@@ -133,7 +133,7 @@
         "menu-remove": "Remove"
       },
       "settings": {
-        "settings": "Settings",
+        "title": "Settings",
         "available": "Available",
         "busy": "Busy",
         "info-title": "Personal Info",

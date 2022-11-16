@@ -70,7 +70,7 @@ const SidebarGroups: React.FC = () => {
       <div className="sidebar-groups">
         <div className="sidebar-groups__header">
           <Title className="group-title" level={4}>
-            {t('groups')}
+            {t('title')}
           </Title>
           <div className="group-create" onClick={() => setToggleModal(true)}>
             <Tooltip

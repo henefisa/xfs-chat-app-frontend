@@ -54,7 +54,7 @@ const SidebarSettings: React.FC = () => {
   return (
     <div className="sidebar-settings">
       <Title level={4} className="sidebar-settings__title">
-        {t('settings')}
+        {t('title')}
       </Title>
       <div className="user-info">
         <div className="user-info__avatar">
