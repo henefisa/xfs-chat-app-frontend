@@ -5,37 +5,13 @@ import Title from '@common/Title/Title';
 import ListUsersResult from '@modules/ListUsersResult/ListUsersResult';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import EFriendStatus from 'src/interfaces/EFriendStatus';
-import EUser from 'src/interfaces/EUser';
-import { IUser } from 'src/models';
+import { IUserItemResult } from 'src/models';
 import { getUsers } from 'src/services/userService';
 import debounce from 'src/utils/debounce';
 
 import './SidebarSearchUsers.scss';
 
 interface ISidebarSearchUsersProps {}
-
-interface IFriendStatusState extends IUser {
-  status: EFriendStatus.REQUESTED | EFriendStatus.ACCEPTED;
-  owner: {
-    id: string;
-  };
-  userTarget: {
-    id: string;
-  };
-}
-
-export interface IUserItemResult extends IUser {
-  email: string;
-  fullName: null | string;
-  avatar: null | string;
-  phone: null | string;
-  description: null | string;
-  location: null | string;
-  status: EUser.STATUS_ACTIVE;
-  role: EUser.ROLE_USER | EUser.ROLE_ADMIN;
-  friendStatus: null | IFriendStatusState;
-}
 
 const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
   const { t } = useTranslation(['common', 'dashboard']);

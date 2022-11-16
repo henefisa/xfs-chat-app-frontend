@@ -1,9 +1,9 @@
 import * as React from 'react';
 import clsx from 'clsx';
+import { IUserItemResult } from 'src/models';
 
 import UserItem from '@modules/UserItem/UserItem';
 import Divider from '@common/Divider/Divider';
-import { IUserItemResult } from '@modules/SidebarSearchUsers/SidebarSearchUsers';
 
 import './ListUsersResult.scss';
 
