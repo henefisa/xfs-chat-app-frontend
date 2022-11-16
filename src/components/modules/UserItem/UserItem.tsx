@@ -52,19 +52,16 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
         </Title>
       </div>
       <div className="user-item__action">
-        {(user.friendStatus?.status === EFriendStatus.REQUESTED || isSend) && (
+        {user.friendStatus?.status === EFriendStatus.REQUESTED || isSend ? (
           <Button className="cancel-user-btn">{t('cancel')}</Button>
-        )}
-
-        {user.friendStatus?.status !== EFriendStatus.REQUESTED &&
-          user.friendStatus?.status !== EFriendStatus.ACCEPTED && (
-            <Button
-              className="add-user-btn"
-              onClick={() => handleAddFriend(user.id)}
-            >
-              {t('add')}
-            </Button>
-          )}
+        ) : user.friendStatus?.status !== EFriendStatus.ACCEPTED ? (
+          <Button
+            className="add-user-btn"
+            onClick={() => handleAddFriend(user.id)}
+          >
+            {t('add')}
+          </Button>
+        ) : null}
       </div>
     </div>
   );
