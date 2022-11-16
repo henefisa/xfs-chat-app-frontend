@@ -2,6 +2,7 @@ import * as React from 'react';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { sendFriendRequest } from 'src/services/userService';
+import EFriendStatus from 'src/interfaces/EFriendStatus';
 
 import Avatar from '@common/Avatar/Avatar';
 import Title from '@common/Title/Title';
@@ -51,12 +52,12 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
         </Title>
       </div>
       <div className="user-item__action">
-        {(user.friendStatus?.status === 'REQUESTED' || isSend) && (
+        {(user.friendStatus?.status === EFriendStatus.REQUESTED || isSend) && (
           <Button className="cancel-user-btn">{t('cancel')}</Button>
         )}
 
-        {user.friendStatus?.status !== 'REQUESTED' &&
-          user.friendStatus?.status !== 'ACCEPTED' && (
+        {user.friendStatus?.status !== EFriendStatus.REQUESTED &&
+          user.friendStatus?.status !== EFriendStatus.ACCEPTED && (
             <Button
               className="add-user-btn"
               onClick={() => handleAddFriend(user.id)}
