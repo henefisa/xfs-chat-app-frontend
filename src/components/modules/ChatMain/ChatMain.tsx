@@ -11,7 +11,9 @@ interface IChatMain {
 const ChatMain: React.FC<IChatMain> = ({ messages }) => {
   const scrollRef = useRef<null | HTMLDivElement>(null);
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+    scrollRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    });
   }, [messages]);
   return (
     <div className="chatmain">
@@ -19,8 +21,8 @@ const ChatMain: React.FC<IChatMain> = ({ messages }) => {
       {messages.map((messages: string, index: React.Key | null | undefined) => {
         if (messages != '')
           return (
-            <div ref={scrollRef}>
-              <MessagesTable key={index} position="right" messages={messages} />
+            <div key={index} ref={scrollRef}>
+              <MessagesTable position="right" messages={messages} />
             </div>
           );
       })}
