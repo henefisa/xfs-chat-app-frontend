@@ -10,9 +10,9 @@ import InputCheckbox from '@common/Input/InputCheckbox';
 import Logo from '@common/Logo/Logo';
 import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
+import Language from '@modules/Language/Language';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 
-import Language from '@modules/Language/Language';
 import { Form } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';

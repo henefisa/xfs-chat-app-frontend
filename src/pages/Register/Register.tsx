@@ -10,15 +10,16 @@ import Card from '@common/Card/Card';
 import Logo from '@common/Logo/Logo';
 import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
+import Language from '@modules/Language/Language';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 
-import Language from '@modules/Language/Language';
 import { Form } from 'antd';
 import { FieldData } from 'rc-field-form/es/interface';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
+import { noWhitespaceRegex } from 'src/regex';
 import * as authService from 'src/services/authService';
 import { checkEmailExist, checkUsernameExist } from 'src/services/userService';
 import { selectisFetchingRegister } from 'src/store/authSlice';
@@ -154,6 +155,10 @@ const Register: React.FC = () => {
               labelCol={{ span: 24 }}
               rules={[
                 { required: true, message: `${t('error-required-message')}` },
+                {
+                  pattern: noWhitespaceRegex,
+                  message: `${t('username-no-whitespace')}`,
+                },
               ]}
             >
               <WrapperInput

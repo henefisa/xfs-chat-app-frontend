@@ -54,6 +54,7 @@
     "email-error-type-message": "Invalid email!",
     "username-label": "Username",
     "username-placeholder": "Enter username",
+    "username-no-whitespace": "Username does not allow space!",
     "password-label": "Password",
     "password-placeholder": "Enter password",
     "terms-title": "By registering you agree to the ChatApp ",
@@ -207,8 +208,6 @@
           "location": "Location"
         },
         "attached-file": "Attached File"
-      },
-      "chat-day-title": {
       }
     }
   },

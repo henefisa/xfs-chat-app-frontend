@@ -54,6 +54,7 @@
     "email-error-type-message": "Email không hợp lệ!",
     "username-label": "Tên đăng nhập",
     "username-placeholder": "Nhập tên đăng nhập",
+    "username-no-whitespace": "Tên đăng nhập không được có ký tự trắng!",
     "password-label": "Mật khẩu",
     "password-placeholder": "Nhập mật khẩu",
     "terms-title": "Bằng cách đăng ký bạn đồng ý với ChatApp về các ",
