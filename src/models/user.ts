@@ -1,4 +1,3 @@
-import EFriendStatus from 'src/interfaces/EFriendStatus';
 import EUser from 'src/interfaces/EUser';
 import { IBase } from './base';
 
@@ -7,7 +6,7 @@ export interface IUser extends IBase {
 }
 
 export interface IFriendStatusState extends IUser {
-  status: EFriendStatus.REQUESTED | EFriendStatus.ACCEPTED;
+  status: EUser.FRIEND_STATUS_REQUESTED | EUser.FRIEND_STATUS_ACCEPTED;
   owner: {
     id: string;
   };
@@ -25,4 +24,7 @@ export interface IUserItemResult extends IUser {
   location: null | string;
   status: EUser.STATUS_ACTIVE | EUser.STATUS_DEACTIVE | EUser.STATUS_INACTIVE;
   role: EUser.ROLE_USER | EUser.ROLE_ADMIN;
+  friendStatus: null | IFriendStatusState;
 }
+
+export type TUserProfile = Omit<IUserItemResult, 'friendStatus'>;

@@ -1,13 +1,13 @@
-import * as React from 'react';
 import clsx from 'clsx';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import EUser from 'src/interfaces/EUser';
+import { IUserItemResult } from 'src/models';
 import { sendFriendRequest } from 'src/services/userService';
-import EFriendStatus from 'src/interfaces/EFriendStatus';
 
 import Avatar from '@common/Avatar/Avatar';
-import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
-import { IUserItemResult } from '@modules/SidebarSearchUsers/SidebarSearchUsers';
+import Title from '@common/Title/Title';
 
 import './UserItem.scss';
 
@@ -52,9 +52,10 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
         </Title>
       </div>
       <div className="user-item__action">
-        {user.friendStatus?.status === EFriendStatus.REQUESTED || isSend ? (
+        {user.friendStatus?.status === EUser.FRIEND_STATUS_REQUESTED ||
+        isSend ? (
           <Button className="cancel-user-btn">{t('cancel')}</Button>
-        ) : user.friendStatus?.status !== EFriendStatus.ACCEPTED ? (
+        ) : user.friendStatus?.status !== EUser.FRIEND_STATUS_ACCEPTED ? (
           <Button
             className="add-user-btn"
             onClick={() => handleAddFriend(user.id)}

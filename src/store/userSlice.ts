@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUserProfile } from 'src/models';
+import { TUserProfile } from 'src/models';
 import { RootState } from '.';
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    profile: { isFetching: false, error: false, userProfile: <IUserProfile>{} },
+    profile: { isFetching: false, error: false, userProfile: <TUserProfile>{} },
   },
   reducers: {
     getProfileStart: (state) => {
       state.profile.isFetching = true;
     },
-    getProfileSuccess: (state, action: PayloadAction<IUserProfile>) => {
+    getProfileSuccess: (state, action: PayloadAction<TUserProfile>) => {
       state.profile.isFetching = false;
       state.profile.error = false;
       state.profile.userProfile = action.payload;
@@ -21,7 +21,7 @@ export const userSlice = createSlice({
       state.profile.error = true;
     },
     deleteUserProfile: (state) => {
-      state.profile.userProfile = <IUserProfile>{};
+      state.profile.userProfile = <TUserProfile>{};
     },
   },
 });
