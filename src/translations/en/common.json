@@ -94,7 +94,10 @@
         "location": "Location",
         "attached-file": "Attached Files"
       },
-      "search-friend": {
+      "search-user": {
+        "title": "Search Users",
+        "search-placeholder": "Search users...",
+        "result-title": "Result",
         "add": "Add",
         "cancel": "Cancel"
       }

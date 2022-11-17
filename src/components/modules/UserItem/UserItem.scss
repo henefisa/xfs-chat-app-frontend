@@ -1,6 +1,6 @@
 @use '../../../assets/styles/variables' as v;
 
-.friend-item {
+.user-item {
   width: 100%;
   min-height: 63.5px;
   padding: 10px;
@@ -8,20 +8,20 @@
   align-items: center;
   cursor: pointer;
 
-  .friend-item__avtar {
+  .user-item__avtar {
     margin-right: 12px;
   }
 
-  .friend-item__info {
+  .user-item__info {
     flex: 1;
-    .friend-name {
+    .user-name {
       margin: 0;
       color: v.$text-color;
       font-size: 16px;
       font-weight: 500;
     }
 
-    .friend-location {
+    .user-location {
       margin: 0;
       color: v.$text-sub-color;
       font-size: 13px;
@@ -29,12 +29,23 @@
     }
   }
 
-  .friend-item__action {
-    .add-friend-btn {
+  .user-item__action {
+    .add-user-btn,
+    .cancel-user-btn {
       color: v.$white;
       font-size: 12px;
       padding: 4px 10px;
       border-radius: 8px;
+    }
+
+    .cancel-user-btn {
+      color: v.$black;
+      background-color: #fcd664;
+      border-color: #fcd664;
+
+      &:hover {
+        background-color: #ffcb30;
+      }
     }
   }
 }

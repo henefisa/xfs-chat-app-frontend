@@ -94,7 +94,10 @@
         "location": "Vị trí",
         "attached-file": "File đã đính kèm"
       },
-      "search-friend": {
+      "search-user": {
+        "title": "Tìm kiếm",
+        "search-placeholder": "Nhập để tìm kiếm...",
+        "result-title": "Kết quả",
         "add": "Thêm",
         "cancel": "Hủy"
       }
