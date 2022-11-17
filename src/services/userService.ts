@@ -56,9 +56,9 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
   }
 };
 
-export const getFriends = async (
+export const getUsers = async (
   keyword: string,
-  t: TFunction<'common', undefined>
+  t: TFunction<('common' | 'dashboard')[], undefined>
 ) => {
   try {
     const res = await apiRequest.get('api/users', { params: { q: keyword } });
@@ -70,5 +70,23 @@ export const getFriends = async (
       duration: 1.5,
       key: '1',
     });
+  }
+};
+
+export const sendFriendRequest = async (
+  id: string,
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    await apiRequest.post('api/friends', { userTarget: id });
+    return true;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+    return false;
   }
 };

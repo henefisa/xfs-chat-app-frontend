@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { initInterceptor } from './api/apiRequest';
 import {
-  defaultSocketContextState,
   SocketContextProvider,
-} from './Context/Socket/Context';
+  defaultSocketContextState,
+} from 'src/context/socket/context';
 import Router from './routes';
 import { useAppDispatch } from './store/hooks';
 

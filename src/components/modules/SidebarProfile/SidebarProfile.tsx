@@ -1,17 +1,19 @@
-import * as React from 'react';
-import { Divider, Collapse } from 'antd';
 import {
-  MoreOutlined,
   CheckCircleFilled,
-  UserOutlined,
+  MoreOutlined,
   PaperClipOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
-import Title from '@common/Title/Title';
-import Dropdown from '@common/Dropdown/Dropdown';
-import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import Avatar from '@common/Avatar/Avatar';
-import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
+import Dropdown from '@common/Dropdown/Dropdown';
+import Title from '@common/Title/Title';
+import { Collapse, Divider } from 'antd';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from 'src/store/hooks';
+import { selectUserProfile } from 'src/store/userSlice';
+import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
+import ProfileMenu from '../ProfileMenu/ProfileMenu';
 
 import './SidebarProfile.scss';
 
@@ -43,14 +45,23 @@ const listAttachedFile = [
 const SidebarProfile: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.profile' });
 
+  const userProfileStore = useAppSelector(selectUserProfile);
+  const date = new Date();
+
   const userInfo = React.useMemo(() => {
     return [
-      { title: t('name'), desc: 'Patricia Smith' },
-      { title: t('email'), desc: 'admin@mgail.com' },
-      { title: t('time'), desc: '15:30 PM' },
-      { title: t('location'), desc: 'Danang, VN' },
+      {
+        title: t('name'),
+        desc: userProfileStore.fullName ?? userProfileStore.username,
+      },
+      { title: t('email'), desc: userProfileStore.email },
+      {
+        title: t('time'),
+        desc: `${date.getHours()}:${date.getMinutes()}`,
+      },
+      { title: t('location'), desc: userProfileStore.location ?? 'SomeWhere' },
     ];
-  }, [t]);
+  }, [t, userProfileStore]);
 
   return (
     <div className="sidebar-profile">
@@ -70,13 +81,16 @@ const SidebarProfile: React.FC = () => {
       </div>
       <div className="user-info">
         <Avatar
-          path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+          path={userProfileStore.avatar ?? ''}
           imgWidth={96}
-          username="A"
+          username={
+            userProfileStore.fullName?.charAt(0).toUpperCase() ??
+            userProfileStore.username?.charAt(0).toUpperCase()
+          }
           className="custom-avatar"
         />
         <Title level={5} className="user-info__name">
-          Danh Huy
+          {userProfileStore.fullName ?? userProfileStore.username}
         </Title>
         <div className="user-info__status">
           <CheckCircleFilled className="status-icon" />
@@ -88,8 +102,7 @@ const SidebarProfile: React.FC = () => {
       <Divider />
       <div className="content-profile">
         <Title className="user-description" level={5}>
-          If several languages coalesce, the grammar of the resulting language
-          is more simple and regular than that of the individual.
+          {userProfileStore.description ?? 'Hello, have a nice day at work!'}
         </Title>
         <Collapse
           bordered={false}

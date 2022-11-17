@@ -94,9 +94,73 @@
         "location": "Vị trí",
         "attached-file": "File đã đính kèm"
       },
-      "search-friend": {
+      "search-user": {
+        "title": "Tìm kiếm",
+        "search-placeholder": "Nhập để tìm kiếm...",
+        "result-title": "Kết quả",
         "add": "Thêm",
         "cancel": "Hủy"
+      },
+      "chats": {
+        "title": "Nhắn tin",
+        "search-placeholder": "Tìm kiếm tin nhắn hoặc người dùng",
+        "typing": "Đang nhắn",
+        "recent": "Mới đây"
+      },
+      "groups": {
+        "title": "Nhóm",
+        "search-placeholder": "Tìm kiếm nhóm",
+        "group-add": "Thêm nhóm",
+        "modal-title": "Thêm mới nhóm",
+        "modal-name-label": "Tên nhóm",
+        "modal-name-placeholder": "Nhập tên nhóm",
+        "modal-members-label": "Tên thành viên",
+        "select-members": "Chọn các thành viên",
+        "contacts": "Liên hệ",
+        "modal-desc-label": "Mô tả",
+        "modal-desc-placeholder": "Nhập mô tả",
+        "btn-close": "Đóng",
+        "btn-create": "Thêm nhóm"
+      },
+      "contacts": {
+        "title": "Liên hệ",
+        "search-contacts": "Tìm kiếm người dùng...",
+        "add-contacts": "Thêm liên hệ",
+        "email-placeholder": "Nhập email",
+        "invatation-mess": "Tin nhắn mời",
+        "mess-placeholder": "Nhập tin nhắn",
+        "btn-close": "Đóng",
+        "btn-invite": "Mời liên hệ",
+        "menu-share": "Chia sẻ",
+        "menu-block": "Chặn",
+        "menu-remove": "Xóa"
+      },
+      "settings": {
+        "title": "Cài đặt",
+        "available": "Hoạt động",
+        "busy": "Đang bận",
+        "info-title": "Thông tin cá nhân",
+        "info-name": "Tên",
+        "info-btn-edit": "Sửa",
+        "info-btn-update": "Cập nhật",
+        "info-email": "Email",
+        "info-time": "Thời gian",
+        "info-location": "Địa điểm",
+        "privacy-title": "Riêng tư",
+        "privacy-profile-photo": "Ảnh hồ sơ",
+        "privacy-last-seen": "Nhìn thấy lần cuối",
+        "privacy-status": "Trạng thái",
+        "privacy-read-receipts": "Đọc biên nhận",
+        "privacy-groups": "Nhóm",
+        "btn-everyone": "Mọi người",
+        "btn-selected": "Đã chọn",
+        "btn-nobody": "Chỉ mình tôi",
+        "security-title": "Bảo vệ",
+        "show-security-notification": "Hiển thị thông báo bảo mật",
+        "help-title": "Hỗ trợ",
+        "help-faq": "FAQS",
+        "help-contact": "Liên hệ",
+        "help-terms": "Điều khoản & Chính sách quyền riêng tư"
       }
     },
     "chat-ui":{
