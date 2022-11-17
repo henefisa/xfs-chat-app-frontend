@@ -2,30 +2,24 @@ import { Loading3QuartersOutlined } from '@ant-design/icons';
 import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
-import ListFriendResult from '@modules/ListFriendResult/ListFriendResult';
+import ListUsersResult from '@modules/ListUsersResult/ListUsersResult';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { IUser } from 'src/models';
-import { getFriends } from 'src/services/userService';
+import { IUserItemResult } from 'src/models';
+import { getUsers } from 'src/services/userService';
 import debounce from 'src/utils/debounce';
 
 import './SidebarSearchUsers.scss';
 
 interface ISidebarSearchUsersProps {}
 
-export interface IListUser extends IUser {
-  fullname: string;
-  avatar: string;
-  location: string;
-}
-
 const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'dashboard']);
 
   const [loading, setLoading] = React.useState<boolean>(false);
-  const [listResult, setListResult] = React.useState<IListUser[]>([]);
+  const [listResult, setListResult] = React.useState<IUserItemResult[]>([]);
 
-  const handleGetFriends = async (keyword: string) => {
+  const handleGetUsers = async (keyword: string) => {
     setLoading(true);
     if (!keyword) {
       setListResult([]);
@@ -33,30 +27,34 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
       return;
     }
 
-    const result = await getFriends(keyword, t);
+    const result = await getUsers(keyword, t);
     setLoading(false);
+
+    if (!result) return;
     setListResult(result.users);
   };
 
-  const debounceGetFriends = React.useMemo(() => {
-    return debounce(handleGetFriends, 700);
+  const debounceGetUsers = React.useMemo(() => {
+    return debounce(handleGetUsers, 700);
   }, []);
 
   return (
     <div className="sidebar-search">
       <div className="header-search">
         <Title className="header-search__title" level={4}>
-          Search Users
+          {t('sidebar.search-user.title', { ns: 'dashboard' })}
         </Title>
         <SearchSidebar
           className="header-search__input"
-          placeholder="Search friend..."
-          onChange={debounceGetFriends}
+          placeholder={t('sidebar.search-user.search-placeholder', {
+            ns: 'dashboard',
+          })}
+          onChange={debounceGetUsers}
         />
       </div>
       <div className="body-search">
         <Title level={5} className="body-search__title">
-          Result
+          {t('sidebar.search-user.result-title', { ns: 'dashboard' })}
         </Title>
         {loading ? (
           <Spin
@@ -66,7 +64,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
             }
           />
         ) : (
-          listResult.length > 0 && <ListFriendResult listResult={listResult} />
+          listResult.length > 0 && <ListUsersResult listResult={listResult} />
         )}
       </div>
     </div>
