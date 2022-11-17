@@ -11,9 +11,7 @@ interface IChatMain {
 const ChatMain: React.FC<IChatMain> = ({ messages }) => {
   const scrollRef = useRef<null | HTMLDivElement>(null);
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({
-      behavior: 'smooth',
-    });
+    scrollRef.current?.scrollIntoView();
   }, [messages]);
   return (
     <div className="chatmain">

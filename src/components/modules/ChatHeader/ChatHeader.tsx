@@ -13,7 +13,7 @@ import Tooltip from '@common/Tooltip/Tooltip';
 import Avatar from '@common/Avatar/Avatar';
 import Dropdown from '@common/Dropdown/Dropdown';
 import Title from '@common/Title/Title';
-import { Button } from 'antd';
+import Button from '@common/Button/Button';
 import ChatCall from '../ChatCall/ChatCall';
 import InputDropdown from '@common/Input/InputDropdown';
 import { useTranslation } from 'react-i18next';
