@@ -1,8 +1,17 @@
-import EUser from 'src/interfaces/EUser';
 import { IBase } from './base';
 
 export interface IUser extends IBase {
   username: string;
+}
+
+export enum EUser {
+  STATUS_ACTIVE = 'ACTIVE',
+  STATUS_DEACTIVE = 'DEACTIVE',
+  STATUS_INACTIVE = 'INACTIVE',
+  ROLE_USER = 'USER',
+  ROLE_ADMIN = 'ADMIN',
+  FRIEND_STATUS_REQUESTED = 'REQUESTED',
+  FRIEND_STATUS_ACCEPTED = 'ACCEPTED',
 }
 
 export interface IFriendStatusState extends IUser {

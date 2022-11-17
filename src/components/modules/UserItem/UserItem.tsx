@@ -1,8 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import EUser from 'src/interfaces/EUser';
-import { IUserItemResult } from 'src/models';
+import { EUser, IUserItemResult } from 'src/models';
 import { sendFriendRequest } from 'src/services/userService';
 
 import Avatar from '@common/Avatar/Avatar';

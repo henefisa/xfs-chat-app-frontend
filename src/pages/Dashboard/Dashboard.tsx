@@ -2,7 +2,7 @@ import ChatUI from '@modules/ChatUI/ChatUI';
 import NavDashboard from '@modules/NavDashboard/NavDashboard';
 import SidebarDashboard from '@modules/SidebarDashboard/SidebarDashboard';
 import * as React from 'react';
-import { SocketContext } from 'src/Context/Socket/Context';
+import { SocketContext } from 'src/context/socket/context';
 
 import './Dashboard.scss';
 
