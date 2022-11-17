@@ -1,13 +1,12 @@
-import * as React from 'react';
 import clsx from 'clsx';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { EFriendStatus, IUserItemResult } from 'src/models';
 import { sendFriendRequest } from 'src/services/userService';
-import EFriendStatus from 'src/interfaces/EFriendStatus';
 
 import Avatar from '@common/Avatar/Avatar';
-import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
-import { IUserItemResult } from '@modules/SidebarSearchUsers/SidebarSearchUsers';
+import Title from '@common/Title/Title';
 
 import './UserItem.scss';
 

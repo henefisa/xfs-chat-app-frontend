@@ -1,9 +1,0 @@
-enum EUser {
-  STATUS_ACTIVE = 'ACTIVE',
-  STATUS_DEACTIVE = 'DEACTIVE',
-  STATUS_INACTIVE = 'INACTIVE',
-  ROLE_USER = 'USER',
-  ROLE_ADMIN = 'ADMIN',
-}
-
-export default EUser;
