@@ -4,18 +4,24 @@ export interface IUser extends IBase {
   username: string;
 }
 
+export enum EFriendStatus {
+  REQUESTED = 'REQUESTED',
+  ACCEPTED = 'ACCEPTED',
+}
+
+export enum EUserRole {
+  USER = 'USER',
+  ADMIN = 'ADMIN',
+}
+
 export enum EUser {
   STATUS_ACTIVE = 'ACTIVE',
   STATUS_DEACTIVE = 'DEACTIVE',
   STATUS_INACTIVE = 'INACTIVE',
-  ROLE_USER = 'USER',
-  ROLE_ADMIN = 'ADMIN',
-  FRIEND_STATUS_REQUESTED = 'REQUESTED',
-  FRIEND_STATUS_ACCEPTED = 'ACCEPTED',
 }
 
 export interface IFriendStatusState extends IUser {
-  status: EUser.FRIEND_STATUS_REQUESTED | EUser.FRIEND_STATUS_ACCEPTED;
+  status: EFriendStatus.REQUESTED | EFriendStatus.ACCEPTED;
   owner: {
     id: string;
   };
@@ -32,7 +38,7 @@ export interface IUserItemResult extends IUser {
   description: null | string;
   location: null | string;
   status: EUser.STATUS_ACTIVE | EUser.STATUS_DEACTIVE | EUser.STATUS_INACTIVE;
-  role: EUser.ROLE_USER | EUser.ROLE_ADMIN;
+  role: EUserRole.USER | EUserRole.ADMIN;
   friendStatus: null | IFriendStatusState;
 }
 

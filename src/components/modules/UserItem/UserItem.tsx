@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { EUser, IUserItemResult } from 'src/models';
+import { EFriendStatus, IUserItemResult } from 'src/models';
 import { sendFriendRequest } from 'src/services/userService';
 
 import Avatar from '@common/Avatar/Avatar';
@@ -51,10 +51,9 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
         </Title>
       </div>
       <div className="user-item__action">
-        {user.friendStatus?.status === EUser.FRIEND_STATUS_REQUESTED ||
-        isSend ? (
+        {user.friendStatus?.status === EFriendStatus.REQUESTED || isSend ? (
           <Button className="cancel-user-btn">{t('cancel')}</Button>
-        ) : user.friendStatus?.status !== EUser.FRIEND_STATUS_ACCEPTED ? (
+        ) : user.friendStatus?.status !== EFriendStatus.ACCEPTED ? (
           <Button
             className="add-user-btn"
             onClick={() => handleAddFriend(user.id)}
