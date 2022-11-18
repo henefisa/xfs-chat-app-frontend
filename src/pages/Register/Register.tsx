@@ -14,12 +14,14 @@ import Language from '@modules/Language/Language';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 
 import { Form } from 'antd';
-import { FieldData } from 'rc-field-form/es/interface';
-import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
+import {
+  FieldData,
+  RuleObject,
+  ValidateErrorEntity,
+} from 'rc-field-form/lib/interface';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { noWhitespaceRegex } from 'src/regex';
 import * as authService from 'src/services/authService';
 import { checkEmailExist, checkUsernameExist } from 'src/services/userService';
 import { selectisFetchingRegister } from 'src/store/authSlice';
@@ -113,6 +115,14 @@ const Register: React.FC = () => {
     );
   };
 
+  const handleCheckWhitespace: RuleObject['validator'] = (rule, value) => {
+    if (value.split(' ').join('').length === value.length) {
+      return Promise.resolve();
+    }
+
+    return Promise.reject(new Error(`${t('username-no-whitespace')}`));
+  };
+
   return (
     <div className="register-page">
       <Logo />
@@ -156,8 +166,7 @@ const Register: React.FC = () => {
               rules={[
                 { required: true, message: `${t('error-required-message')}` },
                 {
-                  pattern: noWhitespaceRegex,
-                  message: `${t('username-no-whitespace')}`,
+                  validator: handleCheckWhitespace,
                 },
               ]}
             >
