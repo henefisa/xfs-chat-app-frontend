@@ -42,14 +42,10 @@
     width: 40px;
     height: 40px;
     box-shadow: none;
-
+    background-color: transparent;
     .custom-chat-icon {
       font-size: 20px;
     }
-  }
-
-  .group-aciton__btn:hover {
-    color: #000;
   }
 
   .group-aciton {
@@ -130,5 +126,6 @@
   &:hover,
   &:focus {
     color: v.$button-hover-border;
+    background-color: transparent;
   }
 }

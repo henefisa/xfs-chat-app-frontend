@@ -41,6 +41,9 @@
         z-index: 2;
         bottom: 23px;
         right: 230px;
+        &.epr-search-container input.epr-search:focus {
+          border: 1px solid v.$button-hover-border;
+        }
       }
       .custom-send-icon {
         font-size: 16px;
@@ -97,4 +100,7 @@
     box-shadow: unset;
     border: 1px solid v.$button-hover-border;
   }
+}
+.EmojiPickerReact .epr-search-container input.epr-search:focus {
+  border: 1px solid v.$button-hover-border;
 }

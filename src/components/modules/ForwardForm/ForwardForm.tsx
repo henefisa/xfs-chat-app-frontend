@@ -1,4 +1,4 @@
-import { Modal } from 'antd';
+import Modal from '@common/Modal/Modal';
 import Title from '@common/Title/Title';
 import React, { useState } from 'react';
 import Button from '@common/Button/Button';
