@@ -1,8 +1,11 @@
 import clsx from 'clsx';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IUserItemResult } from 'src/models';
-import { sendFriendRequest } from 'src/services/userService';
+import { EFriendStatus, IFriendStatusState, IUserItemResult } from 'src/models';
+import {
+  cancelFriendRequest,
+  sendFriendRequest,
+} from 'src/services/userService';
 
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
@@ -21,13 +24,23 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
   });
   const { t: t1 } = useTranslation('common');
 
-  const [isSend, setIsSend] = React.useState<boolean>(false);
+  const [isCancel, setIsCancel] = React.useState<boolean>(false);
+  const [friendStatus, setFriendStatus] = React.useState<IFriendStatusState>();
 
   const handleAddFriend = async (id: string) => {
-    const isSendSuccess = await sendFriendRequest(id, t1);
+    const result = await sendFriendRequest(id, t1);
 
-    if (!isSendSuccess) return;
-    setIsSend(true);
+    if (!result) return;
+    setFriendStatus(result);
+    setIsCancel(false);
+  };
+
+  const handleCancelRequesrt = async (id: string) => {
+    const result = await cancelFriendRequest(id, t1);
+
+    if (!result) return;
+    setFriendStatus(result);
+    setIsCancel(true);
   };
 
   return (
@@ -51,8 +64,14 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
         </Title>
       </div>
       <div className="user-item__action">
-        {user.friendStatus?.status === EFriendStatus.REQUESTED || isSend ? (
-          <Button className="cancel-user-btn">{t('cancel')}</Button>
+        {friendStatus?.status === EFriendStatus.REQUESTED ||
+        (user.friendStatus?.status === EFriendStatus.REQUESTED && !isCancel) ? (
+          <Button
+            className="cancel-user-btn"
+            onClick={() => handleCancelRequesrt(user.id)}
+          >
+            {t('cancel')}
+          </Button>
         ) : user.friendStatus?.status !== EFriendStatus.ACCEPTED ? (
           <Button
             className="add-user-btn"

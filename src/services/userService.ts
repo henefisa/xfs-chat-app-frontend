@@ -78,8 +78,9 @@ export const sendFriendRequest = async (
   t: TFunction<'common', undefined>
 ) => {
   try {
-    await apiRequest.post('api/friends', { userTarget: id });
-    return true;
+    const res = await apiRequest.post('api/friends', { userTarget: id });
+
+    return res.data;
   } catch (err) {
     notification.error({
       message: t('error'),
@@ -87,6 +88,25 @@ export const sendFriendRequest = async (
       duration: 1.5,
       key: '1',
     });
-    return false;
+  }
+};
+
+export const cancelFriendRequest = async (
+  id: string,
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    const res = await apiRequest.post('api/friends/cancel-request', {
+      userRequest: id,
+    });
+
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
   }
 };

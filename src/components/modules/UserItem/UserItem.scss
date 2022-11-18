@@ -40,11 +40,12 @@
 
     .cancel-user-btn {
       color: v.$black;
-      background-color: #fcd664;
-      border-color: #fcd664;
+      background-color: #d4d3f9;
+      border-color: #d4d3f9;
 
       &:hover {
-        background-color: #ffcb30;
+        background-color: #a8a7e2;
+        border-color: #a8a7e2;
       }
     }
   }
