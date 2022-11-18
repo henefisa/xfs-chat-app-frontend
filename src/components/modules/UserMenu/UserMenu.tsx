@@ -4,7 +4,7 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 
-import { MenuProps, notification } from 'antd';
+import { MenuProps } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -73,11 +73,6 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
     await logout(t1);
     dispatch(logoutSuccess());
     dispatch(deleteUserProfile());
-    notification.success({
-      message: t1('success'),
-      description: t1('logout.success', { ns: 'notification' }),
-      duration: 2,
-    });
     navigate('/login');
   };
 

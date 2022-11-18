@@ -10,12 +10,15 @@ import Card from '@common/Card/Card';
 import Logo from '@common/Logo/Logo';
 import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
+import Language from '@modules/Language/Language';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 
-import Language from '@modules/Language/Language';
 import { Form } from 'antd';
-import { FieldData } from 'rc-field-form/es/interface';
-import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
+import {
+  FieldData,
+  RuleObject,
+  ValidateErrorEntity,
+} from 'rc-field-form/lib/interface';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
@@ -112,6 +115,14 @@ const Register: React.FC = () => {
     );
   };
 
+  const handleCheckWhitespace: RuleObject['validator'] = (rule, value) => {
+    if (value.split(' ').join('').length === value.length) {
+      return Promise.resolve();
+    }
+
+    return Promise.reject(new Error(`${t('username-no-whitespace')}`));
+  };
+
   return (
     <div className="register-page">
       <Logo />
@@ -154,6 +165,9 @@ const Register: React.FC = () => {
               labelCol={{ span: 24 }}
               rules={[
                 { required: true, message: `${t('error-required-message')}` },
+                {
+                  validator: handleCheckWhitespace,
+                },
               ]}
             >
               <WrapperInput

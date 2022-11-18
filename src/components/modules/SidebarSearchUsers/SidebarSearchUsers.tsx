@@ -53,9 +53,6 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
         />
       </div>
       <div className="body-search">
-        <Title level={5} className="body-search__title">
-          {t('sidebar.search-user.result-title', { ns: 'dashboard' })}
-        </Title>
         {loading ? (
           <Spin
             className="body-search__loading"
@@ -64,7 +61,14 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
             }
           />
         ) : (
-          listResult.length > 0 && <ListUsersResult listResult={listResult} />
+          listResult.length > 0 && (
+            <>
+              <Title level={5} className="body-search__title">
+                {t('sidebar.search-user.result-title', { ns: 'dashboard' })}
+              </Title>
+              <ListUsersResult listResult={listResult} />
+            </>
+          )
         )}
       </div>
     </div>

@@ -44,6 +44,7 @@ export const login = async (
       notification.warning({
         message: t('warning', { ns: 'common' }),
         description: t('login.warning', { ns: 'notification' }),
+        duration: 1.5,
       });
       return;
     }
@@ -66,6 +67,11 @@ export const logout = async (
   try {
     const refreshToken = getRefreshToken();
     await apiRequest.post('api/auth/logout', { refreshToken });
+    notification.success({
+      message: t('success'),
+      description: t('logout.success', { ns: 'notification' }),
+      duration: 2,
+    });
   } catch (err) {
     notification.error({
       message: t('error'),
