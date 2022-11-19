@@ -96,7 +96,7 @@ export const cancelFriendRequest = async (
   t: TFunction<'common', undefined>
 ) => {
   try {
-    const res = await apiRequest.post('api/friends/cancel-request', {
+    const res = await apiRequest.post('api/friends/cancel', {
       userRequest: id,
     });
 
