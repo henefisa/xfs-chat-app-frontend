@@ -1,6 +1,7 @@
 import { notification } from 'antd';
 import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
+import { EFriendStatus } from 'src/models';
 import { AppDispatch } from 'src/store';
 import {
   getProfileFailed,
@@ -96,8 +97,25 @@ export const cancelFriendRequest = async (
   t: TFunction<'common', undefined>
 ) => {
   try {
-    const res = await apiRequest.post('api/friends/cancel-request', {
+    const res = await apiRequest.post('api/friends/cancel', {
       userRequest: id,
+    });
+
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+  }
+};
+
+export const getRequestFriend = async (t: TFunction<'common', undefined>) => {
+  try {
+    const res = await apiRequest.get('api/friends', {
+      params: { status: EFriendStatus.REQUESTED },
     });
 
     return res.data;
