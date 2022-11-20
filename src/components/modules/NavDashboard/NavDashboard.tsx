@@ -20,7 +20,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { updateNavbar } from 'src/store/navbarSlice';
+import { selectNavBar, updateNavbar } from 'src/store/navbarSlice';
 import { selectUserProfile } from 'src/store/userSlice';
 
 import './NavDashboard.scss';
@@ -29,7 +29,7 @@ const NavDashboard: React.FC = () => {
   const dispatch = useAppDispatch();
   // Viết tạm state dark/light theme
   const [isDark, setIsDark] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const navbarIndex = useAppSelector(selectNavBar);
   const userProfileStore = useAppSelector(selectUserProfile);
   const { t } = useTranslation('dashboard', { keyPrefix: 'navbar' });
 
@@ -79,22 +79,21 @@ const NavDashboard: React.FC = () => {
       </div>
 
       <div className="menu-dashboard">
-        {navBarMenu.map((item, index) => {
+        {navBarMenu.map((item) => {
           const MenuIcon = item.icon;
           return (
             <Button
-              key={index}
+              key={item.key}
               className="menu-dashboard__btn"
               onClick={() => {
                 dispatch(updateNavbar(item.key));
-                setActiveIndex(index);
               }}
             >
               <Tooltip
                 className="custom-nav-icon"
                 placement="top"
                 tooltipTitle={item.tooltipTitle}
-                isActive={index === activeIndex ? true : false}
+                isActive={navbarIndex === item.key}
               >
                 <MenuIcon />
               </Tooltip>
