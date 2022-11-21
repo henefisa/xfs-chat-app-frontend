@@ -8,14 +8,16 @@ import { MenuProps } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import ENavbar from 'src/interfaces/ENavbar';
+import { logout } from 'src/services/authService';
 import { logoutSuccess } from 'src/store/authSlice';
 import { useAppDispatch } from 'src/store/hooks';
+import { updateNavbar } from 'src/store/navbarSlice';
 import { deleteUserProfile } from 'src/store/userSlice';
-import { logout } from 'src/services/authService';
 
 import Button from '@common/Button/Button';
-import Title from '@common/Title/Title';
 import Menu from '@common/Menu/Menu';
+import Title from '@common/Title/Title';
 
 import './UserMenu.scss';
 
@@ -73,6 +75,7 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
     await logout(t1);
     dispatch(logoutSuccess());
     dispatch(deleteUserProfile());
+    dispatch(updateNavbar(ENavbar.PROFILE));
     navigate('/login');
   };
 
