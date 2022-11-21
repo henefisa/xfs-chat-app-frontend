@@ -63,6 +63,7 @@ export const getUsers = async (
 ) => {
   try {
     const res = await apiRequest.get('api/users', { params: { q: keyword } });
+
     return res.data;
   } catch (err) {
     notification.error({
@@ -94,7 +95,7 @@ export const sendFriendRequest = async (
 
 export const cancelFriendRequest = async (
   id: string,
-  t: TFunction<'common', undefined>
+  t: TFunction<('common' | 'dashboard')[], undefined>
 ) => {
   try {
     const res = await apiRequest.post('api/friends/cancel', {
@@ -126,5 +127,27 @@ export const getRequestFriend = async (t: TFunction<'common', undefined>) => {
       duration: 1.5,
       key: '1',
     });
+  }
+};
+
+export const acceptRequestFriend = async (
+  id: string,
+  t: TFunction<('common' | 'dashboard')[], undefined>
+) => {
+  try {
+    await apiRequest.post('api/friends/approve', {
+      userRequest: id,
+    });
+
+    return true;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+
+    return false;
   }
 };
