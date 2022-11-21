@@ -42,8 +42,6 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
     getListRequestFriend();
   }, []);
 
-  console.log(getListRequestLoading);
-
   const handleGetUsers = async (keyword: string) => {
     setGetUserLoading(true);
     if (!keyword) {
