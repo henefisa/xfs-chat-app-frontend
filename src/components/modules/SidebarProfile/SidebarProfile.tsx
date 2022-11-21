@@ -81,7 +81,7 @@ const SidebarProfile: React.FC = () => {
       </div>
       <div className="user-info">
         <Avatar
-          path={userProfileStore.avatar ?? ''}
+          path={userProfileStore.avatar}
           imgWidth={96}
           username={
             userProfileStore.fullName?.charAt(0).toUpperCase() ??

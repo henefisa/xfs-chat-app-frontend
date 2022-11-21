@@ -46,7 +46,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
   return (
     <div className={clsx('user-item', className)}>
       <Avatar
-        path={user.avatar || ''}
+        path={user.avatar}
         username={
           user.fullName
             ? user.fullName.charAt(0).toUpperCase()
@@ -60,7 +60,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
           {user.fullName ?? user.username}
         </Title>
         <Title className="user-location" level={5}>
-          {user.location || ''}
+          {user.location || 'SomeWhere'}
         </Title>
       </div>
       <div className="user-item__action">

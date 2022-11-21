@@ -37,7 +37,7 @@ const FriendItem: React.FC<IFriendItemProps> = ({ friend }) => {
   return (
     <div className="friend-item">
       <Avatar
-        path={friend.owner.avatar ?? ''}
+        path={friend.owner.avatar}
         username={
           friend.owner.fullName?.charAt(0).toUpperCase() ??
           friend.owner.username.charAt(0).toUpperCase()
