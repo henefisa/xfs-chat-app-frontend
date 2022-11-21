@@ -1,5 +1,12 @@
 @use '../../../../src/assets/styles/variables' as v;
 
+.invitation-list {
+  .invitation-list__title {
+    margin: 24px;
+    color: v.$text-color;
+  }
+}
+
 .sidebar-search {
   .header-search {
     padding: 24px 24px 0;

@@ -96,6 +96,7 @@
         "attached-file": "Attached Files"
       },
       "search-user": {
+        "invitation-title": "Invitation List",
         "title": "Search Users",
         "search-placeholder": "Search users...",
         "result-title": "Result",

@@ -1,28 +1,24 @@
 @use '../../../assets/styles/variables' as v;
 
-.user-item {
-  width: 100%;
-  min-height: 64px;
-  padding: 10px;
+.friend-item {
   display: flex;
   align-items: center;
+  padding: 10px;
+  min-height: 64px;
   cursor: pointer;
 
-  .user-item__avtar {
-    margin-right: 12px;
-  }
-
-  .user-item__info {
+  .friend-item__info {
     flex: 1;
+    margin-left: 10px;
 
-    .user-name {
+    .friend-name {
       margin: 0;
       color: v.$text-color;
       font-size: 16px;
       font-weight: 500;
     }
 
-    .user-location {
+    .friend-location {
       margin: 0;
       color: v.$text-sub-color;
       font-size: 13px;
@@ -30,16 +26,16 @@
     }
   }
 
-  .user-item__action {
-    .add-user-btn,
-    .cancel-user-btn {
+  .friend-item__actions {
+    .accept-btn,
+    .cancel-btn {
       color: v.$white;
       font-size: 12px;
       padding: 4px 10px;
       border-radius: 8px;
     }
 
-    .cancel-user-btn {
+    .cancel-btn {
       color: v.$black;
       background-color: #d4d3f9;
       border-color: #d4d3f9;
@@ -48,6 +44,10 @@
         background-color: #a8a7e2;
         border-color: #a8a7e2;
       }
+    }
+
+    .accept-btn + .cancel-btn {
+      margin-left: 6px;
     }
   }
 }

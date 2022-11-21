@@ -1,12 +1,12 @@
 @use '../../../assets/styles/variables' as v;
 
-.list-result {
+.list-request {
   max-height: 280px;
+  margin: 0 8px;
+  padding: 8px 16px;
+  border-radius: 5px;
   overflow: auto;
   background-color: v.$white;
-  border-radius: 5px;
-  padding: 8px 16px;
-  box-shadow: 0 2px 4px rgb(15 34 58 / 12%);
 
   .separate {
     margin: 2px 0;
