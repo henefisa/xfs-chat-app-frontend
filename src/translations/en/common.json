@@ -101,7 +101,8 @@
         "search-placeholder": "Search users...",
         "result-title": "Result",
         "add": "Add",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "accept": "Accept"
       },
       "chats": {
         "title": "Chats",

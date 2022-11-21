@@ -17,7 +17,9 @@ interface ISidebarSearchUsersProps {}
 const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
   const { t } = useTranslation(['common', 'dashboard']);
 
-  const [loading, setLoading] = React.useState<boolean>(false);
+  const [getUserLoading, setGetUserLoading] = React.useState<boolean>(false);
+  const [getListRequestLoading, setGetListRequestLoading] =
+    React.useState<boolean>(false);
   const [listResult, setListResult] = React.useState<IUserItemResult[]>([]);
   const [listFriendRequest, setListFriendRequest] = React.useState<
     IListFriendRequest[]
@@ -25,36 +27,51 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
 
   React.useEffect(() => {
     const getListRequestFriend = async () => {
-      const result = await getRequestFriend(t);
+      setGetListRequestLoading(true);
 
-      if (!result) return;
-
-      setListFriendRequest(result.friends);
+      try {
+        const result = await getRequestFriend(t);
+        setListFriendRequest(result.friends);
+        setGetListRequestLoading(false);
+      } catch (err) {
+        setListFriendRequest([]);
+        setGetListRequestLoading(false);
+      }
     };
 
     getListRequestFriend();
   }, []);
 
+  console.log(getListRequestLoading);
+
   const handleGetUsers = async (keyword: string) => {
-    setLoading(true);
+    setGetUserLoading(true);
     if (!keyword) {
       setListResult([]);
-      setLoading(false);
+      setGetUserLoading(false);
       return;
     }
 
-    const result = await getUsers(keyword, t);
-    setLoading(false);
-
-    if (!result) return;
-    setListResult(result.users);
+    try {
+      const result = await getUsers(keyword, t);
+      setListResult(result.users);
+      setGetUserLoading(false);
+    } catch (err) {
+      setListResult([]);
+      setGetUserLoading(false);
+    }
   };
 
   const debounceGetUsers = React.useMemo(() => {
     return debounce(handleGetUsers, 700);
   }, []);
 
-  return (
+  return getListRequestLoading ? (
+    <Spin
+      className="loading"
+      spinIcon={<Loading3QuartersOutlined className="loading-icon" spin />}
+    />
+  ) : (
     <>
       <div className="invitation-list">
         {listFriendRequest.length > 0 && (
@@ -82,7 +99,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
           />
         </div>
         <div className="body-search">
-          {loading ? (
+          {getUserLoading ? (
             <Spin
               className="body-search__loading"
               spinIcon={

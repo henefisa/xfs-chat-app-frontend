@@ -21,7 +21,7 @@ export enum EUser {
   STATUS_INACTIVE = 'INACTIVE',
 }
 
-export interface IFriendStatusState extends IUser {
+export interface IFriendStatusState extends IBase {
   status:
     | EFriendStatus.REQUESTED
     | EFriendStatus.ACCEPTED

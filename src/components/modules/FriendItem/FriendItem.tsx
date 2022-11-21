@@ -1,8 +1,13 @@
-import * as React from 'react';
 import Avatar from '@common/Avatar/Avatar';
-import { IListFriendRequest } from 'src/models';
-import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
+import Title from '@common/Title/Title';
+import * as React from 'react';
+import { useTranslation } from 'react-i18next';
+import { IListFriendRequest } from 'src/models';
+import {
+  acceptRequestFriend,
+  cancelFriendRequest,
+} from 'src/services/userService';
 
 import './FriendItem.scss';
 
@@ -11,6 +16,24 @@ interface IFriendItemProps {
 }
 
 const FriendItem: React.FC<IFriendItemProps> = ({ friend }) => {
+  const { t } = useTranslation(['common', 'dashboard']);
+  const [isCancelOrAccept, setIsCancelOrAccept] =
+    React.useState<boolean>(false);
+
+  const handleCancelRequest = async (id: string) => {
+    const result = await cancelFriendRequest(id, t);
+
+    if (!result) return;
+    setIsCancelOrAccept(true);
+  };
+
+  const handleAcceptRequest = async (id: string) => {
+    const isSuccess = await acceptRequestFriend(id, t);
+
+    if (!isSuccess) return;
+    setIsCancelOrAccept(true);
+  };
+
   return (
     <div className="friend-item">
       <Avatar
@@ -31,8 +54,22 @@ const FriendItem: React.FC<IFriendItemProps> = ({ friend }) => {
         </Title>
       </div>
       <div className="friend-item__actions">
-        <Button className="accept-btn">Accept</Button>
-        <Button className="cancel-btn">Cancel</Button>
+        {isCancelOrAccept ? null : (
+          <>
+            <Button
+              className="accept-btn"
+              onClick={() => handleAcceptRequest(friend.owner.id)}
+            >
+              {t('sidebar.search-user.accept', { ns: 'dashboard' })}
+            </Button>
+            <Button
+              className="cancel-btn"
+              onClick={() => handleCancelRequest(friend.owner.id)}
+            >
+              {t('sidebar.search-user.cancel', { ns: 'dashboard' })}
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
     setIsCancel(false);
   };
 
-  const handleCancelRequesrt = async (id: string) => {
+  const handleCancelRequest = async (id: string) => {
     const result = await cancelFriendRequest(id, t1);
 
     if (!result) return;
@@ -68,7 +68,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
         (user.friendStatus?.status === EFriendStatus.REQUESTED && !isCancel) ? (
           <Button
             className="cancel-user-btn"
-            onClick={() => handleCancelRequesrt(user.id)}
+            onClick={() => handleCancelRequest(user.id)}
           >
             {t('cancel')}
           </Button>
