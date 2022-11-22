@@ -69,19 +69,22 @@ export const initInterceptor = (
           // Refresh token success
           // Not remember -> getUserProfile error -> refresh token -> save token to sessionStorage
           // Remember -> getUserProfile error -> refresh token -> save token to localStorage
-          originalRequest.headers = originalRequest.headers ?? {};
 
-          originalRequest.headers[
-            'Authorization'
-          ] = `Bearer ${getAccessToken()}`;
+          // Call old request
+          try {
+            const res = await axios.request({
+              ...originalRequest,
+              headers: {
+                Authorization: `Bearer ${getAccessToken()}`,
+              },
+            });
 
-          navigate('/login');
-
-          return axios(originalRequest);
+            return res;
+          } catch (err) {
+            return Promise.reject(err);
+          }
         }
       }
-
-      return Promise.reject(error);
     }
   );
 };
