@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Divider from '@common/Divider/Divider';
 import { IListFriendRequest } from 'src/models';
-import FriendItem from '../FriendItem/FriendItem';
+import RequestFriendItem from '../RequestFriendItem/RequestFriendItem';
 
 import './ListRequestFriend.scss';
 
@@ -16,7 +16,7 @@ const ListRequestFriend: React.FC<IListRequestFriendProps> = ({
     <div className="list-request">
       {friendList.map((item, index) => (
         <React.Fragment key={item.id}>
-          <FriendItem friend={item} />
+          <RequestFriendItem friend={item} />
           {index < friendList.length - 1 && <Divider className="separate" />}
         </React.Fragment>
       ))}
