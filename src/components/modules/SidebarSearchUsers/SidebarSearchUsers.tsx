@@ -5,8 +5,8 @@ import Title from '@common/Title/Title';
 import ListUsersResult from '@modules/ListUsersResult/ListUsersResult';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { IListFriendRequest, IUserItemResult } from 'src/models';
-import { getRequestFriend, getUsers } from 'src/services/userService';
+import { EFriendStatus, IListFriendRequest, IUserItemResult } from 'src/models';
+import { getFriends, getUsers } from 'src/services/userService';
 import debounce from 'src/utils/debounce';
 import ListRequestFriend from '../ListRequestFriend/ListRequestFriend';
 
@@ -30,7 +30,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
       setGetListRequestLoading(true);
 
       try {
-        const result = await getRequestFriend(t);
+        const result = await getFriends({ status: EFriendStatus.REQUESTED }, t);
         setListFriendRequest(result.friends);
         setGetListRequestLoading(false);
       } catch (err) {
@@ -51,7 +51,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
     }
 
     try {
-      const result = await getUsers(keyword, t);
+      const result = await getUsers({ q: keyword }, t);
       setListResult(result.users);
       setGetUserLoading(false);
     } catch (err) {
