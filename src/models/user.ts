@@ -52,3 +52,17 @@ export interface IListFriendRequest extends IBase {
   status: EFriendStatus.REQUESTED;
   owner: TUserProfile;
 }
+
+export interface IGetUsersQuery {
+  q?: string;
+  status?: EUser.STATUS_ACTIVE | EUser.STATUS_DEACTIVE | EUser.STATUS_INACTIVE;
+  limit?: string;
+  offset?: string;
+}
+
+export type TGetFriendsQuery = Omit<IGetUsersQuery, 'status'> & {
+  status?:
+    | EFriendStatus.REQUESTED
+    | EFriendStatus.ACCEPTED
+    | EFriendStatus.REJECTED;
+};

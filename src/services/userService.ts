@@ -1,7 +1,7 @@
 import { notification } from 'antd';
 import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
-import { EFriendStatus } from 'src/models';
+import { TGetFriendsQuery, IGetUsersQuery } from 'src/models';
 import { AppDispatch } from 'src/store';
 import {
   getProfileFailed,
@@ -58,11 +58,13 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
 };
 
 export const getUsers = async (
-  keyword: string,
+  query: IGetUsersQuery,
   t: TFunction<('common' | 'dashboard')[], undefined>
 ) => {
   try {
-    const res = await apiRequest.get('api/users', { params: { q: keyword } });
+    const res = await apiRequest.get('api/users', {
+      params: query,
+    });
 
     return res.data;
   } catch (err) {
@@ -113,10 +115,13 @@ export const cancelFriendRequest = async (
   }
 };
 
-export const getRequestFriend = async (t: TFunction<'common', undefined>) => {
+export const getFriends = async (
+  query: TGetFriendsQuery,
+  t: TFunction<'common', undefined>
+) => {
   try {
     const res = await apiRequest.get('api/friends', {
-      params: { status: EFriendStatus.REQUESTED },
+      params: query,
     });
 
     return res.data;
