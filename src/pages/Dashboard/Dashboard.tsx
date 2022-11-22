@@ -21,6 +21,7 @@ const Dashboard: React.FC = () => {
 
     return () => {
       socket.close();
+      socket.removeAllListeners();
     };
   }, []);
 
