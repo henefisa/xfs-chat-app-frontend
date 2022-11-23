@@ -166,6 +166,7 @@
         "help-terms": "Terms & Privacy policy"
       }
     },
+    "chat-overlay": "Select a chat or start a new one",
     "chat-ui": {
       "chat-header": {
         "search": "Search",

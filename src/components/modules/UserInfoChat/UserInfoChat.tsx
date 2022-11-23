@@ -1,16 +1,18 @@
-import * as React from 'react';
-import { Divider, Collapse } from 'antd';
 import {
   CheckCircleFilled,
-  UserOutlined,
-  PaperClipOutlined,
   CloseOutlined,
+  PaperClipOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
-import Title from '@common/Title/Title';
 import Avatar from '@common/Avatar/Avatar';
-import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
 import Button from '@common/Button/Button';
+import Title from '@common/Title/Title';
+import { Collapse, Divider } from 'antd';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { selectFriend } from 'src/store/friendSlice';
+import { useAppSelector } from 'src/store/hooks';
+import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
 
 import './UserInfoChat.scss';
 
@@ -28,11 +30,20 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
     keyPrefix: 'chat-ui.user-info-chat.about',
   });
 
+  const date = new Date();
+  const friendSelected = useAppSelector(selectFriend);
+
   const userInfoChat = [
-    { title: t1('name'), desc: 'Patricia Smiths' },
-    { title: 'Email', desc: 'admin123@mgail.com' },
-    { title: t1('time'), desc: '6:30 PM' },
-    { title: t1('location'), desc: 'Danang, VN' },
+    {
+      title: t1('name'),
+      desc: friendSelected?.owner?.fullName ?? friendSelected?.owner?.username,
+    },
+    { title: 'Email', desc: friendSelected?.owner?.email },
+    { title: t1('time'), desc: `${date.getHours()}:${date.getMinutes()}` },
+    {
+      title: t1('location'),
+      desc: friendSelected?.owner?.location || 'SomeWhere',
+    },
   ];
 
   const listAttachedFile = [
@@ -67,13 +78,16 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
       </div>
       <div className="user-avatar">
         <Avatar
-          path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+          path={friendSelected?.owner?.avatar}
           imgWidth={96}
-          username="A"
+          username={
+            friendSelected?.owner?.fullName?.charAt(0).toUpperCase() ??
+            friendSelected?.owner?.username.charAt(0).toUpperCase()
+          }
           className="custom-avatar"
         />
         <Title level={5} className="username">
-          Danh Huy
+          {friendSelected?.owner?.fullName ?? friendSelected?.owner?.username}
         </Title>
         <div className="status">
           <CheckCircleFilled className="status__icon" />
@@ -85,8 +99,8 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
       <Divider />
       <div className="content-profile">
         <Title className="description" level={5}>
-          If several languages coalesce, the grammar of the resulting language
-          is more simple and regular than that of the individual.
+          {friendSelected?.owner?.description ||
+            'Hello, have a nice day at work!'}
         </Title>
         <Collapse
           bordered={false}

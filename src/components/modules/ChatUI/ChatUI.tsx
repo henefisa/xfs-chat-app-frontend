@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import ChatHeader from '../ChatHeader/ChatHeader';
+import * as React from 'react';
+import clsx from 'clsx';
+import { useState } from 'react';
 import ChatBottom from '../ChatBottom/ChatBottom';
+import ChatHeader from '../ChatHeader/ChatHeader';
 import ChatMain from '../ChatMain/ChatMain';
 import UserInfoChat from '../UserInfoChat/UserInfoChat';
-import clsx from 'clsx';
 
 import './ChatUI.scss';
 
 const ChatUI = () => {
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
   const [messages, setMessages] = useState(['']);
+
   return (
     <div className="chat-ui">
       <div

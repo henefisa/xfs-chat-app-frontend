@@ -53,7 +53,7 @@ export interface IListFriendRequest extends IBase {
   owner: TUserProfile;
 }
 
-export interface IListFriendAccept extends IBase {
+export interface IFriendAccept extends IBase {
   status: EFriendStatus.ACCEPTED;
   owner: TUserProfile;
 }

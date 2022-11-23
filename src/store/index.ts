@@ -12,6 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import userReducer from './userSlice';
+import friendReducer from './friendSlice';
 import authReducer from './authSlice';
 import navbarReducer from './navbarSlice';
 import languageReducer from './languageSlice';
@@ -31,6 +32,7 @@ const languagePersistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
+  friend: friendReducer,
   auth: persistReducer(loginPersistConfig, authReducer),
   navbar: navbarReducer,
   language: persistReducer(languagePersistConfig, languageReducer),
