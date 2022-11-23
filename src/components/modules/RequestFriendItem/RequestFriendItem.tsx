@@ -9,13 +9,13 @@ import {
   cancelFriendRequest,
 } from 'src/services/userService';
 
-import './FriendItem.scss';
+import './RequestFriendItem.scss';
 
-interface IFriendItemProps {
+interface IRequestFriendItemProps {
   friend: IListFriendRequest;
 }
 
-const FriendItem: React.FC<IFriendItemProps> = ({ friend }) => {
+const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
   const { t } = useTranslation(['common', 'dashboard']);
   const [isCancelOrAccept, setIsCancelOrAccept] =
     React.useState<boolean>(false);
@@ -75,4 +75,4 @@ const FriendItem: React.FC<IFriendItemProps> = ({ friend }) => {
   );
 };
 
-export default FriendItem;
+export default RequestFriendItem;

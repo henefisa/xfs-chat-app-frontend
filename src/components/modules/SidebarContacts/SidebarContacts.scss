@@ -36,6 +36,18 @@
     height: calc(100vh - 160px);
     overflow: auto;
 
+    .spin.loading {
+      position: unset;
+      transform: unset;
+      display: flex;
+      justify-content: center;
+
+      .loading-icon {
+        color: v.$primary;
+        font-size: 32px;
+      }
+    }
+
     .firt-character {
       padding: 16px;
       color: rgb(114, 105, 239);
@@ -141,12 +153,12 @@
           &:hover {
             border: 1px solid #8c86dd;
           }
-      
+
           &:focus {
             border-color: #8c86dd;
             box-shadow: 0 0 0 2px #cdcbef;
           }
-      
+
           &::placeholder {
             color: v.$text-sub-color;
           }
@@ -174,12 +186,12 @@
           &:hover {
             border: 1px solid #8c86dd;
           }
-      
+
           &:focus {
             border-color: #8c86dd;
             box-shadow: 0 0 0 2px #cdcbef;
           }
-      
+
           &::placeholder {
             color: v.$text-sub-color;
           }
