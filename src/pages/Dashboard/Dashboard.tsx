@@ -2,12 +2,18 @@ import ChatUI from '@modules/ChatUI/ChatUI';
 import NavDashboard from '@modules/NavDashboard/NavDashboard';
 import SidebarDashboard from '@modules/SidebarDashboard/SidebarDashboard';
 import * as React from 'react';
+import SidebarSettings from 'src/components/modules/SidebarSettings/SidebarSettings';
 import { SocketContext } from 'src/context/socket/context';
+import ENavbar from 'src/interfaces/ENavbar';
+import { useAppSelector } from 'src/store/hooks';
+import { selectNavBar } from 'src/store/navbarSlice';
+import EditProfile from '../EditProfile/EditProfile';
 
 import './Dashboard.scss';
 
 const Dashboard: React.FC = () => {
   const socket = React.useContext(SocketContext);
+  const navbarAction = useAppSelector(selectNavBar);
 
   React.useEffect(() => {
     socket.connect();
@@ -27,8 +33,15 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard-page">
       <NavDashboard />
-      <SidebarDashboard />
-      <ChatUI />
+
+      {navbarAction === ENavbar.SETTINGS ? (
+        <SidebarSettings />
+      ) : (
+        <>
+          <SidebarDashboard />
+          <ChatUI />
+        </>
+      )}
     </div>
   );
 };

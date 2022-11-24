@@ -24,7 +24,7 @@
       "success": "Logout successfully!",
       "error": "Logout failed!"
     },
-    "register" : {
+    "register": {
       "success": "Sign up successfully. OTP has been sent to email!",
       "error": "Sign up failed!"
     }
@@ -79,7 +79,7 @@
         "setting": "Settings",
         "logout": "Logout"
       }
-    }, 
+    },
     "sidebar": {
       "profile": {
         "heading": "My Profile",
@@ -140,13 +140,12 @@
         "title": "Settings",
         "available": "Available",
         "busy": "Busy",
-        "info-title": "Personal Info",
-        "info-name": "Name",
-        "info-btn-edit": "Edit",
-        "info-btn-update": "Update",
-        "info-email": "Email",
-        "info-time": "Time",
-        "info-location": "Location",
+        "account-details-title": "Account details",
+        "account-name": "Name",
+        "account-email": "Email",
+        "account-location": "Location",
+        "account-phone": "Phone",
+        "account-description": "Description",
         "privacy-title": "Privacy",
         "privacy-profile-photo": "Profile photo",
         "privacy-last-seen": "Last seen",
@@ -161,7 +160,11 @@
         "help-title": "Help",
         "help-faq": "FAQS",
         "help-contact": "Contacts",
-        "help-terms": "Terms & Privacy policy"
+        "help-terms": "Terms & Privacy policy",
+        "success": "successful",
+        "update-success": "Update profile successful",
+        "error": "Error",
+        "update-error": "Update failed!"
       }
     },
     "chat-ui": {

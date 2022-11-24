@@ -21,7 +21,6 @@ const SidebarDashboard: React.FC = () => {
       {navbarAction === ENavbar.GROUPS && <SidebarGroups />}
       {navbarAction === ENavbar.CONTACTS && <SidebarContacts />}
       {navbarAction === ENavbar.SEARCH && <SidebarSearchUsers />}
-      {navbarAction === ENavbar.SETTINGS && <SidebarSettings />}
     </div>
   );
 };
