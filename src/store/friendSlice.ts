@@ -8,13 +8,16 @@ export const friendSlice = createSlice({
   name: 'friend',
   initialState,
   reducers: {
-    clickFriend: (state, action: PayloadAction<IFriendAccept>) => {
+    updateFriendSelected: (state, action: PayloadAction<IFriendAccept>) => {
       state.selectedFriend = action.payload;
+    },
+    deleteFriend: (state) => {
+      state.selectedFriend = <IFriendAccept>{};
     },
   },
 });
 
-export const { clickFriend } = friendSlice.actions;
+export const { updateFriendSelected, deleteFriend } = friendSlice.actions;
 
 export const selectFriend = (state: RootState) => state.friend.selectedFriend;
 

@@ -18,7 +18,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { EFriendStatus, IFriendAccept } from 'src/models';
 import { getFriends } from 'src/services/userService';
-import { clickFriend, selectFriend } from 'src/store/friendSlice';
+import { updateFriendSelected, selectFriend } from 'src/store/friendSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import ContactMenu from '../ContactMenu/ContactMenu';
 
@@ -99,7 +99,7 @@ const SidebarContacts: React.FC = () => {
   }, []);
 
   const handleSelectFriend = (friend: IFriendAccept) => {
-    dispatch(clickFriend(friend));
+    dispatch(updateFriendSelected(friend));
   };
 
   return (
