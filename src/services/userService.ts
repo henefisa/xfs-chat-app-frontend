@@ -1,6 +1,7 @@
 import { notification } from 'antd';
 import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
+import { TGetFriendsQuery, IGetUsersQuery } from 'src/models';
 import { AppDispatch } from 'src/store';
 import {
   getProfileFailed,
@@ -89,11 +90,14 @@ export const updateUserProfile = async (
 };
 
 export const getUsers = async (
-  keyword: string,
+  query: IGetUsersQuery,
   t: TFunction<('common' | 'dashboard')[], undefined>
 ) => {
   try {
-    const res = await apiRequest.get('api/users', { params: { q: keyword } });
+    const res = await apiRequest.get('api/users', {
+      params: query,
+    });
+
     return res.data;
   } catch (err) {
     notification.error({
@@ -125,10 +129,10 @@ export const sendFriendRequest = async (
 
 export const cancelFriendRequest = async (
   id: string,
-  t: TFunction<'common', undefined>
+  t: TFunction<('common' | 'dashboard')[], undefined>
 ) => {
   try {
-    const res = await apiRequest.post('api/friends/cancel-request', {
+    const res = await apiRequest.post('api/friends/cancel', {
       userRequest: id,
     });
 
@@ -140,5 +144,47 @@ export const cancelFriendRequest = async (
       duration: 1.5,
       key: '1',
     });
+  }
+};
+
+export const getFriends = async (
+  query: TGetFriendsQuery,
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    const res = await apiRequest.get('api/friends', {
+      params: query,
+    });
+
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+  }
+};
+
+export const acceptRequestFriend = async (
+  id: string,
+  t: TFunction<('common' | 'dashboard')[], undefined>
+) => {
+  try {
+    await apiRequest.post('api/friends/approve', {
+      userRequest: id,
+    });
+
+    return true;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+
+    return false;
   }
 };

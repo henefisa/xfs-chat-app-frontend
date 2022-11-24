@@ -1,74 +1,106 @@
-import * as React from 'react';
 import Tooltip from '@common/Tooltip/Tooltip';
+import * as React from 'react';
 
 import {
-  UsergroupAddOutlined,
-  MoreOutlined,
   CloseOutlined,
+  Loading3QuartersOutlined,
+  MoreOutlined,
+  UsergroupAddOutlined,
 } from '@ant-design/icons';
 
-import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
-import Dropdown from '@common/Dropdown/Dropdown';
-import ContactMenu from '../ContactMenu/ContactMenu';
-import clsx from 'clsx';
-import Input from '@common/Input/Input';
 import Button from '@common/Button/Button';
+import Dropdown from '@common/Dropdown/Dropdown';
+import Input from '@common/Input/Input';
+import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
+import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
+import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { EFriendStatus, IFriendAccept } from 'src/models';
+import { getFriends } from 'src/services/userService';
+import { clickFriend, selectFriend } from 'src/store/friendSlice';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import ContactMenu from '../ContactMenu/ContactMenu';
 
 import './SidebarContacts.scss';
 
-const contacts = [
-  {
-    firtCharacter: 'A',
-    names: ['Albert Rodarte', 'Allison Etter'],
-  },
-  {
-    firtCharacter: 'C',
-    names: ['Craig Smiley'],
-  },
-  {
-    firtCharacter: 'D',
-    names: ['Daniel Clay', 'Doris Brown'],
-  },
-  {
-    firtCharacter: 'I',
-    names: ['Iris Wells'],
-  },
-  {
-    firtCharacter: 'J',
-    names: ['Juan Flakes', 'John Hall', 'Joy Southern'],
-  },
-
-  {
-    firtCharacter: 'M',
-    names: ['Mary Farmer', 'Mark Messer', 'Michael Hinton'],
-  },
-  {
-    firtCharacter: 'O',
-    names: ['Ossie Wilson'],
-  },
-  {
-    firtCharacter: 'P',
-    names: ['Phillis Griffin', 'Paul Haynes'],
-  },
-  {
-    firtCharacter: 'R',
-    names: ['Rocky Jackson'],
-  },
-  {
-    firtCharacter: 'S',
-    names: ['Sara Muller', 'Simon Velez', 'Steve Walker'],
-  },
-  {
-    firtCharacter: 'H',
-    names: ['Hanah Mile'],
-  },
-];
-
 const SidebarContacts: React.FC = () => {
   const [toggleModal, setToggleModal] = React.useState(false);
+
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [listFriend, setListFriend] = React.useState<
+    {
+      character: string;
+      friends: IFriendAccept[];
+    }[]
+  >([]);
+
+  const friendSelected = useAppSelector(selectFriend);
+
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
+  const { t: t1 } = useTranslation('common');
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    const handleConvertListFriend = (list: IFriendAccept[]) => {
+      const listCharacter: string[] = [];
+      list.forEach((friend) => {
+        if (
+          listCharacter.includes(
+            friend.owner.fullName?.charAt(0).toUpperCase() ??
+              friend.owner.username.charAt(0).toUpperCase()
+          )
+        )
+          return;
+
+        listCharacter.push(
+          friend.owner.fullName?.charAt(0).toUpperCase() ??
+            friend.owner.username.charAt(0).toUpperCase()
+        );
+      });
+
+      const newList = listCharacter.sort().map((item) => {
+        const objectItem: { character: string; friends: IFriendAccept[] } = {
+          character: item,
+          friends: [],
+        };
+
+        list.forEach((friend) => {
+          if (
+            !(
+              friend.owner.fullName?.charAt(0).toUpperCase() ??
+              friend.owner.username.charAt(0).toUpperCase() === item
+            )
+          )
+            return;
+
+          objectItem.friends.push(friend);
+        });
+
+        return objectItem;
+      });
+
+      setListFriend(newList);
+    };
+
+    const getListFriend = async () => {
+      setLoading(true);
+      try {
+        const res = await getFriends({ status: EFriendStatus.ACCEPTED }, t1);
+        handleConvertListFriend(res.friends);
+        setLoading(false);
+      } catch (err) {
+        setListFriend([]);
+        setLoading(false);
+      }
+    };
+
+    getListFriend();
+  }, []);
+
+  const handleSelectFriend = (friend: IFriendAccept) => {
+    dispatch(clickFriend(friend));
+  };
 
   return (
     <>
@@ -87,25 +119,47 @@ const SidebarContacts: React.FC = () => {
           <SearchSidebar placeholder={t('search-contacts')} />
         </div>
         <div className="sidebar-contacts__unstyled">
-          {contacts.map((contact, index) => (
-            <div key={index}>
-              <div className="firt-character">{contact.firtCharacter}</div>
-              <ul className="contact-names">
-                {contact.names.map((name, index) => (
-                  <li key={index}>
-                    <label className="contact-names__label">{name}</label>
-                    <Dropdown
-                      overlay={<ContactMenu />}
-                      trigger={['click']}
-                      placement="bottomRight"
-                    >
-                      <MoreOutlined className="icon" />
-                    </Dropdown>
-                  </li>
+          {loading ? (
+            <Spin
+              className="loading"
+              spinIcon={
+                <Loading3QuartersOutlined className="loading-icon" spin />
+              }
+            />
+          ) : (
+            <>
+              {listFriend.length > 0 &&
+                listFriend.map((item, index) => (
+                  <div key={index}>
+                    <div className="firt-character">{item.character}</div>
+                    <ul className="contact-names">
+                      {item.friends.map((friend) => (
+                        <Button
+                          key={friend.owner.id}
+                          className={clsx('contact-names__btn', {
+                            ['contact-names__btn--active']:
+                              friendSelected?.owner?.username ===
+                              friend.owner.username,
+                          })}
+                          onClick={() => handleSelectFriend(friend)}
+                        >
+                          <label className="contact-names__label">
+                            {friend.owner.fullName ?? friend.owner.username}
+                          </label>
+                          <Dropdown
+                            overlay={<ContactMenu />}
+                            trigger={['click']}
+                            placement="bottomRight"
+                          >
+                            <MoreOutlined className="icon" />
+                          </Dropdown>
+                        </Button>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
-            </div>
-          ))}
+            </>
+          )}
         </div>
       </div>
       <div

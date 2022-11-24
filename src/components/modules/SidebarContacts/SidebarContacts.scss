@@ -36,8 +36,20 @@
     height: calc(100vh - 160px);
     overflow: auto;
 
+    .spin.loading {
+      position: unset;
+      transform: unset;
+      display: flex;
+      justify-content: center;
+
+      .loading-icon {
+        color: v.$primary;
+        font-size: 32px;
+      }
+    }
+
     .firt-character {
-      padding: 16px;
+      padding: 4px 16px;
       color: rgb(114, 105, 239);
       font-size: 15px;
       font-weight: 600;
@@ -45,20 +57,35 @@
 
     .contact-names {
       list-style: none;
-      cursor: pointer;
 
-      li {
+      .contact-names__btn {
+        width: 100%;
         padding: 10px 20px;
         line-height: 1.8;
         display: flex;
+        align-items: center;
         justify-content: space-between;
         cursor: pointer;
+        background-color: transparent;
+        border-radius: 10px;
+        box-shadow: unset;
+
+        &--active {
+          border: 1px solid #5b54bf;
+          background-color: #efeeff;
+        }
 
         .contact-names__label {
           font-weight: 600;
           font-size: 14px;
           color: v.$text-color;
           cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        .ant-dropdown-trigger.dropdown {
+          display: flex;
+          align-items: center;
         }
 
         .icon {
@@ -141,12 +168,12 @@
           &:hover {
             border: 1px solid #8c86dd;
           }
-      
+
           &:focus {
             border-color: #8c86dd;
             box-shadow: 0 0 0 2px #cdcbef;
           }
-      
+
           &::placeholder {
             color: v.$text-sub-color;
           }
@@ -174,12 +201,12 @@
           &:hover {
             border: 1px solid #8c86dd;
           }
-      
+
           &:focus {
             border-color: #8c86dd;
             box-shadow: 0 0 0 2px #cdcbef;
           }
-      
+
           &::placeholder {
             color: v.$text-sub-color;
           }

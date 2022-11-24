@@ -1,22 +1,24 @@
-import * as React from 'react';
 import {
-  SearchOutlined,
-  PhoneOutlined,
-  VideoCameraOutlined,
-  UserOutlined,
-  EllipsisOutlined,
   CheckCircleFilled,
+  EllipsisOutlined,
+  PhoneOutlined,
+  SearchOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
 } from '@ant-design/icons';
+import * as React from 'react';
 
-import ActionsChatMenu from '../ActionsChatMenu/ActionsChatMenu';
-import Tooltip from '@common/Tooltip/Tooltip';
 import Avatar from '@common/Avatar/Avatar';
-import Dropdown from '@common/Dropdown/Dropdown';
-import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
-import ChatCall from '../ChatCall/ChatCall';
+import Dropdown from '@common/Dropdown/Dropdown';
 import InputDropdown from '@common/Input/InputDropdown';
+import Title from '@common/Title/Title';
+import Tooltip from '@common/Tooltip/Tooltip';
 import { useTranslation } from 'react-i18next';
+import { selectFriend } from 'src/store/friendSlice';
+import { useAppSelector } from 'src/store/hooks';
+import ActionsChatMenu from '../ActionsChatMenu/ActionsChatMenu';
+import ChatCall from '../ChatCall/ChatCall';
 
 import './ChatHeader.scss';
 
@@ -32,6 +34,8 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const handleClickuser = () => {
     setOpen(true);
   };
+
+  const friendSelected = useAppSelector(selectFriend);
 
   const listActionChat = React.useMemo(() => {
     return [
@@ -63,13 +67,16 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
     <div className="chat-header">
       <div className="user-info">
         <Avatar
-          path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+          path={friendSelected?.owner?.avatar}
           imgWidth={35}
-          username="A"
+          username={
+            friendSelected?.owner?.fullName?.charAt(0).toUpperCase() ??
+            friendSelected?.owner?.username.charAt(0).toUpperCase()
+          }
           className="user-info__avatar"
         />
         <Title level={5} className="user-info__name" onClick={handleClickuser}>
-          Danh Huy
+          {friendSelected?.owner?.fullName ?? friendSelected?.owner?.username}
         </Title>
         <div className="user-info__status">
           <CheckCircleFilled className="status__icon" />

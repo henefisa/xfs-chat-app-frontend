@@ -1,6 +1,7 @@
 @use '../../../assets/styles/variables' as v;
 
 .sidebar-user {
+  width: 100%;
   border-left: 4px solid rgba($color: #495057, $alpha: 0.1);
   .header-user {
     display: flex;

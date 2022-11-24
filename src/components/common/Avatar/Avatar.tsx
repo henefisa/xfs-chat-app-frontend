@@ -5,7 +5,7 @@ import { Avatar as AAvatar, AvatarProps } from 'antd';
 import './Avatar.scss';
 
 interface IAvatarProps extends AvatarProps {
-  path?: string;
+  path?: string | null;
   username: string;
   imgWidth: number;
   className?: string;

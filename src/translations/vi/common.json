@@ -96,11 +96,13 @@
         "attached-file": "File đã đính kèm"
       },
       "search-user": {
+        "invitation-title": "Danh sách lời mời",
         "title": "Tìm kiếm bạn bè",
         "search-placeholder": "Nhập để tìm kiếm...",
         "result-title": "Kết quả",
         "add": "Thêm",
-        "cancel": "Hủy"
+        "cancel": "Hủy",
+        "accept": "Chấp nhận"
       },
       "chats": {
         "title": "Nhắn tin",
@@ -168,6 +170,8 @@
       }
     },
     "chat-ui": {
+    "chat-overlay": "Hãy chọn một đoạn chat hoặc bắt đầu cuộc trò chuyện mới",
+    "chat-ui":{
       "chat-header": {
         "search": "Tìm kiếm",
         "search-dropdown": "Tìm kiếm...",

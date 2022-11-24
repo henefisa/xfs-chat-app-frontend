@@ -1,0 +1,17 @@
+@use '../../../assets/styles/variables' as v;
+
+.chat-overlay {
+  flex: 1;
+  min-height: 100vh;
+  background-color: v.$white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 10px rgba(3, 16, 30, 0.22);
+
+  .chat-overlay__title {
+    color: v.$text-sub-color;
+    font-size: 20px;
+    font-weight: 300;
+  }
+}

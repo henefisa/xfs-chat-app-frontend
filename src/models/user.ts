@@ -7,6 +7,7 @@ export interface IUser extends IBase {
 export enum EFriendStatus {
   REQUESTED = 'REQUESTED',
   ACCEPTED = 'ACCEPTED',
+  REJECTED = 'REJECTED',
 }
 
 export enum EUserRole {
@@ -20,8 +21,11 @@ export enum EUser {
   STATUS_INACTIVE = 'INACTIVE',
 }
 
-export interface IFriendStatusState extends IUser {
-  status: EFriendStatus.REQUESTED | EFriendStatus.ACCEPTED;
+export interface IFriendStatusState extends IBase {
+  status:
+    | EFriendStatus.REQUESTED
+    | EFriendStatus.ACCEPTED
+    | EFriendStatus.REJECTED;
   owner: {
     id: string;
   };
@@ -43,3 +47,27 @@ export interface IUserItemResult extends IUser {
 }
 
 export type TUserProfile = Omit<IUserItemResult, 'friendStatus'>;
+
+export interface IListFriendRequest extends IBase {
+  status: EFriendStatus.REQUESTED;
+  owner: TUserProfile;
+}
+
+export interface IFriendAccept extends IBase {
+  status: EFriendStatus.ACCEPTED;
+  owner: TUserProfile;
+}
+
+export interface IGetUsersQuery {
+  q?: string;
+  status?: EUser.STATUS_ACTIVE | EUser.STATUS_DEACTIVE | EUser.STATUS_INACTIVE;
+  limit?: string;
+  offset?: string;
+}
+
+export type TGetFriendsQuery = Omit<IGetUsersQuery, 'status'> & {
+  status?:
+    | EFriendStatus.REQUESTED
+    | EFriendStatus.ACCEPTED
+    | EFriendStatus.REJECTED;
+};

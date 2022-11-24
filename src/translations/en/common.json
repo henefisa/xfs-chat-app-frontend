@@ -96,11 +96,13 @@
         "attached-file": "Attached Files"
       },
       "search-user": {
+        "invitation-title": "Invitation List",
         "title": "Search Users",
         "search-placeholder": "Search users...",
         "result-title": "Result",
         "add": "Add",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "accept": "Accept"
       },
       "chats": {
         "title": "Chats",
@@ -167,6 +169,7 @@
         "update-error": "Update failed!"
       }
     },
+    "chat-overlay": "Select a chat or start a new one",
     "chat-ui": {
       "chat-header": {
         "search": "Search",
