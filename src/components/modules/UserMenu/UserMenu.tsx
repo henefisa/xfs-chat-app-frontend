@@ -11,10 +11,9 @@ import { useNavigate } from 'react-router-dom';
 import ENavbar from 'src/interfaces/ENavbar';
 import { logout } from 'src/services/authService';
 import { logoutSuccess } from 'src/store/authSlice';
-import { deleteFriend } from 'src/store/friendSlice';
 import { useAppDispatch } from 'src/store/hooks';
 import { updateNavbar } from 'src/store/navbarSlice';
-import { deleteUserProfile } from 'src/store/userSlice';
+import { deleteFriendSelected, deleteUserProfile } from 'src/store/userSlice';
 
 import Button from '@common/Button/Button';
 import Menu from '@common/Menu/Menu';
@@ -76,7 +75,7 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
     await logout(t1);
     dispatch(logoutSuccess());
     dispatch(deleteUserProfile());
-    dispatch(deleteFriend());
+    dispatch(deleteFriendSelected());
     dispatch(updateNavbar(ENavbar.PROFILE));
     navigate('/login');
   };
