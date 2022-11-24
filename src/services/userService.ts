@@ -1,7 +1,11 @@
 import { notification } from 'antd';
 import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
-import { TGetFriendsQuery, IGetUsersQuery } from 'src/models';
+import {
+  TGetFriendsQuery,
+  IGetUsersQuery,
+  TConversationQuery,
+} from 'src/models';
 import { AppDispatch } from 'src/store';
 import {
   getProfileFailed,
@@ -154,5 +158,23 @@ export const acceptRequestFriend = async (
     });
 
     return false;
+  }
+};
+
+export const getListConversation = async (
+  query: TConversationQuery,
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    const res = await apiRequest.get('api/conversations', { params: query });
+
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
   }
 };

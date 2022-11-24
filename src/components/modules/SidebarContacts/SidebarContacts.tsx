@@ -18,8 +18,8 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { EFriendStatus, IFriendAccept } from 'src/models';
 import { getFriends } from 'src/services/userService';
-import { clickFriend, selectFriend } from 'src/store/friendSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { selectFriend, updateFriendSelected } from 'src/store/userSlice';
 import ContactMenu from '../ContactMenu/ContactMenu';
 
 import './SidebarContacts.scss';
@@ -35,7 +35,7 @@ const SidebarContacts: React.FC = () => {
     }[]
   >([]);
 
-  const friendSelected = useAppSelector(selectFriend);
+  const { selectedFriend } = useAppSelector(selectFriend);
 
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
   const { t: t1 } = useTranslation('common');
@@ -99,7 +99,7 @@ const SidebarContacts: React.FC = () => {
   }, []);
 
   const handleSelectFriend = (friend: IFriendAccept) => {
-    dispatch(clickFriend(friend));
+    dispatch(updateFriendSelected(friend));
   };
 
   return (
@@ -138,7 +138,7 @@ const SidebarContacts: React.FC = () => {
                           key={friend.owner.id}
                           className={clsx('contact-names__btn', {
                             ['contact-names__btn--active']:
-                              friendSelected?.owner?.username ===
+                              selectedFriend?.owner?.username ===
                               friend.owner.username,
                           })}
                           onClick={() => handleSelectFriend(friend)}

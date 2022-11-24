@@ -52,14 +52,14 @@ const SidebarProfile: React.FC = () => {
     return [
       {
         title: t('name'),
-        desc: userProfileStore.fullName ?? userProfileStore.username,
+        desc: userProfileStore?.fullName ?? userProfileStore?.username,
       },
-      { title: t('email'), desc: userProfileStore.email },
+      { title: t('email'), desc: userProfileStore?.email },
       {
         title: t('time'),
         desc: `${date.getHours()}:${date.getMinutes()}`,
       },
-      { title: t('location'), desc: userProfileStore.location ?? 'SomeWhere' },
+      { title: t('location'), desc: userProfileStore?.location ?? 'SomeWhere' },
     ];
   }, [t, userProfileStore]);
 
@@ -81,16 +81,16 @@ const SidebarProfile: React.FC = () => {
       </div>
       <div className="user-info">
         <Avatar
-          path={userProfileStore.avatar}
+          path={userProfileStore?.avatar}
           imgWidth={96}
           username={
-            userProfileStore.fullName?.charAt(0).toUpperCase() ??
-            userProfileStore.username?.charAt(0).toUpperCase()
+            userProfileStore?.fullName?.charAt(0).toUpperCase() ??
+            userProfileStore?.username?.charAt(0).toUpperCase()
           }
           className="custom-avatar"
         />
         <Title level={5} className="user-info__name">
-          {userProfileStore.fullName ?? userProfileStore.username}
+          {userProfileStore?.fullName ?? userProfileStore?.username}
         </Title>
         <div className="user-info__status">
           <CheckCircleFilled className="status-icon" />
@@ -102,7 +102,7 @@ const SidebarProfile: React.FC = () => {
       <Divider />
       <div className="content-profile">
         <Title className="user-description" level={5}>
-          {userProfileStore.description ?? 'Hello, have a nice day at work!'}
+          {userProfileStore?.description ?? 'Hello, have a nice day at work!'}
         </Title>
         <Collapse
           bordered={false}
