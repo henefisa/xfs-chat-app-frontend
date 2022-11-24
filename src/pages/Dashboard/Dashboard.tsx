@@ -3,16 +3,21 @@ import ChatUI from '@modules/ChatUI/ChatUI';
 import NavDashboard from '@modules/NavDashboard/NavDashboard';
 import SidebarDashboard from '@modules/SidebarDashboard/SidebarDashboard';
 import * as React from 'react';
+import SidebarSettings from '@modules/SidebarSettings/SidebarSettings';
 import { SocketContext } from 'src/context/socket/context';
 import { selectFriend } from 'src/store/friendSlice';
 import { useAppSelector } from 'src/store/hooks';
+import { selectNavBar } from 'src/store/navbarSlice';
 
 import './Dashboard.scss';
+import ENavbar from 'src/interfaces/ENavbar';
 
 const Dashboard: React.FC = () => {
   const socket = React.useContext(SocketContext);
 
   const friendSelected = useAppSelector(selectFriend);
+
+  const navbarAction = useAppSelector(selectNavBar);
 
   React.useEffect(() => {
     socket.connect();
@@ -33,9 +38,14 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard-page">
       <NavDashboard />
-      <SidebarDashboard />
-
-      {friendSelected?.id ? <ChatUI /> : <ChatOverlay />}
+      {navbarAction === ENavbar.SETTINGS ? (
+        <SidebarSettings />
+      ) : (
+        <>
+          <SidebarDashboard />
+          {friendSelected?.id ? <ChatUI /> : <ChatOverlay />}
+        </>
+      )}
     </div>
   );
 };

@@ -23,6 +23,9 @@ export const userSlice = createSlice({
     deleteUserProfile: (state) => {
       state.profile.userProfile = <TUserProfile>{};
     },
+    updateProfile: (state, action) => {
+      state.profile.userProfile = action.payload;
+    },
   },
 });
 
@@ -31,6 +34,7 @@ export const {
   getProfileSuccess,
   getProfileFailed,
   deleteUserProfile,
+  updateProfile,
 } = userSlice.actions;
 
 export const selectUserProfile = (state: RootState) =>

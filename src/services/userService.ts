@@ -7,7 +7,16 @@ import {
   getProfileFailed,
   getProfileStart,
   getProfileSuccess,
+  updateProfile,
 } from 'src/store/userSlice';
+
+interface newProfile {
+  username: string;
+  location: string;
+  email: string;
+  phone: string;
+  description: string;
+}
 
 export const checkUsernameExist = async (
   username: string,
@@ -54,6 +63,29 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
     dispatch(getProfileSuccess(res.data));
   } catch (err) {
     dispatch(getProfileFailed());
+  }
+};
+
+export const updateUserProfile = async (
+  dispatch: AppDispatch,
+  user: newProfile,
+  t: TFunction<'dashboard', 'sidebar.settings'>
+) => {
+  try {
+    const res = await apiRequest.put('api/users/profile', user);
+    dispatch(updateProfile(res.data));
+    notification.success({
+      message: t('success'),
+      description: t('update-success'),
+      duration: 2,
+    });
+  } catch (err) {
+    dispatch(getProfileFailed());
+    notification.error({
+      message: t('error'),
+      description: t('update-error'),
+      duration: 2,
+    });
   }
 };
 

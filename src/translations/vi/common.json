@@ -24,7 +24,7 @@
       "success": "Đăng xuất thành công!",
       "error": "Đăng xuất thất bại!"
     },
-    "register" : {
+    "register": {
       "success": "Đăng ký thành công. OTP đã được gửi đến email!",
       "error": "Đăng ký thất bại!"
     }
@@ -79,7 +79,7 @@
         "setting": "Cài đặt",
         "logout": "Đăng xuất"
       }
-    }, 
+    },
     "sidebar": {
       "profile": {
         "heading": "Thông tin của tôi",
@@ -142,13 +142,12 @@
         "title": "Cài đặt",
         "available": "Hoạt động",
         "busy": "Đang bận",
-        "info-title": "Thông tin cá nhân",
-        "info-name": "Tên",
-        "info-btn-edit": "Sửa",
-        "info-btn-update": "Cập nhật",
-        "info-email": "Email",
-        "info-time": "Thời gian",
-        "info-location": "Địa điểm",
+        "account-details-title": "Chi tiết tài khoản",
+        "account-name": "Tên",
+        "account-email": "Email",
+        "account-location": "Địa chỉ",
+        "account-phone": "Số điện thoại",
+        "account-description": "Mô tả",
         "privacy-title": "Riêng tư",
         "privacy-profile-photo": "Ảnh hồ sơ",
         "privacy-last-seen": "Nhìn thấy lần cuối",
@@ -163,11 +162,17 @@
         "help-title": "Hỗ trợ",
         "help-faq": "FAQS",
         "help-contact": "Liên hệ",
-        "help-terms": "Điều khoản & Chính sách quyền riêng tư"
+        "help-terms": "Điều khoản & Chính sách quyền riêng tư",
+        "success": "Thành công",
+        "update-success": "Cập nhật hồ sơ thành công",
+        "error": "Thất bại",
+        "update-error": "cập nhật hồ sơ thất bại",
+        "btn-save": "Lưu thay đổi",
+        "btn-cancel": "Hủy bỏ"
       }
     },
     "chat-overlay": "Hãy chọn một đoạn chat hoặc bắt đầu cuộc trò chuyện mới",
-    "chat-ui":{
+    "chat-ui": {
       "chat-header": {
         "search": "Tìm kiếm",
         "search-dropdown": "Tìm kiếm...",
