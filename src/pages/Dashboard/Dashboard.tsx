@@ -1,13 +1,18 @@
+import ChatOverlay from '@modules/ChatOverlay/ChatOverlay';
 import ChatUI from '@modules/ChatUI/ChatUI';
 import NavDashboard from '@modules/NavDashboard/NavDashboard';
 import SidebarDashboard from '@modules/SidebarDashboard/SidebarDashboard';
 import * as React from 'react';
 import { SocketContext } from 'src/context/socket/context';
+import { selectFriend } from 'src/store/friendSlice';
+import { useAppSelector } from 'src/store/hooks';
 
 import './Dashboard.scss';
 
 const Dashboard: React.FC = () => {
   const socket = React.useContext(SocketContext);
+
+  const friendSelected = useAppSelector(selectFriend);
 
   React.useEffect(() => {
     socket.connect();
@@ -29,7 +34,8 @@ const Dashboard: React.FC = () => {
     <div className="dashboard-page">
       <NavDashboard />
       <SidebarDashboard />
-      <ChatUI />
+
+      {friendSelected?.id ? <ChatUI /> : <ChatOverlay />}
     </div>
   );
 };

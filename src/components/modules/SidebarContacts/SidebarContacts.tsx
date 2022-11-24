@@ -16,26 +16,33 @@ import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IListFriendAccept } from 'src/models';
+import { EFriendStatus, IFriendAccept } from 'src/models';
 import { getFriends } from 'src/services/userService';
+import { clickFriend, selectFriend } from 'src/store/friendSlice';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import ContactMenu from '../ContactMenu/ContactMenu';
 
 import './SidebarContacts.scss';
 
 const SidebarContacts: React.FC = () => {
   const [toggleModal, setToggleModal] = React.useState(false);
-  const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
-  const { t: t1 } = useTranslation('common');
+
   const [loading, setLoading] = React.useState<boolean>(false);
   const [listFriend, setListFriend] = React.useState<
     {
       character: string;
-      friends: IListFriendAccept[];
+      friends: IFriendAccept[];
     }[]
   >([]);
 
+  const friendSelected = useAppSelector(selectFriend);
+
+  const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
+  const { t: t1 } = useTranslation('common');
+  const dispatch = useAppDispatch();
+
   React.useEffect(() => {
-    const handleConvertListFriend = (list: IListFriendAccept[]) => {
+    const handleConvertListFriend = (list: IFriendAccept[]) => {
       const listCharacter: string[] = [];
       list.forEach((friend) => {
         if (
@@ -53,11 +60,10 @@ const SidebarContacts: React.FC = () => {
       });
 
       const newList = listCharacter.sort().map((item) => {
-        const objectItem: { character: string; friends: IListFriendAccept[] } =
-          {
-            character: item,
-            friends: [],
-          };
+        const objectItem: { character: string; friends: IFriendAccept[] } = {
+          character: item,
+          friends: [],
+        };
 
         list.forEach((friend) => {
           if (
@@ -92,6 +98,10 @@ const SidebarContacts: React.FC = () => {
     getListFriend();
   }, []);
 
+  const handleSelectFriend = (friend: IFriendAccept) => {
+    dispatch(clickFriend(friend));
+  };
+
   return (
     <>
       <div className="sidebar-contacts">
@@ -124,7 +134,15 @@ const SidebarContacts: React.FC = () => {
                     <div className="firt-character">{item.character}</div>
                     <ul className="contact-names">
                       {item.friends.map((friend) => (
-                        <li key={friend.owner.id}>
+                        <Button
+                          key={friend.owner.id}
+                          className={clsx('contact-names__btn', {
+                            ['contact-names__btn--active']:
+                              friendSelected?.owner?.username ===
+                              friend.owner.username,
+                          })}
+                          onClick={() => handleSelectFriend(friend)}
+                        >
                           <label className="contact-names__label">
                             {friend.owner.fullName ?? friend.owner.username}
                           </label>
@@ -135,7 +153,7 @@ const SidebarContacts: React.FC = () => {
                           >
                             <MoreOutlined className="icon" />
                           </Dropdown>
-                        </li>
+                        </Button>
                       ))}
                     </ul>
                   </div>
