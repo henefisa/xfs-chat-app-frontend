@@ -125,9 +125,9 @@ const NavDashboard: React.FC = () => {
             className="custom-dropdown-menu"
           >
             <Avatar
-              path={userProfileStore.avatar}
+              path={userProfileStore?.avatar}
               username={
-                userProfileStore.username
+                userProfileStore?.username
                   ? userProfileStore.username.charAt(0).toUpperCase()
                   : ''
               }

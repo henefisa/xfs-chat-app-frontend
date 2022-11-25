@@ -14,8 +14,8 @@ import { Form } from 'antd';
 import { selectUserProfile } from 'src/store/userSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import * as userService from 'src/services/userService';
-import TextArea from 'antd/lib/input/TextArea';
 import { IUserItemResult } from 'src/models';
+import TextArea from '@common/TextArea/TextArea';
 
 import './SidebarSettings.scss';
 
@@ -89,11 +89,11 @@ const SidebarSettings: React.FC = () => {
               <Form
                 onFinish={handleFinish}
                 initialValues={{
-                  fullName: userProfileStore.fullName,
-                  location: userProfileStore.location,
-                  email: userProfileStore.email,
-                  phone: userProfileStore.phone,
-                  description: userProfileStore.description,
+                  fullName: userProfileStore?.fullName,
+                  location: userProfileStore?.location,
+                  email: userProfileStore?.email,
+                  phone: userProfileStore?.phone,
+                  description: userProfileStore?.description,
                 }}
               >
                 <Form.Item

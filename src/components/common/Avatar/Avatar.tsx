@@ -6,7 +6,7 @@ import './Avatar.scss';
 
 interface IAvatarProps extends AvatarProps {
   path?: string | null;
-  username: string;
+  username?: string;
   imgWidth: number;
   className?: string;
 }

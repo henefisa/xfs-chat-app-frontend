@@ -13,7 +13,7 @@ import { logout } from 'src/services/authService';
 import { logoutSuccess } from 'src/store/authSlice';
 import { useAppDispatch } from 'src/store/hooks';
 import { updateNavbar } from 'src/store/navbarSlice';
-import { deleteUserProfile } from 'src/store/userSlice';
+import { deleteFriendSelected, deleteUserProfile } from 'src/store/userSlice';
 
 import Button from '@common/Button/Button';
 import Menu from '@common/Menu/Menu';
@@ -75,6 +75,7 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
     await logout(t1);
     dispatch(logoutSuccess());
     dispatch(deleteUserProfile());
+    dispatch(deleteFriendSelected());
     dispatch(updateNavbar(ENavbar.PROFILE));
     navigate('/login');
   };
