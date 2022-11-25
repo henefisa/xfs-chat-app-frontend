@@ -15,10 +15,10 @@ import InputDropdown from '@common/Input/InputDropdown';
 import Title from '@common/Title/Title';
 import Tooltip from '@common/Tooltip/Tooltip';
 import { useTranslation } from 'react-i18next';
-import { selectFriend } from 'src/store/friendSlice';
 import { useAppSelector } from 'src/store/hooks';
 import ActionsChatMenu from '../ActionsChatMenu/ActionsChatMenu';
 import ChatCall from '../ChatCall/ChatCall';
+import { selectFriend } from 'src/store/userSlice';
 
 import './ChatHeader.scss';
 
@@ -35,7 +35,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
     setOpen(true);
   };
 
-  const friendSelected = useAppSelector(selectFriend);
+  const { selectedFriend } = useAppSelector(selectFriend);
 
   const listActionChat = React.useMemo(() => {
     return [
@@ -67,16 +67,16 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
     <div className="chat-header">
       <div className="user-info">
         <Avatar
-          path={friendSelected?.owner?.avatar}
+          path={selectedFriend?.owner?.avatar}
           imgWidth={35}
           username={
-            friendSelected?.owner?.fullName?.charAt(0).toUpperCase() ??
-            friendSelected?.owner?.username.charAt(0).toUpperCase()
+            selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ??
+            selectedFriend?.owner?.username.charAt(0).toUpperCase()
           }
           className="user-info__avatar"
         />
         <Title level={5} className="user-info__name" onClick={handleClickuser}>
-          {friendSelected?.owner?.fullName ?? friendSelected?.owner?.username}
+          {selectedFriend?.owner?.fullName ?? selectedFriend?.owner?.username}
         </Title>
         <div className="user-info__status">
           <CheckCircleFilled className="status__icon" />
