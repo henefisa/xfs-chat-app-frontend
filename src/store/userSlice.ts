@@ -74,6 +74,12 @@ export const userSlice = createSlice({
     deleteConversationSelected: (state) => {
       state.conversation.selectedConversation = null;
     },
+    updateListConversation: (state, action: PayloadAction<IConversation[]>) => {
+      state.conversation.listConversation = action.payload;
+    },
+    deleteListConversation: (state) => {
+      state.conversation.listConversation = [];
+    },
   },
 });
 
@@ -86,6 +92,8 @@ export const {
   deleteFriendSelected,
   updateConversationSelected,
   deleteConversationSelected,
+  updateListConversation,
+  deleteListConversation,
 } = userSlice.actions;
 
 export const selectUserProfile = (state: RootState) =>
