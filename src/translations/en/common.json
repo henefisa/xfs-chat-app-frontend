@@ -168,7 +168,11 @@
         "error": "Error",
         "update-error": "Update failed!",
         "btn-save": "Save change",
-        "btn-cancel": "Cancel"
+        "btn-cancel": "Cancel",
+        "name-error-message": "Please enter your name!",
+        "location-error-message": "Please enter your location!",
+        "phone-error-message": "Please enter your phone!",
+        "description-error-message": "Please enter your description!"
       }
     },
     "chat-overlay": "Select a chat or start a new one",

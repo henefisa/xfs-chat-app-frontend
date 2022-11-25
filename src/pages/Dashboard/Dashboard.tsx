@@ -8,9 +8,9 @@ import { SocketContext } from 'src/context/socket/context';
 import { selectFriend } from 'src/store/friendSlice';
 import { useAppSelector } from 'src/store/hooks';
 import { selectNavBar } from 'src/store/navbarSlice';
+import ENavbar from 'src/interfaces/ENavbar';
 
 import './Dashboard.scss';
-import ENavbar from 'src/interfaces/ENavbar';
 
 const Dashboard: React.FC = () => {
   const socket = React.useContext(SocketContext);

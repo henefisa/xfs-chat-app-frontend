@@ -4,7 +4,7 @@ import Title from '@common/Title/Title';
 import Dropdown from '@common/Dropdown/Dropdown';
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
-import { Divider } from 'antd';
+import Divider from '@common/Divider/Divider';
 import clsx from 'clsx';
 import PrivacyMenu from '../PrivacyMenu/PrivacyMenu';
 import Input from '@common/Input/Input';
@@ -12,53 +12,21 @@ import Switch from '@common/Switch/Switch';
 import { useTranslation } from 'react-i18next';
 import { Form } from 'antd';
 import { selectUserProfile } from 'src/store/userSlice';
-import { useAppSelector } from 'src/store/hooks';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import * as userService from 'src/services/userService';
-import { useDispatch } from 'react-redux';
 import TextArea from 'antd/lib/input/TextArea';
+import { IUserItemResult } from 'src/models';
 
 import './SidebarSettings.scss';
-
-interface IFormFields {
-  username: string;
-  location: string;
-  email: string;
-  phone: string;
-  description: string;
-}
 
 const SidebarSettings: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.settings' });
   const [active, setActive] = React.useState(0);
   const userProfileStore = useAppSelector(selectUserProfile);
-  const [username, setUsername] = React.useState(userProfileStore.username);
-  const [location, setLocation] = React.useState(
-    userProfileStore.location || ''
-  );
-  const [email, setEmail] = React.useState(userProfileStore.email || '');
-  const [phone, setPhone] = React.useState(userProfileStore.phone || '');
-  const [description, setDescription] = React.useState(
-    userProfileStore.description || ''
-  );
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const onValuesChange = ({
-    username,
-    location,
-    phone,
-    description,
-    email,
-  }: IFormFields) => {
-    setUsername(username);
-    setLocation(location);
-    setPhone(phone);
-    setDescription(description);
-    setEmail(email);
-  };
-
-  const handleFinish = (values: IFormFields) => {
+  const handleFinish = (values: IUserItemResult) => {
     userService.updateUserProfile(dispatch, values, t);
-    console.log(values);
   };
 
   const privacy = [
@@ -88,7 +56,7 @@ const SidebarSettings: React.FC = () => {
         {t('title')}
       </Title>
       <div className="avatar-settings">
-        <div className="avatar-settings--inner">
+        <div className="avatar-settings__inner">
           <Avatar
             path="https://scontent.fdad3-1.fna.fbcdn.net/v/t39.30808-6/277551484_1607305416300980_1426726336589949572_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=NDE6kmkwFQ8AX9-U3bh&_nc_ht=scontent.fdad3-1.fna&oh=00_AT8SGcvhT_y6-Lc16cMBv0OwsUOg0x7ef7Yp1yb_1teoEQ&oe=635BDBD2"
             imgWidth={100}
@@ -101,7 +69,7 @@ const SidebarSettings: React.FC = () => {
         </div>
       </div>
       <div className="account-details">
-        <div className="account-details--inner">
+        <div className="account-details__inner">
           <div className="title-list">
             {titleBox.map((item, index) => (
               <Title
@@ -121,20 +89,22 @@ const SidebarSettings: React.FC = () => {
               <Form
                 onFinish={handleFinish}
                 initialValues={{
-                  username: username,
-                  location: location,
-                  email: email,
-                  phone: phone,
-                  description: description,
+                  fullName: userProfileStore.fullName,
+                  location: userProfileStore.location,
+                  email: userProfileStore.email,
+                  phone: userProfileStore.phone,
+                  description: userProfileStore.description,
                 }}
-                onValuesChange={onValuesChange}
               >
                 <Form.Item
-                  name="username"
+                  name="fullName"
                   label={t('account-name')}
                   labelCol={{ span: 24 }}
                   rules={[
-                    { required: true, message: `username-error-message` },
+                    {
+                      required: true,
+                      message: `${t('name-error-message')}`,
+                    },
                   ]}
                 >
                   <Input className="form-input" />
@@ -144,7 +114,10 @@ const SidebarSettings: React.FC = () => {
                   label={t('account-location')}
                   labelCol={{ span: 24 }}
                   rules={[
-                    { required: true, message: `userlocation-error-message` },
+                    {
+                      required: true,
+                      message: `${t('location-error-message')}`,
+                    },
                   ]}
                 >
                   <Input className="form-input" />
@@ -153,7 +126,9 @@ const SidebarSettings: React.FC = () => {
                   name="phone"
                   label={t('account-phone')}
                   labelCol={{ span: 24 }}
-                  rules={[{ required: true, message: `phone-error-message` }]}
+                  rules={[
+                    { required: true, message: `${t('phone-error-message')}` },
+                  ]}
                 >
                   <Input className="form-input" />
                 </Form.Item>
@@ -161,9 +136,7 @@ const SidebarSettings: React.FC = () => {
                   name="email"
                   label={t('account-email')}
                   labelCol={{ span: 24 }}
-                  rules={[
-                    { required: true, message: `useremail-error-message` },
-                  ]}
+                  rules={[{ required: true, message: `email-error-message` }]}
                 >
                   <Input className="form-input" disabled />
                 </Form.Item>
@@ -172,7 +145,10 @@ const SidebarSettings: React.FC = () => {
                   label={t('account-description')}
                   labelCol={{ span: 24 }}
                   rules={[
-                    { required: true, message: `Description-error-message` },
+                    {
+                      required: true,
+                      message: `${t('description-error-message')}`,
+                    },
                   ]}
                 >
                   <TextArea
@@ -181,12 +157,12 @@ const SidebarSettings: React.FC = () => {
                   />
                 </Form.Item>
                 <div className="form-button">
-                  <Button type="primary" className="cancel-button">
+                  <Button type="primary" className="form-button__cancel">
                     {t('btn-cancel')}
                   </Button>
                   <Button
                     type="primary"
-                    className="save-change-button"
+                    className="form-button__save-change"
                     htmlType="submit"
                   >
                     {t('btn-save')}
@@ -197,12 +173,12 @@ const SidebarSettings: React.FC = () => {
           )}
 
           {active === 1 && (
-            <div className="privacy">
-              <ul className="panel-inner">
+            <div className="privacy__inner">
+              <ul className="privacy__panel">
                 {privacy.map((item, index) => (
                   <div key={index}>
-                    <li className="privacy-item">
-                      <Title level={5} className="privacy-item__title">
+                    <li className="panel-item">
+                      <Title level={5} className="panel-item__title">
                         {item.title}
                       </Title>
                       {item.check ? (
@@ -213,16 +189,14 @@ const SidebarSettings: React.FC = () => {
                           trigger={['click']}
                           placement="bottomRight"
                         >
-                          <Button className="privacy-item__btn">
+                          <Button className="panel-item__btn">
                             {t('btn-everyone')}
                             <DownOutlined className="btn-icon" />
                           </Button>
                         </Dropdown>
                       )}
                     </li>
-                    {index < privacy.length - 1 && (
-                      <Divider className="divider" />
-                    )}
+                    {index < privacy.length - 1 && <Divider />}
                   </div>
                 ))}
               </ul>
@@ -230,10 +204,10 @@ const SidebarSettings: React.FC = () => {
           )}
 
           {active === 2 && (
-            <div className="security">
-              <ul className="panel-inner">
-                <li className="security-item">
-                  <Title level={5} className="security-item__title">
+            <div className="security__inner">
+              <ul className="security__panel">
+                <li className="panel-item">
+                  <Title level={5} className="panel-item__title">
                     {t('show-security-notification')}
                   </Title>
                   <Switch defaultChecked={true} />
@@ -243,16 +217,16 @@ const SidebarSettings: React.FC = () => {
           )}
 
           {active === 3 && (
-            <div className="help">
-              <ul className="panel-inner">
+            <div className="help__inner">
+              <ul className="help__panel">
                 {help.map((item, index) => (
                   <div key={index}>
-                    <li className="help-item">
-                      <Title level={5} className="help-item__title">
+                    <li className="panel-item">
+                      <Title level={5} className="panel-item__title">
                         {item.title}
                       </Title>
                     </li>
-                    {index < help.length - 1 && <Divider className="divider" />}
+                    {index < help.length - 1 && <Divider />}
                   </div>
                 ))}
               </ul>

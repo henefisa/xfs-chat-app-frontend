@@ -1,22 +1,15 @@
 import { notification } from 'antd';
 import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
-import { TGetFriendsQuery, IGetUsersQuery } from 'src/models';
+import { TGetFriendsQuery, IGetUsersQuery, IUserItemResult } from 'src/models';
 import { AppDispatch } from 'src/store';
 import {
   getProfileFailed,
   getProfileStart,
   getProfileSuccess,
-  updateProfile,
+  updateProfileFailed,
+  updateProfileSuccess,
 } from 'src/store/userSlice';
-
-interface newProfile {
-  username: string;
-  location: string;
-  email: string;
-  phone: string;
-  description: string;
-}
 
 export const checkUsernameExist = async (
   username: string,
@@ -68,19 +61,19 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
 
 export const updateUserProfile = async (
   dispatch: AppDispatch,
-  user: newProfile,
+  user: IUserItemResult,
   t: TFunction<'dashboard', 'sidebar.settings'>
 ) => {
   try {
     const res = await apiRequest.put('api/users/profile', user);
-    dispatch(updateProfile(res.data));
+    dispatch(updateProfileSuccess(res.data));
     notification.success({
       message: t('success'),
       description: t('update-success'),
       duration: 2,
     });
   } catch (err) {
-    dispatch(getProfileFailed());
+    dispatch(updateProfileFailed());
     notification.error({
       message: t('error'),
       description: t('update-error'),

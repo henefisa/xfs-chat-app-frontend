@@ -13,7 +13,7 @@
   }
   .avatar-settings {
     text-align: center;
-    .avatar-settings--inner {
+    .avatar-settings__inner {
       position: relative;
       display: inline-block;
       margin-bottom: 12px;
@@ -49,26 +49,27 @@
     border-bottom: 1px solid rgba(33, 40, 50, 0.125);
     margin-bottom: 24px;
 
-    .ant-typography + h5.ant-typography {
+    .account-details__title {
+      padding: 4px 12px 4px 12px;
+      background-color: white;
       margin: 0;
-    }
-  }
-  .account-details__title {
-    padding: 4px 12px 4px 12px;
-    background-color: white;
-    margin: 0;
-    color: v.$text-color;
-    font-size: 15px;
-    cursor: pointer;
-    border-radius: 5px;
+      color: v.$text-color;
+      font-size: 15px;
+      cursor: pointer;
+      border-radius: 5px;
 
-    &.account-details__title--active {
-      background-color: v.$background;
-      color: v.$button;
-    }
+      &.ant-typography + h5.ant-typography {
+        margin: 0;
+      }
 
-    &:hover {
-      background-color: v.$background;
+      &.account-details__title--active {
+        background-color: v.$background;
+        color: v.$button;
+      }
+
+      &:hover {
+        background-color: v.$background;
+      }
     }
   }
 
@@ -125,7 +126,7 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    .account-details--inner {
+    .account-details__inner {
       background-color: white;
       box-shadow: 0 2px 4px rgb(15 34 58 / 12%);
       border-radius: 5px;
@@ -166,7 +167,7 @@
           }
         }
         .form-button {
-          .cancel-button {
+          .form-button__cancel {
             margin-top: 24px;
             background-color: transparent;
             color: v.$button;
@@ -178,56 +179,55 @@
               opacity: 0.8;
             }
           }
-          .save-change-button {
+          .form-button__save-change {
             font-size: 15px;
           }
         }
       }
-      .privacy {
-        .divider {
-          margin: 16px 0;
-        }
-        .privacy-item {
-          padding-left: 51px;
-          width: 300px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          .privacy-item__title {
-            font-size: 13px;
-            color: v.$text-color;
-            margin: 0;
-          }
-          .privacy-item__btn {
-            padding: 3px 8px;
-            background-color: #e6ebf5;
-            font-size: 13.125px;
-            border: 2px solid transparent;
-
-            &:hover {
+      .privacy__inner {
+        .privacy__panel {
+          .panel-item {
+            padding-left: 51px;
+            width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .panel-item__title {
+              font-size: 13px;
               color: v.$text-color;
-              opacity: 0.9;
+              margin: 0;
             }
-            &:focus {
-              border: 2px solid #dee2e8;
-              color: v.$text-color;
-            }
+            .panel-item__btn {
+              padding: 3px 8px;
+              background-color: #e6ebf5;
+              font-size: 13.125px;
+              border: 2px solid transparent;
 
-            .btn-icon {
-              font-size: 10px;
+              &:hover {
+                color: v.$text-color;
+                opacity: 0.9;
+              }
+              &:focus {
+                border: 2px solid #dee2e8;
+                color: v.$text-color;
+              }
+
+              .btn-icon {
+                font-size: 10px;
+              }
             }
           }
         }
       }
-      .security {
-        .panel-inner {
-          .security-item {
+      .security__inner {
+        .security__panel {
+          .panel-item {
             padding-left: 51px;
             width: 300px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            .security-item__title {
+            .panel-item__title {
               font-size: 13px;
               color: v.$text-color;
               font-weight: 600;
@@ -235,24 +235,21 @@
           }
         }
       }
-      .help {
-        .panel-inner {
-          .help-item {
+      .help__inner {
+        .help__panel {
+          .panel-item {
             padding-left: 51px;
             width: 300px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            .help-item__title {
+            .panel-item__title {
               font-size: 13px;
               color: v.$text-color;
               font-weight: 600;
               margin: 0;
             }
-          }
-          .divider {
-            margin: 16px 0;
           }
         }
       }

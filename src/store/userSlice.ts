@@ -23,8 +23,14 @@ export const userSlice = createSlice({
     deleteUserProfile: (state) => {
       state.profile.userProfile = <TUserProfile>{};
     },
-    updateProfile: (state, action) => {
+    updateProfileSuccess: (state, action) => {
+      state.profile.isFetching = false;
+      state.profile.error = false;
       state.profile.userProfile = action.payload;
+    },
+    updateProfileFailed: (state) => {
+      state.profile.isFetching = false;
+      state.profile.error = true;
     },
   },
 });
@@ -34,7 +40,8 @@ export const {
   getProfileSuccess,
   getProfileFailed,
   deleteUserProfile,
-  updateProfile,
+  updateProfileSuccess,
+  updateProfileFailed,
 } = userSlice.actions;
 
 export const selectUserProfile = (state: RootState) =>
