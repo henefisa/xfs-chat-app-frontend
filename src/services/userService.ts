@@ -4,6 +4,7 @@ import apiRequest from 'src/api/apiRequest';
 import {
   TGetFriendsQuery,
   IGetUsersQuery,
+  IUserItemResult,
   TConversationQuery,
 } from 'src/models';
 import { AppDispatch } from 'src/store';
@@ -11,6 +12,8 @@ import {
   getProfileFailed,
   getProfileStart,
   getProfileSuccess,
+  updateProfileFailed,
+  updateProfileSuccess,
 } from 'src/store/userSlice';
 
 export const checkUsernameExist = async (
@@ -58,6 +61,29 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
     dispatch(getProfileSuccess(res.data));
   } catch (err) {
     dispatch(getProfileFailed());
+  }
+};
+
+export const updateUserProfile = async (
+  dispatch: AppDispatch,
+  user: IUserItemResult,
+  t: TFunction<'dashboard', 'sidebar.settings'>
+) => {
+  try {
+    const res = await apiRequest.put('api/users/profile', user);
+    dispatch(updateProfileSuccess(res.data));
+    notification.success({
+      message: t('success'),
+      description: t('update-success'),
+      duration: 2,
+    });
+  } catch (err) {
+    dispatch(updateProfileFailed());
+    notification.error({
+      message: t('error'),
+      description: t('update-error'),
+      duration: 2,
+    });
   }
 };
 
