@@ -16,12 +16,13 @@ import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import * as userService from 'src/services/userService';
 import { IUserItemResult } from 'src/models';
 import TextArea from '@common/TextArea/TextArea';
+import ESidebarSetting from 'src/interfaces/ESidebarSettings';
 
 import './SidebarSettings.scss';
 
 const SidebarSettings: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.settings' });
-  const [active, setActive] = React.useState(0);
+  const [active, setActive] = React.useState(ESidebarSetting.ACCOUNT);
   const userProfileStore = useAppSelector(selectUserProfile);
   const dispatch = useAppDispatch();
 
@@ -44,10 +45,10 @@ const SidebarSettings: React.FC = () => {
   ];
 
   const titleBox = [
-    t('account-details-title'),
-    t('privacy-title'),
-    t('security-title'),
-    t('help-title'),
+    { title: t('account-details-title'), key: ESidebarSetting.ACCOUNT },
+    { title: t('privacy-title'), key: ESidebarSetting.PRIVACY },
+    { title: t('security-title'), key: ESidebarSetting.SECURITY },
+    { title: t('help-title'), key: ESidebarSetting.HELPS },
   ];
 
   return (
@@ -75,16 +76,16 @@ const SidebarSettings: React.FC = () => {
               <Title
                 className={clsx(
                   'account-details__title',
-                  active === index && 'account-details__title--active'
+                  active === item.key && 'account-details__title--active'
                 )}
                 level={5}
                 key={index}
               >
-                <div onClick={() => setActive(index)}>{item}</div>
+                <div onClick={() => setActive(item.key)}>{item.title}</div>
               </Title>
             ))}
           </div>
-          {active === 0 && (
+          {active === ESidebarSetting.ACCOUNT && (
             <div className="form-container">
               <Form
                 onFinish={handleFinish}
@@ -172,7 +173,7 @@ const SidebarSettings: React.FC = () => {
             </div>
           )}
 
-          {active === 1 && (
+          {active === ESidebarSetting.PRIVACY && (
             <div className="privacy__inner">
               <ul className="privacy__panel">
                 {privacy.map((item, index) => (
@@ -203,7 +204,7 @@ const SidebarSettings: React.FC = () => {
             </div>
           )}
 
-          {active === 2 && (
+          {active === ESidebarSetting.SECURITY && (
             <div className="security__inner">
               <ul className="security__panel">
                 <li className="panel-item">
@@ -216,7 +217,7 @@ const SidebarSettings: React.FC = () => {
             </div>
           )}
 
-          {active === 3 && (
+          {active === ESidebarSetting.HELPS && (
             <div className="help__inner">
               <ul className="help__panel">
                 {help.map((item, index) => (
