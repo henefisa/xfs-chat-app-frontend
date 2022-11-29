@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IConversation, IFriendAccept, TUserProfile } from 'src/models';
+import {
+  IConversation,
+  IFriendAccept,
+  IParticipant,
+  TUserProfile,
+} from 'src/models';
 import { RootState } from '.';
 
 interface IUserProfileState {
@@ -18,10 +23,16 @@ interface IUserConversationState {
   listConversation: IConversation[];
 }
 
+interface IUserParticipantState {
+  selectedParticipant: IParticipant | null;
+  listParticipant: IParticipant[];
+}
+
 interface IUserState {
   profile: IUserProfileState;
   friend: IUserFriendState;
   conversation: IUserConversationState;
+  participant: IUserParticipantState;
 }
 
 const initialState: IUserState = {
@@ -37,6 +48,10 @@ const initialState: IUserState = {
   conversation: {
     selectedConversation: null,
     listConversation: [],
+  },
+  participant: {
+    selectedParticipant: null,
+    listParticipant: [],
   },
 };
 
@@ -74,6 +89,12 @@ export const userSlice = createSlice({
     deleteConversationSelected: (state) => {
       state.conversation.selectedConversation = null;
     },
+    updateParticipantSelected: (state, action: PayloadAction<IParticipant>) => {
+      state.participant.selectedParticipant = action.payload;
+    },
+    deleteParticipantSelected: (state) => {
+      state.participant.selectedParticipant = null;
+    },
   },
 });
 
@@ -86,6 +107,8 @@ export const {
   deleteFriendSelected,
   updateConversationSelected,
   deleteConversationSelected,
+  updateParticipantSelected,
+  deleteParticipantSelected,
 } = userSlice.actions;
 
 export const selectUserProfile = (state: RootState) =>
@@ -94,5 +117,7 @@ export const selectUserProfile = (state: RootState) =>
 export const selectFriend = (state: RootState) => state.user.friend;
 
 export const selectConversation = (state: RootState) => state.user.conversation;
+
+export const selectParticipant = (state: RootState) => state.user.participant;
 
 export default userSlice.reducer;
