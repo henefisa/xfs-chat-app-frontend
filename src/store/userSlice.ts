@@ -103,6 +103,7 @@ export const {
   getProfileSuccess,
   getProfileFailed,
   deleteUserProfile,
+  updateProfileFailed,
   updateFriendSelected,
   deleteFriendSelected,
   updateConversationSelected,
