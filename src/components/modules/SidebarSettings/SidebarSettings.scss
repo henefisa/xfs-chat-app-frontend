@@ -17,8 +17,9 @@
       position: relative;
       display: inline-block;
       margin-bottom: 12px;
-      .avatar-btn {
+      .avatar-label {
         position: absolute;
+        cursor: pointer;
         bottom: -4px;
         right: 0;
         height: 32px;
@@ -34,9 +35,17 @@
         }
         &__icon {
           color: #212529;
+          margin-top: 6px;
         }
       }
     }
+  }
+
+  .input-file {
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
   }
 
   .title-list {
@@ -70,55 +79,6 @@
       &:hover {
         background-color: v.$background;
       }
-    }
-  }
-
-  .user-info__avatar {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 24px;
-
-    .avatar-btn {
-      position: absolute;
-      bottom: -4px;
-      right: 0;
-      height: 32px;
-      width: 32px;
-      border-radius: 50%;
-      display: flex;
-      text-align: center;
-      justify-content: center;
-      background-color: #e6ebf5;
-      border: 2px solid transparent;
-      &:focus {
-        border: 2px solid #dee2e8;
-      }
-      &__icon {
-        color: #212529;
-      }
-    }
-  }
-  .user-info__name {
-    color: v.$text-color;
-    margin-bottom: 4px;
-    line-height: 1.2;
-    text-align: center;
-  }
-  .user-info__status {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-
-    .status-current {
-      font-size: 15px;
-      color: v.$text-sub-color;
-    }
-    .status-icon {
-      font-size: 10px;
-      margin-left: 6px;
-      color: v.$icon-color;
     }
   }
 

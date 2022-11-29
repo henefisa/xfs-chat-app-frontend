@@ -14,7 +14,7 @@ import { Form } from 'antd';
 import { selectUserProfile } from 'src/store/userSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import * as userService from 'src/services/userService';
-import { IUserItemResult } from 'src/models';
+import { TUserInfo } from 'src/models';
 import TextArea from '@common/TextArea/TextArea';
 import ESidebarSetting from 'src/interfaces/ESidebarSettings';
 
@@ -25,9 +25,19 @@ const SidebarSettings: React.FC = () => {
   const [active, setActive] = React.useState(ESidebarSetting.ACCOUNT);
   const userProfileStore = useAppSelector(selectUserProfile);
   const dispatch = useAppDispatch();
+  const [selectedFile, setSelectedFile] = React.useState<File>();
+  const [preview, setPreview] = React.useState<string>();
 
-  const handleFinish = (values: IUserItemResult) => {
-    userService.updateUserProfile(dispatch, values, t);
+  const handleFinish = async (values: TUserInfo) => {
+    if (selectedFile) {
+      const res = await userService.getPresignUrl(selectedFile.name, t);
+      await userService.putPresignUrl(res.url, selectedFile, t);
+      const user = { ...values, avatar: res.key };
+      await userService.updateUserProfile(dispatch, user, t);
+    } else {
+      await userService.updateUserProfile(dispatch, values, t);
+    }
+    await userService.getUserProfile(dispatch);
   };
 
   const privacy = [
@@ -51,6 +61,26 @@ const SidebarSettings: React.FC = () => {
     { title: t('help-title'), key: ESidebarSetting.HELPS },
   ];
 
+  React.useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+
+  const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+    setSelectedFile(e.target.files[0]);
+  };
+
   return (
     <div className="sidebar-settings">
       <Title className="title-settings" level={3}>
@@ -59,16 +89,22 @@ const SidebarSettings: React.FC = () => {
       <div className="avatar-settings">
         <div className="avatar-settings__inner">
           <Avatar
-            path="https://scontent.fdad3-1.fna.fbcdn.net/v/t39.30808-6/277551484_1607305416300980_1426726336589949572_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=NDE6kmkwFQ8AX9-U3bh&_nc_ht=scontent.fdad3-1.fna&oh=00_AT8SGcvhT_y6-Lc16cMBv0OwsUOg0x7ef7Yp1yb_1teoEQ&oe=635BDBD2"
+            path={preview || userProfileStore?.avatar}
             imgWidth={100}
             username="A"
             className="custom-avatar"
           />
-          <Button className="avatar-btn">
-            <EditOutlined className="avatar-btn__icon" />
-          </Button>
+          <label htmlFor="upload-file" className="avatar-label">
+            <EditOutlined className="avatar-label__icon" />
+          </label>
         </div>
       </div>
+      <Input
+        id="upload-file"
+        className="input-file"
+        type="file"
+        onChange={onSelectFile}
+      />
       <div className="account-details">
         <div className="account-details__inner">
           <div className="title-list">
