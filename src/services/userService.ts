@@ -70,7 +70,7 @@ export const updateUserProfile = async (
   t: TFunction<'dashboard', 'sidebar.settings'>
 ) => {
   try {
-    await apiRequest.put('api/users/profile', user);
+    await apiRequest.patch('api/users/profile', user);
     notification.success({
       message: t('success'),
       description: t('update-success'),
