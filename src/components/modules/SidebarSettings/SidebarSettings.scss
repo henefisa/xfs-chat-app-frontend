@@ -1,25 +1,25 @@
 @use '../../../assets/styles/variables' as v;
 
 .sidebar-settings {
-  .sidebar-settings__title {
-    padding: 24px 24px 0;
-    color: #495057;
+  background-color: #f5f7fb;
+  width: 95%;
+
+  .title-settings {
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 24px;
+    color: v.$text-color;
     font-size: 21px;
-    font-weight: 600;
-    margin: 0;
   }
-
-  .user-info {
-    padding: 24px;
+  .avatar-settings {
     text-align: center;
-
-    .user-info__avatar {
+    .avatar-settings__inner {
       position: relative;
       display: inline-block;
-      margin-bottom: 24px;
-
-      .avatar-btn {
+      margin-bottom: 12px;
+      .avatar-label {
         position: absolute;
+        cursor: pointer;
         bottom: -4px;
         right: 0;
         height: 32px;
@@ -30,219 +30,187 @@
         justify-content: center;
         background-color: #e6ebf5;
         border: 2px solid transparent;
-
         &:focus {
           border: 2px solid #dee2e8;
         }
-
         &__icon {
           color: #212529;
+          margin-top: 6px;
         }
-      }
-    }
-    .user-info__name {
-      color: v.$text-color;
-      margin-bottom: 4px;
-      line-height: 1.2;
-    }
-
-    .user-info__status {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-
-      .status-current {
-        font-size: 15px;
-        color: v.$text-sub-color;
-      }
-
-      .status-icon {
-        font-size: 10px;
-        margin-left: 6px;
-        color: v.$icon-color;
       }
     }
   }
 
-  .sidebar-settings__content {
-    padding: 0 24px 24px;
-    height: calc(100vh - 336px);
-    overflow: auto;
+  .input-file {
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+  }
 
-    .ant-collapse.info,
-    .ant-collapse.privacy,
-    .ant-collapse.security,
-    .ant-collapse.help {
-      margin-bottom: 8px;
-      background-color: v.$white;
-      border: 1px solid #f0eff5;
-      border-radius: 6px;
+  .title-list {
+    width: 1000px;
+    padding-left: 39px;
+    padding-top: 12px;
+    padding-bottom: 8px;
+    margin: 0 auto;
+    display: flex;
+    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+    margin-bottom: 24px;
 
-      .info__panel,
-      .privacy__panel,
-      .security__panel,
-      .help__panel {
-        .ant-collapse-header {
-          padding: 12px 20px;
+    .account-details__title {
+      padding: 4px 12px 4px 12px;
+      background-color: white;
+      margin: 0;
+      color: v.$text-color;
+      font-size: 15px;
+      cursor: pointer;
+      border-radius: 5px;
 
-          .ant-collapse-arrow {
-            font-size: 10px;
+      &.ant-typography + h5.ant-typography {
+        margin: 0;
+      }
+
+      &.account-details__title--active {
+        background-color: v.$background;
+        color: v.$button;
+      }
+
+      &:hover {
+        background-color: v.$background;
+      }
+    }
+  }
+
+  .account-details {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    .account-details__inner {
+      background-color: white;
+      box-shadow: 0 2px 4px rgb(15 34 58 / 12%);
+      border-radius: 5px;
+
+      .form-container {
+        padding: 24px;
+        width: 1000px;
+        background-color: v.$white;
+        margin: 0 auto;
+
+        .ant-form-item {
+          margin-bottom: 16px;
+          display: inline-block;
+          width: 50%;
+          padding: 0 15px;
+
+          .ant-input[disabled] {
+            background-color: v.$background;
           }
+          .ant-form-item-label {
+            padding: 0;
+            .ant-form-item-required {
+              font-size: 15px;
+              color: v.$text-color;
+              font-weight: 500;
+            }
+          }
+        }
+        .form-input {
+          box-shadow: none;
+          border-radius: 4px;
+          border: 1px solid #e6ebf5;
+          &:hover {
+            border-color: v.$primary;
+          }
+          &:focus {
+            border-color: v.$primary;
+          }
+        }
+        .form-button {
+          .form-button__cancel {
+            margin-top: 24px;
+            background-color: transparent;
+            color: v.$button;
+            border: none;
+            box-shadow: none;
+            font-size: 15px;
 
-          .panel-header {
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+          .form-button__save-change {
+            font-size: 15px;
+          }
+        }
+      }
+      .privacy__inner {
+        .privacy__panel {
+          .panel-item {
+            padding-left: 51px;
+            width: 300px;
             display: flex;
             align-items: center;
-            gap: 6px;
-
-            .panel-header__icon {
+            justify-content: space-between;
+            .panel-item__title {
+              font-size: 13px;
               color: v.$text-color;
-            }
-
-            .panel-header__title {
               margin: 0;
-              font-size: 14px;
+            }
+            .panel-item__btn {
+              padding: 3px 8px;
+              background-color: #e6ebf5;
+              font-size: 13.125px;
+              border: 2px solid transparent;
+
+              &:hover {
+                color: v.$text-color;
+                opacity: 0.9;
+              }
+              &:focus {
+                border: 2px solid #dee2e8;
+                color: v.$text-color;
+              }
+
+              .btn-icon {
+                font-size: 10px;
+              }
+            }
+          }
+        }
+      }
+      .security__inner {
+        .security__panel {
+          .panel-item {
+            padding-left: 51px;
+            width: 300px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .panel-item__title {
+              font-size: 13px;
               color: v.$text-color;
+              font-weight: 600;
             }
           }
         }
-
-        .ant-motion-collapse,
-        .ant-collapse-content.ant-collapse-content-active {
-          .ant-collapse-content-box {
-            padding: 0;
-
-            .panel-inner {
-              list-style: none;
-              padding: 20px;
+      }
+      .help__inner {
+        .help__panel {
+          .panel-item {
+            padding-left: 51px;
+            width: 300px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            .panel-item__title {
+              font-size: 13px;
+              color: v.$text-color;
+              font-weight: 600;
               margin: 0;
-              position: relative;
-
-              .btn-edit {
-                position: absolute;
-                right: 24px;
-                top: 24px;
-                padding: 4px 8px;
-                background-color: v.$card-background-hover;
-                font-size: 13.125px;
-                line-height: 1.4;
-                border: 2px solid transparent;
-                border-radius: 3px;
-
-                &:focus {
-                  border: 2px solid #dee2e8;
-                }
-              }
-
-              .info-item {
-                .info-item__title {
-                  font-size: 15px;
-                  color: #7a7f9a;
-                  font-weight: 400;
-                  margin-bottom: 4px;
-                }
-
-                .info-item__desc {
-                  font-size: 14px;
-                  color: v.$text-color;
-                  margin: 0;
-
-                  .user-name {
-                    font-size: 14px;
-                    color: v.$text-color;
-                    background-color: transparent;
-                    padding: 0;
-                    font-weight: 600;
-                    border: none;
-                    cursor: auto;
-                    &:focus {
-                      border: none;
-                      box-shadow: none;
-                    }
-                  }
-                }
-              }
-
-              .info-item + .info-item {
-                margin-top: 24px;
-              }
             }
           }
-        }
-      }
-    }
-
-    .privacy {
-      .divider {
-        margin: 16px 0;
-      }
-      .privacy-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .privacy-item__title {
-          font-size: 13px;
-          color: v.$text-color;
-          margin: 0;
-        }
-
-        .privacy-item__btn {
-          padding: 3px 8px;
-          background-color: #e6ebf5;
-          font-size: 13.125px;
-          border: 2px solid transparent;
-
-          &:hover {
-            color: v.$text-color;
-            opacity: 0.9;
-          }
-
-          &:focus {
-            border: 2px solid #dee2e8;
-            color: v.$text-color;
-          }
-
-          .btn-icon {
-            font-size: 10px;
-          }
-        }
-      }
-    }
-
-    .security {
-      .panel-inner {
-        .security-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-
-          .security-item__title {
-            font-size: 13px;
-            color: v.$text-color;
-            font-weight: 600;
-          }
-        }
-      }
-    }
-
-    .help {
-      .panel-inner {
-        .help-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          cursor: pointer;
-
-          .help-item__title {
-            font-size: 13px;
-            color: v.$text-color;
-            font-weight: 600;
-            margin: 0;
-          }
-        }
-        .divider {
-          margin: 16px 0;
         }
       }
     }

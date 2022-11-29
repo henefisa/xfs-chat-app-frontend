@@ -5,7 +5,6 @@ import SidebarProfile from '../SidebarProfile/SidebarProfile';
 import SidebarContacts from '../SidebarContacts/SidebarContacts';
 import SidebarGroups from '../SidebarGroups/SidebarGroups';
 import SidebarChats from '../SidebarChats/SidebarChats';
-import SidebarSettings from '../SidebarSettings/SidebarSettings';
 import SidebarSearchUsers from '../SidebarSearchUsers/SidebarSearchUsers';
 import ENavbar from 'src/interfaces/ENavbar';
 
@@ -21,7 +20,6 @@ const SidebarDashboard: React.FC = () => {
       {navbarAction === ENavbar.GROUPS && <SidebarGroups />}
       {navbarAction === ENavbar.CONTACTS && <SidebarContacts />}
       {navbarAction === ENavbar.SEARCH && <SidebarSearchUsers />}
-      {navbarAction === ENavbar.SETTINGS && <SidebarSettings />}
     </div>
   );
 };
