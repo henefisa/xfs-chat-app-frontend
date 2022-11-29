@@ -66,13 +66,16 @@ const SidebarContacts: React.FC = () => {
         };
 
         list.forEach((friend) => {
-          if (
-            !(
-              friend.owner.fullName?.charAt(0).toUpperCase() ??
-              friend.owner.username.charAt(0).toUpperCase() === item
-            )
-          )
+          if (!friend.owner.fullName) {
+            if (!(friend.owner.username.charAt(0).toUpperCase() === item))
+              return;
+
+            objectItem.friends.push(friend);
+
             return;
+          }
+
+          if (!(friend.owner.fullName.charAt(0).toUpperCase() === item)) return;
 
           objectItem.friends.push(friend);
         });
