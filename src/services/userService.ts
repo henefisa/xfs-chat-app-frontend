@@ -1,11 +1,12 @@
 import { notification } from 'antd';
+import axios from 'axios';
 import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
 import {
   TGetFriendsQuery,
   IGetUsersQuery,
-  IUserItemResult,
   TConversationQuery,
+  TDataUpdateProfile,
 } from 'src/models';
 import { AppDispatch } from 'src/store';
 import {
@@ -13,7 +14,6 @@ import {
   getProfileStart,
   getProfileSuccess,
   updateProfileFailed,
-  updateProfileSuccess,
 } from 'src/store/userSlice';
 
 export const checkUsernameExist = async (
@@ -66,12 +66,11 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
 
 export const updateUserProfile = async (
   dispatch: AppDispatch,
-  user: IUserItemResult,
+  user: TDataUpdateProfile,
   t: TFunction<'dashboard', 'sidebar.settings'>
 ) => {
   try {
-    const res = await apiRequest.put('api/users/profile', user);
-    dispatch(updateProfileSuccess(res.data));
+    await apiRequest.put('api/users/profile', user);
     notification.success({
       message: t('success'),
       description: t('update-success'),
@@ -83,6 +82,40 @@ export const updateUserProfile = async (
       message: t('error'),
       description: t('update-error'),
       duration: 2,
+    });
+  }
+};
+
+export const getPresignUrl = async (
+  key: string,
+  t: TFunction<'dashboard', 'sidebar.settings'>
+) => {
+  try {
+    const res = await apiRequest.post('api/upload/presign-url', { key: key });
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('update-error'),
+      duration: 1.5,
+      key: '1',
+    });
+  }
+};
+
+export const putPresignUrl = async (
+  url: string,
+  file: File,
+  t: TFunction<'dashboard', 'sidebar.settings'>
+) => {
+  try {
+    await axios.put(url, file);
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('update-error'),
+      duration: 1.5,
+      key: '1',
     });
   }
 };

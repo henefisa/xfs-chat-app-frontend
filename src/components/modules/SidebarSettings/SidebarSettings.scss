@@ -19,6 +19,7 @@
       margin-bottom: 12px;
       .avatar-btn {
         position: absolute;
+        cursor: pointer;
         bottom: -4px;
         right: 0;
         height: 32px;
@@ -34,9 +35,17 @@
         }
         &__icon {
           color: #212529;
+          margin-top: 6px;
         }
       }
     }
+  }
+
+  .input-file {
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
   }
 
   .title-list {

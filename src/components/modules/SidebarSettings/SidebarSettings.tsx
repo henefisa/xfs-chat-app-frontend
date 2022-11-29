@@ -14,7 +14,7 @@ import { Form } from 'antd';
 import { selectUserProfile } from 'src/store/userSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import * as userService from 'src/services/userService';
-import { IUserItemResult } from 'src/models';
+import { IUserItemResult, TDataUpdateProfile } from 'src/models';
 import TextArea from '@common/TextArea/TextArea';
 import ESidebarSetting from 'src/interfaces/ESidebarSettings';
 
@@ -26,8 +26,9 @@ const SidebarSettings: React.FC = () => {
   const userProfileStore = useAppSelector(selectUserProfile);
   const dispatch = useAppDispatch();
 
-  const handleFinish = (values: IUserItemResult) => {
-    userService.updateUserProfile(dispatch, values, t);
+  const handleFinish = async (values: IUserItemResult) => {
+    await userService.updateUserProfile(dispatch, values, t);
+    await userService.getUserProfile(dispatch);
   };
 
   const privacy = [
@@ -51,6 +52,25 @@ const SidebarSettings: React.FC = () => {
     { title: t('help-title'), key: ESidebarSetting.HELPS },
   ];
 
+  async function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) return;
+    const file = e.target.files[0];
+    const res = await userService.getPresignUrl(file.name, t);
+    await userService.putPresignUrl(res.url, file, t);
+    if (!userProfileStore) return;
+    const user: TDataUpdateProfile = {
+      username: userProfileStore?.username,
+      fullName: userProfileStore?.fullName,
+      avatar: res.key,
+      email: userProfileStore?.email,
+      phone: userProfileStore?.phone,
+      description: userProfileStore?.description,
+      location: userProfileStore?.location,
+    };
+    await userService.updateUserProfile(dispatch, user, t);
+    await userService.getUserProfile(dispatch);
+  }
+
   return (
     <div className="sidebar-settings">
       <Title className="title-settings" level={3}>
@@ -59,16 +79,22 @@ const SidebarSettings: React.FC = () => {
       <div className="avatar-settings">
         <div className="avatar-settings__inner">
           <Avatar
-            path="https://scontent.fdad3-1.fna.fbcdn.net/v/t39.30808-6/277551484_1607305416300980_1426726336589949572_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=NDE6kmkwFQ8AX9-U3bh&_nc_ht=scontent.fdad3-1.fna&oh=00_AT8SGcvhT_y6-Lc16cMBv0OwsUOg0x7ef7Yp1yb_1teoEQ&oe=635BDBD2"
+            path={userProfileStore?.avatar}
             imgWidth={100}
             username="A"
             className="custom-avatar"
           />
-          <Button className="avatar-btn">
+          <label htmlFor="upload-file" className="avatar-btn">
             <EditOutlined className="avatar-btn__icon" />
-          </Button>
+          </label>
         </div>
       </div>
+      <Input
+        id="upload-file"
+        className="input-file"
+        type="file"
+        onChange={changeHandler}
+      />
       <div className="account-details">
         <div className="account-details__inner">
           <div className="title-list">

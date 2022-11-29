@@ -74,11 +74,6 @@ export const userSlice = createSlice({
     deleteConversationSelected: (state) => {
       state.conversation.selectedConversation = null;
     },
-    updateProfileSuccess: (state, action) => {
-      state.profile.isFetching = false;
-      state.profile.error = false;
-      state.profile.userProfile = action.payload;
-    },
     updateProfileFailed: (state) => {
       state.profile.isFetching = false;
       state.profile.error = true;
@@ -91,7 +86,6 @@ export const {
   getProfileSuccess,
   getProfileFailed,
   deleteUserProfile,
-  updateProfileSuccess,
   updateProfileFailed,
   updateFriendSelected,
   deleteFriendSelected,
