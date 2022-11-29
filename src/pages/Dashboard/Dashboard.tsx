@@ -15,8 +15,6 @@ const Dashboard: React.FC = () => {
   const { selectedFriend } = useAppSelector(selectFriend);
   const { selectedParticipant } = useAppSelector(selectParticipant);
 
-  const navbarAction = useAppSelector(selectNavBar);
-
   React.useEffect(() => {
     socket.connect();
     socket.on('connect', () => {
@@ -46,7 +44,5 @@ const Dashboard: React.FC = () => {
     </div>
   );
 };
-
-
 
 export default Dashboard;
