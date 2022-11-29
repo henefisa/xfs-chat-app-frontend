@@ -14,7 +14,7 @@ import { Form } from 'antd';
 import { selectUserProfile } from 'src/store/userSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import * as userService from 'src/services/userService';
-import { TDataUpdateProfile } from 'src/models';
+import { TUserInfo } from 'src/models';
 import TextArea from '@common/TextArea/TextArea';
 import ESidebarSetting from 'src/interfaces/ESidebarSettings';
 
@@ -28,7 +28,7 @@ const SidebarSettings: React.FC = () => {
   const [selectedFile, setSelectedFile] = React.useState<File>();
   const [preview, setPreview] = React.useState<string>();
 
-  const handleFinish = async (values: TDataUpdateProfile) => {
+  const handleFinish = async (values: TUserInfo) => {
     if (selectedFile) {
       const res = await userService.getPresignUrl(selectedFile.name, t);
       await userService.putPresignUrl(res.url, selectedFile, t);
@@ -94,8 +94,8 @@ const SidebarSettings: React.FC = () => {
             username="A"
             className="custom-avatar"
           />
-          <label htmlFor="upload-file" className="avatar-btn">
-            <EditOutlined className="avatar-btn__icon" />
+          <label htmlFor="upload-file" className="avatar-label">
+            <EditOutlined className="avatar-label__icon" />
           </label>
         </div>
       </div>

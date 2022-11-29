@@ -48,7 +48,7 @@ export interface IUserItemResult extends IUser {
 
 export type TUserProfile = Omit<IUserItemResult, 'friendStatus'>;
 
-export type TDataUpdateProfile = Omit<
+export type TUserInfo = Omit<
   TUserProfile,
   'id' | 'created_at' | 'updated_at' | 'status' | 'role'
 >;

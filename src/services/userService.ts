@@ -6,7 +6,7 @@ import {
   TGetFriendsQuery,
   IGetUsersQuery,
   TConversationQuery,
-  TDataUpdateProfile,
+  TUserInfo,
 } from 'src/models';
 import { AppDispatch } from 'src/store';
 import {
@@ -66,7 +66,7 @@ export const getUserProfile = async (dispatch: AppDispatch) => {
 
 export const updateUserProfile = async (
   dispatch: AppDispatch,
-  user: TDataUpdateProfile,
+  user: TUserInfo,
   t: TFunction<'dashboard', 'sidebar.settings'>
 ) => {
   try {
