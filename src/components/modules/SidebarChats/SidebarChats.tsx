@@ -54,7 +54,6 @@ const SidebarChats: React.FC = () => {
 
   const handleSelectParticipant = (participant: IParticipant) => {
     dispatch(updateParticipantSelected(participant));
-    console.log(participant);
   };
 
   const handleSelectConversation = (conversation: IConversation) => {
