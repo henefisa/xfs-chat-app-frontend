@@ -6,12 +6,6 @@ import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import Modal from '@common/Modal/Modal';
 import { useTranslation } from 'react-i18next';
-import {
-  selectFriend,
-  selectParticipant,
-  selectConversation,
-} from 'src/store/userSlice';
-import { useAppSelector } from 'src/store/hooks';
 
 import './ChatCall.scss';
 
@@ -26,34 +20,18 @@ const ChatCall: React.FC<IChatCallProps> = ({ onClose, title, isOpen }) => {
     keyPrefix: 'chat-ui.chat-header.chat-call',
   });
 
-  const { selectedFriend } = useAppSelector(selectFriend);
-  const { selectedParticipant } = useAppSelector(selectParticipant);
-  const { selectedConversation } = useAppSelector(selectConversation);
-
   return (
     <Modal transitionName="none" maskTransitionName="none" open={isOpen}>
       <div className="modal-body">
         <div className="modal-body__items">
           <Avatar
-            path={
-              selectedFriend?.owner?.avatar || selectedParticipant?.user?.avatar
-            }
+            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
             imgWidth={96}
-            username={
-              selectedConversation?.title ||
-              selectedParticipant?.user?.fullName ||
-              selectedParticipant?.user?.username ||
-              selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ||
-              selectedFriend?.owner?.username.charAt(0).toUpperCase()
-            }
+            username="A"
             className="custom-avatar"
           />
           <Title level={5} className="username">
-            {selectedConversation?.title ||
-              selectedParticipant?.user?.fullName ||
-              selectedParticipant?.user?.username ||
-              selectedFriend?.owner?.fullName ||
-              selectedFriend?.owner?.username}
+            Danh Huy
           </Title>
           <Title level={5} className="title-action">
             {title === 'Audio' ? t('start-voice-call') : t('start-video-call')}

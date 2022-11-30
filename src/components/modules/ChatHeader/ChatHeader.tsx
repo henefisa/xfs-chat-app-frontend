@@ -18,11 +18,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import ActionsChatMenu from '../ActionsChatMenu/ActionsChatMenu';
 import ChatCall from '../ChatCall/ChatCall';
-import {
-  selectFriend,
-  selectParticipant,
-  selectConversation,
-} from 'src/store/userSlice';
+import { selectFriend } from 'src/store/userSlice';
 
 import './ChatHeader.scss';
 
@@ -40,8 +36,6 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   };
 
   const { selectedFriend } = useAppSelector(selectFriend);
-  const { selectedParticipant } = useAppSelector(selectParticipant);
-  const { selectedConversation } = useAppSelector(selectConversation);
 
   const listActionChat = React.useMemo(() => {
     return [
@@ -73,25 +67,16 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
     <div className="chat-header">
       <div className="user-info">
         <Avatar
-          path={
-            selectedFriend?.owner?.avatar || selectedParticipant?.user?.avatar
-          }
+          path={selectedFriend?.owner?.avatar}
           imgWidth={35}
           username={
-            selectedConversation?.title ||
-            selectedParticipant?.user?.fullName ||
-            selectedParticipant?.user?.username ||
-            selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ||
+            selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ??
             selectedFriend?.owner?.username.charAt(0).toUpperCase()
           }
           className="user-info__avatar"
         />
         <Title level={5} className="user-info__name" onClick={handleClickuser}>
-          {selectedConversation?.title ||
-            selectedParticipant?.user?.fullName ||
-            selectedParticipant?.user?.username ||
-            selectedFriend?.owner?.fullName ||
-            selectedFriend?.owner?.username}
+          {selectedFriend?.owner?.fullName ?? selectedFriend?.owner?.username}
         </Title>
         <div className="user-info__status">
           <CheckCircleFilled className="status__icon" />
