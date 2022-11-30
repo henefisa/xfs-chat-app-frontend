@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import './Conversation.scss';
 
 interface ConversationProps {
-  path: string;
+  path: string | null;
   name: string;
   time: string;
   unread: string;
