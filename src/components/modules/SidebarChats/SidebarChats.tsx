@@ -54,6 +54,7 @@ const SidebarChats: React.FC = () => {
 
   const handleSelectParticipant = (participant: IParticipant) => {
     dispatch(updateParticipantSelected(participant));
+    console.log(participant);
   };
 
   const handleSelectConversation = (conversation: IConversation) => {
@@ -117,25 +118,48 @@ const SidebarChats: React.FC = () => {
                     <div key={conversation.id}>
                       {conversation.participants.map((participant) => (
                         <div key={participant.id}>
-                          {participant.user.id !== userProfileStore?.id && (
-                            <Button
-                              className="conversation-btn"
-                              onClick={() => {
-                                handleSelectParticipant(participant);
-                                handleSelectConversation(conversation);
-                              }}
-                            >
-                              <Conversation
-                                path={participant.user.avatar}
-                                name={
-                                  conversation.title ||
-                                  participant.user.fullName ||
-                                  participant.user.username
-                                }
-                                time="10:20"
-                                unread="2"
-                              />
-                            </Button>
+                          {conversation.isGroup ? (
+                            <>
+                              {participant.user.id === userProfileStore?.id && (
+                                <Button
+                                  className="conversation-btn"
+                                  onClick={() => {
+                                    handleSelectParticipant(participant);
+                                    handleSelectConversation(conversation);
+                                  }}
+                                >
+                                  <Conversation
+                                    path={participant.user.avatar}
+                                    name={conversation.title}
+                                    time="10:20"
+                                    unread="2"
+                                  />
+                                </Button>
+                              )}
+                            </>
+                          ) : (
+                            <>
+                              {participant.user.id !== userProfileStore?.id && (
+                                <Button
+                                  className="conversation-btn"
+                                  onClick={() => {
+                                    handleSelectParticipant(participant);
+                                    handleSelectConversation(conversation);
+                                  }}
+                                >
+                                  <Conversation
+                                    path={participant.user.avatar}
+                                    name={
+                                      conversation.title ||
+                                      participant.user.fullName ||
+                                      participant.user.username
+                                    }
+                                    time="10:20"
+                                    unread="2"
+                                  />
+                                </Button>
+                              )}
+                            </>
                           )}
                         </div>
                       ))}

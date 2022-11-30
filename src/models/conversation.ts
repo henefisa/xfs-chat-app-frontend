@@ -6,6 +6,7 @@ export type TConversationQuery = Omit<IGetUsersQuery, 'status'>;
 export interface IConversation extends IBase {
   title: string;
   participants: IParticipant[];
+  isGroup: boolean;
 }
 export interface IParticipant extends IBase {
   role: string;
