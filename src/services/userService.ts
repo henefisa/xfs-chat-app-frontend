@@ -226,23 +226,7 @@ export const getListConversation = async (
 ) => {
   try {
     const res = await apiRequest.get('api/conversations', { params: query });
-    return res.data;
-  } catch (err) {
-    notification.error({
-      message: t('error'),
-      description: t('normal-error-message'),
-      duration: 1.5,
-      key: '1',
-    });
-  }
-};
 
-export const getParticipantsConversation = async (
-  id: string,
-  t: TFunction<'common', undefined>
-) => {
-  try {
-    const res = await apiRequest.get('api/participants/' + id);
     return res.data;
   } catch (err) {
     notification.error({
