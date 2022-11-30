@@ -11,11 +11,7 @@ import { Collapse, Divider } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
-import {
-  selectFriend,
-  selectParticipant,
-  selectConversation,
-} from 'src/store/userSlice';
+import { selectFriend } from 'src/store/userSlice';
 import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
 
 import './UserInfoChat.scss';
@@ -36,30 +32,17 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
 
   const date = new Date();
   const { selectedFriend } = useAppSelector(selectFriend);
-  const { selectedParticipant } = useAppSelector(selectParticipant);
-  const { selectedConversation } = useAppSelector(selectConversation);
 
   const userInfoChat = [
     {
       title: t1('name'),
-      desc:
-        selectedConversation?.title ||
-        selectedParticipant?.user?.fullName ||
-        selectedParticipant?.user?.username ||
-        selectedFriend?.owner?.fullName ||
-        selectedFriend?.owner?.username,
+      desc: selectedFriend?.owner?.fullName ?? selectedFriend?.owner?.username,
     },
-    {
-      title: 'Email',
-      desc: selectedParticipant?.user?.email || selectedFriend?.owner?.email,
-    },
+    { title: 'Email', desc: selectedFriend?.owner?.email },
     { title: t1('time'), desc: `${date.getHours()}:${date.getMinutes()}` },
     {
       title: t1('location'),
-      desc:
-        selectedParticipant?.user?.location ||
-        selectedFriend?.owner?.location ||
-        'SomeWhere',
+      desc: selectedFriend?.owner?.location || 'SomeWhere',
     },
   ];
 
@@ -95,25 +78,16 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
       </div>
       <div className="user-avatar">
         <Avatar
-          path={
-            selectedFriend?.owner?.avatar || selectedParticipant?.user?.avatar
-          }
+          path={selectedFriend?.owner?.avatar}
           imgWidth={96}
           username={
-            selectedConversation?.title ||
-            selectedParticipant?.user?.fullName ||
-            selectedParticipant?.user?.username ||
-            selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ||
+            selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ??
             selectedFriend?.owner?.username.charAt(0).toUpperCase()
           }
           className="custom-avatar"
         />
         <Title level={5} className="username">
-          {selectedConversation?.title ||
-            selectedParticipant?.user?.fullName ||
-            selectedParticipant?.user?.username ||
-            selectedFriend?.owner?.fullName ||
-            selectedFriend?.owner?.username}
+          {selectedFriend?.owner?.fullName ?? selectedFriend?.owner?.username}
         </Title>
         <div className="status">
           <CheckCircleFilled className="status__icon" />
