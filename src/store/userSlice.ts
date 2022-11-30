@@ -80,6 +80,10 @@ export const userSlice = createSlice({
     deleteListConversation: (state) => {
       state.conversation.listConversation = [];
     },
+    updateProfileFailed: (state) => {
+      state.profile.isFetching = false;
+      state.profile.error = true;
+    },
   },
 });
 
@@ -88,6 +92,7 @@ export const {
   getProfileSuccess,
   getProfileFailed,
   deleteUserProfile,
+  updateProfileFailed,
   updateFriendSelected,
   deleteFriendSelected,
   updateConversationSelected,

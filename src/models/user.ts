@@ -48,6 +48,11 @@ export interface IUserItemResult extends IUser {
 
 export type TUserProfile = Omit<IUserItemResult, 'friendStatus'>;
 
+export type TUserInfo = Omit<
+  TUserProfile,
+  'id' | 'created_at' | 'updated_at' | 'status' | 'role'
+>;
+
 export interface IListFriendRequest extends IBase {
   status: EFriendStatus.REQUESTED;
   owner: TUserProfile;
