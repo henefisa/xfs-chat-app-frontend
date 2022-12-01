@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IConversation, IFriendAccept, TUserProfile } from 'src/models';
+import {
+  IConversation,
+  IFriendAccept,
+  IMessages,
+  TUserProfile,
+} from 'src/models';
 import { RootState } from '.';
 
 interface IUserProfileState {
@@ -18,10 +23,17 @@ interface IUserConversationState {
   listConversation: IConversation[];
 }
 
+interface IUserMessage {
+  listMessage: IMessages[];
+  isFetching: boolean;
+  error: boolean;
+}
+
 interface IUserState {
   profile: IUserProfileState;
   friend: IUserFriendState;
   conversation: IUserConversationState;
+  message: IUserMessage;
 }
 
 const initialState: IUserState = {
@@ -37,6 +49,11 @@ const initialState: IUserState = {
   conversation: {
     selectedConversation: null,
     listConversation: [],
+  },
+  message: {
+    listMessage: [],
+    isFetching: false,
+    error: false,
   },
 };
 
@@ -71,9 +88,6 @@ export const userSlice = createSlice({
     ) => {
       state.conversation.selectedConversation = action.payload;
     },
-    deleteConversationSelected: (state) => {
-      state.conversation.selectedConversation = null;
-    },
     updateListConversation: (state, action: PayloadAction<IConversation[]>) => {
       state.conversation.listConversation = action.payload;
     },
@@ -83,6 +97,24 @@ export const userSlice = createSlice({
     updateProfileFailed: (state) => {
       state.profile.isFetching = false;
       state.profile.error = true;
+    },
+    deleteConversationSelected: (state) => {
+      state.conversation.selectedConversation = null;
+    },
+    getListMessageStart: (state) => {
+      state.message.isFetching = true;
+    },
+    getListMessageSuccess: (state, action: PayloadAction<IMessages[]>) => {
+      state.message.isFetching = false;
+      state.message.error = false;
+      state.message.listMessage = action.payload.reverse();
+    },
+    getListMessageFailed: (state) => {
+      state.message.isFetching = false;
+      state.message.error = true;
+    },
+    updateListMessage: (state, action: PayloadAction<IMessages>) => {
+      state.message.listMessage.push(action.payload);
     },
   },
 });
@@ -99,6 +131,10 @@ export const {
   deleteConversationSelected,
   updateListConversation,
   deleteListConversation,
+  getListMessageStart,
+  getListMessageSuccess,
+  getListMessageFailed,
+  updateListMessage,
 } = userSlice.actions;
 
 export const selectUserProfile = (state: RootState) =>
@@ -107,5 +143,7 @@ export const selectUserProfile = (state: RootState) =>
 export const selectFriend = (state: RootState) => state.user.friend;
 
 export const selectConversation = (state: RootState) => state.user.conversation;
+
+export const selectMessages = (state: RootState) => state.user.message;
 
 export default userSlice.reducer;

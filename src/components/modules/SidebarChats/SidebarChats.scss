@@ -49,6 +49,12 @@
         border: unset;
         text-align: unset;
         box-shadow: unset;
+        cursor: pointer;
+
+        &:hover,
+        &--active {
+          background-color: v.$card-background-hover;
+        }
       }
     }
   }

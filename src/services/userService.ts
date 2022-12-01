@@ -3,9 +3,10 @@ import axios from 'axios';
 import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
 import {
-  TGetFriendsQuery,
   IGetUsersQuery,
+  IMessageQuery,
   TConversationQuery,
+  TGetFriendsQuery,
   TUserInfo,
 } from 'src/models';
 import { AppDispatch } from 'src/store';
@@ -226,6 +227,44 @@ export const getListConversation = async (
 ) => {
   try {
     const res = await apiRequest.get('api/conversations', { params: query });
+
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+  }
+};
+
+export const getMessages = async (
+  query: IMessageQuery,
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    const res = await apiRequest.get(`api/messages/${query.id}`);
+
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+  }
+};
+
+export const checkHasConversationForTwoMember = async (
+  userId: string,
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    const res = await apiRequest.post('api/conversations/check-conversation', {
+      userTarget: userId,
+    });
 
     return res.data;
   } catch (err) {

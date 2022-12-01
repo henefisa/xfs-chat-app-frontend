@@ -7,10 +7,16 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { SocketContext } from 'src/context/socket/context';
 import ENavbar from 'src/interfaces/ENavbar';
-import { getListConversation } from 'src/services/userService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectNavBar } from 'src/store/navbarSlice';
-import { selectFriend, updateListConversation } from 'src/store/userSlice';
+import { IConversation } from 'src/models';
+import { getListConversation } from 'src/services/userService';
+import {
+  selectConversation,
+  selectFriend,
+  selectUserProfile,
+  updateListConversation,
+} from 'src/store/userSlice';
 
 import './Dashboard.scss';
 
@@ -20,11 +26,14 @@ const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const { selectedFriend } = useAppSelector(selectFriend);
+  const { selectedConversation } = useAppSelector(selectConversation);
+  const userProfileStore = useAppSelector(selectUserProfile);
 
   const navbarAction = useAppSelector(selectNavBar);
 
   React.useEffect(() => {
     socket.connect();
+
     socket.on('connect', () => {
       console.log('socket connected');
     });
@@ -40,17 +49,40 @@ const Dashboard: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
+    if (!userProfileStore) return;
+
+    const handleSubscribeAllConversation = (list: IConversation[]) => {
+      if (list.length === 0 || !userProfileStore) return;
+
+      list.forEach((conversation) => {
+        // subscribe all conversation
+
+        socket.emit(
+          'SUBSCRIBE',
+          {
+            conversationId: conversation.id,
+            userId: userProfileStore.id,
+          },
+          () => {
+            // do something
+          }
+        );
+      });
+    };
+
     const handleGetListConversation = async () => {
       try {
         const result = await getListConversation({}, t);
+
         dispatch(updateListConversation(result.conversations));
+        handleSubscribeAllConversation(result.conversations);
       } catch (err) {
         dispatch(updateListConversation([]));
       }
     };
 
     handleGetListConversation();
-  }, []);
+  }, [userProfileStore]);
 
   return (
     <div className="dashboard-page">
@@ -60,7 +92,11 @@ const Dashboard: React.FC = () => {
       ) : (
         <>
           <SidebarDashboard />
-          {selectedFriend?.id ? <ChatUI /> : <ChatOverlay />}
+          {selectedConversation ?? selectedFriend ? (
+            <ChatUI />
+          ) : (
+            <ChatOverlay />
+          )}
         </>
       )}
     </div>

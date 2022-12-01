@@ -58,4 +58,8 @@
     color: v.$primary;
     background-color: v.$background;
   }
+
+  &:hover {
+    background-color: v.$background;
+  }
 }

@@ -15,7 +15,7 @@ const Router: React.FC = () => {
             path={item.path}
             element={
               item.private ? (
-                <RequireAuth redirectTo="/login">
+                <RequireAuth>
                   <Component />
                 </RequireAuth>
               ) : (

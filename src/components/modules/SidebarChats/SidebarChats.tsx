@@ -4,17 +4,45 @@ import CarouselItem from '@common/Carousel/CarouselItem/CarouselItem';
 import Conversation from '@common/Conversation/Conversation';
 import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Title from '@common/Title/Title';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from 'src/store/hooks';
-import { selectConversation } from 'src/store/userSlice';
+import { IConversation } from 'src/models';
+import { getMessages } from 'src/services/userService';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import {
+  deleteFriendSelected,
+  getListMessageFailed,
+  getListMessageStart,
+  getListMessageSuccess,
+  selectConversation,
+  selectUserProfile,
+  updateConversationSelected,
+} from 'src/store/userSlice';
+import handleTitleOfConversation from 'src/utils/handleTitleOfConversation';
 
 import './SidebarChats.scss';
 
 const SidebarChats: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.chats' });
 
-  const { listConversation } = useAppSelector(selectConversation);
+  const { listConversation, selectedConversation } =
+    useAppSelector(selectConversation);
+  const userProfileStore = useAppSelector(selectUserProfile);
+  const { t: t1 } = useTranslation('common');
+  const dispatch = useAppDispatch();
+
+  const handleClick = async (conversation: IConversation) => {
+    dispatch(getListMessageStart());
+    try {
+      const result = await getMessages({ id: conversation.id }, t1);
+      dispatch(getListMessageSuccess(result.messages));
+      dispatch(updateConversationSelected(conversation));
+      dispatch(deleteFriendSelected());
+    } catch (err) {
+      dispatch(getListMessageFailed());
+    }
+  };
 
   return (
     <div className="sidebar-chats">
@@ -61,16 +89,31 @@ const SidebarChats: React.FC = () => {
               {t('recent')}
             </Title>
             <div className="conversation-list__result">
-              {listConversation.map((conversation) => (
-                <Button key={conversation.id} className="conversation-btn">
-                  <Conversation
-                    path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
-                    name="Patrick Hendricks"
-                    time="10:20"
-                    unread="2"
-                  />
-                </Button>
-              ))}
+              {listConversation.map((conversation) => {
+                const titleConversation = handleTitleOfConversation(
+                  conversation,
+                  userProfileStore
+                );
+
+                return (
+                  <Button
+                    key={conversation.id}
+                    className={clsx('conversation-btn', {
+                      ['conversation-btn--active']:
+                        conversation.id === selectedConversation?.id,
+                    })}
+                    onClick={() => handleClick(conversation)}
+                  >
+                    <Conversation
+                      conversation={conversation}
+                      name={conversation.title || titleConversation}
+                      username={titleConversation}
+                      time="10:20"
+                      unread="2"
+                    />
+                  </Button>
+                );
+              })}
             </div>
           </>
         )}

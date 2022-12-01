@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
-  SmileOutlined,
   PaperClipOutlined,
   PictureOutlined,
   SendOutlined,
+  SmileOutlined,
 } from '@ant-design/icons';
 import Button from '@common/Button/Button';
-import Input from '@common/Input/Input';
-import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
-import Tooltip from '@common/Tooltip/Tooltip';
-import { useTranslation } from 'react-i18next';
 import Dropdown from '@common/Dropdown/Dropdown';
+import Input from '@common/Input/Input';
+import Tooltip from '@common/Tooltip/Tooltip';
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
+import { useTranslation } from 'react-i18next';
+import { SocketContext } from 'src/context/socket/context';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import {
+  selectConversation,
+  selectUserProfile,
+  updateListMessage,
+} from 'src/store/userSlice';
 
 import './ChatBottom.scss';
 
@@ -20,17 +28,19 @@ interface IChatBottom {
 }
 
 const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
+  const socket = React.useContext(SocketContext);
+  const dispatch = useAppDispatch();
+
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-bottom',
   });
   const inputFileRef = React.createRef<HTMLInputElement>();
   const inputImgRef = React.createRef<HTMLInputElement>();
-  const [messages, setMessages] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleClick = () => {
-    setMessagesUser((prev: string[]) => [...prev, messages]);
-    setMessages('');
-  };
+  const { selectedConversation } = useAppSelector(selectConversation);
+  const userProfileStore = useAppSelector(selectUserProfile);
+
   const toggleFile = () => {
     inputFileRef.current?.click();
   };
@@ -38,7 +48,39 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
     inputImgRef.current?.click();
   };
   const onEmojiClick = (emojiObject: EmojiClickData) => {
-    setMessages((prev: string) => prev + emojiObject.emoji);
+    setMessage((prev: string) => prev + emojiObject.emoji);
+  };
+
+  const handleSendMessage = () => {
+    if (!userProfileStore || !selectedConversation || !message.trim()) return;
+
+    socket.emit(
+      'SEND_MESSAGE',
+      {
+        userId: userProfileStore.id,
+        conversationId: selectedConversation.id,
+        text: message,
+      },
+      () => {
+        // do something
+      }
+    );
+
+    dispatch(
+      updateListMessage({
+        id: uuidv4(),
+        updatedAt: new Date().toString(),
+        createdAt: new Date().toString(),
+        attachment: null,
+        isPin: false,
+        isTick: false,
+        message: message,
+        sender: userProfileStore,
+      })
+    );
+
+    setMessagesUser((prev: string[]) => [...prev, message]);
+    setMessage('');
   };
 
   return (
@@ -47,9 +89,9 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
         <Input
           className="type-chat__input"
           placeholder={t('enter-message')}
-          onChange={(e) => setMessages(e.target.value)}
-          value={messages}
-          onPressEnter={handleClick}
+          onChange={(e) => setMessage(e.target.value)}
+          value={message}
+          onPressEnter={handleSendMessage}
         />
       </div>
       <div className="chat-actions">
@@ -94,7 +136,7 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
           </Button>
         </div>
         <div className="send-chat">
-          <Button className="send-chat__btn" onClick={handleClick}>
+          <Button className="send-chat__btn" onClick={handleSendMessage}>
             <SendOutlined className="custom-send-chat" />
           </Button>
         </div>

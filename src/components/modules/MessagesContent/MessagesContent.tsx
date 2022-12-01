@@ -1,29 +1,22 @@
-import React, { useEffect, useState } from 'react';
 import { ClockCircleOutlined, MoreOutlined } from '@ant-design/icons';
 import Dropdown from '@common/Dropdown/Dropdown';
 import clsx from 'clsx';
+import React from 'react';
+import getTime from 'src/utils/getTime';
 import ChatBubbleMenu from '../ChatBubbleMenu/ChatBubbleMenu';
 import './MessagesContent.scss';
 
 interface IMessagesContent {
   position: string;
+  time: string;
   messages: string;
 }
 
 const MessagesContent: React.FC<IMessagesContent> = ({
   position,
+  time,
   messages,
 }) => {
-  const date = new Date();
-  const [time, setTime] = useState('');
-
-  useEffect(() => {
-    const hours = String(date.getHours());
-    let minutes = String(date.getMinutes());
-    if (minutes.length == 1) minutes = '0' + minutes;
-    setTime(hours + ':' + minutes);
-  }, [messages]);
-
   return (
     <div className="messages">
       <div className={clsx('bubble-chat', `bubble-chat--${position}`)}>
@@ -36,7 +29,7 @@ const MessagesContent: React.FC<IMessagesContent> = ({
           {messages}
           <div className="chat-time">
             <ClockCircleOutlined className="custom-icon-time" />
-            {time}
+            {getTime(time)}
           </div>
         </div>
         <div className="bubble-chat__actions">

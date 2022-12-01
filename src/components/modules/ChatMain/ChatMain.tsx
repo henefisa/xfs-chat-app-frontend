@@ -1,28 +1,80 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { SocketContext } from 'src/context/socket/context';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import {
+  selectMessages,
+  selectUserProfile,
+  updateListMessage,
+} from 'src/store/userSlice';
 
-import MessagesTable from '../MessagesTable/MessagesTable';
 import ChatDayTitle from '../ChatDayTitle/ChatDayTitle';
+import MessagesTable from '../MessagesTable/MessagesTable';
 
 import './ChatMain.scss';
 
 interface IChatMain {
   messages: string[];
 }
+
 const ChatMain: React.FC<IChatMain> = ({ messages }) => {
-  const scrollRef = useRef<null | HTMLDivElement>(null);
+  const socket = useContext(SocketContext);
+  const dispatch = useAppDispatch();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const useProfileStore = useAppSelector(selectUserProfile);
+  const { listMessage } = useAppSelector(selectMessages);
+
   useEffect(() => {
     scrollRef.current?.scrollIntoView();
-  }, [messages]);
+  }, [messages, listMessage]);
+
+  useEffect(() => {
+    socket.on('GET_MESSAGE', ({ user, message }) => {
+      dispatch(
+        updateListMessage({
+          id: uuidv4(),
+          updatedAt: new Date().toString(),
+          createdAt: new Date().toString(),
+          attachment: null,
+          isPin: false,
+          isTick: false,
+          message: message,
+          sender: user,
+        })
+      );
+    });
+  }, []);
+
   return (
     <div className="chatmain">
       <ChatDayTitle day="Today" />
-      {messages.map((messages: string, index: number) => {
-        if (messages != '')
+      {listMessage.map((messageObj) => {
+        if (!useProfileStore) return null;
+
+        if (messageObj.sender.id === useProfileStore.id) {
           return (
-            <div key={index} ref={scrollRef}>
-              <MessagesTable position="right" messages={messages} />
+            <div key={messageObj.id} ref={scrollRef}>
+              <MessagesTable
+                sender={messageObj.sender}
+                position="right"
+                time={messageObj.createdAt}
+                messages={messageObj.message}
+              />
             </div>
           );
+        }
+
+        return (
+          <div key={messageObj.id} ref={scrollRef}>
+            <MessagesTable
+              sender={messageObj.sender}
+              position="left"
+              time={messageObj.createdAt}
+              messages={messageObj.message}
+            />
+          </div>
+        );
       })}
     </div>
   );

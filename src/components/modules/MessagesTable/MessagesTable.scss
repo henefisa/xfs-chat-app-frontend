@@ -33,7 +33,7 @@
     font-size: 14px;
     font-weight: 500;
     color: v.$text-color;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     margin-left: 10px;
     margin-top: 10px;
   }
@@ -41,7 +41,7 @@
   .messages-table__body {
     display: flex;
     flex-direction: column;
-    margin: 10px 0px;
+    margin: 5px 0px;
     .bubble {
       margin: 5px 0px;
     }

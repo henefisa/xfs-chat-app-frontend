@@ -3,10 +3,9 @@
 .chat-header {
   display: flex;
   flex-wrap: wrap;
-  height: 90px;
-  padding: 1.5rem;
-  border-bottom: 0.5px solid rgba($color: #495057, $alpha: 0.1);
   justify-content: space-between;
+  padding: 18px;
+  border-bottom: 1px solid rgb(15 34 58 / 12%);
 
   .user-info {
     display: flex;

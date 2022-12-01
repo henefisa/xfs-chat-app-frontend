@@ -16,10 +16,21 @@ import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IFriendAccept } from 'src/models';
-import { getFriends } from 'src/services/userService';
+import { EFriendStatus, IConversation, IFriendAccept } from 'src/models';
+import {
+  checkHasConversationForTwoMember,
+  getFriends,
+  getMessages,
+} from 'src/services/userService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { selectFriend, updateFriendSelected } from 'src/store/userSlice';
+import {
+  deleteConversationSelected,
+  getListMessageFailed,
+  getListMessageStart,
+  getListMessageSuccess,
+  selectFriend,
+  updateFriendSelected,
+} from 'src/store/userSlice';
 import ContactMenu from '../ContactMenu/ContactMenu';
 
 import './SidebarContacts.scss';
@@ -66,13 +77,16 @@ const SidebarContacts: React.FC = () => {
         };
 
         list.forEach((friend) => {
-          if (
-            !(
-              friend.owner.fullName?.charAt(0).toUpperCase() ??
-              friend.owner.username.charAt(0).toUpperCase() === item
-            )
-          )
+          if (!friend.owner.fullName) {
+            if (!(friend.owner.username.charAt(0).toUpperCase() === item))
+              return;
+
+            objectItem.friends.push(friend);
+
             return;
+          }
+
+          if (!(friend.owner.fullName.charAt(0).toUpperCase() === item)) return;
 
           objectItem.friends.push(friend);
         });
@@ -100,6 +114,28 @@ const SidebarContacts: React.FC = () => {
 
   const handleSelectFriend = (friend: IFriendAccept) => {
     dispatch(updateFriendSelected(friend));
+    dispatch(deleteConversationSelected());
+
+    handleCheckHasConversation(friend.owner.id);
+  };
+
+  const handleCheckHasConversation = async (friendId: string) => {
+    try {
+      const conversation: IConversation =
+        await checkHasConversationForTwoMember(friendId, t1);
+
+      if (!conversation) return;
+
+      dispatch(getListMessageStart());
+      try {
+        const result = await getMessages({ id: conversation.id }, t1);
+        dispatch(getListMessageSuccess(result.messages));
+      } catch (err) {
+        dispatch(getListMessageFailed());
+      }
+    } catch (err) {
+      // do something
+    }
   };
 
   return (
