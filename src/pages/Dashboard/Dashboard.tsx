@@ -19,6 +19,7 @@ import {
 } from 'src/store/userSlice';
 
 import './Dashboard.scss';
+import { ESocketEvent } from 'src/models/socket';
 
 const Dashboard: React.FC = () => {
   const socket = React.useContext(SocketContext);
@@ -34,11 +35,11 @@ const Dashboard: React.FC = () => {
   React.useEffect(() => {
     socket.connect();
 
-    socket.on('connect', () => {
+    socket.on(ESocketEvent.CONNECT, () => {
       console.log('socket connected');
     });
 
-    socket.on('disconnect', () => {
+    socket.on(ESocketEvent.DISCONNECT, () => {
       console.log('socket disconnected');
     });
 
@@ -58,7 +59,7 @@ const Dashboard: React.FC = () => {
         // subscribe all conversation
 
         socket.emit(
-          'SUBSCRIBE',
+          ESocketEvent.SUBSCRIBE,
           {
             conversationId: conversation.id,
             userId: userProfileStore.id,

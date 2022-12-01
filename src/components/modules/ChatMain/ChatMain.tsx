@@ -12,6 +12,7 @@ import ChatDayTitle from '../ChatDayTitle/ChatDayTitle';
 import MessagesTable from '../MessagesTable/MessagesTable';
 
 import './ChatMain.scss';
+import { ESocketEvent } from 'src/models/socket';
 
 interface IChatMain {
   messages: string[];
@@ -30,7 +31,7 @@ const ChatMain: React.FC<IChatMain> = ({ messages }) => {
   }, [messages, listMessage]);
 
   useEffect(() => {
-    socket.on('GET_MESSAGE', ({ user, message }) => {
+    socket.on(ESocketEvent.GET_MESSAGE, ({ user, message }) => {
       dispatch(
         updateListMessage({
           id: uuidv4(),

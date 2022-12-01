@@ -22,6 +22,7 @@ import {
 } from 'src/store/userSlice';
 
 import './ChatBottom.scss';
+import { ESocketEvent } from 'src/models/socket';
 
 interface IChatBottom {
   setMessagesUser: React.Dispatch<React.SetStateAction<string[]>>;
@@ -55,7 +56,7 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
     if (!userProfileStore || !selectedConversation || !message.trim()) return;
 
     socket.emit(
-      'SEND_MESSAGE',
+      ESocketEvent.SEND_MESSAGE,
       {
         userId: userProfileStore.id,
         conversationId: selectedConversation.id,
