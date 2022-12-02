@@ -1,3 +1,5 @@
+@use '../../../assets/styles/variables' as v;
+
 .logo {
   display: flex;
   align-items: center;
@@ -10,5 +12,6 @@
 
   .app-name {
     margin: 0;
+    color: v.$text-color;
   }
 }
