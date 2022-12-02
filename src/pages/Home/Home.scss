@@ -1,0 +1,203 @@
+@use '../../assets/styles/variables' as v;
+
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: url('/images/home-bg/bg.jpg') no-repeat center / cover;
+
+  .home-page__header {
+    width: 100%;
+    max-width: 1200px;
+    padding: 30px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .header-logo.logo {
+      margin: 0;
+
+      .logo__img {
+        height: 44px;
+      }
+
+      .app-name {
+        font-size: 24px;
+      }
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .language {
+        margin: 0;
+        display: flex;
+        flex-direction: row-reverse;
+      }
+
+      .header-actions__login,
+      .header-actions__register {
+        color: v.$white;
+        border-radius: 999px;
+        font-size: 15px;
+        padding-left: 28px;
+        padding-right: 28px;
+        box-shadow: 0 6px 8px rgb(15 34 58 / 12%);
+
+        &:hover {
+          box-shadow: 0 0 3px 8px rgba(103, 94, 234, 0.25);
+        }
+      }
+    }
+  }
+
+  .home-page__main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 30px;
+    margin: 0 auto;
+
+    .main-left {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+
+      .main-left__title,
+      .main-left__description,
+      .main-left__btn {
+        opacity: 0;
+        transform: translateY(-100px);
+        transition: 0.3s ease;
+        animation: showTitle 0.3s linear forwards;
+      }
+
+      .main-left__title {
+        color: v.$primary;
+        font-size: 45px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        animation-delay: 0.3s;
+      }
+
+      .main-left__description {
+        color: v.$text-sub-color;
+        font-size: 22px;
+        font-weight: 400;
+        margin: 0;
+        margin-bottom: 30px;
+        animation-delay: 0.6s;
+      }
+
+      .main-left__btn {
+        color: v.$white;
+        font-size: 16px;
+        font-weight: 400;
+        border-radius: 999px;
+        padding-left: 40px;
+        padding-right: 40px;
+        animation-delay: 0.9s;
+
+        &:hover {
+          box-shadow: 0 0 3px 8px rgba(103, 94, 234, 0.25);
+        }
+      }
+    }
+
+    .main-right {
+      flex: 2;
+      transform: translateZ(0) scale(1);
+      perspective: 1500px;
+      transform-style: preserve-3d;
+
+      .main-right__img {
+        position: relative;
+        z-index: 0;
+        max-width: 100%;
+        transform: rotateY(-35deg) rotateX(15deg) translateX(200px);
+        box-shadow: 25px 60px 125px -25px rgb(80 102 144 / 10%),
+          16px 40px 75px -40px rgb(0 0 0 / 20%);
+        border-radius: 12px;
+        opacity: 0;
+        transition: 0.5s ease;
+        animation: showImg 0.6s linear forwards;
+      }
+    }
+  }
+
+  .home-page__footer {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+    padding: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    transition: 0.5s ease;
+    opacity: 0;
+    transform: translateY(100px);
+    animation: showFooter 0.6s linear forwards;
+
+    .footer-item {
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &:hover .footer-item__icon {
+        color: v.$white;
+        background-color: v.$primary;
+      }
+
+      &:hover .footer-item__title {
+        color: v.$primary;
+      }
+
+      .footer-item__icon {
+        font-size: 36px;
+        padding: 12px;
+        color: v.$primary;
+        border-radius: 10px;
+        background-color: v.$white;
+        transition: 0.3s ease;
+      }
+
+      .footer-item__title {
+        color: v.$text-sub-color;
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 12px;
+        transition: 0.3s ease;
+      }
+    }
+  }
+}
+
+@keyframes showTitle {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes showImg {
+  to {
+    opacity: 1;
+    transform: rotateY(-35deg) rotateX(15deg) translateX(0);
+  }
+}
+
+@keyframes showFooter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

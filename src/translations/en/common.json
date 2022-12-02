@@ -29,6 +29,17 @@
       "error": "Sign up failed!"
     }
   },
+  "home": {
+    "title": "Welcome to my Chat App",
+    "sub-title" : "It's easy talking to your fried with RVK Chat App",
+    "login-title": "Signin",
+    "register-title": "Signup",
+    "try-title": "Try It Now",
+    "group-chat": "Group Chat",
+    "video-call": "Video Call",
+    "file-sharing": "File Sharing",
+    "privacy" : "Privacy and Security"
+  },
   "login": {
     "title": "Sign in",
     "sub-title": "Sign in to continue to ChatApp",

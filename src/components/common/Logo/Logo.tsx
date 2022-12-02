@@ -1,5 +1,6 @@
-import * as React from 'react';
 import clsx from 'clsx';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Title from '../Title/Title';
 
 import './Logo.scss';
@@ -10,7 +11,7 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ className, ...rest }) => {
   return (
-    <div className={clsx('logo', className)} {...rest}>
+    <Link to="/" className={clsx('logo', className)} {...rest}>
       <img
         className="logo__img"
         src="/images/logos/logo.svg"
@@ -19,7 +20,7 @@ const Logo: React.FC<LogoProps> = ({ className, ...rest }) => {
       <Title className="app-name" level={4}>
         RVK Chat App
       </Title>
-    </div>
+    </Link>
   );
 };
 
