@@ -29,6 +29,17 @@
       "error": "Đăng ký thất bại!"
     }
   },
+  "home": {
+    "title": "Chào mừng bạn đến với ứng dụng trò chuyện của chúng tôi",
+    "sub-title" : "Thật dễ dàng để nói chuyện với bạn bè của bạn qua RVK Chat App",
+    "login-title": "Đăng nhập",
+    "register-title": "Đăng ký",
+    "try-title": "Bắt đầu ngay bây giờ",
+    "group-chat": "Chat nhóm",
+    "video-call": "Cuộc gọi Video",
+    "file-sharing": "Chia sẽ File",
+    "privacy" : "Riêng tư và bảo mật"
+  },
   "login": {
     "title": "Đăng nhập",
     "sub-title": "Đăng nhập để sử dụng ChatApp",
