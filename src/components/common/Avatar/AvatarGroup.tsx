@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import './Avatar.scss';
-``;
 interface IAvatarGroupProps extends GroupProps {
   className?: string;
   children: React.ReactNode;

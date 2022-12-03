@@ -27,10 +27,6 @@ export enum EUserActiveStatus {
   INACTIVE = 'INACTIVE',
 }
 
-export enum EUserStatus {
-  STATUS_ONLINE = 'ONLINE',
-  STATUS_OFFLINE = 'OFFLINE',
-}
 export interface IFriendStatusState extends IBase {
   status:
     | EFriendStatus.REQUESTED
