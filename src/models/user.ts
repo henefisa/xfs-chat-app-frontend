@@ -15,10 +15,15 @@ export enum EUserRole {
   ADMIN = 'ADMIN',
 }
 
-export enum EUser {
-  STATUS_ACTIVE = 'ACTIVE',
-  STATUS_DEACTIVE = 'DEACTIVE',
-  STATUS_INACTIVE = 'INACTIVE',
+export enum EUserStatus {
+  ONLINE = 'ONLINE',
+  OFFLINE = 'OFFLINE',
+}
+
+export enum EUserActiveStatus {
+  ACTIVE = 'ACTIVE',
+  DEACTIVE = 'DEACTIVE',
+  INACTIVE = 'INACTIVE',
 }
 
 export interface IFriendStatusState extends IBase {
@@ -41,8 +46,13 @@ export interface IUserItemResult extends IUser {
   phone: null | string;
   description: null | string;
   location: null | string;
-  status: EUser.STATUS_ACTIVE | EUser.STATUS_DEACTIVE | EUser.STATUS_INACTIVE;
+  status: EUserStatus.ONLINE | EUserStatus.OFFLINE;
+  activeStatus:
+    | EUserActiveStatus.ACTIVE
+    | EUserActiveStatus.DEACTIVE
+    | EUserActiveStatus.INACTIVE;
   role: EUserRole.USER | EUserRole.ADMIN;
+
   friendStatus: null | IFriendStatusState;
 }
 
@@ -50,7 +60,7 @@ export type TUserProfile = Omit<IUserItemResult, 'friendStatus'>;
 
 export type TUserInfo = Omit<
   TUserProfile,
-  'id' | 'created_at' | 'updated_at' | 'status' | 'role'
+  'id' | 'createdAt' | 'updatedAt' | 'status' | 'role'
 >;
 
 export interface IListFriendRequest extends IBase {
@@ -65,7 +75,10 @@ export interface IFriendAccept extends IBase {
 
 export interface IGetUsersQuery {
   q?: string;
-  status?: EUser.STATUS_ACTIVE | EUser.STATUS_DEACTIVE | EUser.STATUS_INACTIVE;
+  status?:
+    | EUserActiveStatus.ACTIVE
+    | EUserActiveStatus.DEACTIVE
+    | EUserActiveStatus.INACTIVE;
   limit?: string;
   offset?: string;
 }
