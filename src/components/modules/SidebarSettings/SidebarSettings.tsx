@@ -74,7 +74,6 @@ const SidebarSettings: React.FC = () => {
     const newUserInfo = {
       fullName: e.fullName || newInfoUser.fullName,
       location: e.location || newInfoUser.location,
-      email: e.email || newInfoUser.email,
       phone: e.phone || newInfoUser.phone,
       description: e.description || newInfoUser.description,
     };
