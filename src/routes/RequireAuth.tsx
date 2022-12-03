@@ -4,7 +4,6 @@ import { useAppDispatch } from 'src/store/hooks';
 
 interface IRequireAuthProps {
   children: React.ReactElement;
-  redirectTo: string;
 }
 
 const RequireAuth: React.FC<IRequireAuthProps> = ({ children }) => {
