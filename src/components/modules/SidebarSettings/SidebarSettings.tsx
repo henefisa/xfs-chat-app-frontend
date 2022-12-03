@@ -29,13 +29,6 @@ const SidebarSettings: React.FC = () => {
   const [preview, setPreview] = React.useState<string>();
   const [disabled, setDisabled] = React.useState<boolean>(true);
   const [updateSuccess, setUpdateSuccess] = React.useState<boolean>(false);
-  const [newInfoUser, setNewInfoUser] = React.useState({
-    fullName: userProfileStore?.fullName,
-    location: userProfileStore?.location,
-    email: userProfileStore?.email,
-    phone: userProfileStore?.phone,
-    description: userProfileStore?.description,
-  });
 
   const privacy = [
     { title: t('privacy-profile-photo') },
@@ -68,20 +61,7 @@ const SidebarSettings: React.FC = () => {
     };
   }, [updateSuccess]);
 
-  React.useEffect(() => {
-    if (
-      initUserInfo.fullName !== newInfoUser.fullName ||
-      initUserInfo.location !== newInfoUser.location ||
-      initUserInfo.phone !== newInfoUser.phone ||
-      initUserInfo.description !== newInfoUser.description
-    ) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [newInfoUser]);
-
-  const handleFormChange = (
+  const handleValueChage = (
     e: {
       fullName: string;
       location: string;
@@ -98,7 +78,26 @@ const SidebarSettings: React.FC = () => {
       phone: e.phone || newInfoUser.phone,
       description: e.description || newInfoUser.description,
     };
-    setNewInfoUser(newUserInfo);
+
+    checkDisabled(newUserInfo);
+  };
+
+  const checkDisabled = (newUserInfo: {
+    fullName: string | null;
+    location: string | null;
+    phone: string | null;
+    description: string | null;
+  }) => {
+    if (
+      initUserInfo.fullName !== newUserInfo.fullName ||
+      initUserInfo.location !== newUserInfo.location ||
+      initUserInfo.phone !== newUserInfo.phone ||
+      initUserInfo.description !== newUserInfo.description
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
   };
 
   const handleFinish = async (values: TUserInfo) => {
@@ -187,7 +186,7 @@ const SidebarSettings: React.FC = () => {
                   phone: userProfileStore?.phone,
                   description: userProfileStore?.description,
                 }}
-                onValuesChange={handleFormChange}
+                onValuesChange={handleValueChage}
               >
                 <Form.Item
                   name="fullName"
