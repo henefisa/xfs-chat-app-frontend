@@ -32,7 +32,6 @@ const NavDashboard: React.FC = () => {
   const [isDark, setIsDark] = useState(false);
   const navbarIndex = useAppSelector(selectNavBar);
   const userProfileStore = useAppSelector(selectUserProfile);
-  console.log(userProfileStore);
   const { t } = useTranslation('dashboard', { keyPrefix: 'navbar' });
 
   const navBarMenu = React.useMemo(() => {
