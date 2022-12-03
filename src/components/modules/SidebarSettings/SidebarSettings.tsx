@@ -68,29 +68,18 @@ const SidebarSettings: React.FC = () => {
     };
   }, [updateSuccess]);
 
-  console.log(newInfoUser);
-  console.log(initUserInfo);
-  console.log(disabled);
-
   React.useEffect(() => {
     if (
       initUserInfo.fullName !== newInfoUser.fullName ||
       initUserInfo.location !== newInfoUser.location ||
       initUserInfo.phone !== newInfoUser.phone ||
-      initUserInfo.description !== newInfoUser.description ||
-      selectedFile
+      initUserInfo.description !== newInfoUser.description
     ) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
   }, [newInfoUser]);
-
-  React.useEffect(() => {
-    if (selectedFile) {
-      setDisabled(false);
-    }
-  }, [selectedFile]);
 
   const handleFormChange = (
     e: {
@@ -134,6 +123,7 @@ const SidebarSettings: React.FC = () => {
 
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
+    setDisabled(false);
 
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
