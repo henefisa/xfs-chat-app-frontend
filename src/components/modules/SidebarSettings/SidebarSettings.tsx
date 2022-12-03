@@ -22,23 +22,20 @@ import './SidebarSettings.scss';
 
 const SidebarSettings: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.settings' });
-  const [active, setActive] = React.useState(ESidebarSetting.ACCOUNT);
-  const userProfileStore = useAppSelector(selectUserProfile);
   const dispatch = useAppDispatch();
+  const userProfileStore = useAppSelector(selectUserProfile);
+  const [active, setActive] = React.useState(ESidebarSetting.ACCOUNT);
   const [selectedFile, setSelectedFile] = React.useState<File>();
   const [preview, setPreview] = React.useState<string>();
-
-  const handleFinish = async (values: TUserInfo) => {
-    if (selectedFile) {
-      const res = await userService.getPresignUrl(selectedFile.name, t);
-      await userService.putPresignUrl(res.url, selectedFile, t);
-      const user = { ...values, avatar: res.key };
-      await userService.updateUserProfile(dispatch, user, t);
-    } else {
-      await userService.updateUserProfile(dispatch, values, t);
-    }
-    await userService.getUserProfile(dispatch);
-  };
+  const [disabled, setDisabled] = React.useState<boolean>(true);
+  const [updateSuccess, setUpdateSuccess] = React.useState<boolean>(false);
+  const [newInfoUser, setNewInfoUser] = React.useState({
+    fullName: userProfileStore?.fullName,
+    location: userProfileStore?.location,
+    email: userProfileStore?.email,
+    phone: userProfileStore?.phone,
+    description: userProfileStore?.description,
+  });
 
   const privacy = [
     { title: t('privacy-profile-photo') },
@@ -60,6 +57,74 @@ const SidebarSettings: React.FC = () => {
     { title: t('security-title'), key: ESidebarSetting.SECURITY },
     { title: t('help-title'), key: ESidebarSetting.HELPS },
   ];
+
+  const initUserInfo = React.useMemo(() => {
+    return {
+      fullName: userProfileStore?.fullName,
+      location: userProfileStore?.location,
+      email: userProfileStore?.email,
+      phone: userProfileStore?.phone,
+      description: userProfileStore?.description,
+    };
+  }, [updateSuccess]);
+
+  console.log(newInfoUser);
+  console.log(initUserInfo);
+  console.log(disabled);
+
+  React.useEffect(() => {
+    if (
+      initUserInfo.fullName !== newInfoUser.fullName ||
+      initUserInfo.location !== newInfoUser.location ||
+      initUserInfo.phone !== newInfoUser.phone ||
+      initUserInfo.description !== newInfoUser.description ||
+      selectedFile
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [newInfoUser]);
+
+  React.useEffect(() => {
+    if (selectedFile) {
+      setDisabled(false);
+    }
+  }, [selectedFile]);
+
+  const handleFormChange = (
+    e: {
+      fullName: string;
+      location: string;
+      email: string;
+      phone: string;
+      description: string;
+    },
+    newInfoUser: TUserInfo
+  ) => {
+    const newUserInfo = {
+      fullName: e.fullName || newInfoUser.fullName,
+      location: e.location || newInfoUser.location,
+      email: e.email || newInfoUser.email,
+      phone: e.phone || newInfoUser.phone,
+      description: e.description || newInfoUser.description,
+    };
+    setNewInfoUser(newUserInfo);
+  };
+
+  const handleFinish = async (values: TUserInfo) => {
+    if (selectedFile) {
+      const res = await userService.getPresignUrl(selectedFile.name, t);
+      await userService.putPresignUrl(res.url, selectedFile, t);
+      const user = { ...values, avatar: res.key };
+      await userService.updateUserProfile(dispatch, user, t);
+    } else {
+      await userService.updateUserProfile(dispatch, values, t);
+    }
+    await userService.getUserProfile(dispatch);
+    setUpdateSuccess(!updateSuccess);
+    setDisabled(true);
+  };
 
   React.useEffect(() => {
     if (!selectedFile) {
@@ -132,17 +197,12 @@ const SidebarSettings: React.FC = () => {
                   phone: userProfileStore?.phone,
                   description: userProfileStore?.description,
                 }}
+                onValuesChange={handleFormChange}
               >
                 <Form.Item
                   name="fullName"
                   label={t('account-name')}
                   labelCol={{ span: 24 }}
-                  rules={[
-                    {
-                      required: true,
-                      message: `${t('name-error-message')}`,
-                    },
-                  ]}
                 >
                   <Input className="form-input" />
                 </Form.Item>
@@ -150,12 +210,6 @@ const SidebarSettings: React.FC = () => {
                   name="location"
                   label={t('account-location')}
                   labelCol={{ span: 24 }}
-                  rules={[
-                    {
-                      required: true,
-                      message: `${t('location-error-message')}`,
-                    },
-                  ]}
                 >
                   <Input className="form-input" />
                 </Form.Item>
@@ -163,9 +217,6 @@ const SidebarSettings: React.FC = () => {
                   name="phone"
                   label={t('account-phone')}
                   labelCol={{ span: 24 }}
-                  rules={[
-                    { required: true, message: `${t('phone-error-message')}` },
-                  ]}
                 >
                   <Input className="form-input" />
                 </Form.Item>
@@ -173,7 +224,6 @@ const SidebarSettings: React.FC = () => {
                   name="email"
                   label={t('account-email')}
                   labelCol={{ span: 24 }}
-                  rules={[{ required: true, message: `email-error-message` }]}
                 >
                   <Input className="form-input" disabled />
                 </Form.Item>
@@ -181,12 +231,6 @@ const SidebarSettings: React.FC = () => {
                   name="description"
                   label={t('account-description')}
                   labelCol={{ span: 24 }}
-                  rules={[
-                    {
-                      required: true,
-                      message: `${t('description-error-message')}`,
-                    },
-                  ]}
                 >
                   <TextArea
                     className="form-input"
@@ -201,6 +245,7 @@ const SidebarSettings: React.FC = () => {
                     type="primary"
                     className="form-button__save-change"
                     htmlType="submit"
+                    disabled={disabled}
                   >
                     {t('btn-save')}
                   </Button>
