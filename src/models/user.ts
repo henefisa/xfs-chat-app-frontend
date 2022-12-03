@@ -16,10 +16,15 @@ export enum EUserRole {
   MEMBER = 'MEMBER',
 }
 
-export enum EUser {
-  STATUS_ACTIVE = 'ACTIVE',
-  STATUS_DEACTIVE = 'DEACTIVE',
-  STATUS_INACTIVE = 'INACTIVE',
+export enum EUserStatus {
+  ONLINE = 'ONLINE',
+  OFFLINE = 'OFFLINE',
+}
+
+export enum EUserActiveStatus {
+  ACTIVE = 'ACTIVE',
+  DEACTIVE = 'DEACTIVE',
+  INACTIVE = 'INACTIVE',
 }
 
 export enum EUserStatus {
@@ -46,12 +51,13 @@ export interface IUserItemResult extends IUser {
   phone: null | string;
   description: null | string;
   location: null | string;
+  status: EUserStatus.ONLINE | EUserStatus.OFFLINE;
   activeStatus:
-    | EUser.STATUS_ACTIVE
-    | EUser.STATUS_DEACTIVE
-    | EUser.STATUS_INACTIVE;
-  status: EUserStatus.STATUS_OFFLINE | EUserStatus.STATUS_ONLINE;
+    | EUserActiveStatus.ACTIVE
+    | EUserActiveStatus.DEACTIVE
+    | EUserActiveStatus.INACTIVE;
   role: EUserRole.USER | EUserRole.ADMIN;
+
   friendStatus: null | IFriendStatusState;
 }
 
@@ -74,7 +80,10 @@ export interface IFriendAccept extends IBase {
 
 export interface IGetUsersQuery {
   q?: string;
-  status?: EUser.STATUS_ACTIVE | EUser.STATUS_DEACTIVE | EUser.STATUS_INACTIVE;
+  status?:
+    | EUserActiveStatus.ACTIVE
+    | EUserActiveStatus.DEACTIVE
+    | EUserActiveStatus.INACTIVE;
   limit?: string;
   offset?: string;
 }
