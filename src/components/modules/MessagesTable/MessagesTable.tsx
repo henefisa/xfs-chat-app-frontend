@@ -3,34 +3,44 @@ import Avatar from '@common/Avatar/Avatar';
 import Title from '@common/Title/Title';
 import MessagesContent from '../MessagesContent/MessagesContent';
 import clsx from 'clsx';
+import { TUserProfile } from 'src/models';
 
 import './MessagesTable.scss';
 
 interface IMessagesTableProps {
   position: string;
   messages: string;
+  time: string;
+  sender: TUserProfile;
 }
 
 const MessagesTable: React.FC<IMessagesTableProps> = ({
   position,
   messages,
+  time,
+  sender,
 }) => {
+  const name = sender.fullName ?? sender.username;
   return (
     <div className={clsx('messages-table', `messages-table--${position}`)}>
       <div className="messages-table__avatar">
         <Avatar
-          path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
+          path={sender.avatar}
           imgWidth={35}
-          username="A"
+          username={name.charAt(0).toUpperCase()}
           className="custom-avatar"
         />
       </div>
       <div className="messages-table__body">
         <div className="bubble">
-          <MessagesContent messages={messages} position={position} />
+          <MessagesContent
+            messages={messages}
+            position={position}
+            time={time}
+          />
         </div>
         <Title level={5} className="username">
-          Danh Huy
+          {sender.fullName ?? sender.username}
         </Title>
       </div>
     </div>

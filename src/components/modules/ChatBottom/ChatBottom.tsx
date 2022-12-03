@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { v4 as uuidv4 } from 'uuid';
 import {
   SmileOutlined,
   PaperClipOutlined,
@@ -12,6 +12,13 @@ import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import Tooltip from '@common/Tooltip/Tooltip';
 import { useTranslation } from 'react-i18next';
 import Dropdown from '@common/Dropdown/Dropdown';
+import { SocketContext } from 'src/context/socket/context';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import {
+  selectConversation,
+  selectUserProfile,
+  updateListMessage,
+} from 'src/store/userSlice';
 
 import './ChatBottom.scss';
 
@@ -20,6 +27,10 @@ interface IChatBottom {
 }
 
 const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
+  const socket = React.useContext(SocketContext);
+  const dispatch = useAppDispatch();
+  const { selectedConversation } = useAppSelector(selectConversation);
+  const userProfileStore = useAppSelector(selectUserProfile);
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-bottom',
   });
@@ -41,6 +52,38 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
     setMessages((prev: string) => prev + emojiObject.emoji);
   };
 
+  const handleSendMessage = () => {
+    if (!userProfileStore || !selectedConversation || !messages) return;
+
+    socket.emit(
+      'SEND_MESSAGE',
+      {
+        userId: userProfileStore.id,
+        conversationId: selectedConversation.id,
+        text: messages,
+      },
+      () => {
+        // do something
+      }
+    );
+
+    dispatch(
+      updateListMessage({
+        id: uuidv4(),
+        updatedAt: new Date().toString(),
+        createdAt: new Date().toString(),
+        attachment: null,
+        isPin: false,
+        isTick: false,
+        message: messages,
+        sender: userProfileStore,
+      })
+    );
+
+    setMessagesUser((prev: string[]) => [...prev, messages]);
+    setMessages('');
+  };
+
   return (
     <div className="chat-bottom">
       <div className="type-chat">
@@ -49,7 +92,7 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
           placeholder={t('enter-message')}
           onChange={(e) => setMessages(e.target.value)}
           value={messages}
-          onPressEnter={handleClick}
+          onPressEnter={handleSendMessage}
         />
       </div>
       <div className="chat-actions">
@@ -94,7 +137,7 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
           </Button>
         </div>
         <div className="send-chat">
-          <Button className="send-chat__btn" onClick={handleClick}>
+          <Button className="send-chat__btn" onClick={handleSendMessage}>
             <SendOutlined className="custom-send-chat" />
           </Button>
         </div>

@@ -18,7 +18,14 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import ActionsChatMenu from '../ActionsChatMenu/ActionsChatMenu';
 import ChatCall from '../ChatCall/ChatCall';
-import { selectFriend } from 'src/store/userSlice';
+import {
+  selectFriend,
+  selectConversation,
+  selectUserProfile,
+} from 'src/store/userSlice';
+import setMemberConversation from 'src/utils/setMemberConversation';
+import getGroupTitle from 'src/utils/getGroupTitle';
+import AvatarGroupChat from '../AvatarGroupChat/AvatarGroupChat';
 
 import './ChatHeader.scss';
 
@@ -31,11 +38,18 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-header',
   });
+  const [hasConversation, setHasConversation] = React.useState<boolean>(false);
+
+  const { selectedFriend } = useAppSelector(selectFriend);
+  const { selectedConversation } = useAppSelector(selectConversation);
+  const userProfileStore = useAppSelector(selectUserProfile);
+
+  React.useEffect(() => {
+    selectedConversation ? setHasConversation(true) : setHasConversation(false);
+  }, [selectedConversation]);
   const handleClickuser = () => {
     setOpen(true);
   };
-
-  const { selectedFriend } = useAppSelector(selectFriend);
 
   const listActionChat = React.useMemo(() => {
     return [
@@ -66,18 +80,85 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   return (
     <div className="chat-header">
       <div className="user-info">
-        <Avatar
-          path={selectedFriend?.owner?.avatar}
-          imgWidth={35}
-          username={
-            selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ??
-            selectedFriend?.owner?.username.charAt(0).toUpperCase()
-          }
-          className="user-info__avatar"
-        />
-        <Title level={5} className="user-info__name" onClick={handleClickuser}>
-          {selectedFriend?.owner?.fullName ?? selectedFriend?.owner?.username}
-        </Title>
+        {hasConversation ? (
+          <>
+            {selectedConversation?.isGroup ? (
+              <>
+                <AvatarGroupChat conversation={selectedConversation} />
+                <Title
+                  level={5}
+                  className="user-info__name"
+                  onClick={handleClickuser}
+                >
+                  {selectedConversation.title ||
+                    getGroupTitle(selectedConversation, userProfileStore)}
+                </Title>
+              </>
+            ) : (
+              <>
+                <Avatar
+                  path={
+                    setMemberConversation(
+                      selectedConversation,
+                      userProfileStore
+                    )?.avatar
+                  }
+                  imgWidth={46}
+                  username={
+                    setMemberConversation(
+                      selectedConversation,
+                      userProfileStore
+                    )
+                      ?.fullName?.charAt(0)
+                      .toUpperCase() ??
+                    setMemberConversation(
+                      selectedConversation,
+                      userProfileStore
+                    )
+                      ?.username.charAt(0)
+                      .toUpperCase()
+                  }
+                  className="user-info__avatar"
+                />
+                <Title
+                  level={5}
+                  className="user-info__name"
+                  onClick={handleClickuser}
+                >
+                  {selectedConversation?.title ||
+                    setMemberConversation(
+                      selectedConversation,
+                      userProfileStore
+                    )?.fullName ||
+                    setMemberConversation(
+                      selectedConversation,
+                      userProfileStore
+                    )?.username}
+                </Title>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <Avatar
+              path={selectedFriend?.owner?.avatar}
+              imgWidth={46}
+              username={
+                selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ??
+                selectedFriend?.owner?.username.charAt(0).toUpperCase()
+              }
+              className="user-info__avatar"
+            />
+            <Title
+              level={5}
+              className="user-info__name"
+              onClick={handleClickuser}
+            >
+              {selectedFriend?.owner?.fullName ??
+                selectedFriend?.owner?.username}
+            </Title>
+          </>
+        )}
         <div className="user-info__status">
           <CheckCircleFilled className="status__icon" />
         </div>

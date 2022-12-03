@@ -11,7 +11,11 @@ import { Collapse, Divider } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
-import { selectFriend } from 'src/store/userSlice';
+import {
+  selectFriend,
+  selectParticipant,
+  selectConversation,
+} from 'src/store/userSlice';
 import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
 
 import './UserInfoChat.scss';
@@ -29,6 +33,8 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
   const { t: t1 } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.user-info-chat.about',
   });
+  const { selectedParticipant } = useAppSelector(selectParticipant);
+  const { selectedConversation } = useAppSelector(selectConversation);
 
   const date = new Date();
   const { selectedFriend } = useAppSelector(selectFriend);
@@ -36,13 +42,24 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
   const userInfoChat = [
     {
       title: t1('name'),
-      desc: selectedFriend?.owner?.fullName ?? selectedFriend?.owner?.username,
+      desc:
+        selectedConversation?.title ||
+        selectedParticipant?.user?.fullName ||
+        selectedParticipant?.user?.username ||
+        selectedFriend?.owner?.fullName ||
+        selectedFriend?.owner?.username,
     },
-    { title: 'Email', desc: selectedFriend?.owner?.email },
+    {
+      title: 'Email',
+      desc: selectedParticipant?.user?.email || selectedFriend?.owner?.email,
+    },
     { title: t1('time'), desc: `${date.getHours()}:${date.getMinutes()}` },
     {
       title: t1('location'),
-      desc: selectedFriend?.owner?.location || 'SomeWhere',
+      desc:
+        selectedParticipant?.user?.location ||
+        selectedFriend?.owner?.location ||
+        'SomeWhere',
     },
   ];
 
@@ -78,16 +95,25 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
       </div>
       <div className="user-avatar">
         <Avatar
-          path={selectedFriend?.owner?.avatar}
+          path={
+            selectedFriend?.owner?.avatar || selectedParticipant?.user?.avatar
+          }
           imgWidth={96}
           username={
-            selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ??
+            selectedConversation?.title ||
+            selectedParticipant?.user?.fullName ||
+            selectedParticipant?.user?.username ||
+            selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ||
             selectedFriend?.owner?.username.charAt(0).toUpperCase()
           }
           className="custom-avatar"
         />
         <Title level={5} className="username">
-          {selectedFriend?.owner?.fullName ?? selectedFriend?.owner?.username}
+          {selectedConversation?.title ||
+            selectedParticipant?.user?.fullName ||
+            selectedParticipant?.user?.username ||
+            selectedFriend?.owner?.fullName ||
+            selectedFriend?.owner?.username}
         </Title>
         <div className="status">
           <CheckCircleFilled className="status__icon" />

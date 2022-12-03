@@ -13,6 +13,34 @@
     align-items: center;
     position: relative;
 
+    .conversation-avatar {
+      --size: 46px;
+      width: var(--size);
+      height: var(--size);
+      overflow: hidden;
+
+      &.ant-avatar-group .ant-avatar {
+        --size: 26px;
+        width: var(--size);
+        height: var(--size);
+        margin-left: unset;
+        color: v.$primary;
+        background-color: #d4d3f9;
+
+        .ant-avatar-string {
+          line-height: var(--size);
+        }
+      }
+
+      &.ant-avatar-group .ant-avatar:nth-child(3),
+      &.ant-avatar-group .ant-avatar:nth-child(4) {
+        margin-top: -6px;
+      }
+
+      &.ant-avatar-group .ant-avatar:not(:nth-child(2n + 1)) {
+        margin-left: -8px;
+      }
+    }
     .user-status {
       position: absolute;
       border: 2px solid v.$white;
