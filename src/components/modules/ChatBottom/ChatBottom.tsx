@@ -38,10 +38,6 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
   const inputImgRef = React.createRef<HTMLInputElement>();
   const [messages, setMessages] = useState('');
 
-  const handleClick = () => {
-    setMessagesUser((prev: string[]) => [...prev, messages]);
-    setMessages('');
-  };
   const toggleFile = () => {
     inputFileRef.current?.click();
   };

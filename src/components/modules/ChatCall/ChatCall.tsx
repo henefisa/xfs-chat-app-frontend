@@ -6,11 +6,7 @@ import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import Modal from '@common/Modal/Modal';
 import { useTranslation } from 'react-i18next';
-import {
-  selectFriend,
-  selectParticipant,
-  selectConversation,
-} from 'src/store/userSlice';
+import { selectFriend, selectConversation } from 'src/store/userSlice';
 import { useAppSelector } from 'src/store/hooks';
 
 import './ChatCall.scss';
@@ -26,7 +22,6 @@ const ChatCall: React.FC<IChatCallProps> = ({ onClose, title, isOpen }) => {
     keyPrefix: 'chat-ui.chat-header.chat-call',
   });
   const { selectedFriend } = useAppSelector(selectFriend);
-  const { selectedParticipant } = useAppSelector(selectParticipant);
   const { selectedConversation } = useAppSelector(selectConversation);
 
   return (
@@ -34,14 +29,10 @@ const ChatCall: React.FC<IChatCallProps> = ({ onClose, title, isOpen }) => {
       <div className="modal-body">
         <div className="modal-body__items">
           <Avatar
-            path={
-              selectedFriend?.owner?.avatar || selectedParticipant?.user?.avatar
-            }
+            path={selectedFriend?.owner?.avatar}
             imgWidth={96}
             username={
               selectedConversation?.title ||
-              selectedParticipant?.user?.fullName ||
-              selectedParticipant?.user?.username ||
               selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ||
               selectedFriend?.owner?.username.charAt(0).toUpperCase()
             }
@@ -49,8 +40,6 @@ const ChatCall: React.FC<IChatCallProps> = ({ onClose, title, isOpen }) => {
           />
           <Title level={5} className="username">
             {selectedConversation?.title ||
-              selectedParticipant?.user?.fullName ||
-              selectedParticipant?.user?.username ||
               selectedFriend?.owner?.fullName ||
               selectedFriend?.owner?.username}
           </Title>
