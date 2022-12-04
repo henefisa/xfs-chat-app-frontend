@@ -92,17 +92,17 @@ const ChatBottom: React.FC<IChatBottom> = () => {
         }
       }
 
-      // socket.emit(
-      //   ESocketEvent.SEND_MESSAGE,
-      //   {
-      //     userId: userProfileStore.id,
-      //     conversationId: newConversationId,
-      //     text: message,
-      //   },
-      //   () => {
-      //     // do something
-      //   }
-      // );
+      socket.emit(
+        ESocketEvent.SEND_MESSAGE,
+        {
+          userId: userProfileStore.id,
+          conversationId: newConversationId,
+          text: message,
+        },
+        () => {
+          // do something
+        }
+      );
     }
 
     dispatch(
