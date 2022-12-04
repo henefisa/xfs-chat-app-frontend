@@ -16,10 +16,14 @@ import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IFriendAccept } from 'src/models';
+import { EFriendStatus, IFriendAccept, TUserProfile } from 'src/models';
 import { getFriends } from 'src/services/userService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { selectFriend, updateFriendSelected } from 'src/store/userSlice';
+import {
+  selectFriend,
+  selectUserProfile,
+  updateFriendSelected,
+} from 'src/store/userSlice';
 import ContactMenu from '../ContactMenu/ContactMenu';
 
 import './SidebarContacts.scss';
@@ -31,50 +35,61 @@ const SidebarContacts: React.FC = () => {
   const [listFriend, setListFriend] = React.useState<
     {
       character: string;
-      friends: IFriendAccept[];
+      friends: TUserProfile[];
     }[]
   >([]);
 
   const { selectedFriend } = useAppSelector(selectFriend);
+  const userProfileStore = useAppSelector(selectUserProfile);
 
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
   const { t: t1 } = useTranslation('common');
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
+    const checkFriend = (item: IFriendAccept) => {
+      // Kiểm tra friend là ai (owner hay userTarget)
+      let friend: TUserProfile;
+
+      if (userProfileStore?.id === item.owner.id) {
+        friend = item.userTarget;
+      } else {
+        friend = item.owner;
+      }
+
+      return friend;
+    };
+
     const handleConvertListFriend = (list: IFriendAccept[]) => {
       const listCharacter: string[] = [];
-      list.forEach((friend) => {
-        if (
-          listCharacter.includes(
-            friend.owner.fullName?.charAt(0).toUpperCase() ??
-              friend.owner.username.charAt(0).toUpperCase()
-          )
-        )
-          return;
 
-        listCharacter.push(
-          friend.owner.fullName?.charAt(0).toUpperCase() ??
-            friend.owner.username.charAt(0).toUpperCase()
-        );
+      list.forEach((item) => {
+        const friend = checkFriend(item);
+
+        const name = friend.fullName ?? friend.username;
+
+        if (listCharacter.includes(name.charAt(0).toUpperCase())) return;
+
+        listCharacter.push(name.charAt(0).toUpperCase());
       });
 
       const newList = listCharacter.sort().map((item) => {
-        const objectItem: { character: string; friends: IFriendAccept[] } = {
+        const objectItem: { character: string; friends: TUserProfile[] } = {
           character: item,
           friends: [],
         };
 
-        list.forEach((friend) => {
-          if (!friend.owner.fullName) {
-            if (friend.owner.username.charAt(0).toUpperCase() !== item) return;
+        list.forEach((value) => {
+          const friend = checkFriend(value);
+          if (!friend.fullName) {
+            if (friend.username.charAt(0).toUpperCase() !== item) return;
 
             objectItem.friends.push(friend);
 
             return;
           }
 
-          if (friend.owner.fullName.charAt(0).toUpperCase() !== item) return;
+          if (friend.fullName.charAt(0).toUpperCase() !== item) return;
 
           objectItem.friends.push(friend);
         });
@@ -100,7 +115,7 @@ const SidebarContacts: React.FC = () => {
     getListFriend();
   }, []);
 
-  const handleSelectFriend = (friend: IFriendAccept) => {
+  const handleSelectFriend = (friend: TUserProfile) => {
     dispatch(updateFriendSelected(friend));
   };
 
@@ -137,16 +152,15 @@ const SidebarContacts: React.FC = () => {
                     <ul className="contact-names">
                       {item.friends.map((friend) => (
                         <Button
-                          key={friend.owner.id}
+                          key={friend.id}
                           className={clsx('contact-names__btn', {
                             ['contact-names__btn--active']:
-                              selectedFriend?.owner?.username ===
-                              friend.owner.username,
+                              selectedFriend?.username === friend.username,
                           })}
                           onClick={() => handleSelectFriend(friend)}
                         >
                           <label className="contact-names__label">
-                            {friend.owner.fullName ?? friend.owner.username}
+                            {friend.fullName ?? friend.username}
                           </label>
                           <Dropdown
                             overlay={<ContactMenu />}
