@@ -81,15 +81,10 @@ const SidebarContacts: React.FC = () => {
 
         list.forEach((value) => {
           const friend = checkFriend(value);
-          if (!friend.fullName) {
-            if (friend.username.charAt(0).toUpperCase() !== item) return;
 
-            objectItem.friends.push(friend);
+          const name = friend.fullName ?? friend.username;
 
-            return;
-          }
-
-          if (friend.fullName.charAt(0).toUpperCase() !== item) return;
+          if (name.charAt(0).toUpperCase() !== item) return;
 
           objectItem.friends.push(friend);
         });
