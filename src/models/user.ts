@@ -53,6 +53,12 @@ export type TUserInfo = Omit<
   'id' | 'created_at' | 'updated_at' | 'status' | 'role'
 >;
 
+export interface IChangeField {
+  fullName: null | string | undefined;
+  phone: null | string | undefined;
+  description: null | string | undefined;
+  location: null | string | undefined;
+}
 export interface IListFriendRequest extends IBase {
   status: EFriendStatus.REQUESTED;
   owner: TUserProfile;

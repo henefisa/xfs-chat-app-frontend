@@ -14,9 +14,10 @@ import { Form } from 'antd';
 import { selectUserProfile } from 'src/store/userSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import * as userService from 'src/services/userService';
-import { TUserInfo } from 'src/models';
+import { IChangeField, TUserInfo } from 'src/models';
 import TextArea from '@common/TextArea/TextArea';
 import ESidebarSetting from 'src/interfaces/ESidebarSettings';
+import { checkDisabled } from 'src/utils/checkdisabled';
 
 import './SidebarSettings.scss';
 
@@ -55,48 +56,19 @@ const SidebarSettings: React.FC = () => {
     return {
       fullName: userProfileStore?.fullName,
       location: userProfileStore?.location,
-      email: userProfileStore?.email,
       phone: userProfileStore?.phone,
       description: userProfileStore?.description,
     };
   }, [updateSuccess]);
 
-  const handleValueChage = (
-    e: {
-      fullName: string;
-      location: string;
-      email: string;
-      phone: string;
-      description: string;
-    },
-    newInfoUser: TUserInfo
-  ) => {
+  const handleValueChange = (e: IChangeField, newInfoUser: TUserInfo) => {
     const newUserInfo = {
       fullName: e.fullName || newInfoUser.fullName,
       location: e.location || newInfoUser.location,
       phone: e.phone || newInfoUser.phone,
       description: e.description || newInfoUser.description,
     };
-
-    checkDisabled(newUserInfo);
-  };
-
-  const checkDisabled = (newUserInfo: {
-    fullName: string | null;
-    location: string | null;
-    phone: string | null;
-    description: string | null;
-  }) => {
-    if (
-      initUserInfo.fullName !== newUserInfo.fullName ||
-      initUserInfo.location !== newUserInfo.location ||
-      initUserInfo.phone !== newUserInfo.phone ||
-      initUserInfo.description !== newUserInfo.description
-    ) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
+    checkDisabled(initUserInfo, newUserInfo, setDisabled);
   };
 
   const handleFinish = async (values: TUserInfo) => {
@@ -185,7 +157,7 @@ const SidebarSettings: React.FC = () => {
                   phone: userProfileStore?.phone,
                   description: userProfileStore?.description,
                 }}
-                onValuesChange={handleValueChage}
+                onValuesChange={handleValueChange}
               >
                 <Form.Item
                   name="fullName"
