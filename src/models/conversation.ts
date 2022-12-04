@@ -9,7 +9,8 @@ export interface IParticipant extends IBase {
 }
 
 export interface IConversation extends IBase {
-  title: string;
+  title: string | null;
+  avatar: string | null;
   isGroup: boolean;
   participants: IParticipant[];
 }

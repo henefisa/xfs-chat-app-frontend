@@ -65,6 +65,11 @@ export interface IListFriendRequest extends IBase {
   owner: TUserProfile;
 }
 
+export type TListFriend = {
+  character: string;
+  friends: TUserProfile[];
+}[];
+
 export interface IFriendAccept extends IBase {
   status: EFriendStatus.ACCEPTED;
   owner: TUserProfile;

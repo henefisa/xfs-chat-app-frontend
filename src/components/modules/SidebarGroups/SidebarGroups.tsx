@@ -1,70 +1,27 @@
-import * as React from 'react';
 import Tooltip from '@common/Tooltip/Tooltip';
+import * as React from 'react';
 
-import { UsergroupAddOutlined, CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 
-import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import BlockGroup from '@common/BlockGroup/BlockGroup';
-import Input from '@common/Input/Input';
 import Button from '@common/Button/Button';
-import clsx from 'clsx';
+import Input from '@common/Input/Input';
+import InputCheckbox from '@common/Input/InputCheckbox';
+import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Title from '@common/Title/Title';
+import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from 'src/store/hooks';
+import { selectFriend } from 'src/store/userSlice';
 
 import './SidebarGroups.scss';
-
-const contacts = [
-  {
-    firtCharacter: 'A',
-    names: ['Albert Rodarte', 'Allison Etter'],
-  },
-  {
-    firtCharacter: 'C',
-    names: ['Craig Smiley'],
-  },
-  {
-    firtCharacter: 'D',
-    names: ['Daniel Clay', 'Doris Brown'],
-  },
-  {
-    firtCharacter: 'I',
-    names: ['Iris Wells'],
-  },
-  {
-    firtCharacter: 'J',
-    names: ['Juan Flakes', 'John Hall', 'Joy Southern'],
-  },
-
-  {
-    firtCharacter: 'M',
-    names: ['Mary Farmer', 'Mark Messer', 'Michael Hinton'],
-  },
-  {
-    firtCharacter: 'O',
-    names: ['Ossie Wilson'],
-  },
-  {
-    firtCharacter: 'P',
-    names: ['Phillis Griffin', 'Paul Haynes'],
-  },
-  {
-    firtCharacter: 'R',
-    names: ['Rocky Jackson'],
-  },
-  {
-    firtCharacter: 'S',
-    names: ['Sara Muller', 'Simon Velez', 'Steve Walker'],
-  },
-  {
-    firtCharacter: 'H',
-    names: ['Hanah Mile'],
-  },
-];
 
 const SidebarGroups: React.FC = () => {
   const [active, setActive] = React.useState(false);
   const [toggleModal, setToggleModal] = React.useState(false);
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.groups' });
+
+  const { listFriend } = useAppSelector(selectFriend);
 
   return (
     <>
@@ -74,11 +31,7 @@ const SidebarGroups: React.FC = () => {
             {t('title')}
           </Title>
           <div className="group-create" onClick={() => setToggleModal(true)}>
-            <Tooltip
-              className=""
-              placement="bottom"
-              tooltipTitle={t('group-add-tooltip')}
-            >
+            <Tooltip placement="bottom" tooltipTitle={t('group-add-tooltip')}>
               <UsergroupAddOutlined className="group-create__icon" />
             </Tooltip>
           </div>
@@ -87,11 +40,6 @@ const SidebarGroups: React.FC = () => {
           <SearchSidebar placeholder={t('search-placeholder')} />
         </div>
         <div className="sidebar-groups__box">
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
@@ -153,38 +101,26 @@ const SidebarGroups: React.FC = () => {
                     {t('contacts')}
                   </Title>
                   <div className="select-contacts__add">
-                    {contacts.map((contact, index) => (
+                    {listFriend?.map((item, index) => (
                       <div key={index}>
                         <Title className="firt-character">
-                          {contact.firtCharacter}
+                          {item.character}
                         </Title>
                         <ul className="contact-names">
-                          {contact.names.map((name, index) => (
-                            <li key={index}>
-                              <input
-                                className="contact-names__checkbox"
-                                type="checkbox"
-                              ></input>
-                              <Title className="contact-names__label">
-                                {name}
-                              </Title>
-                            </li>
-                          ))}
+                          {item.friends.map((friend) => {
+                            const name = friend.fullName ?? friend.username;
+                            return (
+                              <li key={friend.id}>
+                                <InputCheckbox label={name} />
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="dialog-desc">
-              <Title className="dialog-desc__title">
-                {t('modal-desc-label')}
-              </Title>
-              <textarea
-                className="dialog-desc__input"
-                placeholder={t('modal-desc-placeholder')}
-              ></textarea>
             </div>
           </div>
           <div className="dialog__footer">

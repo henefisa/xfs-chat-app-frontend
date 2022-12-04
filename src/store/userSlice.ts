@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   IConversation,
-  IFriendAccept,
   IMessages,
+  TListFriend,
   TUserProfile,
 } from 'src/models';
 import { RootState } from '.';
@@ -15,7 +15,7 @@ interface IUserProfileState {
 
 interface IUserFriendState {
   selectedFriend: TUserProfile | null;
-  listFriend: IFriendAccept[] | null;
+  listFriend: TListFriend | null;
 }
 
 interface IUserConversationState {
@@ -124,6 +124,12 @@ export const userSlice = createSlice({
     updateHasConversation: (state, action: PayloadAction<boolean>) => {
       state.conversation.hasConversation = action.payload;
     },
+    updateListFriend: (state, action: PayloadAction<TListFriend>) => {
+      state.friend.listFriend = action.payload;
+    },
+    deleteListFriend: (state) => {
+      state.friend.listFriend = [];
+    },
   },
 });
 
@@ -145,6 +151,8 @@ export const {
   updateListMessage,
   deleteListMessage,
   updateHasConversation,
+  updateListFriend,
+  deleteListFriend,
 } = userSlice.actions;
 
 export const selectUserProfile = (state: RootState) =>

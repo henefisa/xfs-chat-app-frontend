@@ -38,6 +38,7 @@ import {
   selectUserProfile,
   updateFriendSelected,
   updateHasConversation,
+  updateListFriend,
 } from 'src/store/userSlice';
 import ContactMenu from '../ContactMenu/ContactMenu';
 
@@ -47,14 +48,8 @@ const SidebarContacts: React.FC = () => {
   const [toggleModal, setToggleModal] = React.useState(false);
 
   const [loading, setLoading] = React.useState<boolean>(false);
-  const [listFriend, setListFriend] = React.useState<
-    {
-      character: string;
-      friends: TUserProfile[];
-    }[]
-  >([]);
 
-  const { selectedFriend } = useAppSelector(selectFriend);
+  const { selectedFriend, listFriend } = useAppSelector(selectFriend);
   const userProfileStore = useAppSelector(selectUserProfile);
 
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
@@ -106,7 +101,7 @@ const SidebarContacts: React.FC = () => {
         return objectItem;
       });
 
-      setListFriend(newList);
+      dispatch(updateListFriend(newList));
     };
 
     const getListFriend = async () => {
@@ -117,7 +112,6 @@ const SidebarContacts: React.FC = () => {
 
         setLoading(false);
       } catch (err) {
-        setListFriend([]);
         setLoading(false);
       }
     };
@@ -182,35 +176,34 @@ const SidebarContacts: React.FC = () => {
             />
           ) : (
             <>
-              {listFriend.length > 0 &&
-                listFriend.map((item, index) => (
-                  <div key={index}>
-                    <div className="firt-character">{item.character}</div>
-                    <ul className="contact-names">
-                      {item.friends.map((friend) => (
-                        <Button
-                          key={friend.id}
-                          className={clsx('contact-names__btn', {
-                            ['contact-names__btn--active']:
-                              selectedFriend?.username === friend.username,
-                          })}
-                          onClick={() => handleSelectFriend(friend)}
+              {listFriend?.map((item, index) => (
+                <div key={index}>
+                  <div className="firt-character">{item.character}</div>
+                  <ul className="contact-names">
+                    {item.friends.map((friend) => (
+                      <Button
+                        key={friend.id}
+                        className={clsx('contact-names__btn', {
+                          ['contact-names__btn--active']:
+                            selectedFriend?.username === friend.username,
+                        })}
+                        onClick={() => handleSelectFriend(friend)}
+                      >
+                        <label className="contact-names__label">
+                          {friend.fullName ?? friend.username}
+                        </label>
+                        <Dropdown
+                          overlay={<ContactMenu />}
+                          trigger={['click']}
+                          placement="bottomRight"
                         >
-                          <label className="contact-names__label">
-                            {friend.fullName ?? friend.username}
-                          </label>
-                          <Dropdown
-                            overlay={<ContactMenu />}
-                            trigger={['click']}
-                            placement="bottomRight"
-                          >
-                            <MoreOutlined className="icon" />
-                          </Dropdown>
-                        </Button>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                          <MoreOutlined className="icon" />
+                        </Dropdown>
+                      </Button>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </>
           )}
         </div>
