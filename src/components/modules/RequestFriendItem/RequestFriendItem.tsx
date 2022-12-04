@@ -20,6 +20,8 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
   const [isCancelOrAccept, setIsCancelOrAccept] =
     React.useState<boolean>(false);
 
+  const name = friend.owner.fullName ?? friend.owner.username;
+
   const handleCancelRequest = async (id: string) => {
     const result = await cancelFriendRequest(id, t);
 
@@ -38,16 +40,13 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
     <div className="friend-item">
       <Avatar
         path={friend.owner.avatar}
-        username={
-          friend.owner.fullName?.charAt(0).toUpperCase() ??
-          friend.owner.username.charAt(0).toUpperCase()
-        }
+        username={name.charAt(0).toUpperCase()}
         imgWidth={35.2}
         className="friend-item__avatar"
       />
       <div className="friend-item__info">
         <Title className="friend-name" level={5}>
-          {friend.owner.fullName ?? friend.owner.username}
+          {name}
         </Title>
         <Title className="friend-location" level={5}>
           {friend.owner.location || 'Some Where'}

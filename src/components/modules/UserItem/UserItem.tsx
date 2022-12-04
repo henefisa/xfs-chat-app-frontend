@@ -24,6 +24,8 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
   });
   const { t: t1 } = useTranslation('common');
 
+  const name = user.fullName ?? user.username;
+
   const [isCancel, setIsCancel] = React.useState<boolean>(false);
   const [friendStatus, setFriendStatus] = React.useState<IFriendStatusState>();
 
@@ -47,20 +49,16 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
     <div className={clsx('user-item', className)}>
       <Avatar
         path={user.avatar}
-        username={
-          user.fullName
-            ? user.fullName.charAt(0).toUpperCase()
-            : user.username.charAt(0).toUpperCase()
-        }
+        username={name.charAt(0).toUpperCase()}
         imgWidth={35.2}
         className="user-item__avtar"
       />
       <div className="user-item__info">
         <Title className="user-name" level={5}>
-          {user.fullName ?? user.username}
+          {name}
         </Title>
         <Title className="user-location" level={5}>
-          {user.location || 'SomeWhere'}
+          {user.location || 'Some Where'}
         </Title>
       </div>
       <div className="user-item__action">

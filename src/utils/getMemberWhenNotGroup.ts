@@ -1,6 +1,6 @@
 import { IConversation, TUserProfile } from 'src/models';
 
-const handleReturnMemmberWhenNotGroup = (
+const getMemberWhenNotGroup = (
   conversation: IConversation | null,
   userProfileStore: TUserProfile | null
 ) => {
@@ -12,4 +12,4 @@ const handleReturnMemmberWhenNotGroup = (
   return conversation.participants[1].user;
 };
 
-export default handleReturnMemmberWhenNotGroup;
+export default getMemberWhenNotGroup;

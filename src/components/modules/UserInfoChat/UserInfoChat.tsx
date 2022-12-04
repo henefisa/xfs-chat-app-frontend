@@ -12,6 +12,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import { selectFriend } from 'src/store/userSlice';
+import getTime from 'src/utils/getTime';
 import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
 
 import './UserInfoChat.scss';
@@ -30,19 +31,19 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
     keyPrefix: 'chat-ui.user-info-chat.about',
   });
 
-  const date = new Date();
   const { selectedFriend } = useAppSelector(selectFriend);
+  const name = selectedFriend?.fullName ?? selectedFriend?.username;
 
   const userInfoChat = [
     {
       title: t1('name'),
-      desc: selectedFriend?.owner?.fullName ?? selectedFriend?.owner?.username,
+      desc: name,
     },
-    { title: 'Email', desc: selectedFriend?.owner?.email },
-    { title: t1('time'), desc: `${date.getHours()}:${date.getMinutes()}` },
+    { title: 'Email', desc: selectedFriend?.email },
+    { title: t1('time'), desc: getTime(new Date().toString()) },
     {
       title: t1('location'),
-      desc: selectedFriend?.owner?.location || 'SomeWhere',
+      desc: selectedFriend?.location || 'Some Where',
     },
   ];
 
@@ -78,16 +79,13 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
       </div>
       <div className="user-avatar">
         <Avatar
-          path={selectedFriend?.owner?.avatar}
+          path={selectedFriend?.avatar}
           imgWidth={96}
-          username={
-            selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ??
-            selectedFriend?.owner?.username.charAt(0).toUpperCase()
-          }
+          username={name?.charAt(0).toUpperCase()}
           className="custom-avatar"
         />
         <Title level={5} className="username">
-          {selectedFriend?.owner?.fullName ?? selectedFriend?.owner?.username}
+          {name}
         </Title>
         <div className="status">
           <CheckCircleFilled className="status__icon" />
@@ -99,8 +97,7 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
       <Divider />
       <div className="content-profile">
         <Title className="description" level={5}>
-          {selectedFriend?.owner?.description ||
-            'Hello, have a nice day at work!'}
+          {selectedFriend?.description || 'Hello, have a nice day at work!'}
         </Title>
         <Collapse
           bordered={false}

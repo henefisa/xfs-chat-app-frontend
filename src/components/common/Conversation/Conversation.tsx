@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { IConversation } from 'src/models';
 import { useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';
-import handleReturnMemmberWhenNotGroup from 'src/utils/handleReturnMemberWhenNotGroup';
+import getMemberWhenNotGroup from 'src/utils/getMemberWhenNotGroup';
 import Avatar from '../Avatar/Avatar';
 import Title from '../Title/Title';
 
@@ -36,10 +36,7 @@ const Conversation: React.FC<ConversationProps> = ({
           <ConversationAvatarGroup conversation={conversation} />
         ) : (
           <Avatar
-            path={
-              handleReturnMemmberWhenNotGroup(conversation, userProfileStore)
-                ?.avatar
-            }
+            path={getMemberWhenNotGroup(conversation, userProfileStore)?.avatar}
             username={username.charAt(0).toUpperCase()}
             imgWidth={46}
           />

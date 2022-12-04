@@ -10,15 +10,13 @@ import {
 
 import ChatDayTitle from '../ChatDayTitle/ChatDayTitle';
 import MessagesTable from '../MessagesTable/MessagesTable';
-
-import './ChatMain.scss';
 import { ESocketEvent } from 'src/models/socket';
 
-interface IChatMain {
-  messages: string[];
-}
+import './ChatMain.scss';
 
-const ChatMain: React.FC<IChatMain> = ({ messages }) => {
+interface IChatMain {}
+
+const ChatMain: React.FC<IChatMain> = () => {
   const socket = useContext(SocketContext);
   const dispatch = useAppDispatch();
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -28,7 +26,7 @@ const ChatMain: React.FC<IChatMain> = ({ messages }) => {
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView();
-  }, [messages, listMessage]);
+  }, [listMessage]);
 
   useEffect(() => {
     socket.on(ESocketEvent.GET_MESSAGE, ({ user, message }) => {
@@ -50,29 +48,29 @@ const ChatMain: React.FC<IChatMain> = ({ messages }) => {
   return (
     <div className="chatmain">
       <ChatDayTitle day="Today" />
-      {listMessage.map((messageObj) => {
+      {listMessage.map((message) => {
         if (!useProfileStore) return null;
 
-        if (messageObj.sender.id === useProfileStore.id) {
+        if (message.sender.id === useProfileStore.id) {
           return (
-            <div key={messageObj.id} ref={scrollRef}>
+            <div key={message.id} ref={scrollRef}>
               <MessagesTable
-                sender={messageObj.sender}
+                sender={message.sender}
                 position="right"
-                time={messageObj.createdAt}
-                messages={messageObj.message}
+                time={message.createdAt}
+                message={message.message}
               />
             </div>
           );
         }
 
         return (
-          <div key={messageObj.id} ref={scrollRef}>
+          <div key={message.id} ref={scrollRef}>
             <MessagesTable
-              sender={messageObj.sender}
+              sender={message.sender}
               position="left"
-              time={messageObj.createdAt}
-              messages={messageObj.message}
+              time={message.createdAt}
+              message={message.message}
             />
           </div>
         );

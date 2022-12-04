@@ -19,7 +19,7 @@ import {
   selectUserProfile,
   updateConversationSelected,
 } from 'src/store/userSlice';
-import handleTitleOfConversation from 'src/utils/handleTitleOfConversation';
+import getConversationTitle from 'src/utils/getConversationTitle';
 
 import './SidebarChats.scss';
 
@@ -90,7 +90,7 @@ const SidebarChats: React.FC = () => {
             </Title>
             <div className="conversation-list__result">
               {listConversation.map((conversation) => {
-                const titleConversation = handleTitleOfConversation(
+                const titleConversation = getConversationTitle(
                   conversation,
                   userProfileStore
                 );

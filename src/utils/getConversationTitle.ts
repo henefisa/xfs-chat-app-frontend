@@ -1,6 +1,6 @@
 import { IConversation, TUserProfile } from 'src/models';
 
-const handleTitleOfConversation = (
+const getConversationTitle = (
   conversation: IConversation,
   userProfileStore: TUserProfile | null
 ) => {
@@ -19,4 +19,4 @@ const handleTitleOfConversation = (
   return titleConversation;
 };
 
-export default handleTitleOfConversation;
+export default getConversationTitle;

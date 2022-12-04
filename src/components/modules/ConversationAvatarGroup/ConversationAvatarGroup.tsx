@@ -18,17 +18,18 @@ const ConversationAvatarGroup: React.FC<IConversationAvatarGroupProps> = ({
       maxPopoverTrigger="click"
       className="conversation-avatar"
     >
-      {conversation.participants.map((participant) => (
-        <Avatar
-          key={participant.id}
-          path={participant.user.avatar}
-          username={
-            participant.user.fullName?.charAt(0).toUpperCase() ??
-            participant.user.username.charAt(0).toUpperCase()
-          }
-          imgWidth={26}
-        />
-      ))}
+      {conversation.participants.map((participant) => {
+        const name = participant.user.fullName ?? participant.user.username;
+
+        return (
+          <Avatar
+            key={participant.id}
+            path={participant.user.avatar}
+            username={name.charAt(0).toUpperCase()}
+            imgWidth={26}
+          />
+        );
+      })}
     </AvatarGroup>
   );
 };

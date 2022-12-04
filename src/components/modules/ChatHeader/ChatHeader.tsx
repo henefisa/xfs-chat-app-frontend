@@ -21,8 +21,8 @@ import {
   selectFriend,
   selectUserProfile,
 } from 'src/store/userSlice';
-import handleReturnMemmberWhenNotGroup from 'src/utils/handleReturnMemberWhenNotGroup';
-import handleTitleOfConversation from 'src/utils/handleTitleOfConversation';
+import getMemberWhenNotGroup from 'src/utils/getMemberWhenNotGroup';
+import getConversationTitle from 'src/utils/getConversationTitle';
 import ActionsChatMenu from '../ActionsChatMenu/ActionsChatMenu';
 import ChatCall from '../ChatCall/ChatCall';
 import ConversationAvatarGroup from '../ConversationAvatarGroup/ConversationAvatarGroup';
@@ -41,9 +41,15 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
 
   const [hasConversation, setHasConversation] = React.useState<boolean>(false);
 
-  const { selectedFriend } = useAppSelector(selectFriend);
   const { selectedConversation } = useAppSelector(selectConversation);
   const userProfileStore = useAppSelector(selectUserProfile);
+  const { selectedFriend } = useAppSelector(selectFriend);
+
+  const name = selectedFriend?.fullName ?? selectedFriend?.username;
+
+  const nameWhenHasConversation =
+    getMemberWhenNotGroup(selectedConversation, userProfileStore)?.fullName ??
+    getMemberWhenNotGroup(selectedConversation, userProfileStore)?.username;
 
   React.useEffect(() => {
     selectedConversation ? setHasConversation(true) : setHasConversation(false);
@@ -93,7 +99,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
                   onClick={handleClickuser}
                 >
                   {selectedConversation.title ||
-                    handleTitleOfConversation(
+                    getConversationTitle(
                       selectedConversation,
                       userProfileStore
                     )}
@@ -103,26 +109,13 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
               <>
                 <Avatar
                   path={
-                    handleReturnMemmberWhenNotGroup(
+                    getMemberWhenNotGroup(
                       selectedConversation,
                       userProfileStore
                     )?.avatar
                   }
                   imgWidth={46}
-                  username={
-                    handleReturnMemmberWhenNotGroup(
-                      selectedConversation,
-                      userProfileStore
-                    )
-                      ?.fullName?.charAt(0)
-                      .toUpperCase() ??
-                    handleReturnMemmberWhenNotGroup(
-                      selectedConversation,
-                      userProfileStore
-                    )
-                      ?.username.charAt(0)
-                      .toUpperCase()
-                  }
+                  username={nameWhenHasConversation?.charAt(0).toUpperCase()}
                   className="user-info__avatar"
                 />
                 <Title
@@ -130,15 +123,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
                   className="user-info__name"
                   onClick={handleClickuser}
                 >
-                  {selectedConversation?.title ||
-                    handleReturnMemmberWhenNotGroup(
-                      selectedConversation,
-                      userProfileStore
-                    )?.fullName ||
-                    handleReturnMemmberWhenNotGroup(
-                      selectedConversation,
-                      userProfileStore
-                    )?.username}
+                  {selectedConversation?.title || nameWhenHasConversation}
                 </Title>
               </>
             )}
@@ -146,12 +131,9 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
         ) : (
           <>
             <Avatar
-              path={selectedFriend?.owner?.avatar}
+              path={selectedFriend?.avatar}
               imgWidth={46}
-              username={
-                selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ??
-                selectedFriend?.owner?.username.charAt(0).toUpperCase()
-              }
+              username={name?.charAt(0).toUpperCase()}
               className="user-info__avatar"
             />
             <Title
@@ -159,8 +141,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
               className="user-info__name"
               onClick={handleClickuser}
             >
-              {selectedFriend?.owner?.fullName ??
-                selectedFriend?.owner?.username}
+              {name}
             </Title>
           </>
         )}

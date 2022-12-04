@@ -14,13 +14,14 @@ interface IUserProfileState {
 }
 
 interface IUserFriendState {
-  selectedFriend: IFriendAccept | null;
+  selectedFriend: TUserProfile | null;
   listFriend: IFriendAccept[] | null;
 }
 
 interface IUserConversationState {
   selectedConversation: IConversation | null;
   listConversation: IConversation[];
+  hasConversation: boolean;
 }
 
 interface IUserMessage {
@@ -49,6 +50,7 @@ const initialState: IUserState = {
   conversation: {
     selectedConversation: null,
     listConversation: [],
+    hasConversation: true,
   },
   message: {
     listMessage: [],
@@ -76,7 +78,7 @@ export const userSlice = createSlice({
     deleteUserProfile: (state) => {
       state.profile.userProfile = null;
     },
-    updateFriendSelected: (state, action: PayloadAction<IFriendAccept>) => {
+    updateFriendSelected: (state, action: PayloadAction<TUserProfile>) => {
       state.friend.selectedFriend = action.payload;
     },
     deleteFriendSelected: (state) => {
@@ -116,6 +118,12 @@ export const userSlice = createSlice({
     updateListMessage: (state, action: PayloadAction<IMessages>) => {
       state.message.listMessage.push(action.payload);
     },
+    deleteListMessage: (state) => {
+      state.message.listMessage = [];
+    },
+    updateHasConversation: (state, action: PayloadAction<boolean>) => {
+      state.conversation.hasConversation = action.payload;
+    },
   },
 });
 
@@ -135,6 +143,8 @@ export const {
   getListMessageSuccess,
   getListMessageFailed,
   updateListMessage,
+  deleteListMessage,
+  updateHasConversation,
 } = userSlice.actions;
 
 export const selectUserProfile = (state: RootState) =>

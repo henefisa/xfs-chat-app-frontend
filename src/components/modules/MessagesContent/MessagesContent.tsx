@@ -9,13 +9,13 @@ import './MessagesContent.scss';
 interface IMessagesContent {
   position: string;
   time: string;
-  messages: string;
+  message: string;
 }
 
 const MessagesContent: React.FC<IMessagesContent> = ({
   position,
   time,
-  messages,
+  message,
 }) => {
   return (
     <div className="messages">
@@ -26,7 +26,7 @@ const MessagesContent: React.FC<IMessagesContent> = ({
             `bubble-chat__content--${position}`
           )}
         >
-          {messages}
+          {message}
           <div className="chat-time">
             <ClockCircleOutlined className="custom-icon-time" />
             {getTime(time)}
