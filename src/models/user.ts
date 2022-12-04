@@ -57,7 +57,7 @@ export type TUserProfile = Omit<IUserItemResult, 'friendStatus'>;
 
 export type TUserInfo = Omit<
   TUserProfile,
-  'id' | 'created_at' | 'updated_at' | 'status' | 'role'
+  'id' | 'createdAt' | 'updatedAt' | 'status' | 'role' | 'username'
 >;
 
 export interface IListFriendRequest extends IBase {
