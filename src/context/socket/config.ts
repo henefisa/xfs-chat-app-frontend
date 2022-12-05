@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client';
 
-export const socket = io(import.meta.env.VITE_APP_SOCKET_URI, {
+export const socket = io('ws://localhost:8000', {
   autoConnect: false,
 });
