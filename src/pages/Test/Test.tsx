@@ -27,9 +27,15 @@ const Test: React.FC = () => {
   const [id, setId] = React.useState('');
   const socket = React.useContext(SocketContext);
 
-  console.log(socket);
-
   React.useEffect(() => {
+    socket.on('connect', () => {
+      console.log('connected');
+    });
+
+    socket.on('disconnect', () => {
+      console.log('disconnected');
+    });
+
     socket.on('video-offer', async (data: any) => {
       const description = new RTCSessionDescription(data.sdp);
       await peerConnection.setRemoteDescription(description);
@@ -106,11 +112,18 @@ const Test: React.FC = () => {
 
   return (
     <div>
-      <button onClick={handleClick}>Test button</button>
+      <button onClick={handleClick}>Call</button>
       <input type="text" value={id} onChange={(e) => setId(e.target.value)} />
 
       <video ref={ref} autoPlay playsInline controls={false} />
       <video ref={localVideoRef} autoPlay playsInline controls={false} />
+      <button
+        onClick={() => {
+          socket.connect();
+        }}
+      >
+        Click
+      </button>
     </div>
   );
 };
