@@ -7,15 +7,13 @@
   align-items: center;
 }
 
-.ant-avatar-group.avatar-group {
-  flex-shrink: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.ant-popover.ant-avatar-group-popover {
+  .ant-popover-inner {
+    border-radius: 10px;
 
-  .ant-avatar.ant-avatar-circle {
-    --size: 26px;
-    height: var(--size);
-    width: var(--size);
+    .ant-popover-inner-content {
+      display: flex;
+      padding: 8px 12px;
+    }
   }
 }

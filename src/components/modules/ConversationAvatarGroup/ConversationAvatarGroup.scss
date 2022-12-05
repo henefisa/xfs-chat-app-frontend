@@ -1,6 +1,10 @@
 @use '../../../assets/styles/variables' as v;
 
-.ant-avatar-group.conversation-avatar {
+.ant-avatar-group.avatar-group.conversation-avatar {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   --size: 46px;
   width: var(--size);
   height: var(--size);
@@ -28,5 +32,11 @@
 
   .ant-avatar:not(:nth-child(2n + 1)) {
     margin-left: -8px;
+  }
+
+  .ant-avatar.ant-avatar-circle {
+    --size: 26px;
+    height: var(--size);
+    width: var(--size);
   }
 }
