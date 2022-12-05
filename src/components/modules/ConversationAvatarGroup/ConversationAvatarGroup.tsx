@@ -7,10 +7,12 @@ import './ConversationAvatarGroup.scss';
 
 interface IConversationAvatarGroupProps {
   conversation: IConversation;
+  imgSize: number;
 }
 
 const ConversationAvatarGroup: React.FC<IConversationAvatarGroupProps> = ({
   conversation,
+  imgSize,
 }) => {
   return (
     <AvatarGroup
@@ -26,7 +28,7 @@ const ConversationAvatarGroup: React.FC<IConversationAvatarGroupProps> = ({
             key={participant.id}
             path={participant.user.avatar}
             username={name.charAt(0).toUpperCase()}
-            imgWidth={26}
+            imgWidth={imgSize}
           />
         );
       })}

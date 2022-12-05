@@ -45,9 +45,9 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const userProfileStore = useAppSelector(selectUserProfile);
   const { selectedFriend } = useAppSelector(selectFriend);
 
-  const name = selectedFriend?.fullName ?? selectedFriend?.username;
-
-  const nameWhenHasConversation =
+  const name =
+    selectedFriend?.fullName ??
+    selectedFriend?.username ??
     getMemberWhenNotGroup(selectedConversation, userProfileStore)?.fullName ??
     getMemberWhenNotGroup(selectedConversation, userProfileStore)?.username;
 
@@ -92,7 +92,10 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
           <>
             {selectedConversation?.isGroup ? (
               <>
-                <ConversationAvatarGroup conversation={selectedConversation} />
+                <ConversationAvatarGroup
+                  conversation={selectedConversation}
+                  imgSize={26}
+                />
                 <Title
                   level={5}
                   className="user-info__name"
@@ -115,7 +118,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
                     )?.avatar
                   }
                   imgWidth={46}
-                  username={nameWhenHasConversation?.charAt(0).toUpperCase()}
+                  username={name?.charAt(0).toUpperCase()}
                   className="user-info__avatar"
                 />
                 <Title
@@ -123,7 +126,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
                   className="user-info__name"
                   onClick={handleClickuser}
                 >
-                  {selectedConversation?.title || nameWhenHasConversation}
+                  {selectedConversation?.title || name}
                 </Title>
               </>
             )}
