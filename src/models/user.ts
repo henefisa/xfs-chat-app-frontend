@@ -60,7 +60,7 @@ export type TUserProfile = Omit<IUserItemResult, 'friendStatus'>;
 
 export type TUserInfo = Omit<
   TUserProfile,
-  'id' | 'createdAt' | 'updatedAt' | 'status' | 'role'
+  'id' | 'createdAt' | 'updatedAt' | 'status' | 'role' | 'username'
 >;
 
 export interface IListFriendRequest extends IBase {
@@ -71,6 +71,7 @@ export interface IListFriendRequest extends IBase {
 export interface IFriendAccept extends IBase {
   status: EFriendStatus.ACCEPTED;
   owner: TUserProfile;
+  userTarget: TUserProfile;
 }
 
 export interface IGetUsersQuery {

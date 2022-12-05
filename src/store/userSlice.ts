@@ -9,7 +9,7 @@ interface IUserProfileState {
 }
 
 interface IUserFriendState {
-  selectedFriend: IFriendAccept | null;
+  selectedFriend: TUserProfile | null;
   listFriend: IFriendAccept[] | null;
 }
 
@@ -59,7 +59,7 @@ export const userSlice = createSlice({
     deleteUserProfile: (state) => {
       state.profile.userProfile = null;
     },
-    updateFriendSelected: (state, action: PayloadAction<IFriendAccept>) => {
+    updateFriendSelected: (state, action: PayloadAction<TUserProfile>) => {
       state.friend.selectedFriend = action.payload;
     },
     deleteFriendSelected: (state) => {
