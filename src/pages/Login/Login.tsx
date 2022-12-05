@@ -45,16 +45,18 @@ const LoginPage: React.FC = () => {
 
       if (!accessToken) return;
 
-      const isActivate: boolean | undefined =
-        await authService.checkUserActivate(t);
-      if (isActivate === undefined) return;
+      try {
+        const isActivated: boolean = await authService.checkUserActivate(t);
 
-      if (!isActivate) {
-        navigate('/verify-account');
-        return;
+        if (!isActivated) {
+          navigate('/verify-account');
+          return;
+        }
+
+        navigate('/dashboard');
+      } catch (err) {
+        // do something
       }
-
-      navigate('/dashboard');
     };
 
     handleLoginWhenRemember();

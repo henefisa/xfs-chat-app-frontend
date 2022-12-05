@@ -50,6 +50,7 @@ export const initInterceptor = (
               message: t('error'),
               description: t('login.error', { ns: 'notification' }),
               duration: 2,
+              key: '1',
             });
 
             return Promise.reject(error);

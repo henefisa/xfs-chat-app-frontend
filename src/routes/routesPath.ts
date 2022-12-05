@@ -23,6 +23,7 @@ const routes: IRoute[] = [
   },
   {
     path: '/verify-account',
+    private: true,
     component: VerifyAccount,
   },
   {
