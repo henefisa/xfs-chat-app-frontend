@@ -23,7 +23,7 @@ import {
   selectConversation,
   selectUserProfile,
 } from 'src/store/userSlice';
-import setMemberConversation from 'src/utils/setMemberConversation';
+import getMemberConversation from 'src/utils/getMemberConversation';
 import getGroupTitle from 'src/utils/getGroupTitle';
 import AvatarGroupChat from '../AvatarGroupChat/AvatarGroupChat';
 
@@ -51,6 +51,10 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
     setOpen(true);
   };
 
+  const name = selectedFriend?.fullName ?? selectedFriend?.username;
+  const nameMember =
+    getMemberConversation(selectedConversation, userProfileStore)?.fullName ??
+    getMemberConversation(selectedConversation, userProfileStore)?.username;
   const listActionChat = React.useMemo(() => {
     return [
       {
@@ -84,7 +88,10 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
           <>
             {selectedConversation?.isGroup ? (
               <>
-                <AvatarGroupChat conversation={selectedConversation} />
+                <AvatarGroupChat
+                  conversation={selectedConversation}
+                  imgwidth={26}
+                />
                 <Title
                   level={5}
                   className="user-info__name"
@@ -98,26 +105,13 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
               <>
                 <Avatar
                   path={
-                    setMemberConversation(
+                    getMemberConversation(
                       selectedConversation,
                       userProfileStore
                     )?.avatar
                   }
                   imgWidth={46}
-                  username={
-                    setMemberConversation(
-                      selectedConversation,
-                      userProfileStore
-                    )
-                      ?.fullName?.charAt(0)
-                      .toUpperCase() ??
-                    setMemberConversation(
-                      selectedConversation,
-                      userProfileStore
-                    )
-                      ?.username.charAt(0)
-                      .toUpperCase()
-                  }
+                  username={nameMember?.charAt(0).toUpperCase()}
                   className="user-info__avatar"
                 />
                 <Title
@@ -125,15 +119,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
                   className="user-info__name"
                   onClick={handleClickuser}
                 >
-                  {selectedConversation?.title ||
-                    setMemberConversation(
-                      selectedConversation,
-                      userProfileStore
-                    )?.fullName ||
-                    setMemberConversation(
-                      selectedConversation,
-                      userProfileStore
-                    )?.username}
+                  {selectedConversation?.title || nameMember}
                 </Title>
               </>
             )}
@@ -141,12 +127,9 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
         ) : (
           <>
             <Avatar
-              path={selectedFriend?.owner?.avatar}
+              path={selectedFriend?.avatar}
               imgWidth={46}
-              username={
-                selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ??
-                selectedFriend?.owner?.username.charAt(0).toUpperCase()
-              }
+              username={name?.charAt(0).toUpperCase()}
               className="user-info__avatar"
             />
             <Title
@@ -154,8 +137,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
               className="user-info__name"
               onClick={handleClickuser}
             >
-              {selectedFriend?.owner?.fullName ??
-                selectedFriend?.owner?.username}
+              {name}
             </Title>
           </>
         )}

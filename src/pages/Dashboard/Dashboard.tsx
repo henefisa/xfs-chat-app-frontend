@@ -17,6 +17,7 @@ import {
 import { IConversation } from 'src/models';
 import { getListConversation } from 'src/services/userService';
 import { useTranslation } from 'react-i18next';
+import { ESocketEvent } from 'src/models/socket';
 
 import './Dashboard.scss';
 
@@ -32,11 +33,11 @@ const Dashboard: React.FC = () => {
 
   React.useEffect(() => {
     socket.connect();
-    socket.on('connect', () => {
+    socket.on(ESocketEvent.CONNECT, () => {
       console.log('connected');
     });
 
-    socket.on('disconnect', () => {
+    socket.on(ESocketEvent.DISCONNECT, () => {
       console.log('disconnected');
     });
 
@@ -56,7 +57,7 @@ const Dashboard: React.FC = () => {
         // subscribe all conversation
 
         socket.emit(
-          'SUBSCRIBE',
+          ESocketEvent.SUBSCRIBE,
           {
             conversationId: conversation.id,
             userId: userProfileStore.id,

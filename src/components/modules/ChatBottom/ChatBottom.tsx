@@ -18,22 +18,25 @@ import {
   selectConversation,
   selectUserProfile,
   updateListMessage,
+  selectFriend,
+  updateHasConversation,
 } from 'src/store/userSlice';
+import { ESocketEvent } from 'src/models/socket';
+import { createConversation } from 'src/services/userService';
 
 import './ChatBottom.scss';
+import { notification } from 'antd';
 
-interface IChatBottom {
-  setMessagesUser: React.Dispatch<React.SetStateAction<string[]>>;
-}
-
-const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
+const ChatBottom: React.FC = () => {
   const socket = React.useContext(SocketContext);
   const dispatch = useAppDispatch();
-  const { selectedConversation } = useAppSelector(selectConversation);
-  const userProfileStore = useAppSelector(selectUserProfile);
+  const { selectedConversation, hasConversation } =
+    useAppSelector(selectConversation);
+
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-bottom',
   });
+  const { t: t1 } = useTranslation('common');
   const inputFileRef = React.createRef<HTMLInputElement>();
   const inputImgRef = React.createRef<HTMLInputElement>();
   const [messages, setMessages] = useState('');
@@ -47,21 +50,57 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
   const onEmojiClick = (emojiObject: EmojiClickData) => {
     setMessages((prev: string) => prev + emojiObject.emoji);
   };
+  const { selectedFriend } = useAppSelector(selectFriend);
+  const userProfileStore = useAppSelector(selectUserProfile);
+  const handleSendMessage = async () => {
+    if (!userProfileStore || !messages) return;
 
-  const handleSendMessage = () => {
-    if (!userProfileStore || !selectedConversation || !messages) return;
+    if (selectedConversation) {
+      socket.emit(
+        ESocketEvent.SEND_MESSAGE,
+        {
+          userId: userProfileStore.id,
+          conversationId: selectedConversation.id,
+          text: messages,
+        },
+        () => {
+          // do something
+        }
+      );
+    } else {
+      let newConversationId = '';
+      if (!hasConversation || selectedFriend) {
+        try {
+          const res = await createConversation(
+            { members: [userProfileStore.id, selectedFriend?.id || ''] },
+            t1
+          );
+          console.log(res);
 
-    socket.emit(
-      'SEND_MESSAGE',
-      {
-        userId: userProfileStore.id,
-        conversationId: selectedConversation.id,
-        text: messages,
-      },
-      () => {
-        // do something
+          newConversationId = res.id;
+          dispatch(updateHasConversation(true));
+        } catch (err) {
+          notification.error({
+            message: t1('error'),
+            description: t1('normal-error-message'),
+            duration: 1.5,
+            key: '1',
+          });
+        }
+
+        socket.emit(
+          ESocketEvent.SEND_MESSAGE,
+          {
+            userId: userProfileStore.id,
+            conversationId: newConversationId,
+            text: messages,
+          },
+          () => {
+            // do something
+          }
+        );
       }
-    );
+    }
 
     dispatch(
       updateListMessage({
@@ -75,8 +114,6 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
         sender: userProfileStore,
       })
     );
-
-    setMessagesUser((prev: string[]) => [...prev, messages]);
     setMessages('');
   };
 

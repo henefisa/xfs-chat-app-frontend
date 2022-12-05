@@ -13,10 +13,13 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import {
   selectFriend,
-  selectParticipant,
   selectConversation,
+  selectUserProfile,
 } from 'src/store/userSlice';
 import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
+import getMemberConversation from 'src/utils/getMemberConversation';
+import getGroupTitle from 'src/utils/getGroupTitle';
+import AvatarGroupChat from '../AvatarGroupChat/AvatarGroupChat';
 
 import './UserInfoChat.scss';
 
@@ -33,32 +36,41 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
   const { t: t1 } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.user-info-chat.about',
   });
-  const { selectedParticipant } = useAppSelector(selectParticipant);
-  const { selectedConversation } = useAppSelector(selectConversation);
 
   const date = new Date();
   const { selectedFriend } = useAppSelector(selectFriend);
+  const [hasConversation, setHasConversation] = React.useState<boolean>(false);
+
+  const { selectedConversation } = useAppSelector(selectConversation);
+  const userProfileStore = useAppSelector(selectUserProfile);
+  const name = selectedFriend?.fullName ?? selectedFriend?.username;
+  const nameMember =
+    getMemberConversation(selectedConversation, userProfileStore)?.fullName ??
+    getMemberConversation(selectedConversation, userProfileStore)?.username ??
+    selectedFriend?.fullName ??
+    selectedFriend?.username;
+  React.useEffect(() => {
+    selectedConversation ? setHasConversation(true) : setHasConversation(false);
+  }, [selectedConversation]);
 
   const userInfoChat = [
     {
       title: t1('name'),
-      desc:
-        selectedConversation?.title ||
-        selectedParticipant?.user?.fullName ||
-        selectedParticipant?.user?.username ||
-        selectedFriend?.owner?.fullName ||
-        selectedFriend?.owner?.username,
+      desc: nameMember || selectedConversation?.title,
     },
     {
       title: 'Email',
-      desc: selectedParticipant?.user?.email || selectedFriend?.owner?.email,
+      desc:
+        getMemberConversation(selectedConversation, userProfileStore)?.email ||
+        selectedFriend?.email,
     },
     { title: t1('time'), desc: `${date.getHours()}:${date.getMinutes()}` },
     {
       title: t1('location'),
       desc:
-        selectedParticipant?.user?.location ||
-        selectedFriend?.owner?.location ||
+        getMemberConversation(selectedConversation, userProfileStore)
+          ?.location ||
+        selectedFriend?.location ||
         'SomeWhere',
     },
   ];
@@ -94,27 +106,51 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
         </Button>
       </div>
       <div className="user-avatar">
-        <Avatar
-          path={
-            selectedFriend?.owner?.avatar || selectedParticipant?.user?.avatar
-          }
-          imgWidth={96}
-          username={
-            selectedConversation?.title ||
-            selectedParticipant?.user?.fullName ||
-            selectedParticipant?.user?.username ||
-            selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ||
-            selectedFriend?.owner?.username.charAt(0).toUpperCase()
-          }
-          className="custom-avatar"
-        />
-        <Title level={5} className="username">
-          {selectedConversation?.title ||
-            selectedParticipant?.user?.fullName ||
-            selectedParticipant?.user?.username ||
-            selectedFriend?.owner?.fullName ||
-            selectedFriend?.owner?.username}
-        </Title>
+        {hasConversation ? (
+          <>
+            {selectedConversation?.isGroup ? (
+              <>
+                <AvatarGroupChat
+                  conversation={selectedConversation}
+                  imgwidth={26}
+                />
+                <Title level={5} className="username">
+                  {selectedConversation.title ||
+                    getGroupTitle(selectedConversation, userProfileStore)}
+                </Title>
+              </>
+            ) : (
+              <>
+                <Avatar
+                  path={
+                    getMemberConversation(
+                      selectedConversation,
+                      userProfileStore
+                    )?.avatar
+                  }
+                  imgWidth={96}
+                  username={nameMember?.charAt(0).toUpperCase()}
+                  className="custom-avatar"
+                />
+                <Title level={5} className="username">
+                  {selectedConversation?.title || nameMember}
+                </Title>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <Avatar
+              path={selectedFriend?.avatar}
+              imgWidth={96}
+              username={name?.charAt(0).toUpperCase()}
+              className="custom-avatar"
+            />
+            <Title level={5} className="username">
+              {name}
+            </Title>
+          </>
+        )}
         <div className="status">
           <CheckCircleFilled className="status__icon" />
           <Title level={5} className="status__name">
@@ -125,8 +161,7 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
       <Divider />
       <div className="content-profile">
         <Title className="description" level={5}>
-          {selectedFriend?.owner?.description ||
-            'Hello, have a nice day at work!'}
+          {selectedFriend?.description || 'Hello, have a nice day at work!'}
         </Title>
         <Collapse
           bordered={false}

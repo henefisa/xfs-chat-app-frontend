@@ -256,3 +256,41 @@ export const getMessages = async (
     });
   }
 };
+
+export const checkHasConversationForTwoMember = async (
+  userId: string,
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    const res = await apiRequest.post('api/conversations/check-conversation', {
+      userTarget: userId,
+    });
+
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+  }
+};
+
+export const createConversation = async (
+  data: { title?: string; members: string[] },
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    const res = await apiRequest.post('api/conversations', data);
+
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+  }
+};

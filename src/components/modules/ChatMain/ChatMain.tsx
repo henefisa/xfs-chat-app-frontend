@@ -9,29 +9,24 @@ import {
 } from 'src/store/userSlice';
 import MessagesTable from '../MessagesTable/MessagesTable';
 import ChatDayTitle from '../ChatDayTitle/ChatDayTitle';
+import { ESocketEvent } from 'src/models/socket';
 
 import './ChatMain.scss';
 
-interface IChatMain {
-  messages: string[];
-}
-const ChatMain: React.FC<IChatMain> = ({ messages }) => {
+const ChatMain: React.FC = () => {
   const socket = useContext(SocketContext);
   const dispatch = useAppDispatch();
   const scrollRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView();
-  }, [messages]);
 
   const useProfileStore = useAppSelector(selectUserProfile);
   const { listMessage } = useAppSelector(selectMessages);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView();
-  }, [messages, listMessage]);
+  }, [listMessage]);
 
   useEffect(() => {
-    socket.on('GET_MESSAGE', ({ user, message }) => {
+    socket.on(ESocketEvent.GET_MESSAGE, ({ user, message }) => {
       // do something
       dispatch(
         updateListMessage({

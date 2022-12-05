@@ -1,6 +1,6 @@
 import { IConversation, TUserProfile } from 'src/models';
 
-const setMemberConversation = (
+const getMemberConversation = (
   conversation: IConversation | null,
   userProfileStore: TUserProfile | null
 ) => {
@@ -12,4 +12,4 @@ const setMemberConversation = (
   return conversation.participants[1].user;
 };
 
-export default setMemberConversation;
+export default getMemberConversation;

@@ -7,9 +7,13 @@ import './AvatarGroupChat.scss';
 
 interface IAvatarGroupChatProps {
   conversation: IConversation;
+  imgwidth: number;
 }
 
-const AvatarGroupChat: React.FC<IAvatarGroupChatProps> = ({ conversation }) => {
+const AvatarGroupChat: React.FC<IAvatarGroupChatProps> = ({
+  conversation,
+  imgwidth,
+}) => {
   return (
     <AvatarGroup
       maxCount={conversation.participants.length === 4 ? 4 : 3}
@@ -23,7 +27,7 @@ const AvatarGroupChat: React.FC<IAvatarGroupChatProps> = ({ conversation }) => {
             key={participant.id}
             path={participant.user.avatar}
             username={name.charAt(0).toUpperCase()}
-            imgWidth={26}
+            imgWidth={imgwidth}
           />
         );
       })}

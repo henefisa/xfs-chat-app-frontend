@@ -15,7 +15,8 @@ const getGroupTitle = (
       item.user.fullName ? item.user.fullName : item.user.username
     )
     .join(', ');
-
+  if (titleConversation.length > 25)
+    return titleConversation.substring(0, 25) + '...';
   return titleConversation;
 };
 

@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';
 import { IConversation } from 'src/models';
-import setMemberConversation from 'src/utils/setMemberConversation';
-import AvatarGroupChat from 'src/components/modules/AvatarGroupChat/AvatarGroupChat';
+import setMemberConversation from 'src/utils/getMemberConversation';
+import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
 import './Conversation.scss';
 
 interface ConversationProps {
@@ -31,7 +31,7 @@ const Conversation: React.FC<ConversationProps> = ({
     <div className="conversation-item">
       <div className="conversation-item__avatar">
         {conversation.isGroup ? (
-          <AvatarGroupChat conversation={conversation} />
+          <AvatarGroupChat conversation={conversation} imgwidth={26} />
         ) : (
           <Avatar
             path={setMemberConversation(conversation, userProfileStore)?.avatar}
