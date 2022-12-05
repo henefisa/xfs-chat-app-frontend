@@ -8,7 +8,14 @@
 }
 
 .ant-avatar-group.avatar-group {
+  flex-shrink: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  .ant-avatar.ant-avatar-circle {
+    --size: 26px;
+    height: var(--size);
+    width: var(--size);
+  }
 }

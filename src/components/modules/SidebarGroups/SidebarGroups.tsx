@@ -11,17 +11,50 @@ import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Title from '@common/Title/Title';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { createConversation } from 'src/services/userService';
 import { useAppSelector } from 'src/store/hooks';
-import { selectFriend } from 'src/store/userSlice';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 
 import './SidebarGroups.scss';
 
 const SidebarGroups: React.FC = () => {
   const [active, setActive] = React.useState(false);
   const [toggleModal, setToggleModal] = React.useState(false);
+  const [groupName, setGroupName] = React.useState<string>();
+  const [groupFriendId, setGroupFriendId] = React.useState<string[]>([]);
+
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.groups' });
+  const { t: t1 } = useTranslation(['common', 'dashboard']);
 
   const { listFriend } = useAppSelector(selectFriend);
+  const userProfileStore = useAppSelector(selectUserProfile);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+
+    if (checked) {
+      setGroupFriendId((prev) => [...prev, value]);
+    } else {
+      setGroupFriendId(groupFriendId.filter((item) => item !== value));
+    }
+  };
+
+  const handleCreateGroupConversation = async () => {
+    if (groupFriendId.length < 2 || !userProfileStore) return;
+
+    const newGroupFriend = [userProfileStore.id, ...groupFriendId];
+
+    try {
+      await createConversation(
+        { title: groupName, members: newGroupFriend },
+        t1
+      );
+
+      setToggleModal(false);
+    } catch (err) {
+      // do something
+    }
+  };
 
   return (
     <>
@@ -79,6 +112,8 @@ const SidebarGroups: React.FC = () => {
               <Input
                 className="group-name__input"
                 placeholder={t('modal-name-placeholder')}
+                value={groupName}
+                onChange={(e) => setGroupName(e.target.value)}
               />
             </div>
             <div className="group-members">
@@ -111,7 +146,11 @@ const SidebarGroups: React.FC = () => {
                             const name = friend.fullName ?? friend.username;
                             return (
                               <li key={friend.id}>
-                                <InputCheckbox label={name} />
+                                <InputCheckbox
+                                  label={name}
+                                  friendId={friend.id}
+                                  handleChange={handleChange}
+                                />
                               </li>
                             );
                           })}
@@ -127,7 +166,12 @@ const SidebarGroups: React.FC = () => {
             <Button className="btn-close" onClick={() => setToggleModal(false)}>
               {t('btn-close')}
             </Button>
-            <Button className="btn-create">{t('btn-create')}</Button>
+            <Button
+              className="btn-create"
+              onClick={handleCreateGroupConversation}
+            >
+              {t('btn-create')}
+            </Button>
           </div>
         </div>
       </div>

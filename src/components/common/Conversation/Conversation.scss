@@ -6,9 +6,9 @@
   border-radius: 4px;
   transition: all 0.4s;
   display: flex;
+  gap: 16px;
 
   .conversation-item__avatar {
-    margin-right: 16px;
     display: flex;
     align-items: center;
     position: relative;
@@ -41,13 +41,16 @@
 
   .conversation-item__content {
     flex-grow: 1;
+    overflow: hidden;
 
-    .title {
+    .conversation-title {
       font-size: 15px;
+      padding: 0;
       margin: 0;
       margin-bottom: 4px;
-      padding: 0;
       color: v.$text-color;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .message {
