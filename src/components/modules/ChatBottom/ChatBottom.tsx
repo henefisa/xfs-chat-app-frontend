@@ -25,7 +25,6 @@ import { ESocketEvent } from 'src/models/socket';
 import { createConversation } from 'src/services/userService';
 
 import './ChatBottom.scss';
-import { notification } from 'antd';
 
 const ChatBottom: React.FC = () => {
   const socket = React.useContext(SocketContext);
@@ -69,23 +68,16 @@ const ChatBottom: React.FC = () => {
       );
     } else {
       let newConversationId = '';
-      if (!hasConversation || selectedFriend) {
+      if (!hasConversation && selectedFriend) {
         try {
           const res = await createConversation(
-            { members: [userProfileStore.id, selectedFriend?.id || ''] },
+            { members: [userProfileStore.id, selectedFriend?.id] },
             t1
           );
-          console.log(res);
-
           newConversationId = res.id;
           dispatch(updateHasConversation(true));
         } catch (err) {
-          notification.error({
-            message: t1('error'),
-            description: t1('normal-error-message'),
-            duration: 1.5,
-            key: '1',
-          });
+          // dothing //
         }
 
         socket.emit(
