@@ -5,8 +5,8 @@ import Title from '@common/Title/Title';
 import ListUsersResult from '@modules/ListUsersResult/ListUsersResult';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IFriendRequest, IUserItemResult } from 'src/models';
-import { getFriends, getUsers } from 'src/services/userService';
+import { EFriendStatus, IUserItemResult } from 'src/models';
+import { getUsers } from 'src/services/userService';
 import debounce from 'src/utils/debounce';
 import ListRequestFriend from '../ListRequestFriend/ListRequestFriend';
 
@@ -22,7 +22,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
     React.useState<boolean>(false);
   const [listResult, setListResult] = React.useState<IUserItemResult[]>([]);
   const [listFriendRequest, setListFriendRequest] = React.useState<
-    IFriendRequest[]
+    IUserItemResult[]
   >([]);
 
   React.useEffect(() => {
@@ -30,8 +30,12 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
       setGetListRequestLoading(true);
 
       try {
-        const result = await getFriends({ status: EFriendStatus.REQUESTED }, t);
-        setListFriendRequest(result.friends);
+        const result = await getUsers(
+          { friendStatus: EFriendStatus.REQUESTED },
+          t
+        );
+
+        setListFriendRequest(result.users);
         setGetListRequestLoading(false);
       } catch (err) {
         setGetListRequestLoading(false);
