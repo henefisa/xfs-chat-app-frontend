@@ -163,11 +163,9 @@ export const cancelFriendRequest = async (
   t: TFunction<('common' | 'dashboard')[], undefined>
 ) => {
   try {
-    const res = await apiRequest.post('api/friends/cancel', {
+    await apiRequest.post('api/friends/cancel', {
       userRequest: id,
     });
-
-    return res.data;
   } catch (err) {
     notification.error({
       message: t('error'),
@@ -206,8 +204,6 @@ export const acceptRequestFriend = async (
     await apiRequest.post('api/friends/approve', {
       userRequest: id,
     });
-
-    return true;
   } catch (err) {
     notification.error({
       message: t('error'),
@@ -215,8 +211,6 @@ export const acceptRequestFriend = async (
       duration: 1.5,
       key: '1',
     });
-
-    return false;
   }
 };
 

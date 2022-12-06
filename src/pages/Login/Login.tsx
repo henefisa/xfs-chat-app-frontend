@@ -1,14 +1,8 @@
-import {
-  HeartFilled,
-  Loading3QuartersOutlined,
-  LockOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { HeartFilled, LockOutlined, UserOutlined } from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
 import InputCheckbox from '@common/Input/InputCheckbox';
 import Logo from '@common/Logo/Logo';
-import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import Language from '@modules/Language/Language';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
@@ -18,7 +12,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import * as authService from 'src/services/authService';
-import { selectisFetchingRegister } from 'src/store/authSlice';
+import { selectisFetchingLogin } from 'src/store/authSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import debounce from 'src/utils/debounce';
 import { getAccessToken } from 'src/utils/getTokenFromLocal';
@@ -37,7 +31,7 @@ const LoginPage: React.FC = () => {
 
   const { t } = useTranslation(['login', 'common', 'notification']);
 
-  const isLoading = useAppSelector(selectisFetchingRegister);
+  const isLoading = useAppSelector(selectisFetchingLogin);
 
   React.useEffect(() => {
     const handleLoginWhenRemember = async () => {
@@ -126,20 +120,13 @@ const LoginPage: React.FC = () => {
               <InputCheckbox label={t('remember-label')} />
             </Form.Item>
             <Form.Item className="button-item">
-              <Button htmlType="submit" type="primary" className="login-button">
-                {isLoading ? (
-                  <Spin
-                    className="spinner"
-                    spinIcon={
-                      <Loading3QuartersOutlined
-                        className="spinner__icon"
-                        spin
-                      />
-                    }
-                  />
-                ) : (
-                  t('title')
-                )}
+              <Button
+                htmlType="submit"
+                type="primary"
+                className="login-button"
+                loading={isLoading}
+              >
+                {t('title')}
               </Button>
             </Form.Item>
           </Form>

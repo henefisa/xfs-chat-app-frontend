@@ -24,43 +24,53 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
   });
   const { t: t1 } = useTranslation('common');
 
+  const name = user.fullName || user.username;
+
   const [isCancel, setIsCancel] = React.useState<boolean>(false);
-  const [friendStatus, setFriendStatus] = React.useState<IFriendStatusState>();
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [friendStatus, setFriendStatus] =
+    React.useState<IFriendStatusState | null>(null);
 
   const handleAddFriend = async (id: string) => {
-    const result = await sendFriendRequest(id, t1);
+    setIsLoading(true);
 
-    if (!result) return;
-    setFriendStatus(result);
-    setIsCancel(false);
+    try {
+      const result = await sendFriendRequest(id, t1);
+      setFriendStatus(result);
+      setIsLoading(false);
+      setIsCancel(false);
+    } catch (err) {
+      setIsLoading(false);
+    }
   };
 
   const handleCancelRequest = async (id: string) => {
-    const result = await cancelFriendRequest(id, t1);
+    setIsLoading(true);
 
-    if (!result) return;
-    setFriendStatus(result);
-    setIsCancel(true);
+    try {
+      await cancelFriendRequest(id, t1);
+      setFriendStatus(null);
+      setIsLoading(false);
+      setIsCancel(true);
+    } catch (err) {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className={clsx('user-item', className)}>
       <Avatar
         path={user.avatar}
-        username={
-          user.fullName
-            ? user.fullName.charAt(0).toUpperCase()
-            : user.username.charAt(0).toUpperCase()
-        }
+        username={name.charAt(0).toUpperCase()}
         imgWidth={35.2}
         className="user-item__avtar"
       />
       <div className="user-item__info">
         <Title className="user-name" level={5}>
-          {user.fullName ?? user.username}
+          {name}
         </Title>
         <Title className="user-location" level={5}>
-          {user.location || 'SomeWhere'}
+          {user.location || 'Some Where'}
         </Title>
       </div>
       <div className="user-item__action">
@@ -68,6 +78,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
         (user.friendStatus?.status === EFriendStatus.REQUESTED && !isCancel) ? (
           <Button
             className="cancel-user-btn"
+            loading={isLoading}
             onClick={() => handleCancelRequest(user.id)}
           >
             {t('cancel')}
@@ -75,6 +86,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
         ) : user.friendStatus?.status !== EFriendStatus.ACCEPTED ? (
           <Button
             className="add-user-btn"
+            loading={isLoading}
             onClick={() => handleAddFriend(user.id)}
           >
             {t('add')}
