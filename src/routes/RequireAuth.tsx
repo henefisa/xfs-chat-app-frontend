@@ -57,7 +57,8 @@ const RequireAuth: React.FC<IRequireAuthProps> = ({ children }) => {
     };
 
     handleCheckUserActive();
-  }, []);
+  }, [location.pathname]);
+
 
   return children;
 };

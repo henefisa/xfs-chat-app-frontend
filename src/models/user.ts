@@ -1,4 +1,5 @@
 import { IBase } from './base';
+import { IConversation } from './conversation';
 
 export interface IUser extends IBase {
   username: string;
@@ -52,8 +53,8 @@ export interface IUserItemResult extends IUser {
     | EUserActiveStatus.DEACTIVE
     | EUserActiveStatus.INACTIVE;
   role: EUserRole.USER | EUserRole.ADMIN;
-
   friendStatus: null | IFriendStatusState;
+  conversation: IConversation;
 }
 
 export type TUserProfile = Omit<IUserItemResult, 'friendStatus'>;
@@ -63,7 +64,7 @@ export type TUserInfo = Omit<
   'id' | 'createdAt' | 'updatedAt' | 'status' | 'role' | 'username'
 >;
 
-export interface IListFriendRequest extends IBase {
+export interface IFriendRequest extends IBase {
   status: EFriendStatus.REQUESTED;
   owner: TUserProfile;
 }

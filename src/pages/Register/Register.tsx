@@ -1,6 +1,5 @@
 import {
   HeartFilled,
-  Loading3QuartersOutlined,
   LockOutlined,
   MailOutlined,
   UserOutlined,
@@ -8,7 +7,6 @@ import {
 import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
 import Logo from '@common/Logo/Logo';
-import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import Language from '@modules/Language/Language';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
@@ -116,6 +114,8 @@ const Register: React.FC = () => {
   };
 
   const handleCheckWhitespace: RuleObject['validator'] = (rule, value) => {
+    if (!value) return Promise.reject();
+
     if (value.split(' ').join('').length === value.length) {
       return Promise.resolve();
     }
@@ -196,20 +196,9 @@ const Register: React.FC = () => {
                 htmlType="submit"
                 type="primary"
                 className="register-button"
+                loading={isLoading}
               >
-                {isLoading ? (
-                  <Spin
-                    className="spinner"
-                    spinIcon={
-                      <Loading3QuartersOutlined
-                        className="spinner__icon"
-                        spin
-                      />
-                    }
-                  />
-                ) : (
-                  t('title')
-                )}
+                {t('title')}
               </Button>
             </Form.Item>
             <div className="terms-item">
