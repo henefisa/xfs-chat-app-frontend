@@ -55,17 +55,11 @@ const ChatBottom: React.FC = () => {
     if (!userProfileStore || !messages.trim()) return;
 
     if (selectedConversation) {
-      socket.emit(
-        ESocketEvent.SEND_MESSAGE,
-        {
-          userId: userProfileStore.id,
-          conversationId: selectedConversation.id,
-          text: messages,
-        },
-        () => {
-          // do something
-        }
-      );
+      socket.emit(ESocketEvent.SEND_MESSAGE, {
+        userId: userProfileStore.id,
+        conversationId: selectedConversation.id,
+        text: messages,
+      });
     } else {
       let newConversationId = '';
       if (!hasConversation && selectedFriend) {
@@ -80,17 +74,11 @@ const ChatBottom: React.FC = () => {
           // dothing //
         }
 
-        socket.emit(
-          ESocketEvent.SEND_MESSAGE,
-          {
-            userId: userProfileStore.id,
-            conversationId: newConversationId,
-            text: messages,
-          },
-          () => {
-            // do something
-          }
-        );
+        socket.emit(ESocketEvent.SEND_MESSAGE, {
+          userId: userProfileStore.id,
+          conversationId: newConversationId,
+          text: messages,
+        });
       }
     }
 
