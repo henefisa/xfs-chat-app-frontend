@@ -52,7 +52,7 @@ const ChatBottom: React.FC = () => {
   const { selectedFriend } = useAppSelector(selectFriend);
   const userProfileStore = useAppSelector(selectUserProfile);
   const handleSendMessage = async () => {
-    if (!userProfileStore || !messages) return;
+    if (!userProfileStore || !messages.trim()) return;
 
     if (selectedConversation) {
       socket.emit(
