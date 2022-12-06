@@ -14,7 +14,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as authService from 'src/services/authService';
 import { selectisFetchingLogin } from 'src/store/authSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import debounce from 'src/utils/debounce';
 import { getAccessToken } from 'src/utils/getTokenFromLocal';
 
 import './Login.scss';
@@ -56,14 +55,10 @@ const LoginPage: React.FC = () => {
     handleLoginWhenRemember();
   }, []);
 
-  const debounceClickLogin = React.useMemo(() => {
-    return debounce(authService.login, 1000);
-  }, []);
-
   const handleFinish = (values: IFormFields) => {
     const { isRemember, ...user } = values;
 
-    debounceClickLogin(user, isRemember, dispatch, navigate, t);
+    authService.login(user, isRemember, dispatch, navigate, t);
   };
 
   return (

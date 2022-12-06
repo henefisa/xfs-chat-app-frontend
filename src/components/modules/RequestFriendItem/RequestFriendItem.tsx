@@ -70,6 +70,7 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
             <Button
               className="accept-btn"
               loading={isAcceptLoading}
+              spinSize="small"
               onClick={() => handleAcceptRequest(friend.owner.id)}
             >
               {t('sidebar.search-user.accept', { ns: 'dashboard' })}
@@ -77,6 +78,7 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
             <Button
               className="cancel-btn"
               loading={isCancelLoading}
+              spinSize="small"
               onClick={() => handleCancelRequest(friend.owner.id)}
             >
               {t('sidebar.search-user.cancel', { ns: 'dashboard' })}

@@ -49,6 +49,12 @@
           outline: none;
           opacity: 0.8;
         }
+
+        .spinner {
+          .spinner__icon {
+            color: v.$primary;
+          }
+        }
       }
     }
 

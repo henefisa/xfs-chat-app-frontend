@@ -79,6 +79,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
           <Button
             className="cancel-user-btn"
             loading={isLoading}
+            spinSize="small"
             onClick={() => handleCancelRequest(user.id)}
           >
             {t('cancel')}
@@ -87,6 +88,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
           <Button
             className="add-user-btn"
             loading={isLoading}
+            spinSize="small"
             onClick={() => handleAddFriend(user.id)}
           >
             {t('add')}
