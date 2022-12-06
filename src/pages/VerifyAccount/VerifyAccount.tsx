@@ -31,24 +31,38 @@ const VerifyAccount: React.FC = () => {
   }, []);
 
   const handleCheckOtp = async (otp: string) => {
-    const isSuccess: boolean | undefined = await checkOtp(otp, t);
-
-    if (isSuccess === undefined) return;
-
-    if (isSuccess) {
-      notification.success({
-        message: t('success'),
-        description: t('check-otp-success', { ns: 'verify-account' }),
+    if (otp.length !== 6) {
+      notification.warning({
+        message: t('warning'),
+        description: t('has-six-character', { ns: 'verify-account' }),
         duration: 1.5,
+        key: '1',
       });
+      return;
+    }
 
-      navigate('/dashboard');
-    } else {
-      notification.error({
-        message: t('error'),
-        description: t('check-otp-error', { ns: 'verify-account' }),
-        duration: 1.5,
-      });
+    try {
+      const isSuccess: boolean = await checkOtp(otp, t);
+
+      if (isSuccess) {
+        notification.success({
+          message: t('success'),
+          description: t('check-otp-success', { ns: 'verify-account' }),
+          duration: 1.5,
+          key: '1',
+        });
+
+        navigate('/dashboard');
+      } else {
+        notification.error({
+          message: t('error'),
+          description: t('check-otp-error', { ns: 'verify-account' }),
+          duration: 1.5,
+          key: '1',
+        });
+      }
+    } catch (err) {
+      // do something
     }
   };
 
