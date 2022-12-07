@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Divider from '@common/Divider/Divider';
 import { IUserItemResult } from 'src/models';
-import RequestFriendItem from '../RequestFriendItem/RequestFriendItem';
+import RequestFriendItem from '@modules/RequestFriendItem/RequestFriendItem';
 
 import './ListRequestFriend.scss';
 

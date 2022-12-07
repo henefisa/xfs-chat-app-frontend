@@ -12,8 +12,8 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';
-import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
-import ProfileMenu from '../ProfileMenu/ProfileMenu';
+import AttachedFileItem from '@modules/AttachedFileItem/AttachedFileItem';
+import ProfileMenu from '@modules/ProfileMenu/ProfileMenu';
 
 import './SidebarProfile.scss';
 
@@ -46,13 +46,15 @@ const SidebarProfile: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.profile' });
 
   const userProfileStore = useAppSelector(selectUserProfile);
+  const name = userProfileStore?.fullName ?? userProfileStore?.username;
+
   const date = new Date();
 
   const userInfo = React.useMemo(() => {
     return [
       {
         title: t('name'),
-        desc: userProfileStore?.fullName ?? userProfileStore?.username,
+        desc: name,
       },
       { title: t('email'), desc: userProfileStore?.email },
       {
@@ -83,14 +85,11 @@ const SidebarProfile: React.FC = () => {
         <Avatar
           path={userProfileStore?.avatar}
           imgWidth={96}
-          username={
-            userProfileStore?.fullName?.charAt(0).toUpperCase() ??
-            userProfileStore?.username?.charAt(0).toUpperCase()
-          }
+          username={name?.charAt(0).toUpperCase()}
           className="custom-avatar"
         />
         <Title level={5} className="user-info__name">
-          {userProfileStore?.fullName ?? userProfileStore?.username}
+          {name}
         </Title>
         <div className="user-info__status">
           <CheckCircleFilled className="status-icon" />

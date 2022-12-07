@@ -6,7 +6,7 @@ import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
 import Divider from '@common/Divider/Divider';
 import clsx from 'clsx';
-import PrivacyMenu from '../PrivacyMenu/PrivacyMenu';
+import PrivacyMenu from '@modules/PrivacyMenu/PrivacyMenu';
 import Input from '@common/Input/Input';
 import Switch from '@common/Switch/Switch';
 import { useTranslation } from 'react-i18next';

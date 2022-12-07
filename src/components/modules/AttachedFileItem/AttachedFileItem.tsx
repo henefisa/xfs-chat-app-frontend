@@ -9,7 +9,7 @@ import {
 
 import Title from '@common/Title/Title';
 import Dropdown from '@common/Dropdown/Dropdown';
-import FileActionMenu from '../FileActionMenu/FileActionMenu';
+import FileActionMenu from '@modules/FileActionMenu/FileActionMenu';
 import Button from '@common/Button/Button';
 
 import './AttachedFileItem.scss';

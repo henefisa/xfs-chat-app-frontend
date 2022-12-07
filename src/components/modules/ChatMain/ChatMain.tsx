@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 
-import MessagesTable from '../MessagesTable/MessagesTable';
-import ChatDayTitle from '../ChatDayTitle/ChatDayTitle';
+import MessagesTable from '@modules/MessagesTable/MessagesTable';
+import ChatDayTitle from '@modules/ChatDayTitle/ChatDayTitle';
 
 import './ChatMain.scss';
 

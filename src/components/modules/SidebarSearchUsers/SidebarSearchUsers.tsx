@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { EFriendStatus, IUserItemResult } from 'src/models';
 import { getUsers } from 'src/services/userService';
 import debounce from 'src/utils/debounce';
-import ListRequestFriend from '../ListRequestFriend/ListRequestFriend';
+import ListRequestFriend from '@modules/ListRequestFriend/ListRequestFriend';
 
 import './SidebarSearchUsers.scss';
 

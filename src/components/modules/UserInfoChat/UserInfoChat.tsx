@@ -12,7 +12,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import { selectFriend } from 'src/store/userSlice';
-import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
+import AttachedFileItem from '@modules/AttachedFileItem/AttachedFileItem';
 
 import './UserInfoChat.scss';
 
@@ -32,11 +32,12 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
 
   const date = new Date();
   const { selectedFriend } = useAppSelector(selectFriend);
+  const name = selectedFriend?.fullName ?? selectedFriend?.username;
 
   const userInfoChat = [
     {
       title: t1('name'),
-      desc: selectedFriend?.fullName ?? selectedFriend?.username,
+      desc: name,
     },
     { title: 'Email', desc: selectedFriend?.email },
     { title: t1('time'), desc: `${date.getHours()}:${date.getMinutes()}` },
@@ -80,14 +81,11 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
         <Avatar
           path={selectedFriend?.avatar}
           imgWidth={96}
-          username={
-            selectedFriend?.fullName?.charAt(0).toUpperCase() ??
-            selectedFriend?.username.charAt(0).toUpperCase()
-          }
+          username={name?.charAt(0).toUpperCase()}
           className="custom-avatar"
         />
         <Title level={5} className="username">
-          {selectedFriend?.fullName ?? selectedFriend?.username}
+          {name}
         </Title>
         <div className="status">
           <CheckCircleFilled className="status__icon" />

@@ -55,7 +55,7 @@ export interface IUserItemResult extends IUser {
     | EUserActiveStatus.INACTIVE;
   role: EUserRole.USER | EUserRole.ADMIN;
   friendStatus: null | IFriendStatusState;
-  conversation: IConversation;
+  conversation: IConversation | null;
 }
 
 export type TUserProfile = Omit<IUserItemResult, 'friendStatus'>;

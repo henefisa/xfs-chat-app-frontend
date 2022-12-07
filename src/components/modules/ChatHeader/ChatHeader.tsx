@@ -16,8 +16,8 @@ import Title from '@common/Title/Title';
 import Tooltip from '@common/Tooltip/Tooltip';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
-import ActionsChatMenu from '../ActionsChatMenu/ActionsChatMenu';
-import ChatCall from '../ChatCall/ChatCall';
+import ActionsChatMenu from '@modules/ActionsChatMenu/ActionsChatMenu';
+import ChatCall from '@modules/ChatCall/ChatCall';
 import { selectFriend } from 'src/store/userSlice';
 
 import './ChatHeader.scss';
