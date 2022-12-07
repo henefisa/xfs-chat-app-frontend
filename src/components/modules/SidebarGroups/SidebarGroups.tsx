@@ -8,18 +8,19 @@ import Button from '@common/Button/Button';
 import Input from '@common/Input/Input';
 import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Title from '@common/Title/Title';
+import CheckboxMember from '@modules/CheckboxCustom/CheckboxMember';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import { createConversation } from 'src/services/userService';
 import { useAppSelector } from 'src/store/hooks';
-import InputCheckbox from '@common/Input/InputCheckbox';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 
 import './SidebarGroups.scss';
 
 const SidebarGroups: React.FC = () => {
   const [active, setActive] = React.useState(false);
   const [toggleModal, setToggleModal] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [groupName, setGroupName] = React.useState<string>();
   const [groupFriendId, setGroupFriendId] = React.useState<string[]>([]);
 
@@ -44,15 +45,17 @@ const SidebarGroups: React.FC = () => {
 
     const newGroupFriend = [userProfileStore.id, ...groupFriendId];
 
+    setIsLoading(true);
     try {
       await createConversation(
         { title: groupName, members: newGroupFriend },
         t1
       );
 
+      setIsLoading(false);
       setToggleModal(false);
     } catch (err) {
-      // do something
+      setIsLoading(false);
     }
   };
 
@@ -150,7 +153,7 @@ const SidebarGroups: React.FC = () => {
                             const name = friend.fullName || friend.username;
                             return (
                               <li key={index}>
-                                <InputCheckbox
+                                <CheckboxMember
                                   label={name}
                                   friendId={friend.id}
                                   handleChange={handleChange}
@@ -173,6 +176,7 @@ const SidebarGroups: React.FC = () => {
             <Button
               className="btn-create"
               onClick={handleCreateGroupConversation}
+              loading={isLoading}
             >
               {t('btn-create')}
             </Button>

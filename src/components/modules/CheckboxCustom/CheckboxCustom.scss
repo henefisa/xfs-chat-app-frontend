@@ -1,0 +1,49 @@
+@use '../../../assets/styles/variables' as v;
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  input[type='checkbox'] {
+    opacity: 0;
+
+    &:focus + .checkbox__label::before {
+      border-color: #b9b4f7;
+      box-shadow: 0 0 0 2.4px rgb(114 105 239 / 25%);
+    }
+
+    &:checked + .checkbox__label::before {
+      content: '';
+      background-image: url('/images/icons/check-icon.svg');
+      background-color: v.$checkbox-bg;
+      border-color: v.$checkbox-bg;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+    }
+  }
+
+  .checkbox__label {
+    display: flex;
+    position: relative;
+    font-weight: 500;
+    color: v.$text-color;
+
+    &::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 1px solid #b9b9be;
+      border-radius: 4px;
+      background-color: #f7f7ff;
+      cursor: pointer;
+      position: absolute;
+      top: calc(50%);
+      left: -23px;
+      transform: translateY(-50%);
+      transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    }
+  }
+}

@@ -1,7 +1,6 @@
 import { HeartFilled, LockOutlined, UserOutlined } from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
-import InputCheckbox from '@common/Input/InputCheckbox';
 import Logo from '@common/Logo/Logo';
 import Title from '@common/Title/Title';
 import Language from '@modules/Language/Language';
@@ -11,6 +10,7 @@ import { Form } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
+import CheckboxRemember from '@modules/CheckboxCustom/CheckboxRemember';
 import * as authService from 'src/services/authService';
 import { selectisFetchingLogin } from 'src/store/authSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
@@ -112,7 +112,7 @@ const LoginPage: React.FC = () => {
               </Form.Item>
             </div>
             <Form.Item name="isRemember" valuePropName="checked">
-              <InputCheckbox label={t('remember-label')} />
+              <CheckboxRemember label={t('remember-label')} />
             </Form.Item>
             <Form.Item className="button-item">
               <Button

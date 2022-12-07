@@ -1,32 +1,23 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
-import './Input.scss';
+import './CheckboxCustom.scss';
 
-interface IInputCheckboxProps {
+export interface ICheckboxRememberProps {
   className?: string;
   label: string;
-  friendId?: string;
-  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputCheckbox: React.FC<IInputCheckboxProps> = ({
+const CheckboxRemember: React.FC<ICheckboxRememberProps> = ({
   className,
   label,
-  friendId,
-  handleChange,
   ...rest
 }) => {
   const idForInput = label.toLowerCase().split(' ').join('-');
 
   return (
     <div className={clsx('checkbox', className)} {...rest}>
-      <input
-        type="checkbox"
-        id={idForInput}
-        value={friendId}
-        onChange={handleChange}
-      />
+      <input type="checkbox" id={idForInput} />
       <label htmlFor={idForInput} className="checkbox__label">
         {label}
       </label>
@@ -34,4 +25,4 @@ const InputCheckbox: React.FC<IInputCheckboxProps> = ({
   );
 };
 
-export default InputCheckbox;
+export default CheckboxRemember;
