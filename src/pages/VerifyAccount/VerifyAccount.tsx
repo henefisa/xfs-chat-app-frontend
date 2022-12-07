@@ -19,8 +19,8 @@ const VerifyAccount: React.FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation(['common', 'verify-account']);
 
-  const [isGettingOtp, setIsGettingOtp] = React.useState<boolean>(false);
-  const [isVerifyingOtp, setIsVerifyingOtp] = React.useState<boolean>(false);
+  const [isGettingOtp, setIsGettingOtp] = React.useState(false);
+  const [isVerifyingOtp, setIsVerifyingOtp] = React.useState(false);
   const [otp, setOtp] = React.useState('');
 
   const handleGetOtp = async () => {

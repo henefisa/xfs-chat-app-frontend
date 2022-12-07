@@ -27,7 +27,7 @@ import './SidebarContacts.scss';
 const SidebarContacts: React.FC = () => {
   const [toggleModal, setToggleModal] = React.useState(false);
 
-  const [loading, setLoading] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState(false);
   const [listFriend, setListFriend] = React.useState<
     {
       character: string;

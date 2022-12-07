@@ -26,8 +26,8 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
 
   const name = user.fullName || user.username;
 
-  const [isCancel, setIsCancel] = React.useState<boolean>(false);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isCancel, setIsCancel] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [friendStatus, setFriendStatus] =
     React.useState<IFriendStatusState | null>(null);
 

@@ -17,9 +17,9 @@ interface ISidebarSearchUsersProps {}
 const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
   const { t } = useTranslation(['common', 'dashboard']);
 
-  const [getUserLoading, setGetUserLoading] = React.useState<boolean>(false);
+  const [getUserLoading, setGetUserLoading] = React.useState(false);
   const [getListRequestLoading, setGetListRequestLoading] =
-    React.useState<boolean>(false);
+    React.useState(false);
   const [listResult, setListResult] = React.useState<IUserItemResult[]>([]);
   const [listFriendRequest, setListFriendRequest] = React.useState<
     IUserItemResult[]

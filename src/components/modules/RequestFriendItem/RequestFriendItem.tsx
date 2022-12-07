@@ -18,34 +18,32 @@ interface IRequestFriendItemProps {
 const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
   const { t } = useTranslation(['common', 'dashboard']);
 
-  const [isCancelOrAccept, setIsCancelOrAccept] =
-    React.useState<boolean>(false);
-  const [isCancelLoading, setIsCancelLoading] = React.useState<boolean>(false);
-  const [isAcceptLoading, setIsAcceptLoading] = React.useState<boolean>(false);
+  const [isCancelOrAccept, setIsCancelOrAccept] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const name = friend.fullName ?? friend.username;
 
   const handleCancelRequest = async (id: string) => {
-    setIsCancelLoading(true);
+    setIsLoading(true);
 
     try {
       await cancelFriendRequest(id, t);
-      setIsCancelLoading(false);
+      setIsLoading(false);
       setIsCancelOrAccept(true);
     } catch (err) {
-      setIsCancelLoading(false);
+      setIsLoading(false);
     }
   };
 
   const handleAcceptRequest = async (id: string) => {
-    setIsAcceptLoading(true);
+    setIsLoading(true);
 
     try {
       await acceptRequestFriend(id, t);
-      setIsAcceptLoading(false);
+      setIsLoading(false);
       setIsCancelOrAccept(true);
     } catch (err) {
-      setIsAcceptLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -70,7 +68,7 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
           <>
             <Button
               className="accept-btn"
-              loading={isAcceptLoading}
+              loading={isLoading}
               spinSize="small"
               onClick={() => handleAcceptRequest(friend.id)}
             >
@@ -78,7 +76,7 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
             </Button>
             <Button
               className="cancel-btn"
-              loading={isCancelLoading}
+              loading={isLoading}
               spinSize="small"
               onClick={() => handleCancelRequest(friend.id)}
             >

@@ -17,7 +17,7 @@ const SidebarChats: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.chats' });
   const { t: t1 } = useTranslation('common');
 
-  const [loading, setLoading] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState(false);
   const [listConversation, setListConversation] = React.useState<
     IConversation[]
   >([]);
