@@ -5,7 +5,7 @@ import Title from '@common/Title/Title';
 import ListUsersResult from '@modules/ListUsersResult/ListUsersResult';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IListFriendRequest, IUserItemResult } from 'src/models';
+import { EFriendStatus, IFriendRequest, IUserItemResult } from 'src/models';
 import { getFriends, getUsers } from 'src/services/userService';
 import debounce from 'src/utils/debounce';
 import ListRequestFriend from '../ListRequestFriend/ListRequestFriend';
@@ -22,7 +22,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
     React.useState<boolean>(false);
   const [listResult, setListResult] = React.useState<IUserItemResult[]>([]);
   const [listFriendRequest, setListFriendRequest] = React.useState<
-    IListFriendRequest[]
+    IFriendRequest[]
   >([]);
 
   React.useEffect(() => {
@@ -34,7 +34,6 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
         setListFriendRequest(result.friends);
         setGetListRequestLoading(false);
       } catch (err) {
-        setListFriendRequest([]);
         setGetListRequestLoading(false);
       }
     };
@@ -45,7 +44,6 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
   const handleGetUsers = async (keyword: string) => {
     setGetUserLoading(true);
     if (!keyword) {
-      setListResult([]);
       setGetUserLoading(false);
       return;
     }
@@ -55,7 +53,6 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
       setListResult(result.users);
       setGetUserLoading(false);
     } catch (err) {
-      setListResult([]);
       setGetUserLoading(false);
     }
   };

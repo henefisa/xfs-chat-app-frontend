@@ -3,10 +3,10 @@ import {
   ApiOutlined,
   ContactsOutlined,
   MessageOutlined,
+  SearchOutlined,
   SettingOutlined,
   UsergroupAddOutlined,
   UserOutlined,
-  SearchOutlined,
 } from '@ant-design/icons';
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
@@ -19,6 +19,7 @@ import ENavbar from 'src/interfaces/ENavbar';
 import * as React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectNavBar, updateNavbar } from 'src/store/navbarSlice';
 import { selectUserProfile } from 'src/store/userSlice';
@@ -74,9 +75,9 @@ const NavDashboard: React.FC = () => {
 
   return (
     <div className="navbar-dash">
-      <div className="logo">
+      <Link to="/" className="logo">
         <img className="logo__img" src="/images/logos/logo.svg" alt="Logo" />
-      </div>
+      </Link>
 
       <div className="menu-dashboard">
         {navBarMenu.map((item) => {
