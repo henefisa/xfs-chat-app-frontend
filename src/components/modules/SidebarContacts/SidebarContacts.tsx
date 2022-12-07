@@ -121,8 +121,8 @@ const SidebarContacts: React.FC = () => {
             />
           ) : (
             <>
-              {listFriend?.map((item, index) => (
-                <div key={index}>
+              {listFriend?.map((item) => (
+                <div key={item.character}>
                   <div className="firt-character">{item.character}</div>
                   <ul className="contact-names">
                     {item.friends.map((friend) => {

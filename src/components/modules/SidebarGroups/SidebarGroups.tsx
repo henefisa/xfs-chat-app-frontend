@@ -120,7 +120,9 @@ const SidebarGroups: React.FC = () => {
                 className="group-name__input"
                 placeholder={t('modal-name-placeholder')}
                 value={groupName}
-                onChange={(e) => setGroupName(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setGroupName(e.target.value)
+                }
               />
             </div>
             <div className="group-members">
@@ -143,16 +145,16 @@ const SidebarGroups: React.FC = () => {
                     {t('contacts')}
                   </Title>
                   <div className="select-contacts__add">
-                    {listFriend?.map((item, index) => (
-                      <div key={index}>
+                    {listFriend?.map((item) => (
+                      <div key={item.character}>
                         <Title className="firt-character">
                           {item.character}
                         </Title>
                         <ul className="contact-names">
-                          {item.friends.map((friend, index) => {
+                          {item.friends.map((friend) => {
                             const name = friend.fullName || friend.username;
                             return (
-                              <li key={index}>
+                              <li key={friend.id}>
                                 <CheckboxMember
                                   label={name}
                                   friendId={friend.id}
