@@ -64,11 +64,6 @@ export type TUserInfo = Omit<
   'id' | 'createdAt' | 'updatedAt' | 'status' | 'role' | 'username'
 >;
 
-export type IChangeField = Omit<
-  TUserInfo | undefined,
-  'username' | 'avatar' | 'email'
->;
-
 export interface IFriendRequest extends IBase {
   status: EFriendStatus.REQUESTED;
   owner: TUserProfile;
