@@ -180,11 +180,7 @@
         "error": "Thất bại",
         "update-error": "cập nhật hồ sơ thất bại",
         "btn-save": "Lưu thay đổi",
-        "btn-cancel": "Hủy bỏ",
-        "name-error-message": "Vui lòng nhập tên của bạn!",
-        "location-error-message": "Vui lòng nhập địa chỉ của bạn!",
-        "phone-error-message": "Vui lòng nhập số điện thoại của bạn!",
-        "description-error-message": "Vui lòng nhập mô tả về bạn!"
+        "btn-cancel": "Hủy bỏ"
       }
     },
     "chat-overlay": "Hãy chọn một đoạn chat hoặc bắt đầu cuộc trò chuyện mới",
