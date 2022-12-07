@@ -3,6 +3,7 @@
     "error": "Error",
     "success": "Success",
     "warning": "Warning",
+    "info": "Info",
     "normal-error-message": "An error occurred!",
     "edit": "Edit",
     "update": "Update",
@@ -28,6 +29,17 @@
       "success": "Sign up successfully. OTP has been sent to email!",
       "error": "Sign up failed!"
     }
+  },
+  "home": {
+    "title": "Welcome to my Chat App",
+    "sub-title" : "It's easy talking to your friend with RVK Chat App",
+    "login-title": "Signin",
+    "register-title": "Signup",
+    "try-title": "Try It Now",
+    "group-chat": "Group Chat",
+    "video-call": "Video Call",
+    "file-sharing": "File Sharing",
+    "privacy" : "Privacy and Security"
   },
   "login": {
     "title": "Sign in",
@@ -222,6 +234,9 @@
   "verify-account": {
     "receive-otp": "OTP has been sent to email!",
     "check-otp-error": "OTP code is incorrect!",
-    "check-otp-success": "Authentication successful!"
+    "check-otp-success": "Authentication successful!",
+    "required-active": "You need to verify your account!",
+    "activated": "Your account has been activated before!",
+    "has-six-character": "You must enter a sufficient number of characters!"
   }
 }

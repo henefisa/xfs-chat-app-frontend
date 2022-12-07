@@ -1,4 +1,5 @@
 import { IBase } from './base';
+import { IConversation } from './conversation';
 
 export interface IUser extends IBase {
   username: string;
@@ -15,10 +16,15 @@ export enum EUserRole {
   ADMIN = 'ADMIN',
 }
 
-export enum EUser {
-  STATUS_ACTIVE = 'ACTIVE',
-  STATUS_DEACTIVE = 'DEACTIVE',
-  STATUS_INACTIVE = 'INACTIVE',
+export enum EUserStatus {
+  ONLINE = 'ONLINE',
+  OFFLINE = 'OFFLINE',
+}
+
+export enum EUserActiveStatus {
+  ACTIVE = 'ACTIVE',
+  DEACTIVE = 'DEACTIVE',
+  INACTIVE = 'INACTIVE',
 }
 
 export interface IFriendStatusState extends IBase {
@@ -41,16 +47,21 @@ export interface IUserItemResult extends IUser {
   phone: null | string;
   description: null | string;
   location: null | string;
-  status: EUser.STATUS_ACTIVE | EUser.STATUS_DEACTIVE | EUser.STATUS_INACTIVE;
+  status: EUserStatus.ONLINE | EUserStatus.OFFLINE;
+  activeStatus:
+    | EUserActiveStatus.ACTIVE
+    | EUserActiveStatus.DEACTIVE
+    | EUserActiveStatus.INACTIVE;
   role: EUserRole.USER | EUserRole.ADMIN;
   friendStatus: null | IFriendStatusState;
+  conversation: IConversation;
 }
 
 export type TUserProfile = Omit<IUserItemResult, 'friendStatus'>;
 
 export type TUserInfo = Omit<
   TUserProfile,
-  'id' | 'created_at' | 'updated_at' | 'status' | 'role'
+  'id' | 'createdAt' | 'updatedAt' | 'status' | 'role' | 'username'
 >;
 
 export type IChangeField = Omit<
@@ -58,7 +69,7 @@ export type IChangeField = Omit<
   'username' | 'avatar' | 'email'
 >;
 
-export interface IListFriendRequest extends IBase {
+export interface IFriendRequest extends IBase {
   status: EFriendStatus.REQUESTED;
   owner: TUserProfile;
 }
@@ -66,11 +77,15 @@ export interface IListFriendRequest extends IBase {
 export interface IFriendAccept extends IBase {
   status: EFriendStatus.ACCEPTED;
   owner: TUserProfile;
+  userTarget: TUserProfile;
 }
 
 export interface IGetUsersQuery {
   q?: string;
-  status?: EUser.STATUS_ACTIVE | EUser.STATUS_DEACTIVE | EUser.STATUS_INACTIVE;
+  status?:
+    | EUserActiveStatus.ACTIVE
+    | EUserActiveStatus.DEACTIVE
+    | EUserActiveStatus.INACTIVE;
   limit?: string;
   offset?: string;
 }

@@ -1,5 +1,4 @@
-import { Spin as ASpin } from 'antd';
-import { SpinProps } from 'antd';
+import { Spin as ASpin, SpinProps } from 'antd';
 import clsx from 'clsx';
 import * as React from 'react';
 

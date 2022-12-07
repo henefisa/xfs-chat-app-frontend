@@ -37,6 +37,8 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
 
   const { selectedFriend } = useAppSelector(selectFriend);
 
+  const name = selectedFriend?.fullName ?? selectedFriend?.username;
+
   const listActionChat = React.useMemo(() => {
     return [
       {
@@ -67,16 +69,13 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
     <div className="chat-header">
       <div className="user-info">
         <Avatar
-          path={selectedFriend?.owner?.avatar}
+          path={selectedFriend?.avatar}
           imgWidth={35}
-          username={
-            selectedFriend?.owner?.fullName?.charAt(0).toUpperCase() ??
-            selectedFriend?.owner?.username.charAt(0).toUpperCase()
-          }
+          username={name?.charAt(0).toUpperCase()}
           className="user-info__avatar"
         />
         <Title level={5} className="user-info__name" onClick={handleClickuser}>
-          {selectedFriend?.owner?.fullName ?? selectedFriend?.owner?.username}
+          {name}
         </Title>
         <div className="user-info__status">
           <CheckCircleFilled className="status__icon" />
