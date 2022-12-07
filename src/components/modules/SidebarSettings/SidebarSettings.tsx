@@ -68,7 +68,7 @@ const SidebarSettings: React.FC = () => {
       phone: e.phone || newInfoUser.phone,
       description: e.description || newInfoUser.description,
     };
-    isEqual(initUserInfo, newUserInfo) ? setDisabled(true) : setDisabled(false);
+    setDisabled(isEqual(initUserInfo, newUserInfo));
   };
 
   const handleFinish = async (values: TUserInfo) => {
