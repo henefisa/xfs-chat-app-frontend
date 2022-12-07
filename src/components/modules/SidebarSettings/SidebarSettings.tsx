@@ -17,7 +17,7 @@ import * as userService from 'src/services/userService';
 import { TUserInfo } from 'src/models';
 import TextArea from '@common/TextArea/TextArea';
 import ESidebarSetting from 'src/interfaces/ESidebarSettings';
-import { compareObjects } from 'src/utils/compareObjects';
+import isEqual from 'lodash.isequal';
 
 import './SidebarSettings.scss';
 
@@ -68,15 +68,15 @@ const SidebarSettings: React.FC = () => {
       phone: e.phone || newInfoUser.phone,
       description: e.description || newInfoUser.description,
     };
-    compareObjects(initUserInfo, newUserInfo, setDisabled);
+    isEqual(initUserInfo, newUserInfo) ? setDisabled(true) : setDisabled(false);
   };
 
   const handleFinish = async (values: TUserInfo) => {
     if (selectedFile) {
       const res = await userService.getPresignUrl(selectedFile.name, t);
       await userService.putPresignUrl(res.url, selectedFile, t);
-      const user = { ...values, avatar: res.key };
-      await userService.updateUserProfile(dispatch, user, t);
+      const profile = { ...values, avatar: res.key };
+      await userService.updateUserProfile(dispatch, profile, t);
     } else {
       await userService.updateUserProfile(dispatch, values, t);
     }
@@ -192,10 +192,7 @@ const SidebarSettings: React.FC = () => {
                   label={t('account-description')}
                   labelCol={{ span: 24 }}
                 >
-                  <TextArea
-                    className="form-input"
-                    placeholder="admin@mgail.com"
-                  />
+                  <TextArea className="form-input" />
                 </Form.Item>
                 <div className="form-button">
                   <Button type="primary" className="form-button__cancel">
