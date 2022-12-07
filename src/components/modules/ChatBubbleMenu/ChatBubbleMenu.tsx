@@ -4,7 +4,7 @@ import { CopyOutlined, SaveOutlined, DeleteOutlined } from '@ant-design/icons';
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import clsx from 'clsx';
-import ForwardForm from '../ForwardForm/ForwardForm';
+import ForwardForm from '@modules/ForwardForm/ForwardForm';
 import Menu from '@common/Menu/Menu';
 import { useTranslation } from 'react-i18next';
 

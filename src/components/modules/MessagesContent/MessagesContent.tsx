@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ClockCircleOutlined, MoreOutlined } from '@ant-design/icons';
 import Dropdown from '@common/Dropdown/Dropdown';
 import clsx from 'clsx';
-import ChatBubbleMenu from '../ChatBubbleMenu/ChatBubbleMenu';
+import ChatBubbleMenu from '@modules/ChatBubbleMenu/ChatBubbleMenu';
+
 import './MessagesContent.scss';
 
 interface IMessagesContent {

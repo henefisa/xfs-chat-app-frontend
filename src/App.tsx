@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { initInterceptor } from './api/apiRequest';
+import { initInterceptor } from 'src/api/apiRequest';
 import {
   SocketContextProvider,
   defaultSocketContextState,
 } from 'src/context/socket/context';
-import Router from './routes';
-import { useAppDispatch } from './store/hooks';
+import Router from 'src/routes';
+import { useAppDispatch } from 'src/store/hooks';
 
 function App() {
   const navigate = useNavigate();

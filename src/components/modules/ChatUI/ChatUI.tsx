@@ -1,10 +1,10 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import { useState } from 'react';
-import ChatBottom from '../ChatBottom/ChatBottom';
-import ChatHeader from '../ChatHeader/ChatHeader';
-import ChatMain from '../ChatMain/ChatMain';
-import UserInfoChat from '../UserInfoChat/UserInfoChat';
+import ChatBottom from '@modules/ChatBottom/ChatBottom';
+import ChatHeader from '@modules/ChatHeader/ChatHeader';
+import ChatMain from '@modules/ChatMain/ChatMain';
+import UserInfoChat from '@modules/UserInfoChat/UserInfoChat';
 
 import './ChatUI.scss';
 

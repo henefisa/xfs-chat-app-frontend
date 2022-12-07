@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { selectNavBar } from 'src/store/navbarSlice';
 import { useAppSelector } from 'src/store/hooks';
-import SidebarProfile from '../SidebarProfile/SidebarProfile';
-import SidebarContacts from '../SidebarContacts/SidebarContacts';
-import SidebarGroups from '../SidebarGroups/SidebarGroups';
-import SidebarChats from '../SidebarChats/SidebarChats';
-import SidebarSearchUsers from '../SidebarSearchUsers/SidebarSearchUsers';
+import SidebarProfile from '@modules/SidebarProfile/SidebarProfile';
+import SidebarContacts from '@modules/SidebarContacts/SidebarContacts';
+import SidebarGroups from '@modules/SidebarGroups/SidebarGroups';
+import SidebarChats from '@modules/SidebarChats/SidebarChats';
+import SidebarSearchUsers from '@modules/SidebarSearchUsers/SidebarSearchUsers';
 import ENavbar from 'src/interfaces/ENavbar';
 
 import './SidebarDashboard.scss';

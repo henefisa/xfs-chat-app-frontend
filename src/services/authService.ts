@@ -12,7 +12,7 @@ import {
   rememberOnSubmit,
 } from 'src/store/authSlice';
 import { getRefreshToken } from 'src/utils/getTokenFromLocal';
-import { AppDispatch } from '../store';
+import { AppDispatch } from 'src/store';
 
 interface IUserLogin {
   username: string;

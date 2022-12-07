@@ -10,7 +10,7 @@ import OtpInput from 'react-otp-input';
 import { useNavigate } from 'react-router-dom';
 import { logoutSuccess } from 'src/store/authSlice';
 import { useAppDispatch } from 'src/store/hooks';
-import { checkOtp, getOtp, logout } from '../../services/authService';
+import { checkOtp, getOtp, logout } from 'src/services/authService';
 
 import './VerifyAccount.scss';
 

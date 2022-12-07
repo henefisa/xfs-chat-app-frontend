@@ -14,13 +14,13 @@ import Input from '@common/Input/Input';
 import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
+import ContactMenu from '@modules/ContactMenu/ContactMenu';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { EFriendStatus, IUserItemResult, TUserProfile } from 'src/models';
 import { getUsers } from 'src/services/userService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectFriend, updateFriendSelected } from 'src/store/userSlice';
-import ContactMenu from '../ContactMenu/ContactMenu';
 
 import './SidebarContacts.scss';
 
@@ -129,27 +129,31 @@ const SidebarContacts: React.FC = () => {
                   <div key={index}>
                     <div className="firt-character">{item.character}</div>
                     <ul className="contact-names">
-                      {item.friends.map((friend) => (
-                        <Button
-                          key={friend.id}
-                          className={clsx('contact-names__btn', {
-                            ['contact-names__btn--active']:
-                              selectedFriend?.username === friend.username,
-                          })}
-                          onClick={() => handleSelectFriend(friend)}
-                        >
-                          <label className="contact-names__label">
-                            {friend.fullName ?? friend.username}
-                          </label>
-                          <Dropdown
-                            overlay={<ContactMenu />}
-                            trigger={['click']}
-                            placement="bottomRight"
+                      {item.friends.map((friend) => {
+                        const name = friend.fullName ?? friend.username;
+
+                        return (
+                          <Button
+                            key={friend.id}
+                            className={clsx('contact-names__btn', {
+                              ['contact-names__btn--active']:
+                                selectedFriend?.username === friend.username,
+                            })}
+                            onClick={() => handleSelectFriend(friend)}
                           >
-                            <MoreOutlined className="icon" />
-                          </Dropdown>
-                        </Button>
-                      ))}
+                            <label className="contact-names__label">
+                              {name}
+                            </label>
+                            <Dropdown
+                              overlay={<ContactMenu />}
+                              trigger={['click']}
+                              placement="bottomRight"
+                            >
+                              <MoreOutlined className="icon" />
+                            </Dropdown>
+                          </Button>
+                        );
+                      })}
                     </ul>
                   </div>
                 ))}
