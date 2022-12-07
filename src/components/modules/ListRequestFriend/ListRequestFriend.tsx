@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Divider from '@common/Divider/Divider';
-import { IFriendRequest } from 'src/models';
+import { IUserItemResult } from 'src/models';
 import RequestFriendItem from '../RequestFriendItem/RequestFriendItem';
 
 import './ListRequestFriend.scss';
 
 interface IListRequestFriendProps {
-  friendList: IFriendRequest[];
+  friendList: IUserItemResult[];
 }
 
 const ListRequestFriend: React.FC<IListRequestFriendProps> = ({

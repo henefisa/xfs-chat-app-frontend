@@ -14,6 +14,7 @@ export enum EFriendStatus {
 export enum EUserRole {
   USER = 'USER',
   ADMIN = 'ADMIN',
+  MEMBER = 'MEMBER',
 }
 
 export enum EUserStatus {
@@ -81,6 +82,10 @@ export interface IGetUsersQuery {
     | EUserActiveStatus.ACTIVE
     | EUserActiveStatus.DEACTIVE
     | EUserActiveStatus.INACTIVE;
+  friendStatus?:
+    | EFriendStatus.ACCEPTED
+    | EFriendStatus.REJECTED
+    | EFriendStatus.REQUESTED;
   limit?: string;
   offset?: string;
 }

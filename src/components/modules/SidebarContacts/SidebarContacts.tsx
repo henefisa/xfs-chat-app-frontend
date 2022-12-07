@@ -16,78 +16,59 @@ import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IFriendAccept, TUserProfile } from 'src/models';
-import { getFriends } from 'src/services/userService';
+import { EFriendStatus, IUserItemResult, TUserProfile } from 'src/models';
+import { getUsers } from 'src/services/userService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import {
-  selectFriend,
-  selectUserProfile,
-  updateFriendSelected,
-} from 'src/store/userSlice';
+import { selectFriend, updateFriendSelected } from 'src/store/userSlice';
 import ContactMenu from '../ContactMenu/ContactMenu';
 
 import './SidebarContacts.scss';
 
+interface IFriendConvert {
+  character: string;
+  friends: TUserProfile[];
+}
+
 const SidebarContacts: React.FC = () => {
   const [toggleModal, setToggleModal] = React.useState(false);
 
-  const [loading, setLoading] = React.useState<boolean>(false);
-  const [listFriend, setListFriend] = React.useState<
-    {
-      character: string;
-      friends: TUserProfile[];
-    }[]
-  >([]);
+  const [loading, setLoading] = React.useState(false);
+  const [listFriend, setListFriend] = React.useState<IFriendConvert[]>([]);
 
   const { selectedFriend } = useAppSelector(selectFriend);
-  const userProfileStore = useAppSelector(selectUserProfile);
 
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
   const { t: t1 } = useTranslation('common');
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    const checkFriend = (item: IFriendAccept) => {
-      // Kiểm tra friend là ai (owner hay userTarget)
-      let friend: TUserProfile;
+    const handleConvertListFriend = (list: IUserItemResult[]) => {
+      const listCharacter = list.reduce((accumulator, friend) => {
+        const nameCharacter = (friend.fullName ?? friend.username)
+          .charAt(0)
+          .toUpperCase();
 
-      if (userProfileStore?.id === item.owner.id) {
-        friend = item.userTarget;
-      } else {
-        friend = item.owner;
-      }
+        if (!accumulator.includes(nameCharacter))
+          accumulator.push(nameCharacter);
 
-      return friend;
-    };
+        return accumulator;
+      }, [] as string[]);
 
-    const handleConvertListFriend = (list: IFriendAccept[]) => {
-      const listCharacter: string[] = [];
-
-      list.forEach((item) => {
-        const friend = checkFriend(item);
-
-        const name = friend.fullName ?? friend.username;
-
-        if (listCharacter.includes(name.charAt(0).toUpperCase())) return;
-
-        listCharacter.push(name.charAt(0).toUpperCase());
-      });
-
-      const newList = listCharacter.sort().map((item) => {
-        const objectItem: { character: string; friends: TUserProfile[] } = {
-          character: item,
+      const newList = listCharacter.sort().map((character) => {
+        const objectItem: IFriendConvert = {
+          character: character,
           friends: [],
         };
 
-        list.forEach((value) => {
-          const friend = checkFriend(value);
+        objectItem.friends = list.reduce((accumulator, friend) => {
+          const nameCharacter = (friend.fullName ?? friend.username)
+            .charAt(0)
+            .toUpperCase();
 
-          const name = friend.fullName ?? friend.username;
+          if (nameCharacter === character) accumulator.push(friend);
 
-          if (name.charAt(0).toUpperCase() !== item) return;
-
-          objectItem.friends.push(friend);
-        });
+          return accumulator;
+        }, [] as TUserProfile[]);
 
         return objectItem;
       });
@@ -98,11 +79,14 @@ const SidebarContacts: React.FC = () => {
     const getListFriend = async () => {
       setLoading(true);
       try {
-        const res = await getFriends({ status: EFriendStatus.ACCEPTED }, t1);
-        handleConvertListFriend(res.friends);
+        const result = await getUsers(
+          { friendStatus: EFriendStatus.ACCEPTED },
+          t1
+        );
+
+        handleConvertListFriend(result.users);
         setLoading(false);
       } catch (err) {
-        setListFriend([]);
         setLoading(false);
       }
     };
