@@ -1,70 +1,60 @@
-import * as React from 'react';
 import Tooltip from '@common/Tooltip/Tooltip';
+import * as React from 'react';
 
-import { UsergroupAddOutlined, CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 
-import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import BlockGroup from '@common/BlockGroup/BlockGroup';
-import Input from '@common/Input/Input';
 import Button from '@common/Button/Button';
-import clsx from 'clsx';
+import Input from '@common/Input/Input';
+import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Title from '@common/Title/Title';
+import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
+import { createConversation } from 'src/services/userService';
+import { useAppSelector } from 'src/store/hooks';
+import InputCheckbox from '@common/Input/InputCheckbox';
 
 import './SidebarGroups.scss';
-
-const contacts = [
-  {
-    firtCharacter: 'A',
-    names: ['Albert Rodarte', 'Allison Etter'],
-  },
-  {
-    firtCharacter: 'C',
-    names: ['Craig Smiley'],
-  },
-  {
-    firtCharacter: 'D',
-    names: ['Daniel Clay', 'Doris Brown'],
-  },
-  {
-    firtCharacter: 'I',
-    names: ['Iris Wells'],
-  },
-  {
-    firtCharacter: 'J',
-    names: ['Juan Flakes', 'John Hall', 'Joy Southern'],
-  },
-
-  {
-    firtCharacter: 'M',
-    names: ['Mary Farmer', 'Mark Messer', 'Michael Hinton'],
-  },
-  {
-    firtCharacter: 'O',
-    names: ['Ossie Wilson'],
-  },
-  {
-    firtCharacter: 'P',
-    names: ['Phillis Griffin', 'Paul Haynes'],
-  },
-  {
-    firtCharacter: 'R',
-    names: ['Rocky Jackson'],
-  },
-  {
-    firtCharacter: 'S',
-    names: ['Sara Muller', 'Simon Velez', 'Steve Walker'],
-  },
-  {
-    firtCharacter: 'H',
-    names: ['Hanah Mile'],
-  },
-];
 
 const SidebarGroups: React.FC = () => {
   const [active, setActive] = React.useState(false);
   const [toggleModal, setToggleModal] = React.useState(false);
+  const [groupName, setGroupName] = React.useState<string>();
+  const [groupFriendId, setGroupFriendId] = React.useState<string[]>([]);
+
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.groups' });
+  const { t: t1 } = useTranslation(['common', 'dashboard']);
+
+  const { listFriend } = useAppSelector(selectFriend);
+  const userProfileStore = useAppSelector(selectUserProfile);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+
+    if (checked) {
+      setGroupFriendId((prev) => [...prev, value]);
+    } else {
+      setGroupFriendId(groupFriendId.filter((item) => item !== value));
+    }
+  };
+
+  const handleCreateGroupConversation = async () => {
+    if (groupFriendId.length < 2 || !userProfileStore) return;
+
+    const newGroupFriend = [userProfileStore.id, ...groupFriendId];
+
+    try {
+      await createConversation(
+        { title: groupName, members: newGroupFriend },
+        t1
+      );
+
+      setToggleModal(false);
+    } catch (err) {
+      // do something
+    }
+  };
 
   return (
     <>
@@ -87,11 +77,6 @@ const SidebarGroups: React.FC = () => {
           <SearchSidebar placeholder={t('search-placeholder')} />
         </div>
         <div className="sidebar-groups__box">
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
@@ -131,6 +116,8 @@ const SidebarGroups: React.FC = () => {
               <Input
                 className="group-name__input"
                 placeholder={t('modal-name-placeholder')}
+                value={groupName}
+                onChange={(e) => setGroupName(e.target.value)}
               />
             </div>
             <div className="group-members">
@@ -153,23 +140,24 @@ const SidebarGroups: React.FC = () => {
                     {t('contacts')}
                   </Title>
                   <div className="select-contacts__add">
-                    {contacts.map((contact, index) => (
+                    {listFriend?.map((item, index) => (
                       <div key={index}>
                         <Title className="firt-character">
-                          {contact.firtCharacter}
+                          {item.character}
                         </Title>
                         <ul className="contact-names">
-                          {contact.names.map((name, index) => (
-                            <li key={index}>
-                              <input
-                                className="contact-names__checkbox"
-                                type="checkbox"
-                              ></input>
-                              <Title className="contact-names__label">
-                                {name}
-                              </Title>
-                            </li>
-                          ))}
+                          {item.friends.map((friend, index) => {
+                            const name = friend.fullName || friend.username;
+                            return (
+                              <li key={index}>
+                                <InputCheckbox
+                                  label={name}
+                                  friendId={friend.id}
+                                  handleChange={handleChange}
+                                />
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     ))}
@@ -177,21 +165,17 @@ const SidebarGroups: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="dialog-desc">
-              <Title className="dialog-desc__title">
-                {t('modal-desc-label')}
-              </Title>
-              <textarea
-                className="dialog-desc__input"
-                placeholder={t('modal-desc-placeholder')}
-              ></textarea>
-            </div>
           </div>
           <div className="dialog__footer">
             <Button className="btn-close" onClick={() => setToggleModal(false)}>
               {t('btn-close')}
             </Button>
-            <Button className="btn-create">{t('btn-create')}</Button>
+            <Button
+              className="btn-create"
+              onClick={handleCreateGroupConversation}
+            >
+              {t('btn-create')}
+            </Button>
           </div>
         </div>
       </div>

@@ -17,25 +17,22 @@ import Title from '@common/Title/Title';
 import ContactMenu from '@modules/ContactMenu/ContactMenu';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IUserItemResult, TUserProfile } from 'src/models';
+import { EFriendStatus, IFriendConvert, IUserItemResult } from 'src/models';
 import { getUsers } from 'src/services/userService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { selectFriend, updateFriendSelected } from 'src/store/userSlice';
+import {
+  selectFriend,
+  updateFriendSelected,
+  updateListFriend,
+} from 'src/store/userSlice';
 
 import './SidebarContacts.scss';
 
-interface IFriendConvert {
-  character: string;
-  friends: TUserProfile[];
-}
-
 const SidebarContacts: React.FC = () => {
   const [toggleModal, setToggleModal] = React.useState(false);
-
   const [loading, setLoading] = React.useState(false);
-  const [listFriend, setListFriend] = React.useState<IFriendConvert[]>([]);
 
-  const { selectedFriend } = useAppSelector(selectFriend);
+  const { selectedFriend, listFriend } = useAppSelector(selectFriend);
 
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
   const { t: t1 } = useTranslation('common');
@@ -68,12 +65,12 @@ const SidebarContacts: React.FC = () => {
           if (nameCharacter === character) accumulator.push(friend);
 
           return accumulator;
-        }, [] as TUserProfile[]);
+        }, [] as IUserItemResult[]);
 
         return objectItem;
       });
 
-      setListFriend(newList);
+      dispatch(updateListFriend(newList));
     };
 
     const getListFriend = async () => {
@@ -94,7 +91,7 @@ const SidebarContacts: React.FC = () => {
     getListFriend();
   }, []);
 
-  const handleSelectFriend = (friend: TUserProfile) => {
+  const handleSelectFriend = (friend: IUserItemResult) => {
     dispatch(updateFriendSelected(friend));
   };
 
@@ -124,39 +121,36 @@ const SidebarContacts: React.FC = () => {
             />
           ) : (
             <>
-              {listFriend.length > 0 &&
-                listFriend.map((item, index) => (
-                  <div key={index}>
-                    <div className="firt-character">{item.character}</div>
-                    <ul className="contact-names">
-                      {item.friends.map((friend) => {
-                        const name = friend.fullName ?? friend.username;
+              {listFriend?.map((item, index) => (
+                <div key={index}>
+                  <div className="firt-character">{item.character}</div>
+                  <ul className="contact-names">
+                    {item.friends.map((friend) => {
+                      const name = friend.fullName ?? friend.username;
 
-                        return (
-                          <Button
-                            key={friend.id}
-                            className={clsx('contact-names__btn', {
-                              ['contact-names__btn--active']:
-                                selectedFriend?.username === friend.username,
-                            })}
-                            onClick={() => handleSelectFriend(friend)}
+                      return (
+                        <Button
+                          key={friend.id}
+                          className={clsx('contact-names__btn', {
+                            ['contact-names__btn--active']:
+                              selectedFriend?.username === friend.username,
+                          })}
+                          onClick={() => handleSelectFriend(friend)}
+                        >
+                          <label className="contact-names__label">{name}</label>
+                          <Dropdown
+                            overlay={<ContactMenu />}
+                            trigger={['click']}
+                            placement="bottomRight"
                           >
-                            <label className="contact-names__label">
-                              {name}
-                            </label>
-                            <Dropdown
-                              overlay={<ContactMenu />}
-                              trigger={['click']}
-                              placement="bottomRight"
-                            >
-                              <MoreOutlined className="icon" />
-                            </Dropdown>
-                          </Button>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                ))}
+                            <MoreOutlined className="icon" />
+                          </Dropdown>
+                        </Button>
+                      );
+                    })}
+                  </ul>
+                </div>
+              ))}
             </>
           )}
         </div>
