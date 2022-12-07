@@ -90,7 +90,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
               <>
                 <AvatarGroupChat
                   conversation={selectedConversation}
-                  imgwidth={26}
+                  imgWidth={26}
                 />
                 <Title
                   level={5}

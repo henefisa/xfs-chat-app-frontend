@@ -52,6 +52,9 @@
         color: v.$text-color;
         margin-bottom: 4px;
       }
+      .username-group {
+        margin-top: 10px;
+      }
     }
 
     .title-action {
@@ -65,8 +68,8 @@
 
     .actions {
       display: flex;
-      flex: 1;
-      margin: 0px 0px 4px;
+      flex: 0 0 auto;
+      margin: 35px 4px;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;

@@ -2,6 +2,7 @@ import * as React from 'react';
 import Avatar from '@common/Avatar/Avatar';
 import AvatarGroup from '@common/Avatar/AvatarGroup';
 import { IConversation } from 'src/models';
+import clsx from 'clsx';
 
 import './AvatarGroupChat.scss';
 

@@ -31,7 +31,7 @@ const Conversation: React.FC<ConversationProps> = ({
     <div className="conversation-item">
       <div className="conversation-item__avatar">
         {conversation.isGroup ? (
-          <AvatarGroupChat conversation={conversation} imgwidth={26} />
+          <AvatarGroupChat conversation={conversation} imgWidth={26} />
         ) : (
           <Avatar
             path={setMemberConversation(conversation, userProfileStore)?.avatar}

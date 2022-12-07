@@ -112,7 +112,7 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
               <>
                 <AvatarGroupChat
                   conversation={selectedConversation}
-                  imgwidth={26}
+                  imgWidth={26}
                 />
                 <Title level={5} className="username">
                   {selectedConversation.title ||
