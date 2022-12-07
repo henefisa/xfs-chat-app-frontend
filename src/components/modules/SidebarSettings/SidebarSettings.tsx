@@ -14,10 +14,10 @@ import { Form } from 'antd';
 import { selectUserProfile } from 'src/store/userSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import * as userService from 'src/services/userService';
-import { IChangeField, TUserInfo } from 'src/models';
+import { TUserInfo } from 'src/models';
 import TextArea from '@common/TextArea/TextArea';
 import ESidebarSetting from 'src/interfaces/ESidebarSettings';
-import { checkDisabled } from 'src/utils/checkdisabled';
+import { compareObjects } from 'src/utils/compareObjects';
 
 import './SidebarSettings.scss';
 
@@ -61,14 +61,14 @@ const SidebarSettings: React.FC = () => {
     };
   }, [updateSuccess]);
 
-  const handleValueChange = (e: IChangeField, newInfoUser: TUserInfo) => {
+  const handleValuesChange = (e: TUserInfo, newInfoUser: TUserInfo) => {
     const newUserInfo = {
       fullName: e.fullName || newInfoUser.fullName,
       location: e.location || newInfoUser.location,
       phone: e.phone || newInfoUser.phone,
       description: e.description || newInfoUser.description,
     };
-    checkDisabled(initUserInfo, newUserInfo, setDisabled);
+    compareObjects(initUserInfo, newUserInfo, setDisabled);
   };
 
   const handleFinish = async (values: TUserInfo) => {
@@ -157,7 +157,7 @@ const SidebarSettings: React.FC = () => {
                   phone: userProfileStore?.phone,
                   description: userProfileStore?.description,
                 }}
-                onValuesChange={handleValueChange}
+                onValuesChange={handleValuesChange}
               >
                 <Form.Item
                   name="fullName"
