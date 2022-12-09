@@ -135,7 +135,10 @@
         "modal-desc-label": "Description",
         "modal-desc-placeholder": "Enter Description",
         "btn-close": "Close",
-        "btn-create": "Create Group"
+        "btn-create": "Create Group",
+        "create-conversation": {
+          "success": "New conversation created successfully!"
+        }
       },
       "contacts": {
         "title": "Contacts",

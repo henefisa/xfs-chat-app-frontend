@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IConversation, IFriendAccept, TUserProfile } from 'src/models';
+import {
+  IConversation,
+  IFriendConvert,
+  IUserItemResult,
+  TUserProfile,
+} from 'src/models';
 import { RootState } from '.';
 
 interface IUserProfileState {
@@ -9,8 +14,8 @@ interface IUserProfileState {
 }
 
 interface IUserFriendState {
-  selectedFriend: TUserProfile | null;
-  listFriend: IFriendAccept[] | null;
+  selectedFriend: IUserItemResult | null;
+  listFriend: IFriendConvert[] | null;
 }
 
 interface IUserConversationState {
@@ -59,11 +64,17 @@ export const userSlice = createSlice({
     deleteUserProfile: (state) => {
       state.profile.userProfile = null;
     },
-    updateFriendSelected: (state, action: PayloadAction<TUserProfile>) => {
+    updateFriendSelected: (state, action: PayloadAction<IUserItemResult>) => {
       state.friend.selectedFriend = action.payload;
     },
     deleteFriendSelected: (state) => {
       state.friend.selectedFriend = null;
+    },
+    updateListFriend: (state, action: PayloadAction<IFriendConvert[]>) => {
+      state.friend.listFriend = action.payload;
+    },
+    deleteListFriend: (state) => {
+      state.friend.listFriend = null;
     },
     updateConversationSelected: (
       state,
@@ -89,6 +100,8 @@ export const {
   updateProfileFailed,
   updateFriendSelected,
   deleteFriendSelected,
+  updateListFriend,
+  deleteListFriend,
   updateConversationSelected,
   deleteConversationSelected,
 } = userSlice.actions;
