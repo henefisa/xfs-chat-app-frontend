@@ -95,6 +95,14 @@ const SidebarContacts: React.FC = () => {
     dispatch(updateFriendSelected(friend));
   };
 
+  const onSelectFriend = React.useCallback((friend: IUserItemResult) => {
+    return () => handleSelectFriend(friend);
+  }, []);
+
+  const onToggleModal = React.useCallback((isTrue: boolean) => {
+    return () => setToggleModal(isTrue);
+  }, []);
+
   return (
     <>
       <div className="sidebar-contacts">
@@ -102,7 +110,7 @@ const SidebarContacts: React.FC = () => {
           <Title className="contact-title" level={4}>
             {t('title')}
           </Title>
-          <div className="contact-add" onClick={() => setToggleModal(true)}>
+          <div className="contact-add" onClick={onToggleModal(true)}>
             <Tooltip placement="bottom" tooltipTitle={t('add-contacts')}>
               <UsergroupAddOutlined className="contact-add__icon" />
             </Tooltip>
@@ -135,7 +143,7 @@ const SidebarContacts: React.FC = () => {
                             ['contact-names__btn--active']:
                               selectedFriend?.username === friend.username,
                           })}
-                          onClick={() => handleSelectFriend(friend)}
+                          onClick={onSelectFriend(friend)}
                         >
                           <label className="contact-names__label">{name}</label>
                           <Dropdown
@@ -170,7 +178,7 @@ const SidebarContacts: React.FC = () => {
             <Title className="dialog-header__title" level={5}>
               {t('add-contacts')}
             </Title>
-            <button onClick={() => setToggleModal(false)}>
+            <button onClick={onToggleModal(false)}>
               <CloseOutlined />
             </button>
           </div>
@@ -195,7 +203,7 @@ const SidebarContacts: React.FC = () => {
             </div>
           </div>
           <div className="dialog-footer">
-            <Button className="btn-close" onClick={() => setToggleModal(false)}>
+            <Button className="btn-close" onClick={onToggleModal(false)}>
               {t('btn-close')}
             </Button>
             <Button className="btn-invite">{t('btn-invite')}</Button>

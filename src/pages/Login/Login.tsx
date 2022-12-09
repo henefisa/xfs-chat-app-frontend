@@ -55,11 +55,11 @@ const LoginPage: React.FC = () => {
     handleLoginWhenRemember();
   }, []);
 
-  const handleFinish = (values: IFormFields) => {
+  const handleFinish = React.useCallback((values: IFormFields) => {
     const { isRemember, ...user } = values;
 
     authService.login(user, isRemember, dispatch, navigate, t);
-  };
+  }, []);
 
   return (
     <div className="login-page">

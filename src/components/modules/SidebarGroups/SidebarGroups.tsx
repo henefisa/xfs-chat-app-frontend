@@ -30,34 +30,50 @@ const SidebarGroups: React.FC = () => {
   const { listFriend } = useAppSelector(selectFriend);
   const userProfileStore = useAppSelector(selectUserProfile);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
+  const handleChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value, checked } = e.target;
 
-    if (checked) {
-      setGroupFriendId((prev) => [...prev, value]);
-    } else {
-      setGroupFriendId(groupFriendId.filter((item) => item !== value));
-    }
-  };
+      if (checked) {
+        setGroupFriendId((prev) => [...prev, value]);
+      } else {
+        setGroupFriendId(groupFriendId.filter((item) => item !== value));
+      }
+    },
+    []
+  );
 
-  const handleCreateGroupConversation = async () => {
-    if (groupFriendId.length < 2 || !userProfileStore) return;
+  const handleCreateGroupConversation = React.useCallback(() => {
+    return async () => {
+      if (groupFriendId.length < 2 || !userProfileStore) return;
 
-    const newGroupFriend = [userProfileStore.id, ...groupFriendId];
+      const newGroupFriend = [userProfileStore.id, ...groupFriendId];
 
-    setIsLoading(true);
-    try {
-      await createConversation(
-        { title: groupName, members: newGroupFriend },
-        t1
-      );
+      setIsLoading(true);
+      try {
+        await createConversation(
+          { title: groupName, members: newGroupFriend },
+          t1
+        );
 
-      setIsLoading(false);
-      setToggleModal(false);
-    } catch (err) {
-      setIsLoading(false);
-    }
-  };
+        setIsLoading(false);
+        setToggleModal(false);
+      } catch (err) {
+        setIsLoading(false);
+      }
+    };
+  }, []);
+
+  const onToggleModal = React.useCallback((isTrue: boolean) => {
+    return () => setToggleModal(isTrue);
+  }, []);
+
+  const onInputChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => setGroupName(e.target.value),
+    []
+  );
+
+  const onActive = React.useCallback(() => setActive(!active), [active]);
 
   return (
     <>
@@ -66,7 +82,7 @@ const SidebarGroups: React.FC = () => {
           <Title className="group-title" level={4}>
             {t('title')}
           </Title>
-          <div className="group-create" onClick={() => setToggleModal(true)}>
+          <div className="group-create" onClick={onToggleModal(true)}>
             <Tooltip
               className=""
               placement="bottom"
@@ -106,7 +122,7 @@ const SidebarGroups: React.FC = () => {
             </Title>
             <Button
               className="dialog-header__btn"
-              onClick={() => setToggleModal(false)}
+              onClick={onToggleModal(false)}
             >
               <CloseOutlined />
             </Button>
@@ -120,9 +136,7 @@ const SidebarGroups: React.FC = () => {
                 className="group-name__input"
                 placeholder={t('modal-name-placeholder')}
                 value={groupName}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setGroupName(e.target.value)
-                }
+                onChange={onInputChange}
               />
             </div>
             <div className="group-members">
@@ -134,10 +148,7 @@ const SidebarGroups: React.FC = () => {
                   [`select-contacts--open`]: active,
                 })}
               >
-                <Button
-                  className="select-members__btn"
-                  onClick={() => setActive(!active)}
-                >
+                <Button className="select-members__btn" onClick={onActive}>
                   {t('select-members')}
                 </Button>
                 <div className={clsx('select-contacts')}>
@@ -172,7 +183,7 @@ const SidebarGroups: React.FC = () => {
             </div>
           </div>
           <div className="dialog__footer">
-            <Button className="btn-close" onClick={() => setToggleModal(false)}>
+            <Button className="btn-close" onClick={onToggleModal(false)}>
               {t('btn-close')}
             </Button>
             <Button
