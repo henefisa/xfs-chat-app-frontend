@@ -1,8 +1,8 @@
 import { GlobalOutlined } from '@ant-design/icons';
 import clsx from 'clsx';
 import * as React from 'react';
-import Dropdown from 'src/components/common/Dropdown/Dropdown';
-import LanguageMenu from '../LanguageMenu/LanguageMenu';
+import Dropdown from '@common/Dropdown/Dropdown';
+import LanguageMenu from '@modules/LanguageMenu/LanguageMenu';
 
 import './LanguageDropDown.scss';
 

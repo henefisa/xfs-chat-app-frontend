@@ -1,44 +1,54 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+
 import {
-  SmileOutlined,
   PaperClipOutlined,
   PictureOutlined,
   SendOutlined,
+  SmileOutlined,
 } from '@ant-design/icons';
 import Button from '@common/Button/Button';
-import Input from '@common/Input/Input';
-import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
-import Tooltip from '@common/Tooltip/Tooltip';
-import { useTranslation } from 'react-i18next';
 import Dropdown from '@common/Dropdown/Dropdown';
+import Input from '@common/Input/Input';
+import Tooltip from '@common/Tooltip/Tooltip';
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
+import { useTranslation } from 'react-i18next';
 import { SocketContext } from 'src/context/socket/context';
+import { ESocketEvent } from 'src/models/socket';
+import {
+  createConversation,
+  getListConversation,
+} from 'src/services/userService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import {
   selectConversation,
-  selectUserProfile,
-  updateListMessage,
   selectFriend,
-  updateHasConversation,
+  selectUserProfile,
+  updateListConversation,
+  updateListMessage,
 } from 'src/store/userSlice';
-import { ESocketEvent } from 'src/models/socket';
-import { createConversation } from 'src/services/userService';
+import { IConversation } from 'src/models';
 
 import './ChatBottom.scss';
+interface IChatBottom {}
 
-const ChatBottom: React.FC = () => {
+const ChatBottom: React.FC<IChatBottom> = () => {
   const socket = React.useContext(SocketContext);
   const dispatch = useAppDispatch();
-  const { selectedConversation, hasConversation } =
-    useAppSelector(selectConversation);
 
+  const { t: t1 } = useTranslation('common');
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-bottom',
   });
-  const { t: t1 } = useTranslation('common');
+
   const inputFileRef = React.createRef<HTMLInputElement>();
   const inputImgRef = React.createRef<HTMLInputElement>();
   const [messages, setMessages] = useState('');
+
+  const { selectedConversation } = useAppSelector(selectConversation);
+
+  const { selectedFriend } = useAppSelector(selectFriend);
+  const userProfileStore = useAppSelector(selectUserProfile);
 
   const toggleFile = () => {
     inputFileRef.current?.click();
@@ -49,8 +59,7 @@ const ChatBottom: React.FC = () => {
   const onEmojiClick = (emojiObject: EmojiClickData) => {
     setMessages((prev: string) => prev + emojiObject.emoji);
   };
-  const { selectedFriend } = useAppSelector(selectFriend);
-  const userProfileStore = useAppSelector(selectUserProfile);
+
   const handleSendMessage = async () => {
     if (!userProfileStore || !messages.trim()) return;
 
@@ -62,24 +71,25 @@ const ChatBottom: React.FC = () => {
       });
     } else {
       let newConversationId = '';
-      if (!hasConversation && selectedFriend) {
+      if (!selectedFriend?.conversation && selectedFriend) {
         try {
-          const res = await createConversation(
-            { members: [userProfileStore.id, selectedFriend?.id] },
+          const result: IConversation = await createConversation(
+            { members: [userProfileStore.id, selectedFriend.id] },
             t1
           );
-          newConversationId = res.id;
-          dispatch(updateHasConversation(true));
+          const res = await getListConversation(t);
+          dispatch(updateListConversation(res.conversations));
+          newConversationId = result.id;
         } catch (err) {
-          // dothing //
+          // do something
         }
-
-        socket.emit(ESocketEvent.SEND_MESSAGE, {
-          userId: userProfileStore.id,
-          conversationId: newConversationId,
-          text: messages,
-        });
       }
+
+      socket.emit(ESocketEvent.SEND_MESSAGE, {
+        userId: userProfileStore.id,
+        conversationId: newConversationId || selectedFriend?.conversation?.id,
+        text: messages,
+      });
     }
 
     dispatch(
@@ -94,6 +104,7 @@ const ChatBottom: React.FC = () => {
         sender: userProfileStore,
       })
     );
+
     setMessages('');
   };
 

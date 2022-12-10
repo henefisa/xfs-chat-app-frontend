@@ -30,7 +30,6 @@ const SidebarChats: React.FC = () => {
 
   const { listConversation, selectedConversation } =
     useAppSelector(selectConversation);
-
   const handleClick = async (conversation: IConversation) => {
     dispatch(getListMessageStart());
     try {

@@ -7,8 +7,8 @@ import {
   selectUserProfile,
   updateListMessage,
 } from 'src/store/userSlice';
-import MessagesTable from '../MessagesTable/MessagesTable';
-import ChatDayTitle from '../ChatDayTitle/ChatDayTitle';
+import MessagesTable from '@modules/MessagesTable/MessagesTable';
+import ChatDayTitle from '@modules/ChatDayTitle/ChatDayTitle';
 import { ESocketEvent } from 'src/models/socket';
 
 import './ChatMain.scss';
@@ -27,7 +27,6 @@ const ChatMain: React.FC = () => {
 
   useEffect(() => {
     socket.on(ESocketEvent.GET_MESSAGE, ({ user, message }) => {
-      // do something
       dispatch(
         updateListMessage({
           id: uuidv4(),

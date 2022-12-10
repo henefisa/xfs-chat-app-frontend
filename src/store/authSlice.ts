@@ -36,7 +36,7 @@ export const authSlice = createSlice({
       state.login.isRemember = action.payload;
     },
     registerStart: (state) => {
-      state.register.isFetching = false;
+      state.register.isFetching = true;
     },
     registerSuccess: (state) => {
       state.register.isFetching = false;

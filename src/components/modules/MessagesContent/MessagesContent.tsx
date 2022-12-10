@@ -2,8 +2,7 @@ import React from 'react';
 import { ClockCircleOutlined, MoreOutlined } from '@ant-design/icons';
 import Dropdown from '@common/Dropdown/Dropdown';
 import clsx from 'clsx';
-import ChatBubbleMenu from '../ChatBubbleMenu/ChatBubbleMenu';
-import getTime from 'src/utils/getTime';
+import ChatBubbleMenu from '@modules/ChatBubbleMenu/ChatBubbleMenu';
 
 import './MessagesContent.scss';
 
@@ -18,6 +17,12 @@ const MessagesContent: React.FC<IMessagesContent> = ({
   messages,
   time,
 }) => {
+  const getTime = (stringTime: string) => {
+    const date = new Date(stringTime);
+    let minutes = String(date.getMinutes());
+    if (minutes.length == 1) minutes = '0' + minutes;
+    return `${date.getHours()}:${minutes}`;
+  };
   return (
     <div className="messages">
       <div className={clsx('bubble-chat', `bubble-chat--${position}`)}>

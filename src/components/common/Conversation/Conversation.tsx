@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Avatar from '../Avatar/Avatar';
-import Title from '../Title/Title';
+import Avatar from '@common/Avatar/Avatar';
+import Title from '@common/Title/Title';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';

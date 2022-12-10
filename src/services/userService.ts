@@ -164,11 +164,9 @@ export const cancelFriendRequest = async (
   t: TFunction<('common' | 'dashboard')[], undefined>
 ) => {
   try {
-    const res = await apiRequest.post('api/friends/cancel', {
+    await apiRequest.post('api/friends/cancel', {
       userRequest: id,
     });
-
-    return res.data;
   } catch (err) {
     notification.error({
       message: t('error'),
@@ -207,8 +205,6 @@ export const acceptRequestFriend = async (
     await apiRequest.post('api/friends/approve', {
       userRequest: id,
     });
-
-    return true;
   } catch (err) {
     notification.error({
       message: t('error'),
@@ -216,18 +212,14 @@ export const acceptRequestFriend = async (
       duration: 1.5,
       key: '1',
     });
-
-    return false;
   }
 };
 
 export const getListConversation = async (
-  query: TConversationQuery,
   t: TFunction<'common', undefined>
 ) => {
   try {
-    const res = await apiRequest.get('api/conversations', { params: query });
-
+    const res = await apiRequest.get('api/conversations');
     return res.data;
   } catch (err) {
     notification.error({
@@ -245,26 +237,6 @@ export const getMessages = async (
 ) => {
   try {
     const res = await apiRequest.get(`api/messages/${query.id}`);
-
-    return res.data;
-  } catch (err) {
-    notification.error({
-      message: t('error'),
-      description: t('normal-error-message'),
-      duration: 1.5,
-      key: '1',
-    });
-  }
-};
-
-export const checkHasConversationForTwoMember = async (
-  userId: string,
-  t: TFunction<'common', undefined>
-) => {
-  try {
-    const res = await apiRequest.post('api/conversations/check-conversation', {
-      userTarget: userId,
-    });
 
     return res.data;
   } catch (err) {

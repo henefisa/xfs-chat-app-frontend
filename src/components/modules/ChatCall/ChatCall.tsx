@@ -13,7 +13,7 @@ import {
 } from 'src/store/userSlice';
 import { useAppSelector } from 'src/store/hooks';
 import getMemberConversation from 'src/utils/getMemberConversation';
-import AvatarGroupChat from '../AvatarGroupChat/AvatarGroupChat';
+import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
 import getGroupTitle from 'src/utils/getGroupTitle';
 
 import './ChatCall.scss';

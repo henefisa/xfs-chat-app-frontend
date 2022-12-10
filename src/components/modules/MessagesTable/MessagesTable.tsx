@@ -1,7 +1,7 @@
 import React from 'react';
 import Avatar from '@common/Avatar/Avatar';
 import Title from '@common/Title/Title';
-import MessagesContent from '../MessagesContent/MessagesContent';
+import MessagesContent from '@modules/MessagesContent/MessagesContent';
 import clsx from 'clsx';
 import { TUserProfile } from 'src/models';
 

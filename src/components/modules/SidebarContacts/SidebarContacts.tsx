@@ -16,14 +16,19 @@ import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IFriendAccept, TUserProfile } from 'src/models';
-import { getFriends } from 'src/services/userService';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { EFriendStatus, IConversation, IUserItemResult } from 'src/models';
+import { getMessages, getUsers } from 'src/services/userService';
 import {
+  deleteConversationSelected,
+  deleteListMessage,
+  getListMessageFailed,
+  getListMessageStart,
+  getListMessageSuccess,
   selectFriend,
-  selectUserProfile,
   updateFriendSelected,
+  updateListFriend,
 } from 'src/store/userSlice';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import ContactMenu from '../ContactMenu/ContactMenu';
 
 import './SidebarContacts.scss';
@@ -32,40 +37,18 @@ const SidebarContacts: React.FC = () => {
   const [toggleModal, setToggleModal] = React.useState(false);
 
   const [loading, setLoading] = React.useState<boolean>(false);
-  const [listFriend, setListFriend] = React.useState<
-    {
-      character: string;
-      friends: TUserProfile[];
-    }[]
-  >([]);
 
-  const { selectedFriend } = useAppSelector(selectFriend);
-  const userProfileStore = useAppSelector(selectUserProfile);
+  const { selectedFriend, listFriend } = useAppSelector(selectFriend);
 
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
   const { t: t1 } = useTranslation('common');
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    const checkFriend = (item: IFriendAccept) => {
-      // Kiểm tra friend là ai (owner hay userTarget)
-      let friend: TUserProfile;
-
-      if (userProfileStore?.id === item.owner.id) {
-        friend = item.userTarget;
-      } else {
-        friend = item.owner;
-      }
-
-      return friend;
-    };
-
-    const handleConvertListFriend = (list: IFriendAccept[]) => {
+    const handleConvertListFriend = (list: IUserItemResult[]) => {
       const listCharacter: string[] = [];
 
-      list.forEach((item) => {
-        const friend = checkFriend(item);
-
+      list.forEach((friend) => {
         const name = friend.fullName ?? friend.username;
 
         if (listCharacter.includes(name.charAt(0).toUpperCase())) return;
@@ -74,14 +57,12 @@ const SidebarContacts: React.FC = () => {
       });
 
       const newList = listCharacter.sort().map((item) => {
-        const objectItem: { character: string; friends: TUserProfile[] } = {
+        const objectItem: { character: string; friends: IUserItemResult[] } = {
           character: item,
           friends: [],
         };
 
-        list.forEach((value) => {
-          const friend = checkFriend(value);
-
+        list.forEach((friend) => {
           const name = friend.fullName ?? friend.username;
 
           if (name.charAt(0).toUpperCase() !== item) return;
@@ -92,17 +73,20 @@ const SidebarContacts: React.FC = () => {
         return objectItem;
       });
 
-      setListFriend(newList);
+      dispatch(updateListFriend(newList));
     };
 
     const getListFriend = async () => {
       setLoading(true);
       try {
-        const res = await getFriends({ status: EFriendStatus.ACCEPTED }, t1);
-        handleConvertListFriend(res.friends);
+        const res = await getUsers(
+          { friendStatus: EFriendStatus.ACCEPTED },
+          t1
+        );
+        handleConvertListFriend(res.users);
+
         setLoading(false);
       } catch (err) {
-        setListFriend([]);
         setLoading(false);
       }
     };
@@ -110,8 +94,27 @@ const SidebarContacts: React.FC = () => {
     getListFriend();
   }, []);
 
-  const handleSelectFriend = (friend: TUserProfile) => {
+  const handleSelectFriend = (friend: IUserItemResult) => {
     dispatch(updateFriendSelected(friend));
+    dispatch(deleteConversationSelected());
+
+    handleGetMessage(friend.conversation);
+  };
+
+  const handleGetMessage = async (conversation: IConversation | null) => {
+    if (!conversation) {
+      dispatch(deleteListMessage());
+      return;
+    }
+
+    dispatch(getListMessageStart());
+
+    try {
+      const result = await getMessages({ id: conversation.id }, t1);
+      dispatch(getListMessageSuccess(result.messages));
+    } catch (err) {
+      dispatch(getListMessageFailed());
+    }
   };
 
   return (
@@ -140,12 +143,13 @@ const SidebarContacts: React.FC = () => {
             />
           ) : (
             <>
-              {listFriend.length > 0 &&
-                listFriend.map((item, index) => (
-                  <div key={index}>
-                    <div className="firt-character">{item.character}</div>
-                    <ul className="contact-names">
-                      {item.friends.map((friend) => (
+              {listFriend?.map((item, index) => (
+                <div key={index}>
+                  <div className="firt-character">{item.character}</div>
+                  <ul className="contact-names">
+                    {item.friends.map((friend) => {
+                      const name = friend.fullName ?? friend.username;
+                      return (
                         <Button
                           key={friend.id}
                           className={clsx('contact-names__btn', {
@@ -154,9 +158,7 @@ const SidebarContacts: React.FC = () => {
                           })}
                           onClick={() => handleSelectFriend(friend)}
                         >
-                          <label className="contact-names__label">
-                            {friend.fullName ?? friend.username}
-                          </label>
+                          <label className="contact-names__label">{name}</label>
                           <Dropdown
                             overlay={<ContactMenu />}
                             trigger={['click']}
@@ -165,10 +167,11 @@ const SidebarContacts: React.FC = () => {
                             <MoreOutlined className="icon" />
                           </Dropdown>
                         </Button>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                      );
+                    })}
+                  </ul>
+                </div>
+              ))}
             </>
           )}
         </div>

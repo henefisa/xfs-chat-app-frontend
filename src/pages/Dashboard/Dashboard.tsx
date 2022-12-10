@@ -56,16 +56,10 @@ const Dashboard: React.FC = () => {
       list.forEach((conversation) => {
         // subscribe all conversation
 
-        socket.emit(
-          ESocketEvent.SUBSCRIBE,
-          {
-            conversationId: conversation.id,
-            userId: userProfileStore.id,
-          },
-          () => {
-            // do something
-          }
-        );
+        socket.emit(ESocketEvent.SUBSCRIBE, {
+          conversationId: conversation.id,
+          userId: userProfileStore.id,
+        });
 
         // get participants of all conversation -> do after
       });
@@ -73,7 +67,7 @@ const Dashboard: React.FC = () => {
 
     const handleGetListConversation = async () => {
       try {
-        const result = await getListConversation({}, t);
+        const result = await getListConversation(t);
 
         dispatch(updateListConversation(result.conversations));
         handleSubscribeAllConversation(result.conversations);

@@ -1,14 +1,7 @@
 import { IBase } from './base';
-import { IGetUsersQuery, TUserProfile, EUserRole } from './user';
+import { EUserRole, IGetUsersQuery, TUserProfile } from './user';
 
 export type TConversationQuery = Omit<IGetUsersQuery, 'status'>;
-
-export interface IConversation extends IBase {
-  title: string;
-  participants: IParticipant[];
-  isGroup: boolean;
-  avatar: string;
-}
 
 export interface IParticipant extends IBase {
   role: EUserRole.MEMBER;
@@ -28,4 +21,10 @@ export interface IMessages extends IBase {
   isTick: boolean;
   message: string;
   sender: TUserProfile;
+}
+export interface IConversation extends IBase {
+  title: string | null;
+  isGroup: boolean;
+  avatar: string | null;
+  participants?: IParticipant[] | null;
 }

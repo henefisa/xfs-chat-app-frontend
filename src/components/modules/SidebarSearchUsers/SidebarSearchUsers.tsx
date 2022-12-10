@@ -5,10 +5,10 @@ import Title from '@common/Title/Title';
 import ListUsersResult from '@modules/ListUsersResult/ListUsersResult';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IListFriendRequest, IUserItemResult } from 'src/models';
-import { getFriends, getUsers } from 'src/services/userService';
+import { EFriendStatus, IUserItemResult } from 'src/models';
+import { getUsers } from 'src/services/userService';
 import debounce from 'src/utils/debounce';
-import ListRequestFriend from '../ListRequestFriend/ListRequestFriend';
+import ListRequestFriend from '@modules/ListRequestFriend/ListRequestFriend';
 
 import './SidebarSearchUsers.scss';
 
@@ -17,12 +17,12 @@ interface ISidebarSearchUsersProps {}
 const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
   const { t } = useTranslation(['common', 'dashboard']);
 
-  const [getUserLoading, setGetUserLoading] = React.useState<boolean>(false);
+  const [getUserLoading, setGetUserLoading] = React.useState(false);
   const [getListRequestLoading, setGetListRequestLoading] =
-    React.useState<boolean>(false);
+    React.useState(false);
   const [listResult, setListResult] = React.useState<IUserItemResult[]>([]);
   const [listFriendRequest, setListFriendRequest] = React.useState<
-    IListFriendRequest[]
+    IUserItemResult[]
   >([]);
 
   React.useEffect(() => {
@@ -30,11 +30,14 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
       setGetListRequestLoading(true);
 
       try {
-        const result = await getFriends({ status: EFriendStatus.REQUESTED }, t);
-        setListFriendRequest(result.friends);
+        const result = await getUsers(
+          { friendStatus: EFriendStatus.REQUESTED },
+          t
+        );
+
+        setListFriendRequest(result.users);
         setGetListRequestLoading(false);
       } catch (err) {
-        setListFriendRequest([]);
         setGetListRequestLoading(false);
       }
     };
@@ -45,7 +48,6 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
   const handleGetUsers = async (keyword: string) => {
     setGetUserLoading(true);
     if (!keyword) {
-      setListResult([]);
       setGetUserLoading(false);
       return;
     }
@@ -55,7 +57,6 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
       setListResult(result.users);
       setGetUserLoading(false);
     } catch (err) {
-      setListResult([]);
       setGetUserLoading(false);
     }
   };

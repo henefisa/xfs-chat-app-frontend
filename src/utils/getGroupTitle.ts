@@ -6,11 +6,11 @@ const getGroupTitle = (
 ) => {
   if (!userProfileStore) return '';
 
-  const newPariticipants = conversation.participants.filter(
+  const newParticipants = conversation.participants.filter(
     (item) => item.user.id !== userProfileStore.id
   );
 
-  const titleConversation: string = newPariticipants
+  const titleConversation: string = newParticipants
     .map((item) =>
       item.user.fullName ? item.user.fullName : item.user.username
     )

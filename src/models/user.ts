@@ -1,4 +1,5 @@
 import { IBase } from './base';
+import { IConversation } from './conversation';
 
 export interface IUser extends IBase {
   username: string;
@@ -53,8 +54,8 @@ export interface IUserItemResult extends IUser {
     | EUserActiveStatus.DEACTIVE
     | EUserActiveStatus.INACTIVE;
   role: EUserRole.USER | EUserRole.ADMIN;
-
   friendStatus: null | IFriendStatusState;
+  conversation: IConversation | null;
 }
 
 export type TUserProfile = Omit<IUserItemResult, 'friendStatus'>;
@@ -64,7 +65,7 @@ export type TUserInfo = Omit<
   'id' | 'createdAt' | 'updatedAt' | 'status' | 'role' | 'username'
 >;
 
-export interface IListFriendRequest extends IBase {
+export interface IFriendRequest extends IBase {
   status: EFriendStatus.REQUESTED;
   owner: TUserProfile;
 }
@@ -81,6 +82,10 @@ export interface IGetUsersQuery {
     | EUserActiveStatus.ACTIVE
     | EUserActiveStatus.DEACTIVE
     | EUserActiveStatus.INACTIVE;
+  friendStatus?:
+    | EFriendStatus.ACCEPTED
+    | EFriendStatus.REJECTED
+    | EFriendStatus.REQUESTED;
   limit?: string;
   offset?: string;
 }
@@ -91,3 +96,8 @@ export type TGetFriendsQuery = Omit<IGetUsersQuery, 'status'> & {
     | EFriendStatus.ACCEPTED
     | EFriendStatus.REJECTED;
 };
+
+export type TListFriend = {
+  character: string;
+  friends: IUserItemResult[];
+}[];

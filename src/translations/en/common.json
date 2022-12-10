@@ -3,6 +3,7 @@
     "error": "Error",
     "success": "Success",
     "warning": "Warning",
+    "info": "Info",
     "normal-error-message": "An error occurred!",
     "edit": "Edit",
     "update": "Update",
@@ -179,11 +180,7 @@
         "error": "Error",
         "update-error": "Update failed!",
         "btn-save": "Save change",
-        "btn-cancel": "Cancel",
-        "name-error-message": "Please enter your name!",
-        "location-error-message": "Please enter your location!",
-        "phone-error-message": "Please enter your phone!",
-        "description-error-message": "Please enter your description!"
+        "btn-cancel": "Cancel"
       }
     },
     "chat-overlay": "Select a chat or start a new one",
@@ -237,6 +234,9 @@
   "verify-account": {
     "receive-otp": "OTP has been sent to email!",
     "check-otp-error": "OTP code is incorrect!",
-    "check-otp-success": "Authentication successful!"
+    "check-otp-success": "Authentication successful!",
+    "required-active": "You need to verify your account!",
+    "activated": "Your account has been activated before!",
+    "has-six-character": "You must enter a sufficient number of characters!"
   }
 }

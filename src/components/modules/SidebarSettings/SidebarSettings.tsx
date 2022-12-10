@@ -6,7 +6,7 @@ import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
 import Divider from '@common/Divider/Divider';
 import clsx from 'clsx';
-import PrivacyMenu from '../PrivacyMenu/PrivacyMenu';
+import PrivacyMenu from '@modules/PrivacyMenu/PrivacyMenu';
 import Input from '@common/Input/Input';
 import Switch from '@common/Switch/Switch';
 import { useTranslation } from 'react-i18next';
@@ -17,28 +17,19 @@ import * as userService from 'src/services/userService';
 import { TUserInfo } from 'src/models';
 import TextArea from '@common/TextArea/TextArea';
 import ESidebarSetting from 'src/interfaces/ESidebarSettings';
+import isEqual from 'lodash.isequal';
 
 import './SidebarSettings.scss';
 
 const SidebarSettings: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.settings' });
-  const [active, setActive] = React.useState(ESidebarSetting.ACCOUNT);
-  const userProfileStore = useAppSelector(selectUserProfile);
   const dispatch = useAppDispatch();
+  const userProfileStore = useAppSelector(selectUserProfile);
+  const [active, setActive] = React.useState(ESidebarSetting.ACCOUNT);
   const [selectedFile, setSelectedFile] = React.useState<File>();
   const [preview, setPreview] = React.useState<string>();
-
-  const handleFinish = async (values: TUserInfo) => {
-    if (selectedFile) {
-      const res = await userService.getPresignUrl(selectedFile.name, t);
-      await userService.putPresignUrl(res.url, selectedFile, t);
-      const user = { ...values, avatar: res.key };
-      await userService.updateUserProfile(dispatch, user, t);
-    } else {
-      await userService.updateUserProfile(dispatch, values, t);
-    }
-    await userService.getUserProfile(dispatch);
-  };
+  const [disabled, setDisabled] = React.useState<boolean>(true);
+  const [updateSuccess, setUpdateSuccess] = React.useState<boolean>(false);
 
   const privacy = [
     { title: t('privacy-profile-photo') },
@@ -61,6 +52,39 @@ const SidebarSettings: React.FC = () => {
     { title: t('help-title'), key: ESidebarSetting.HELPS },
   ];
 
+  const initUserInfo = React.useMemo(() => {
+    return {
+      fullName: userProfileStore?.fullName,
+      location: userProfileStore?.location,
+      phone: userProfileStore?.phone,
+      description: userProfileStore?.description,
+    };
+  }, [updateSuccess]);
+
+  const handleValuesChange = (e: TUserInfo, newInfoUser: TUserInfo) => {
+    const newUserInfo = {
+      fullName: e.fullName || newInfoUser.fullName,
+      location: e.location || newInfoUser.location,
+      phone: e.phone || newInfoUser.phone,
+      description: e.description || newInfoUser.description,
+    };
+    setDisabled(isEqual(initUserInfo, newUserInfo));
+  };
+
+  const handleFinish = async (values: TUserInfo) => {
+    if (selectedFile) {
+      const res = await userService.getPresignUrl(selectedFile.name, t);
+      await userService.putPresignUrl(res.url, selectedFile, t);
+      const profile = { ...values, avatar: res.key };
+      await userService.updateUserProfile(dispatch, profile, t);
+    } else {
+      await userService.updateUserProfile(dispatch, values, t);
+    }
+    await userService.getUserProfile(dispatch);
+    setUpdateSuccess(!updateSuccess);
+    setDisabled(true);
+  };
+
   React.useEffect(() => {
     if (!selectedFile) {
       setPreview(undefined);
@@ -69,6 +93,7 @@ const SidebarSettings: React.FC = () => {
 
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
+    setDisabled(false);
 
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
@@ -132,17 +157,12 @@ const SidebarSettings: React.FC = () => {
                   phone: userProfileStore?.phone,
                   description: userProfileStore?.description,
                 }}
+                onValuesChange={handleValuesChange}
               >
                 <Form.Item
                   name="fullName"
                   label={t('account-name')}
                   labelCol={{ span: 24 }}
-                  rules={[
-                    {
-                      required: true,
-                      message: `${t('name-error-message')}`,
-                    },
-                  ]}
                 >
                   <Input className="form-input" />
                 </Form.Item>
@@ -150,12 +170,6 @@ const SidebarSettings: React.FC = () => {
                   name="location"
                   label={t('account-location')}
                   labelCol={{ span: 24 }}
-                  rules={[
-                    {
-                      required: true,
-                      message: `${t('location-error-message')}`,
-                    },
-                  ]}
                 >
                   <Input className="form-input" />
                 </Form.Item>
@@ -163,9 +177,6 @@ const SidebarSettings: React.FC = () => {
                   name="phone"
                   label={t('account-phone')}
                   labelCol={{ span: 24 }}
-                  rules={[
-                    { required: true, message: `${t('phone-error-message')}` },
-                  ]}
                 >
                   <Input className="form-input" />
                 </Form.Item>
@@ -173,7 +184,6 @@ const SidebarSettings: React.FC = () => {
                   name="email"
                   label={t('account-email')}
                   labelCol={{ span: 24 }}
-                  rules={[{ required: true, message: `email-error-message` }]}
                 >
                   <Input className="form-input" disabled />
                 </Form.Item>
@@ -181,17 +191,8 @@ const SidebarSettings: React.FC = () => {
                   name="description"
                   label={t('account-description')}
                   labelCol={{ span: 24 }}
-                  rules={[
-                    {
-                      required: true,
-                      message: `${t('description-error-message')}`,
-                    },
-                  ]}
                 >
-                  <TextArea
-                    className="form-input"
-                    placeholder="admin@mgail.com"
-                  />
+                  <TextArea className="form-input" />
                 </Form.Item>
                 <div className="form-button">
                   <Button type="primary" className="form-button__cancel">
@@ -201,6 +202,7 @@ const SidebarSettings: React.FC = () => {
                     type="primary"
                     className="form-button__save-change"
                     htmlType="submit"
+                    disabled={disabled}
                   >
                     {t('btn-save')}
                   </Button>

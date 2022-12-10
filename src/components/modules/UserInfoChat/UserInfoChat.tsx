@@ -16,10 +16,10 @@ import {
   selectConversation,
   selectUserProfile,
 } from 'src/store/userSlice';
-import AttachedFileItem from '../AttachedFileItem/AttachedFileItem';
+import AttachedFileItem from '@modules/AttachedFileItem/AttachedFileItem';
 import getMemberConversation from 'src/utils/getMemberConversation';
 import getGroupTitle from 'src/utils/getGroupTitle';
-import AvatarGroupChat from '../AvatarGroupChat/AvatarGroupChat';
+import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
 
 import './UserInfoChat.scss';
 
