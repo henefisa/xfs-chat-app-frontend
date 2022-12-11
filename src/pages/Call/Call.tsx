@@ -21,7 +21,7 @@ const CallPage: React.FC = () => {
           imgWidth={100}
           className="custom-avatar"
         />
-        <Title level={5} className="user-info__name">
+        <Title level={5} className="username-info__name">
           Nguyễn Danh Huy
         </Title>
         <p className="call-page__status">Đang gọi...</p>
