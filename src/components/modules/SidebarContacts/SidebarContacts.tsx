@@ -60,8 +60,8 @@ const SidebarContacts: React.FC = () => {
 
         return accumulator;
       }, [] as string[]);
-      const listItem = listCharacter.sort();
-      const newList = listItem.map((character) => {
+      listCharacter.sort();
+      const newList = listCharacter.map((character) => {
         const objectItem: IFriendConvert = {
           character: character,
           friends: [],

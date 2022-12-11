@@ -60,7 +60,7 @@ const ChatBottom: React.FC<IChatBottom> = () => {
     setMessages((prev: string) => prev + emojiObject.emoji);
   };
 
-  async function handleSendMessage() {
+  const handleSendMessage = async () => {
     if (!userProfileStore || !messages.trim()) return;
 
     if (selectedConversation) {
@@ -110,7 +110,11 @@ const ChatBottom: React.FC<IChatBottom> = () => {
     );
 
     setMessages('');
-  }
+  };
+
+  const onSendMessage = React.useCallback(() => {
+    return () => handleSendMessage();
+  }, [messages]);
 
   return (
     <div className="chat-bottom">
@@ -120,7 +124,7 @@ const ChatBottom: React.FC<IChatBottom> = () => {
           placeholder={t('enter-message')}
           onChange={(e) => setMessages(e.target.value)}
           value={messages}
-          onPressEnter={handleSendMessage}
+          onPressEnter={onSendMessage()}
         />
       </div>
       <div className="chat-actions">
@@ -165,7 +169,7 @@ const ChatBottom: React.FC<IChatBottom> = () => {
           </Button>
         </div>
         <div className="send-chat">
-          <Button className="send-chat__btn" onClick={handleSendMessage}>
+          <Button className="send-chat__btn" onClick={onSendMessage()}>
             <SendOutlined className="custom-send-chat" />
           </Button>
         </div>

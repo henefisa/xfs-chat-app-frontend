@@ -255,7 +255,6 @@ export const createConversation = async (
 ) => {
   try {
     const res = await apiRequest.post('api/conversations', data);
-    return res.data;
     notification.success({
       message: t('success'),
       description: t('sidebar.groups.create-conversation.success', {
@@ -264,6 +263,7 @@ export const createConversation = async (
       duration: 1.5,
       key: '1',
     });
+    return res.data;
   } catch (err) {
     notification.error({
       message: t('error'),
