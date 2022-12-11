@@ -30,6 +30,7 @@ const SidebarSettings: React.FC = () => {
   const [preview, setPreview] = React.useState<string>();
   const [disabled, setDisabled] = React.useState<boolean>(true);
   const [updateSuccess, setUpdateSuccess] = React.useState<boolean>(false);
+  const [hide, setHide] = React.useState<boolean>(true);
 
   const privacy = [
     { title: t('privacy-profile-photo') },
@@ -69,6 +70,7 @@ const SidebarSettings: React.FC = () => {
       description: e.description || newInfoUser.description,
     };
     setDisabled(isEqual(initUserInfo, newUserInfo));
+    setHide(isEqual(initUserInfo, newUserInfo))
   };
 
   const handleFinish = async (values: TUserInfo) => {
@@ -83,7 +85,10 @@ const SidebarSettings: React.FC = () => {
     await userService.getUserProfile(dispatch);
     setUpdateSuccess(!updateSuccess);
     setDisabled(true);
+    setHide(true)
   };
+
+
 
   React.useEffect(() => {
     if (!selectedFile) {
@@ -195,7 +200,7 @@ const SidebarSettings: React.FC = () => {
                   <TextArea className="form-input" />
                 </Form.Item>
                 <div className="form-button">
-                  <Button type="primary" className="form-button__cancel">
+                  <Button type="primary" className={clsx("form-button__cancel", hide && "form-button__cancel--hide")}>
                     {t('btn-cancel')}
                   </Button>
                   <Button
