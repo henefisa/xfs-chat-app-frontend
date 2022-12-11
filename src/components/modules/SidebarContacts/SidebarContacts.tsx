@@ -14,10 +14,17 @@ import Input from '@common/Input/Input';
 import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
+import ContactMenu from '@modules/ContactMenu/ContactMenu';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IConversation, IUserItemResult } from 'src/models';
+import {
+  EFriendStatus,
+  IConversation,
+  IFriendConvert,
+  IUserItemResult,
+} from 'src/models';
 import { getMessages, getUsers } from 'src/services/userService';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import {
   deleteConversationSelected,
   deleteListMessage,
@@ -28,15 +35,12 @@ import {
   updateFriendSelected,
   updateListFriend,
 } from 'src/store/userSlice';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import ContactMenu from '../ContactMenu/ContactMenu';
 
 import './SidebarContacts.scss';
 
 const SidebarContacts: React.FC = () => {
   const [toggleModal, setToggleModal] = React.useState(false);
-
-  const [loading, setLoading] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState(false);
 
   const { selectedFriend, listFriend } = useAppSelector(selectFriend);
 
@@ -46,29 +50,32 @@ const SidebarContacts: React.FC = () => {
 
   React.useEffect(() => {
     const handleConvertListFriend = (list: IUserItemResult[]) => {
-      const listCharacter: string[] = [];
+      const listCharacter = list.reduce((accumulator, friend) => {
+        const nameCharacter = (friend.fullName ?? friend.username)
+          .charAt(0)
+          .toUpperCase();
 
-      list.forEach((friend) => {
-        const name = friend.fullName ?? friend.username;
+        if (!accumulator.includes(nameCharacter))
+          accumulator.push(nameCharacter);
 
-        if (listCharacter.includes(name.charAt(0).toUpperCase())) return;
-
-        listCharacter.push(name.charAt(0).toUpperCase());
-      });
-
-      const newList = listCharacter.sort().map((item) => {
-        const objectItem: { character: string; friends: IUserItemResult[] } = {
-          character: item,
+        return accumulator;
+      }, [] as string[]);
+      const listItem = listCharacter.sort();
+      const newList = listItem.map((character) => {
+        const objectItem: IFriendConvert = {
+          character: character,
           friends: [],
         };
 
-        list.forEach((friend) => {
-          const name = friend.fullName ?? friend.username;
+        objectItem.friends = list.reduce((accumulator, friend) => {
+          const nameCharacter = (friend.fullName ?? friend.username)
+            .charAt(0)
+            .toUpperCase();
 
-          if (name.charAt(0).toUpperCase() !== item) return;
+          if (nameCharacter === character) accumulator.push(friend);
 
-          objectItem.friends.push(friend);
-        });
+          return accumulator;
+        }, [] as IUserItemResult[]);
 
         return objectItem;
       });
@@ -79,12 +86,12 @@ const SidebarContacts: React.FC = () => {
     const getListFriend = async () => {
       setLoading(true);
       try {
-        const res = await getUsers(
+        const result = await getUsers(
           { friendStatus: EFriendStatus.ACCEPTED },
           t1
         );
-        handleConvertListFriend(res.users);
 
+        handleConvertListFriend(result.users);
         setLoading(false);
       } catch (err) {
         setLoading(false);
@@ -97,9 +104,16 @@ const SidebarContacts: React.FC = () => {
   const handleSelectFriend = (friend: IUserItemResult) => {
     dispatch(updateFriendSelected(friend));
     dispatch(deleteConversationSelected());
-
     handleGetMessage(friend.conversation);
   };
+
+  const onSelectFriend = React.useCallback((friend: IUserItemResult) => {
+    return () => handleSelectFriend(friend);
+  }, []);
+
+  const onToggleModal = React.useCallback((isTrue: boolean) => {
+    return () => setToggleModal(isTrue);
+  }, []);
 
   const handleGetMessage = async (conversation: IConversation | null) => {
     if (!conversation) {
@@ -124,7 +138,7 @@ const SidebarContacts: React.FC = () => {
           <Title className="contact-title" level={4}>
             {t('title')}
           </Title>
-          <div className="contact-add" onClick={() => setToggleModal(true)}>
+          <div className="contact-add" onClick={onToggleModal(true)}>
             <Tooltip placement="bottom" tooltipTitle={t('add-contacts')}>
               <UsergroupAddOutlined className="contact-add__icon" />
             </Tooltip>
@@ -143,12 +157,13 @@ const SidebarContacts: React.FC = () => {
             />
           ) : (
             <>
-              {listFriend?.map((item, index) => (
-                <div key={index}>
+              {listFriend?.map((item) => (
+                <div key={item.character}>
                   <div className="firt-character">{item.character}</div>
                   <ul className="contact-names">
                     {item.friends.map((friend) => {
                       const name = friend.fullName ?? friend.username;
+
                       return (
                         <Button
                           key={friend.id}
@@ -156,7 +171,7 @@ const SidebarContacts: React.FC = () => {
                             ['contact-names__btn--active']:
                               selectedFriend?.username === friend.username,
                           })}
-                          onClick={() => handleSelectFriend(friend)}
+                          onClick={onSelectFriend(friend)}
                         >
                           <label className="contact-names__label">{name}</label>
                           <Dropdown
@@ -191,7 +206,7 @@ const SidebarContacts: React.FC = () => {
             <Title className="dialog-header__title" level={5}>
               {t('add-contacts')}
             </Title>
-            <button onClick={() => setToggleModal(false)}>
+            <button onClick={onToggleModal(false)}>
               <CloseOutlined />
             </button>
           </div>
@@ -216,7 +231,7 @@ const SidebarContacts: React.FC = () => {
             </div>
           </div>
           <div className="dialog-footer">
-            <Button className="btn-close" onClick={() => setToggleModal(false)}>
+            <Button className="btn-close" onClick={onToggleModal(false)}>
               {t('btn-close')}
             </Button>
             <Button className="btn-invite">{t('btn-invite')}</Button>

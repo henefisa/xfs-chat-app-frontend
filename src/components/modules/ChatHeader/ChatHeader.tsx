@@ -38,7 +38,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-header',
   });
-  const [hasConversation, setHasConversation] = React.useState<boolean>(false);
+  const [hasConversation, setHasConversation] = React.useState(false);
 
   const { selectedFriend } = useAppSelector(selectFriend);
   const { selectedConversation } = useAppSelector(selectConversation);
@@ -50,7 +50,9 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const handleClickuser = () => {
     setOpen(true);
   };
-
+  const onClickuser = React.useCallback(() => {
+    return () => handleClickuser();
+  }, []);
   const name = selectedFriend?.fullName ?? selectedFriend?.username;
   const nameMember =
     getMemberConversation(selectedConversation, userProfileStore)?.fullName ??
@@ -95,7 +97,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
                 <Title
                   level={5}
                   className="user-info__name"
-                  onClick={handleClickuser}
+                  onClick={onClickuser}
                 >
                   {selectedConversation.title ||
                     getGroupTitle(selectedConversation, userProfileStore)}
@@ -117,7 +119,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
                 <Title
                   level={5}
                   className="user-info__name"
-                  onClick={handleClickuser}
+                  onClick={onClickuser}
                 >
                   {selectedConversation?.title || nameMember}
                 </Title>
@@ -132,11 +134,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
               username={name?.charAt(0).toUpperCase()}
               className="user-info__avatar"
             />
-            <Title
-              level={5}
-              className="user-info__name"
-              onClick={handleClickuser}
-            >
+            <Title level={5} className="user-info__name" onClick={onClickuser}>
               {name}
             </Title>
           </>

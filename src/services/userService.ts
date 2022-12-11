@@ -5,8 +5,8 @@ import apiRequest from 'src/api/apiRequest';
 import {
   TGetFriendsQuery,
   IGetUsersQuery,
-  TConversationQuery,
   TUserInfo,
+  IDataCreateConversation,
   IMessageQuery,
 } from 'src/models';
 import { AppDispatch } from 'src/store';
@@ -250,13 +250,20 @@ export const getMessages = async (
 };
 
 export const createConversation = async (
-  data: { title?: string; members: string[] },
-  t: TFunction<'common', undefined>
+  data: IDataCreateConversation,
+  t: TFunction<('common' | 'dashboard')[], undefined>
 ) => {
   try {
     const res = await apiRequest.post('api/conversations', data);
-
     return res.data;
+    notification.success({
+      message: t('success'),
+      description: t('sidebar.groups.create-conversation.success', {
+        ns: 'dashboard',
+      }),
+      duration: 1.5,
+      key: '1',
+    });
   } catch (err) {
     notification.error({
       message: t('error'),

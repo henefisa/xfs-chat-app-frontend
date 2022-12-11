@@ -28,3 +28,8 @@ export interface IConversation extends IBase {
   avatar: string | null;
   participants?: IParticipant[] | null;
 }
+
+export interface IDataCreateConversation {
+  title?: string;
+  members: string[];
+}

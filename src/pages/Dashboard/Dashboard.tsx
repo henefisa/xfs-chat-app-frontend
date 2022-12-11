@@ -68,7 +68,6 @@ const Dashboard: React.FC = () => {
     const handleGetListConversation = async () => {
       try {
         const result = await getListConversation(t);
-
         dispatch(updateListConversation(result.conversations));
         handleSubscribeAllConversation(result.conversations);
       } catch (err) {

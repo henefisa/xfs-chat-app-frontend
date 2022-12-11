@@ -1,70 +1,79 @@
-import * as React from 'react';
 import Tooltip from '@common/Tooltip/Tooltip';
+import * as React from 'react';
 
-import { UsergroupAddOutlined, CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 
-import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import BlockGroup from '@common/BlockGroup/BlockGroup';
-import Input from '@common/Input/Input';
 import Button from '@common/Button/Button';
-import clsx from 'clsx';
+import Input from '@common/Input/Input';
+import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Title from '@common/Title/Title';
+import CheckboxMember from '@modules/CheckboxCustom/CheckboxMember';
+import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { createConversation } from 'src/services/userService';
+import { useAppSelector } from 'src/store/hooks';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 
 import './SidebarGroups.scss';
-
-const contacts = [
-  {
-    firtCharacter: 'A',
-    names: ['Albert Rodarte', 'Allison Etter'],
-  },
-  {
-    firtCharacter: 'C',
-    names: ['Craig Smiley'],
-  },
-  {
-    firtCharacter: 'D',
-    names: ['Daniel Clay', 'Doris Brown'],
-  },
-  {
-    firtCharacter: 'I',
-    names: ['Iris Wells'],
-  },
-  {
-    firtCharacter: 'J',
-    names: ['Juan Flakes', 'John Hall', 'Joy Southern'],
-  },
-
-  {
-    firtCharacter: 'M',
-    names: ['Mary Farmer', 'Mark Messer', 'Michael Hinton'],
-  },
-  {
-    firtCharacter: 'O',
-    names: ['Ossie Wilson'],
-  },
-  {
-    firtCharacter: 'P',
-    names: ['Phillis Griffin', 'Paul Haynes'],
-  },
-  {
-    firtCharacter: 'R',
-    names: ['Rocky Jackson'],
-  },
-  {
-    firtCharacter: 'S',
-    names: ['Sara Muller', 'Simon Velez', 'Steve Walker'],
-  },
-  {
-    firtCharacter: 'H',
-    names: ['Hanah Mile'],
-  },
-];
 
 const SidebarGroups: React.FC = () => {
   const [active, setActive] = React.useState(false);
   const [toggleModal, setToggleModal] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [groupName, setGroupName] = React.useState<string>();
+  const [groupFriendId, setGroupFriendId] = React.useState<string[]>([]);
+
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.groups' });
+  const { t: t1 } = useTranslation(['common', 'dashboard']);
+
+  const { listFriend } = useAppSelector(selectFriend);
+  const userProfileStore = useAppSelector(selectUserProfile);
+
+  const handleChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value, checked } = e.target;
+
+      if (checked) {
+        setGroupFriendId((prev) => [...prev, value]);
+      } else {
+        setGroupFriendId(groupFriendId.filter((item) => item !== value));
+      }
+    },
+    []
+  );
+
+  const handleCreateGroupConversation = React.useCallback(() => {
+    return async () => {
+      if (groupFriendId.length < 2 || !userProfileStore) return;
+
+      const newGroupFriend = [userProfileStore.id, ...groupFriendId];
+
+      setIsLoading(true);
+      try {
+        await createConversation(
+          { title: groupName, members: newGroupFriend },
+          t1
+        );
+
+        setIsLoading(false);
+        setToggleModal(false);
+      } catch (err) {
+        setIsLoading(false);
+      }
+    };
+  }, []);
+
+  const onToggleModal = React.useCallback((isTrue: boolean) => {
+    return () => setToggleModal(isTrue);
+  }, []);
+
+  const onInputChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => setGroupName(e.target.value),
+    []
+  );
+
+  const onActive = React.useCallback(() => setActive(!active), [active]);
 
   return (
     <>
@@ -73,7 +82,7 @@ const SidebarGroups: React.FC = () => {
           <Title className="group-title" level={4}>
             {t('title')}
           </Title>
-          <div className="group-create" onClick={() => setToggleModal(true)}>
+          <div className="group-create" onClick={onToggleModal(true)}>
             <Tooltip
               className=""
               placement="bottom"
@@ -87,11 +96,6 @@ const SidebarGroups: React.FC = () => {
           <SearchSidebar placeholder={t('search-placeholder')} />
         </div>
         <div className="sidebar-groups__box">
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
-          <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
           <BlockGroup avtTitle="G" name="#General" pill="23+" />
@@ -118,7 +122,7 @@ const SidebarGroups: React.FC = () => {
             </Title>
             <Button
               className="dialog-header__btn"
-              onClick={() => setToggleModal(false)}
+              onClick={onToggleModal(false)}
             >
               <CloseOutlined />
             </Button>
@@ -131,6 +135,8 @@ const SidebarGroups: React.FC = () => {
               <Input
                 className="group-name__input"
                 placeholder={t('modal-name-placeholder')}
+                value={groupName}
+                onChange={onInputChange}
               />
             </div>
             <div className="group-members">
@@ -142,10 +148,7 @@ const SidebarGroups: React.FC = () => {
                   [`select-contacts--open`]: active,
                 })}
               >
-                <Button
-                  className="select-members__btn"
-                  onClick={() => setActive(!active)}
-                >
+                <Button className="select-members__btn" onClick={onActive}>
                   {t('select-members')}
                 </Button>
                 <div className={clsx('select-contacts')}>
@@ -153,23 +156,24 @@ const SidebarGroups: React.FC = () => {
                     {t('contacts')}
                   </Title>
                   <div className="select-contacts__add">
-                    {contacts.map((contact, index) => (
-                      <div key={index}>
+                    {listFriend?.map((item) => (
+                      <div key={item.character}>
                         <Title className="firt-character">
-                          {contact.firtCharacter}
+                          {item.character}
                         </Title>
                         <ul className="contact-names">
-                          {contact.names.map((name, index) => (
-                            <li key={index}>
-                              <input
-                                className="contact-names__checkbox"
-                                type="checkbox"
-                              ></input>
-                              <Title className="contact-names__label">
-                                {name}
-                              </Title>
-                            </li>
-                          ))}
+                          {item.friends.map((friend) => {
+                            const name = friend.fullName || friend.username;
+                            return (
+                              <li key={friend.id}>
+                                <CheckboxMember
+                                  label={name}
+                                  friendId={friend.id}
+                                  handleChange={handleChange}
+                                />
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     ))}
@@ -177,21 +181,18 @@ const SidebarGroups: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="dialog-desc">
-              <Title className="dialog-desc__title">
-                {t('modal-desc-label')}
-              </Title>
-              <textarea
-                className="dialog-desc__input"
-                placeholder={t('modal-desc-placeholder')}
-              ></textarea>
-            </div>
           </div>
           <div className="dialog__footer">
-            <Button className="btn-close" onClick={() => setToggleModal(false)}>
+            <Button className="btn-close" onClick={onToggleModal(false)}>
               {t('btn-close')}
             </Button>
-            <Button className="btn-create">{t('btn-create')}</Button>
+            <Button
+              className="btn-create"
+              onClick={handleCreateGroupConversation}
+              loading={isLoading}
+            >
+              {t('btn-create')}
+            </Button>
           </div>
         </div>
       </div>

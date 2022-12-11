@@ -76,6 +76,11 @@ export interface IFriendAccept extends IBase {
   userTarget: TUserProfile;
 }
 
+export interface IFriendConvert {
+  character: string;
+  friends: IUserItemResult[];
+}
+
 export interface IGetUsersQuery {
   q?: string;
   status?:

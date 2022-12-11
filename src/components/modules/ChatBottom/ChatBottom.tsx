@@ -27,9 +27,9 @@ import {
   updateListConversation,
   updateListMessage,
 } from 'src/store/userSlice';
-import { IConversation } from 'src/models';
 
 import './ChatBottom.scss';
+import { IConversation } from 'src/models';
 interface IChatBottom {}
 
 const ChatBottom: React.FC<IChatBottom> = () => {
@@ -60,7 +60,7 @@ const ChatBottom: React.FC<IChatBottom> = () => {
     setMessages((prev: string) => prev + emojiObject.emoji);
   };
 
-  const handleSendMessage = async () => {
+  async function handleSendMessage() {
     if (!userProfileStore || !messages.trim()) return;
 
     if (selectedConversation) {
@@ -73,10 +73,14 @@ const ChatBottom: React.FC<IChatBottom> = () => {
       let newConversationId = '';
       if (!selectedFriend?.conversation && selectedFriend) {
         try {
+          const newConversation = [userProfileStore.id, selectedFriend.id];
           const result: IConversation = await createConversation(
-            { members: [userProfileStore.id, selectedFriend.id] },
+            {
+              members: newConversation,
+            },
             t1
           );
+
           const res = await getListConversation(t);
           dispatch(updateListConversation(res.conversations));
           newConversationId = result.id;
@@ -106,7 +110,7 @@ const ChatBottom: React.FC<IChatBottom> = () => {
     );
 
     setMessages('');
-  };
+  }
 
   return (
     <div className="chat-bottom">

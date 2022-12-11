@@ -135,7 +135,10 @@
         "modal-desc-label": "Mô tả",
         "modal-desc-placeholder": "Nhập mô tả",
         "btn-close": "Đóng",
-        "btn-create": "Thêm nhóm"
+        "btn-create": "Thêm nhóm",
+        "create-conversation": {
+          "success": "Tạo mới cuộc hội thoại thành công!"
+        }
       },
       "contacts": {
         "title": "Liên hệ",

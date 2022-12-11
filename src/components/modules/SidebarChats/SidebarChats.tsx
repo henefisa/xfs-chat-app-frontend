@@ -41,6 +41,10 @@ const SidebarChats: React.FC = () => {
     }
   };
 
+  const onHandleClick = React.useCallback((conversation: IConversation) => {
+    return () => handleClick(conversation);
+  }, []);
+
   return (
     <div className="sidebar-chats">
       <div className="header-chats">
@@ -100,7 +104,7 @@ const SidebarChats: React.FC = () => {
                         ['conversation-btn--active']:
                           conversation.id === selectedConversation?.id,
                       })}
-                      onClick={() => handleClick(conversation)}
+                      onClick={onHandleClick(conversation)}
                     >
                       <Conversation
                         conversation={conversation}
