@@ -30,6 +30,8 @@ const SidebarSettings: React.FC = () => {
   const [preview, setPreview] = React.useState<string>();
   const [disabled, setDisabled] = React.useState<boolean>(true);
   const [updateSuccess, setUpdateSuccess] = React.useState<boolean>(false);
+  const [hideCancel, setHideCancel] = React.useState<boolean>(true);
+  const [form] = Form.useForm();
 
   const privacy = [
     { title: t('privacy-profile-photo') },
@@ -69,6 +71,11 @@ const SidebarSettings: React.FC = () => {
       description: e.description || newInfoUser.description,
     };
     setDisabled(isEqual(initUserInfo, newUserInfo));
+    setHideCancel(isEqual(initUserInfo, newUserInfo));
+  };
+  const handleReset = () => {
+    form.resetFields();
+    setHideCancel(true);
   };
 
   const handleFinish = async (values: TUserInfo) => {
@@ -83,6 +90,7 @@ const SidebarSettings: React.FC = () => {
     await userService.getUserProfile(dispatch);
     setUpdateSuccess(!updateSuccess);
     setDisabled(true);
+    setHideCancel(true);
   };
 
   React.useEffect(() => {
@@ -149,6 +157,7 @@ const SidebarSettings: React.FC = () => {
           {active === ESidebarSetting.ACCOUNT && (
             <div className="form-container">
               <Form
+                form={form}
                 onFinish={handleFinish}
                 initialValues={{
                   fullName: userProfileStore?.fullName,
@@ -178,7 +187,7 @@ const SidebarSettings: React.FC = () => {
                   label={t('account-phone')}
                   labelCol={{ span: 24 }}
                 >
-                  <Input className="form-input" />
+                  <Input type="Number" className="form-input" />
                 </Form.Item>
                 <Form.Item
                   name="email"
@@ -195,7 +204,14 @@ const SidebarSettings: React.FC = () => {
                   <TextArea className="form-input" />
                 </Form.Item>
                 <div className="form-button">
-                  <Button type="primary" className="form-button__cancel">
+                  <Button
+                    type="primary"
+                    className={clsx(
+                      'form-button__cancel',
+                      hideCancel && 'form-button__cancel--hide'
+                    )}
+                    onClick={handleReset}
+                  >
                     {t('btn-cancel')}
                   </Button>
                   <Button
