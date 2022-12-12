@@ -1,0 +1,58 @@
+@use '../../assets/styles/variables' as v;
+
+.call-page {
+  height: 100vh;
+  background-color: black;
+
+  .call-page__info {
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .user-info__name {
+      color: v.$white;
+      font-size: 24px;
+      font-weight: 700;
+      margin-top: 16px;
+    }
+    .call-page__status {
+      color: v.$white;
+      font-size: 15px;
+    }
+  }
+
+  .call-page__footer {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .btn-add-member,
+    .btn-video,
+    .btn-mic,
+    .btn-close {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      margin: 0 15px;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        border: transparent;
+      }
+
+      .icon {
+        font-size: 19px;
+        color: v.$white;
+      }
+    }
+    .btn-close {
+      background-color: rgb(240, 75, 75);
+    }
+  }
+}
