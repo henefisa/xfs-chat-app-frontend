@@ -37,6 +37,11 @@ const routes: IRoute[] = [
     private: true,
     component: DashboardPage,
   },
+  {
+    path: '/settings',
+    private: true,
+    component: DashboardPage,
+  },
 ];
 
 export default routes;
