@@ -134,7 +134,11 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
               username={name?.charAt(0).toUpperCase()}
               className="user-info__avatar"
             />
-            <Title level={5} className="user-info__name" onClick={onClickuser}>
+            <Title
+              level={5}
+              className="user-info__name"
+              onClick={onClickuser()}
+            >
               {name}
             </Title>
           </>
