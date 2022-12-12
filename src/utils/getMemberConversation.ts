@@ -6,8 +6,8 @@ const getMemberConversation = (
 ) => {
   if (!userProfileStore || !conversation) return;
 
-  if (userProfileStore.id !== conversation.participants[0].user.id)
-    return conversation.participants[0].user;
+  if (userProfileStore.id !== conversation.participants?.[0].user.id)
+    return conversation.participants?.[0].user;
 
   return conversation.participants[1].user;
 };

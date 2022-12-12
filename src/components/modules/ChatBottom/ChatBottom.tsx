@@ -26,6 +26,7 @@ import {
   selectUserProfile,
   updateListConversation,
   updateListMessage,
+  updateConversationSelected,
 } from 'src/store/userSlice';
 
 import './ChatBottom.scss';
@@ -83,6 +84,7 @@ const ChatBottom: React.FC<IChatBottom> = () => {
 
           const res = await getListConversation(t);
           dispatch(updateListConversation(res.conversations));
+          dispatch(updateConversationSelected(result));
           newConversationId = result.id;
         } catch (err) {
           // do something
