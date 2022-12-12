@@ -19,7 +19,7 @@ import ENavbar from 'src/interfaces/ENavbar';
 import * as React from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectNavBar, updateNavbar } from 'src/store/navbarSlice';
 import { selectUserProfile } from 'src/store/userSlice';
@@ -28,6 +28,7 @@ import './NavDashboard.scss';
 
 const NavDashboard: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   // Viết tạm state dark/light theme
   const [isDark, setIsDark] = useState(false);
   const navbarIndex = useAppSelector(selectNavBar);
@@ -40,31 +41,37 @@ const NavDashboard: React.FC = () => {
         icon: UserOutlined,
         tooltipTitle: t('profile'),
         key: ENavbar.PROFILE,
+        path: 'dashboard',
       },
       {
         icon: MessageOutlined,
         tooltipTitle: t('chat'),
         key: ENavbar.CHATS,
+        path: 'dashboard',
       },
       {
         icon: UsergroupAddOutlined,
         tooltipTitle: t('groups'),
         key: ENavbar.GROUPS,
+        path: 'dashboard',
       },
       {
         icon: ContactsOutlined,
         tooltipTitle: t('contacts'),
         key: ENavbar.CONTACTS,
+        path: 'dashboard',
       },
       {
         icon: SearchOutlined,
         tooltipTitle: t('search'),
         key: ENavbar.SEARCH,
+        path: 'dashboard',
       },
       {
         icon: SettingOutlined,
         tooltipTitle: t('settings'),
         key: ENavbar.SETTINGS,
+        path: 'settings',
       },
     ];
   }, [t]);
@@ -88,6 +95,7 @@ const NavDashboard: React.FC = () => {
               className="menu-dashboard__btn"
               onClick={() => {
                 dispatch(updateNavbar(item.key));
+                navigate(`../${item.path}`);
               }}
             >
               <Tooltip
