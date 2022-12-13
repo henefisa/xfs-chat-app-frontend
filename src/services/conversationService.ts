@@ -7,7 +7,7 @@ import {
   TConversationQuery,
 } from 'src/models';
 
-export const getListConversation = async (
+export const getConversation = async (
   t: TFunction<'common', undefined>,
   query: TConversationQuery = {}
 ) => {

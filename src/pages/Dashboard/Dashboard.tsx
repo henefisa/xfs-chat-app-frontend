@@ -14,7 +14,7 @@ import {
   updateListConversation,
 } from 'src/store/conversationSlice';
 import { IConversation } from 'src/models';
-import { getListConversation } from 'src/services/conversationService';
+import { getConversation } from 'src/services/conversationService';
 import { ESocketEvent } from 'src/models/socket';
 import { useTranslation } from 'react-i18next';
 
@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
 
     const handleGetListConversation = async () => {
       try {
-        const result = await getListConversation(t, { q: '' });
+        const result = await getConversation(t);
         dispatch(updateListConversation(result.conversations));
         handleSubscribeAllConversation(result.conversations);
       } catch (err) {
