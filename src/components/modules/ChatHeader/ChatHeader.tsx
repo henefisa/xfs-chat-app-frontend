@@ -47,11 +47,8 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   React.useEffect(() => {
     selectedConversation ? setHasConversation(true) : setHasConversation(false);
   }, [selectedConversation]);
-  const handleClickuser = () => {
-    setOpen(true);
-  };
   const onClickuser = React.useCallback(() => {
-    return () => handleClickuser();
+    return () => setOpen(true);
   }, []);
   const name = selectedFriend?.fullName ?? selectedFriend?.username;
   const nameMember =
@@ -97,7 +94,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
                 <Title
                   level={5}
                   className="user-info__name"
-                  onClick={onClickuser}
+                  onClick={onClickuser()}
                 >
                   {selectedConversation.title ||
                     getGroupTitle(selectedConversation, userProfileStore)}
@@ -119,7 +116,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
                 <Title
                   level={5}
                   className="user-info__name"
-                  onClick={onClickuser}
+                  onClick={onClickuser()}
                 >
                   {selectedConversation?.title || nameMember}
                 </Title>
