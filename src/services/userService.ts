@@ -2,12 +2,7 @@ import { notification } from 'antd';
 import axios from 'axios';
 import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
-import {
-  TGetFriendsQuery,
-  IGetUsersQuery,
-  TUserInfo,
-  IMessageQuery,
-} from 'src/models';
+import { TGetFriendsQuery, IGetUsersQuery, TUserInfo } from 'src/models';
 import { AppDispatch } from 'src/store';
 import {
   getProfileFailed,
