@@ -1,0 +1,42 @@
+@use '../../../assets/styles/variables' as v;
+
+.ant-avatar-group.avatar-group.conversation-avatar {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  --size: 46px;
+  width: var(--size);
+  height: var(--size);
+  overflow: hidden;
+
+  .ant-avatar:not(:first-child) {
+    margin-left: unset;
+  }
+
+  .ant-avatar {
+    margin-left: unset;
+    color: v.$primary;
+    background-color: #d4d3f9;
+
+    .ant-avatar-string {
+      --size: 26px;
+      line-height: var(--size);
+    }
+  }
+
+  .ant-avatar:nth-child(3),
+  .ant-avatar:nth-child(4) {
+    margin-top: -6px;
+  }
+
+  .ant-avatar:not(:nth-child(2n + 1)) {
+    margin-left: -8px;
+  }
+
+  .ant-avatar.ant-avatar-circle {
+    --size: 26px;
+    height: var(--size);
+    width: var(--size);
+  }
+}

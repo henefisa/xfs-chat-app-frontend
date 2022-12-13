@@ -19,3 +19,18 @@ export interface IDataCreateConversation {
   title?: string;
   members: string[];
 }
+
+export interface IMessageQuery {
+  id: string;
+  q?: string;
+  limit?: string;
+  offset?: string;
+}
+
+export interface IMessages extends IBase {
+  attachment: string | null;
+  isPin: boolean;
+  isTick: boolean;
+  message: string;
+  sender: TUserProfile;
+}

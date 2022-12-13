@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   IConversation,
   IFriendConvert,
+  IMessages,
   IUserItemResult,
   TUserProfile,
 } from 'src/models';
@@ -22,11 +23,17 @@ interface IUserConversationState {
   selectedConversation: IConversation | null;
   listConversation: IConversation[];
 }
+interface IUserMessage {
+  listMessage: IMessages[];
+  isFetching: boolean;
+  error: boolean;
+}
 
 interface IUserState {
   profile: IUserProfileState;
   friend: IUserFriendState;
   conversation: IUserConversationState;
+  message: IUserMessage;
 }
 
 const initialState: IUserState = {
@@ -42,6 +49,11 @@ const initialState: IUserState = {
   conversation: {
     selectedConversation: null,
     listConversation: [],
+  },
+  message: {
+    listMessage: [],
+    isFetching: false,
+    error: false,
   },
 };
 
@@ -89,6 +101,27 @@ export const userSlice = createSlice({
       state.profile.isFetching = false;
       state.profile.error = true;
     },
+    updateListConversation: (state, action: PayloadAction<IConversation[]>) => {
+      state.conversation.listConversation = action.payload;
+    },
+    deleteListConversation: (state) => {
+      state.conversation.listConversation = [];
+    },
+    getListMessageStart: (state) => {
+      state.message.isFetching = true;
+    },
+    getListMessageSuccess: (state, action: PayloadAction<IMessages[]>) => {
+      state.message.isFetching = false;
+      state.message.error = false;
+      state.message.listMessage = action.payload.reverse();
+    },
+    getListMessageFailed: (state) => {
+      state.message.isFetching = false;
+      state.message.error = true;
+    },
+    updateListMessage: (state, action: PayloadAction<IMessages>) => {
+      state.message.listMessage.push(action.payload);
+    },
   },
 });
 
@@ -104,6 +137,12 @@ export const {
   deleteListFriend,
   updateConversationSelected,
   deleteConversationSelected,
+  updateListConversation,
+  deleteListConversation,
+  getListMessageStart,
+  getListMessageSuccess,
+  getListMessageFailed,
+  updateListMessage,
 } = userSlice.actions;
 
 export const selectUserProfile = (state: RootState) =>
