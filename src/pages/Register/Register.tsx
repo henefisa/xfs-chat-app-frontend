@@ -44,7 +44,7 @@ const Register: React.FC = () => {
   const isLoading = useAppSelector(selectisFetchingRegister);
 
   const debounceClickRegister = React.useMemo(() => {
-    return debounce(authService.register, 1000);
+    return debounce(authService.register, 700);
   }, []);
 
   const handleFinishFailed = ({ values }: ValidateErrorEntity<IFormFields>) => {
@@ -58,7 +58,7 @@ const Register: React.FC = () => {
   };
 
   const debounceOnFinishFaild = React.useMemo(() => {
-    return debounce(handleFinishFailed, 1000);
+    return debounce(handleFinishFailed, 700);
   }, []);
 
   const handleFinish = (values: IFormFields) => {
