@@ -8,14 +8,13 @@ import { SocketContext } from 'src/context/socket/context';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectNavBar } from 'src/store/navbarSlice';
 import ENavbar from 'src/interfaces/ENavbar';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import {
   selectConversation,
-  selectFriend,
-  selectUserProfile,
   updateListConversation,
-} from 'src/store/userSlice';
+} from 'src/store/conversationSlice';
 import { IConversation } from 'src/models';
-import { getListConversation } from 'src/services/userService';
+import { getListConversation } from 'src/services/conversationService';
 import { ESocketEvent } from 'src/models/socket';
 import { useTranslation } from 'react-i18next';
 
@@ -54,14 +53,10 @@ const Dashboard: React.FC = () => {
       if (list.length === 0 || !userProfileStore) return;
 
       list.forEach((conversation) => {
-        // subscribe all conversation
-
         socket.emit(ESocketEvent.SUBSCRIBE, {
           conversationId: conversation.id,
           userId: userProfileStore.id,
         });
-
-        // get participants of all conversation -> do after
       });
     };
 

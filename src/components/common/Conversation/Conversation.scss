@@ -48,6 +48,10 @@
       margin-bottom: 4px;
       padding: 0;
       color: v.$text-color;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 200px;
     }
 
     .message {
