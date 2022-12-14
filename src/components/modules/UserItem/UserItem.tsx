@@ -12,6 +12,7 @@ import Button from '@common/Button/Button';
 import Title from '@common/Title/Title';
 
 import './UserItem.scss';
+import debounce from 'src/utils/debounce';
 
 interface IUserItem {
   user: IUserItemResult;
@@ -57,6 +58,14 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
     }
   };
 
+  const debounceAddRequest = React.useMemo(() => {
+    return debounce(handleAddFriend, 500);
+  }, []);
+
+  const debounceCancelRequest = React.useMemo(() => {
+    return debounce(handleCancelRequest, 500);
+  }, []);
+
   return (
     <div className={clsx('user-item', className)}>
       <Avatar
@@ -66,7 +75,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
         className="user-item__avtar"
       />
       <div className="user-item__info">
-        <Title className="user-name" level={5}>
+        <Title className="username" level={5}>
           {name}
         </Title>
         <Title className="user-location" level={5}>
@@ -80,7 +89,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
             className="cancel-user-btn"
             loading={isLoading}
             spinSize="small"
-            onClick={() => handleCancelRequest(user.id)}
+            onClick={() => debounceCancelRequest(user.id)}
           >
             {t('cancel')}
           </Button>
@@ -89,7 +98,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
             className="add-user-btn"
             loading={isLoading}
             spinSize="small"
-            onClick={() => handleAddFriend(user.id)}
+            onClick={() => debounceAddRequest(user.id)}
           >
             {t('add')}
           </Button>

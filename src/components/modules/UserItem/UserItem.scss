@@ -2,24 +2,28 @@
 
 .user-item {
   width: 100%;
-  min-height: 64px;
   padding: 10px;
   display: flex;
   align-items: center;
+  gap: 16px;
   cursor: pointer;
 
   .user-item__avtar {
-    margin-right: 12px;
+    flex-shrink: 0;
   }
 
   .user-item__info {
-    flex: 1;
+    flex-grow: 1;
+    overflow: hidden;
 
-    .user-name {
+    .username {
       margin: 0;
       color: v.$text-color;
       font-size: 16px;
       font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .user-location {
@@ -31,6 +35,8 @@
   }
 
   .user-item__action {
+    flex-shrink: 0;
+
     .add-user-btn,
     .cancel-user-btn {
       color: v.$white;
