@@ -11,7 +11,7 @@ import Title from '@common/Title/Title';
 import CheckboxMember from '@modules/CheckboxCustom/CheckboxMember';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { createConversation } from 'src/services/userService';
+import { createConversation } from 'src/services/conversationService';
 import { useAppSelector } from 'src/store/hooks';
 import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 

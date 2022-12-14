@@ -2,13 +2,7 @@ import { notification } from 'antd';
 import axios from 'axios';
 import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
-import {
-  TGetFriendsQuery,
-  IGetUsersQuery,
-  TConversationQuery,
-  TUserInfo,
-  IDataCreateConversation,
-} from 'src/models';
+import { TGetFriendsQuery, IGetUsersQuery, TUserInfo } from 'src/models';
 import { AppDispatch } from 'src/store';
 import {
   getProfileFailed,
@@ -204,49 +198,6 @@ export const acceptRequestFriend = async (
   try {
     await apiRequest.post('api/friends/approve', {
       userRequest: id,
-    });
-  } catch (err) {
-    notification.error({
-      message: t('error'),
-      description: t('normal-error-message'),
-      duration: 1.5,
-      key: '1',
-    });
-  }
-};
-
-export const getListConversation = async (
-  query: TConversationQuery,
-  t: TFunction<'common', undefined>
-) => {
-  try {
-    const res = await apiRequest.get('api/conversations', { params: query });
-
-    return res.data;
-  } catch (err) {
-    notification.error({
-      message: t('error'),
-      description: t('normal-error-message'),
-      duration: 1.5,
-      key: '1',
-    });
-  }
-};
-
-export const createConversation = async (
-  data: IDataCreateConversation,
-  t: TFunction<('common' | 'dashboard')[], undefined>
-) => {
-  try {
-    await apiRequest.post('api/conversations', data);
-
-    notification.success({
-      message: t('success'),
-      description: t('sidebar.groups.create-conversation.success', {
-        ns: 'dashboard',
-      }),
-      duration: 1.5,
-      key: '1',
     });
   } catch (err) {
     notification.error({
