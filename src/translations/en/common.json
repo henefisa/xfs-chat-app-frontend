@@ -240,6 +240,16 @@
     "check-otp-success": "Authentication successful!",
     "required-active": "You need to verify your account!",
     "activated": "Your account has been activated before!",
-    "has-six-character": "You must enter a sufficient number of characters!"
+    "has-six-character": "You must enter a sufficient number of characters!",
+    "title": "Verification",
+    "sub-title": "Enter the verification code we just sent you on your email address",
+    "description": "Your OTP will expire in 60s. If you didn't receive a code!",
+    "btn-resend": "Resend",
+    "btn-reset": "Reset",
+    "btn-verify": "Verify",
+    "btn-sign-in": "Sign in",
+    "ask-account": "Wanting to use another account?",
+    "author-title": "© 2022 Chat App. Crafted with ",
+    "author": " by RVK Team"
   }
 }

@@ -240,6 +240,16 @@
     "check-otp-success": "Xác thực thành công!",
     "required-active": "Bạn cần phải kích hoạt tài khoản!",
     "activated": "Tài khoản của bạn đã kích hoạt trước đó!",
-    "has-six-character": "Bạn phải nhập đủ số kí tự!"
+    "has-six-character": "Bạn phải nhập đủ số kí tự!",
+    "title": "Xác thực",
+    "sub-title": "Nhập mã xác minh chúng tôi vừa gửi cho bạn vào địa chỉ email của bạn",
+    "description": "OTP của bạn sẽ hết hạn sau 60 giây. Nếu bạn không nhận được mã!",
+    "btn-resend": "Gửi lại",
+    "btn-reset": "Nhập lại",
+    "btn-verify": "Kiểm tra",
+    "btn-sign-in": "Đăng nhập",
+    "ask-account": "Muốn sử dụng một tài khoản khác?",
+    "author-title": "© 2022 Chat App. Thiết kế ",
+    "author": " bởi RVK Team"
   }
 }
