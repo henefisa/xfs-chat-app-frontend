@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';
 import { IConversation } from 'src/models';
-import setMemberConversation from 'src/utils/getMemberConversation';
+import getMemberConversation from 'src/utils/getMemberConversation';
 import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
 import './Conversation.scss';
 
@@ -34,7 +34,7 @@ const Conversation: React.FC<ConversationProps> = ({
           <AvatarGroupChat conversation={conversation} imgWidth={26} />
         ) : (
           <Avatar
-            path={setMemberConversation(conversation, userProfileStore)?.avatar}
+            path={getMemberConversation(conversation, userProfileStore)?.avatar}
             username={username.charAt(0).toUpperCase()}
             imgWidth={46}
             className="avatar"
@@ -43,9 +43,7 @@ const Conversation: React.FC<ConversationProps> = ({
         <span className="conversation-item__status--online" />
       </div>
       <div className="conversation-item__content">
-        <div className="title">
-          <Title>{name}</Title>
-        </div>
+        <Title className="conversation-title">{name}</Title>
         <p className="message typing">
           {t('typing')}
           <span className="animate-typing">

@@ -1,12 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  IConversation,
-  IFriendConvert,
-  IMessages,
-  IParticipant,
-  IUserItemResult,
-  TUserProfile,
-} from 'src/models';
+import { IFriendConvert, IUserItemResult, TUserProfile } from 'src/models';
 import { RootState } from '.';
 
 interface IUserProfileState {
@@ -20,29 +13,9 @@ interface IUserFriendState {
   listFriend: IFriendConvert[] | null;
 }
 
-interface IUserConversationState {
-  selectedConversation: IConversation | null;
-  listConversation: IConversation[];
-  hasConversation: boolean;
-}
-
-interface IUserParticipantState {
-  selectedParticipant: IParticipant | null;
-  listParticipant: IParticipant[];
-}
-
-interface IUserMessage {
-  listMessage: IMessages[];
-  isFetching: boolean;
-  error: boolean;
-}
-
 interface IUserState {
   profile: IUserProfileState;
   friend: IUserFriendState;
-  conversation: IUserConversationState;
-  participant: IUserParticipantState;
-  message: IUserMessage;
 }
 
 const initialState: IUserState = {
@@ -54,20 +27,6 @@ const initialState: IUserState = {
   friend: {
     selectedFriend: null,
     listFriend: null,
-  },
-  conversation: {
-    selectedConversation: null,
-    listConversation: [],
-    hasConversation: true,
-  },
-  participant: {
-    selectedParticipant: null,
-    listParticipant: [],
-  },
-  message: {
-    listMessage: [],
-    isFetching: false,
-    error: false,
   },
 };
 
@@ -102,51 +61,9 @@ export const userSlice = createSlice({
     deleteListFriend: (state) => {
       state.friend.listFriend = null;
     },
-    updateConversationSelected: (
-      state,
-      action: PayloadAction<IConversation>
-    ) => {
-      state.conversation.selectedConversation = action.payload;
-    },
-    updateListConversation: (state, action: PayloadAction<IConversation[]>) => {
-      state.conversation.listConversation = action.payload;
-    },
-    deleteListConversation: (state) => {
-      state.conversation.listConversation = [];
-    },
-    updateParticipantSelected: (state, action: PayloadAction<IParticipant>) => {
-      state.participant.selectedParticipant = action.payload;
-    },
-    deleteParticipantSelected: (state) => {
-      state.participant.selectedParticipant = null;
-    },
-    deleteConversationSelected: (state) => {
-      state.conversation.selectedConversation = null;
-    },
     updateProfileFailed: (state) => {
       state.profile.isFetching = false;
       state.profile.error = true;
-    },
-    getListMessageStart: (state) => {
-      state.message.isFetching = true;
-    },
-    getListMessageSuccess: (state, action: PayloadAction<IMessages[]>) => {
-      state.message.isFetching = false;
-      state.message.error = false;
-      state.message.listMessage = action.payload.reverse();
-    },
-    getListMessageFailed: (state) => {
-      state.message.isFetching = false;
-      state.message.error = true;
-    },
-    updateListMessage: (state, action: PayloadAction<IMessages>) => {
-      state.message.listMessage.push(action.payload);
-    },
-    updateHasConversation: (state, action: PayloadAction<boolean>) => {
-      state.conversation.hasConversation = action.payload;
-    },
-    deleteListMessage: (state) => {
-      state.message.listMessage = [];
     },
   },
 });
@@ -161,29 +78,11 @@ export const {
   deleteFriendSelected,
   updateListFriend,
   deleteListFriend,
-  updateConversationSelected,
-  deleteConversationSelected,
-  updateParticipantSelected,
-  deleteParticipantSelected,
-  updateListConversation,
-  deleteListConversation,
-  getListMessageStart,
-  getListMessageSuccess,
-  getListMessageFailed,
-  updateListMessage,
-  updateHasConversation,
-  deleteListMessage,
 } = userSlice.actions;
 
 export const selectUserProfile = (state: RootState) =>
   state.user.profile.userProfile;
 
 export const selectFriend = (state: RootState) => state.user.friend;
-
-export const selectConversation = (state: RootState) => state.user.conversation;
-
-export const selectParticipant = (state: RootState) => state.user.participant;
-
-export const selectMessages = (state: RootState) => state.user.message;
 
 export default userSlice.reducer;

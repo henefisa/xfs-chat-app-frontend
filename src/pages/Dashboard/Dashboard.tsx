@@ -8,27 +8,26 @@ import { SocketContext } from 'src/context/socket/context';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectNavBar } from 'src/store/navbarSlice';
 import ENavbar from 'src/interfaces/ENavbar';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import {
-  selectFriend,
   selectConversation,
-  selectUserProfile,
   updateListConversation,
-} from 'src/store/userSlice';
+} from 'src/store/conversationSlice';
 import { IConversation } from 'src/models';
-import { getListConversation } from 'src/services/userService';
-import { useTranslation } from 'react-i18next';
+import { getConversation } from 'src/services/conversationService';
 import { ESocketEvent } from 'src/models/socket';
+import { useTranslation } from 'react-i18next';
 
 import './Dashboard.scss';
 
 const Dashboard: React.FC = () => {
   const socket = React.useContext(SocketContext);
   const { t } = useTranslation('common');
+  const { selectedFriend } = useAppSelector(selectFriend);
   const dispatch = useAppDispatch();
 
   const { selectedConversation } = useAppSelector(selectConversation);
   const userProfileStore = useAppSelector(selectUserProfile);
-  const { selectedFriend } = useAppSelector(selectFriend);
   const navbarAction = useAppSelector(selectNavBar);
 
   React.useEffect(() => {
@@ -54,20 +53,16 @@ const Dashboard: React.FC = () => {
       if (list.length === 0 || !userProfileStore) return;
 
       list.forEach((conversation) => {
-        // subscribe all conversation
-
         socket.emit(ESocketEvent.SUBSCRIBE, {
           conversationId: conversation.id,
           userId: userProfileStore.id,
         });
-
-        // get participants of all conversation -> do after
       });
     };
 
     const handleGetListConversation = async () => {
       try {
-        const result = await getListConversation(t);
+        const result = await getConversation(t);
         dispatch(updateListConversation(result.conversations));
         handleSubscribeAllConversation(result.conversations);
       } catch (err) {

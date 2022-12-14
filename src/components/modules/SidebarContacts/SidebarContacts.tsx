@@ -23,18 +23,21 @@ import {
   IFriendConvert,
   IUserItemResult,
 } from 'src/models';
-import { getMessages, getUsers } from 'src/services/userService';
+import { getUsers } from 'src/services/userService';
+import { getMessages } from 'src/services/conversationService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import {
+  selectFriend,
+  updateFriendSelected,
+  updateListFriend,
+} from 'src/store/userSlice';
 import {
   deleteConversationSelected,
   deleteListMessage,
   getListMessageFailed,
   getListMessageStart,
   getListMessageSuccess,
-  selectFriend,
-  updateFriendSelected,
-  updateListFriend,
-} from 'src/store/userSlice';
+} from 'src/store/conversationSlice';
 
 import './SidebarContacts.scss';
 
@@ -124,7 +127,7 @@ const SidebarContacts: React.FC = () => {
     dispatch(getListMessageStart());
 
     try {
-      const result = await getMessages({ id: conversation.id }, t1);
+      const result = await getMessages(t1, { id: conversation.id });
       dispatch(getListMessageSuccess(result.messages));
     } catch (err) {
       dispatch(getListMessageFailed());

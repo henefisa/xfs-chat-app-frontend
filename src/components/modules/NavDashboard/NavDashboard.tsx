@@ -95,7 +95,7 @@ const NavDashboard: React.FC = () => {
               className="menu-dashboard__btn"
               onClick={() => {
                 dispatch(updateNavbar(item.key));
-                navigate(`../${item.path}`);
+                navigate(`/${item.path}`);
               }}
             >
               <Tooltip

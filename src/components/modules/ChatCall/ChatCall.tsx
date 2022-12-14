@@ -6,15 +6,12 @@ import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import Modal from '@common/Modal/Modal';
 import { useTranslation } from 'react-i18next';
-import {
-  selectFriend,
-  selectConversation,
-  selectUserProfile,
-} from 'src/store/userSlice';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import { useAppSelector } from 'src/store/hooks';
 import getMemberConversation from 'src/utils/getMemberConversation';
 import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
 import getGroupTitle from 'src/utils/getGroupTitle';
+import { selectConversation } from 'src/store/conversationSlice';
 
 import './ChatCall.scss';
 

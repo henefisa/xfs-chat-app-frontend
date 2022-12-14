@@ -8,6 +8,7 @@ import {
   acceptRequestFriend,
   cancelFriendRequest,
 } from 'src/services/userService';
+import debounce from 'src/utils/debounce';
 
 import './RequestFriendItem.scss';
 
@@ -47,6 +48,14 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
     }
   };
 
+  const debounceCancelRequest = React.useMemo(() => {
+    return debounce(handleCancelRequest, 500);
+  }, []);
+
+  const debounceAcceptRequest = React.useMemo(() => {
+    return debounce(handleAcceptRequest, 500);
+  }, []);
+
   return (
     <div className="friend-item">
       <Avatar
@@ -70,7 +79,7 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
               className="accept-btn"
               loading={isLoading}
               spinSize="small"
-              onClick={() => handleAcceptRequest(friend.id)}
+              onClick={() => debounceAcceptRequest(friend.id)}
             >
               {t('sidebar.search-user.accept', { ns: 'dashboard' })}
             </Button>
@@ -78,7 +87,7 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
               className="cancel-btn"
               loading={isLoading}
               spinSize="small"
-              onClick={() => handleCancelRequest(friend.id)}
+              onClick={() => debounceCancelRequest(friend.id)}
             >
               {t('sidebar.search-user.cancel', { ns: 'dashboard' })}
             </Button>

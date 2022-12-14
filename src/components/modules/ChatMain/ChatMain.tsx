@@ -2,15 +2,11 @@ import React, { useRef, useEffect, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { SocketContext } from 'src/context/socket/context';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import {
-  selectMessages,
-  selectUserProfile,
-  updateListMessage,
-} from 'src/store/userSlice';
+import { selectUserProfile } from 'src/store/userSlice';
 import MessagesTable from '@modules/MessagesTable/MessagesTable';
 import ChatDayTitle from '@modules/ChatDayTitle/ChatDayTitle';
 import { ESocketEvent } from 'src/models/socket';
-
+import { selectMessages, updateListMessage } from 'src/store/conversationSlice';
 import './ChatMain.scss';
 
 const ChatMain: React.FC = () => {

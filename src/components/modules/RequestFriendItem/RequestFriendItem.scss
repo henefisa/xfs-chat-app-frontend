@@ -3,19 +3,23 @@
 .friend-item {
   display: flex;
   align-items: center;
+  gap: 16px;
   padding: 10px;
   min-height: 64px;
   cursor: pointer;
 
   .friend-item__info {
     flex: 1;
-    margin-left: 10px;
+    overflow: hidden;
 
     .friend-name {
       margin: 0;
       color: v.$text-color;
       font-size: 16px;
       font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .friend-location {

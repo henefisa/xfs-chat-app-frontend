@@ -18,14 +18,11 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
 import ActionsChatMenu from '@modules/ActionsChatMenu/ActionsChatMenu';
 import ChatCall from '@modules/ChatCall/ChatCall';
-import {
-  selectFriend,
-  selectConversation,
-  selectUserProfile,
-} from 'src/store/userSlice';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import getMemberConversation from 'src/utils/getMemberConversation';
 import getGroupTitle from 'src/utils/getGroupTitle';
 import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
+import { selectConversation } from 'src/store/conversationSlice';
 
 import './ChatHeader.scss';
 

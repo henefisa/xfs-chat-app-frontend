@@ -11,15 +11,12 @@ import { Collapse, Divider } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
-import {
-  selectFriend,
-  selectConversation,
-  selectUserProfile,
-} from 'src/store/userSlice';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import AttachedFileItem from '@modules/AttachedFileItem/AttachedFileItem';
 import getMemberConversation from 'src/utils/getMemberConversation';
 import getGroupTitle from 'src/utils/getGroupTitle';
 import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
+import { selectConversation } from 'src/store/conversationSlice';
 
 import './UserInfoChat.scss';
 

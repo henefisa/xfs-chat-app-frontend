@@ -8,16 +8,16 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { IConversation } from 'src/models';
-import { getMessages } from 'src/services/userService';
+import { getMessages } from 'src/services/conversationService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { selectUserProfile } from 'src/store/userSlice';
 import {
-  selectUserProfile,
   getListMessageFailed,
   getListMessageStart,
   getListMessageSuccess,
   selectConversation,
   updateConversationSelected,
-} from 'src/store/userSlice';
+} from 'src/store/conversationSlice';
 import getGroupTitle from 'src/utils/getGroupTitle';
 
 import './SidebarChats.scss';
@@ -33,7 +33,7 @@ const SidebarChats: React.FC = () => {
   const handleClick = async (conversation: IConversation) => {
     dispatch(getListMessageStart());
     try {
-      const result = await getMessages({ id: conversation.id }, t1);
+      const result = await getMessages(t1, { id: conversation.id });
       dispatch(getListMessageSuccess(result.messages));
       dispatch(updateConversationSelected(conversation));
     } catch (err) {

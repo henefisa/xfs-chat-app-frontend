@@ -3,6 +3,7 @@ import Button from '@common/Button/Button';
 import Card from '@common/Card/Card';
 import Logo from '@common/Logo/Logo';
 import Title from '@common/Title/Title';
+import CheckboxRemember from '@modules/CheckboxCustom/CheckboxRemember';
 import Language from '@modules/Language/Language';
 import WrapperInput from '@modules/WrapperInput/WrapperInput';
 
@@ -10,10 +11,10 @@ import { Form } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import CheckboxRemember from '@modules/CheckboxCustom/CheckboxRemember';
 import * as authService from 'src/services/authService';
 import { selectisFetchingLogin } from 'src/store/authSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import debounce from 'src/utils/debounce';
 import { getAccessToken } from 'src/utils/getTokenFromLocal';
 
 import './Login.scss';
@@ -61,6 +62,10 @@ const LoginPage: React.FC = () => {
     authService.login(user, isRemember, dispatch, navigate, t);
   }, []);
 
+  const debounceLogin = React.useMemo(() => {
+    return debounce(handleFinish, 700);
+  }, []);
+
   return (
     <div className="login-page">
       <Logo />
@@ -72,7 +77,7 @@ const LoginPage: React.FC = () => {
       </Title>
       <Card>
         <div className="form-container">
-          <Form onFinish={handleFinish}>
+          <Form onFinish={debounceLogin}>
             <Form.Item
               name="username"
               label={t('username-label')}

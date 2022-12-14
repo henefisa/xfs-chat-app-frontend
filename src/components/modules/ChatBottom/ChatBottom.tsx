@@ -17,18 +17,16 @@ import { SocketContext } from 'src/context/socket/context';
 import { ESocketEvent } from 'src/models/socket';
 import {
   createConversation,
-  getListConversation,
-} from 'src/services/userService';
+  getConversation,
+} from 'src/services/conversationService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import {
   selectConversation,
-  selectFriend,
-  selectUserProfile,
   updateListConversation,
   updateListMessage,
   updateConversationSelected,
-} from 'src/store/userSlice';
-
+} from 'src/store/conversationSlice';
 import './ChatBottom.scss';
 import { IConversation } from 'src/models';
 interface IChatBottom {}
@@ -82,7 +80,7 @@ const ChatBottom: React.FC<IChatBottom> = () => {
             t1
           );
 
-          const res = await getListConversation(t);
+          const res = await getConversation(t);
           dispatch(updateListConversation(res.conversations));
           dispatch(updateConversationSelected(result));
           newConversationId = result.id;
