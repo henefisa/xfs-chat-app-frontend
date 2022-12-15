@@ -84,10 +84,10 @@ const VerifyAccount: React.FC = () => {
       <Logo />
       <div className="otp-check">
         <Title className="otp-check__heading" level={4}>
-          Verification
+          {t('title', { ns: 'verify-account' })}
         </Title>
         <Title className="otp-check__sub-heading" level={5}>
-          Enter the verification code we just sent you on your email address
+          {t('sub-title', { ns: 'verify-account' })}
         </Title>
         <OtpInput
           value={otp}
@@ -112,25 +112,25 @@ const VerifyAccount: React.FC = () => {
         />
         <Title className="otp-check__desc" level={4}>
           {/* eslint-disable-next-line react/no-unescaped-entities */}
-          Your OTP will expire in 60s. If you didn't receive a code!
+          {t('description', { ns: 'verify-account' })}
           <Button
             className="btn-resend"
             loading={isGettingOtp}
             onClick={handleGetOtp}
           >
-            Resend
+            {t('btn-resend', { ns: 'verify-account' })}
           </Button>
         </Title>
         <div className="otp-check__btn">
           <Button className="btn-reset" onClick={() => setOtp('')}>
-            Reset
+            {t('btn-reset', { ns: 'verify-account' })}
           </Button>
           <Button
             className="btn-verify"
             loading={isVerifyingOtp}
             onClick={() => handleCheckOtp(otp)}
           >
-            Verify
+            {t('btn-verify', { ns: 'verify-account' })}
           </Button>
         </div>
       </div>
@@ -138,14 +138,15 @@ const VerifyAccount: React.FC = () => {
       <div className="otp-page__footer">
         <Language />
         <Title className="anothor-account-title" level={4}>
-          Wanting to use another account?
+          {t('ask-account', { ns: 'verify-account' })}
           <Button className="btn-back-login" onClick={handleLogout}>
-            Sign in
+            {t('btn-sign-in', { ns: 'verify-account' })}
           </Button>
         </Title>
         <Title className="author" level={5}>
-          © 2022 Chat App. Crafted with{' '}
-          <HeartFilled className="author__heart-icon" /> by RVK Team
+          {t('author-title', { ns: 'verify-account' })}
+          <HeartFilled className="author__heart-icon" />{' '}
+          {t('author', { ns: 'verify-account' })}
         </Title>
       </div>
     </div>
