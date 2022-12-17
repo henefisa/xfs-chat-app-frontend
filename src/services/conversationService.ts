@@ -29,8 +29,7 @@ export const createConversation = async (
   t: TFunction<('common' | 'dashboard')[], undefined>
 ) => {
   try {
-    await apiRequest.post('api/conversations', data);
-
+    const res = await apiRequest.post('api/conversations', data);
     notification.success({
       message: t('success'),
       description: t('sidebar.groups.create-conversation.success', {
@@ -39,6 +38,7 @@ export const createConversation = async (
       duration: 1.5,
       key: '1',
     });
+    return res.data;
   } catch (err) {
     notification.error({
       message: t('error'),

@@ -31,7 +31,7 @@ const initialState: IConversationState = {
 };
 
 export const conversationSlice = createSlice({
-  name: 'user',
+  name: 'conversation',
   initialState,
   reducers: {
     updateConversationSelected: (
@@ -64,6 +64,9 @@ export const conversationSlice = createSlice({
     updateListMessage: (state, action: PayloadAction<IMessages>) => {
       state.message.listMessage.push(action.payload);
     },
+    deleteListMessage: (state) => {
+      state.message.listMessage = [];
+    },
   },
 });
 
@@ -76,9 +79,11 @@ export const {
   getListMessageSuccess,
   getListMessageFailed,
   updateListMessage,
+  deleteListMessage,
 } = conversationSlice.actions;
 
 export const selectConversation = (state: RootState) =>
   state.conversation.conversation;
+export const selectMessages = (state: RootState) => state.conversation.message;
 
 export default conversationSlice.reducer;

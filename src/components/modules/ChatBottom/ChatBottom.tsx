@@ -1,36 +1,54 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
-  SmileOutlined,
   PaperClipOutlined,
   PictureOutlined,
   SendOutlined,
+  SmileOutlined,
 } from '@ant-design/icons';
 import Button from '@common/Button/Button';
-import Input from '@common/Input/Input';
-import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
-import Tooltip from '@common/Tooltip/Tooltip';
-import { useTranslation } from 'react-i18next';
 import Dropdown from '@common/Dropdown/Dropdown';
-
+import Input from '@common/Input/Input';
+import Tooltip from '@common/Tooltip/Tooltip';
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
+import { useTranslation } from 'react-i18next';
+import { SocketContext } from 'src/context/socket/context';
+import { ESocketEvent } from 'src/models/socket';
+import {
+  createConversation,
+  getConversation,
+} from 'src/services/conversationService';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
+import {
+  selectConversation,
+  updateListConversation,
+  updateListMessage,
+  updateConversationSelected,
+} from 'src/store/conversationSlice';
 import './ChatBottom.scss';
+import { IConversation } from 'src/models';
+interface IChatBottom {}
 
-interface IChatBottom {
-  setMessagesUser: React.Dispatch<React.SetStateAction<string[]>>;
-}
+const ChatBottom: React.FC<IChatBottom> = () => {
+  const socket = React.useContext(SocketContext);
+  const dispatch = useAppDispatch();
 
-const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
+  const { t: t1 } = useTranslation('common');
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-bottom',
   });
+
   const inputFileRef = React.createRef<HTMLInputElement>();
   const inputImgRef = React.createRef<HTMLInputElement>();
   const [messages, setMessages] = useState('');
 
-  const handleClick = () => {
-    setMessagesUser((prev: string[]) => [...prev, messages]);
-    setMessages('');
-  };
+  const { selectedConversation } = useAppSelector(selectConversation);
+
+  const { selectedFriend } = useAppSelector(selectFriend);
+  const userProfileStore = useAppSelector(selectUserProfile);
+
   const toggleFile = () => {
     inputFileRef.current?.click();
   };
@@ -41,6 +59,64 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
     setMessages((prev: string) => prev + emojiObject.emoji);
   };
 
+  const handleSendMessage = async () => {
+    if (!userProfileStore || !messages.trim()) return;
+
+    if (selectedConversation) {
+      socket.emit(ESocketEvent.SEND_MESSAGE, {
+        userId: userProfileStore.id,
+        conversationId: selectedConversation.id,
+        text: messages,
+      });
+    } else {
+      let newConversationId = '';
+      if (!selectedFriend?.conversation && selectedFriend) {
+        try {
+          const newConversation = [userProfileStore.id, selectedFriend.id];
+          const result: IConversation = await createConversation(
+            {
+              members: newConversation,
+            },
+            t1
+          );
+
+          const res = await getConversation(t);
+          dispatch(updateListConversation(res.conversations));
+          dispatch(updateConversationSelected(result));
+          newConversationId = result.id;
+        } catch (err) {
+          // do something
+        }
+      }
+
+      socket.emit(ESocketEvent.SEND_MESSAGE, {
+        userId: userProfileStore.id,
+        conversationId: newConversationId || selectedFriend?.conversation?.id,
+        text: messages,
+      });
+    }
+
+    dispatch(
+      updateListMessage({
+        id: uuidv4(),
+        updatedAt: new Date().toString(),
+        createdAt: new Date().toString(),
+        attachment: null,
+        isPin: false,
+        isTick: false,
+        message: messages,
+        sender: userProfileStore,
+        conversation: null,
+      })
+    );
+
+    setMessages('');
+  };
+
+  const onSendMessage = React.useCallback(() => {
+    return () => handleSendMessage();
+  }, [messages]);
+
   return (
     <div className="chat-bottom">
       <div className="type-chat">
@@ -49,7 +125,7 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
           placeholder={t('enter-message')}
           onChange={(e) => setMessages(e.target.value)}
           value={messages}
-          onPressEnter={handleClick}
+          onPressEnter={onSendMessage()}
         />
       </div>
       <div className="chat-actions">
@@ -94,7 +170,7 @@ const ChatBottom: React.FC<IChatBottom> = ({ setMessagesUser }) => {
           </Button>
         </div>
         <div className="send-chat">
-          <Button className="send-chat__btn" onClick={handleClick}>
+          <Button className="send-chat__btn" onClick={onSendMessage()}>
             <SendOutlined className="custom-send-chat" />
           </Button>
         </div>
