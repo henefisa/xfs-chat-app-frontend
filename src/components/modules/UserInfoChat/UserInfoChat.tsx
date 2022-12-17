@@ -11,8 +11,12 @@ import { Collapse, Divider } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
-import { selectFriend } from 'src/store/userSlice';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import AttachedFileItem from '@modules/AttachedFileItem/AttachedFileItem';
+import getMemberConversation from 'src/utils/getMemberConversation';
+import getGroupTitle from 'src/utils/getGroupTitle';
+import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
+import { selectConversation } from 'src/store/conversationSlice';
 
 import './UserInfoChat.scss';
 
@@ -32,18 +36,39 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
 
   const date = new Date();
   const { selectedFriend } = useAppSelector(selectFriend);
+  const [hasConversation, setHasConversation] = React.useState<boolean>(false);
+
+  const { selectedConversation } = useAppSelector(selectConversation);
+  const userProfileStore = useAppSelector(selectUserProfile);
   const name = selectedFriend?.fullName ?? selectedFriend?.username;
+  const nameMember =
+    getMemberConversation(selectedConversation, userProfileStore)?.fullName ??
+    getMemberConversation(selectedConversation, userProfileStore)?.username ??
+    selectedFriend?.fullName ??
+    selectedFriend?.username;
+  React.useEffect(() => {
+    selectedConversation ? setHasConversation(true) : setHasConversation(false);
+  }, [selectedConversation]);
 
   const userInfoChat = [
     {
       title: t1('name'),
-      desc: name,
+      desc: nameMember || selectedConversation?.title,
     },
-    { title: 'Email', desc: selectedFriend?.email },
+    {
+      title: 'Email',
+      desc:
+        getMemberConversation(selectedConversation, userProfileStore)?.email ||
+        selectedFriend?.email,
+    },
     { title: t1('time'), desc: `${date.getHours()}:${date.getMinutes()}` },
     {
       title: t1('location'),
-      desc: selectedFriend?.location || 'SomeWhere',
+      desc:
+        getMemberConversation(selectedConversation, userProfileStore)
+          ?.location ||
+        selectedFriend?.location ||
+        'SomeWhere',
     },
   ];
 
@@ -78,15 +103,51 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
         </Button>
       </div>
       <div className="user-avatar">
-        <Avatar
-          path={selectedFriend?.avatar}
-          imgWidth={96}
-          username={name?.charAt(0).toUpperCase()}
-          className="custom-avatar"
-        />
-        <Title level={5} className="username">
-          {name}
-        </Title>
+        {hasConversation ? (
+          <>
+            {selectedConversation?.isGroup ? (
+              <>
+                <AvatarGroupChat
+                  conversation={selectedConversation}
+                  imgWidth={26}
+                />
+                <Title level={5} className="username">
+                  {selectedConversation.title ||
+                    getGroupTitle(selectedConversation, userProfileStore)}
+                </Title>
+              </>
+            ) : (
+              <>
+                <Avatar
+                  path={
+                    getMemberConversation(
+                      selectedConversation,
+                      userProfileStore
+                    )?.avatar
+                  }
+                  imgWidth={96}
+                  username={nameMember?.charAt(0).toUpperCase()}
+                  className="custom-avatar"
+                />
+                <Title level={5} className="username">
+                  {selectedConversation?.title || nameMember}
+                </Title>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <Avatar
+              path={selectedFriend?.avatar}
+              imgWidth={96}
+              username={name?.charAt(0).toUpperCase()}
+              className="custom-avatar"
+            />
+            <Title level={5} className="username">
+              {name}
+            </Title>
+          </>
+        )}
         <div className="status">
           <CheckCircleFilled className="status__icon" />
           <Title level={5} className="status__name">
