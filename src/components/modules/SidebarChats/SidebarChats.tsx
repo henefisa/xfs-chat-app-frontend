@@ -36,6 +36,7 @@ const SidebarChats: React.FC = () => {
       const result = await getMessages(t1, { id: conversation.id });
       dispatch(getListMessageSuccess(result.messages));
       dispatch(updateConversationSelected(conversation));
+      console.log(conversation.id);
     } catch (err) {
       dispatch(getListMessageFailed());
     }

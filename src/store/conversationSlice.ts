@@ -31,7 +31,7 @@ const initialState: IConversationState = {
 };
 
 export const conversationSlice = createSlice({
-  name: 'user',
+  name: 'conversation',
   initialState,
   reducers: {
     updateConversationSelected: (

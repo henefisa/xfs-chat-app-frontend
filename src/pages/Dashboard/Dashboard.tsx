@@ -17,6 +17,7 @@ import { IConversation } from 'src/models';
 import { getConversation } from 'src/services/conversationService';
 import { ESocketEvent } from 'src/models/socket';
 import { useTranslation } from 'react-i18next';
+import { notification } from 'antd';
 
 import './Dashboard.scss';
 
@@ -67,6 +68,12 @@ const Dashboard: React.FC = () => {
         handleSubscribeAllConversation(result.conversations);
       } catch (err) {
         dispatch(updateListConversation([]));
+        notification.error({
+          message: t('error'),
+          description: t('normal-error-message'),
+          duration: 1.5,
+          key: '1',
+        });
       }
     };
 

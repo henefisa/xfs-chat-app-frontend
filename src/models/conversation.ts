@@ -17,6 +17,7 @@ export interface IMessageQuery {
 
 export interface IMessages extends IBase {
   attachment: string | null;
+  conversation: string | null;
   isPin: boolean;
   isTick: boolean;
   message: string;

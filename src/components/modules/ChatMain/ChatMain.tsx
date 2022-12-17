@@ -1,12 +1,16 @@
 import React, { useRef, useEffect, useContext } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { SocketContext } from 'src/context/socket/context';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';
 import MessagesTable from '@modules/MessagesTable/MessagesTable';
 import ChatDayTitle from '@modules/ChatDayTitle/ChatDayTitle';
 import { ESocketEvent } from 'src/models/socket';
-import { selectMessages, updateListMessage } from 'src/store/conversationSlice';
+import {
+  selectMessages,
+  updateListMessage,
+  selectConversation,
+} from 'src/store/conversationSlice';
+
 import './ChatMain.scss';
 
 const ChatMain: React.FC = () => {
@@ -16,37 +20,27 @@ const ChatMain: React.FC = () => {
 
   const useProfileStore = useAppSelector(selectUserProfile);
   const { listMessage } = useAppSelector(selectMessages);
-
+  const { selectedConversation } = useAppSelector(selectConversation);
   useEffect(() => {
     scrollRef.current?.scrollIntoView();
   }, [listMessage]);
-
   useEffect(() => {
     socket.on(ESocketEvent.GET_MESSAGE, ({ user, message }) => {
-      dispatch(
-        updateListMessage({
-          id: uuidv4(),
-          updatedAt: new Date().toString(),
-          createdAt: new Date().toString(),
-          attachment: null,
-          isPin: false,
-          isTick: false,
-          message: message,
-          sender: user,
-        })
-      );
+      if (message.conversation === selectedConversation?.id) {
+        const newMessage = { ...message, sender: user };
+        dispatch(updateListMessage(newMessage));
+      }
     });
 
     return () => {
       socket.removeListener('GET_MESSAGE');
     };
-  }, []);
+  }, [selectedConversation]);
   return (
     <div className="chatmain">
       <ChatDayTitle day="Today" />
       {listMessage.map((message) => {
         if (!useProfileStore) return null;
-
         if (message.sender.id === useProfileStore.id) {
           return (
             <div key={message.id} ref={scrollRef}>
@@ -59,7 +53,6 @@ const ChatMain: React.FC = () => {
             </div>
           );
         }
-
         return (
           <div key={message.id} ref={scrollRef}>
             <MessagesTable

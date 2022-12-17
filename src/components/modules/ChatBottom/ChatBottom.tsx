@@ -106,6 +106,7 @@ const ChatBottom: React.FC<IChatBottom> = () => {
         isTick: false,
         message: messages,
         sender: userProfileStore,
+        conversation: null,
       })
     );
 

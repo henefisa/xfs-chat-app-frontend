@@ -11,7 +11,7 @@ interface IMessagesTableProps {
   position: string;
   messages: string;
   time: string;
-  sender: TUserProfile;
+  sender: TUserProfile | null;
 }
 
 const MessagesTable: React.FC<IMessagesTableProps> = ({
@@ -20,14 +20,14 @@ const MessagesTable: React.FC<IMessagesTableProps> = ({
   time,
   sender,
 }) => {
-  const name = sender.fullName ?? sender.username;
+  const name = sender?.fullName ?? sender?.username;
   return (
     <div className={clsx('messages-table', `messages-table--${position}`)}>
       <div className="messages-table__avatar">
         <Avatar
-          path={sender.avatar}
+          path={sender?.avatar}
           imgWidth={35}
-          username={name.charAt(0).toUpperCase()}
+          username={name?.charAt(0).toUpperCase()}
           className="custom-avatar"
         />
       </div>
@@ -40,7 +40,7 @@ const MessagesTable: React.FC<IMessagesTableProps> = ({
           />
         </div>
         <Title level={5} className="username">
-          {sender.fullName ?? sender.username}
+          {sender?.fullName ?? sender?.username}
         </Title>
       </div>
     </div>
