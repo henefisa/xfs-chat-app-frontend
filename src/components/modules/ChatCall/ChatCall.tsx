@@ -6,6 +6,12 @@ import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import Modal from '@common/Modal/Modal';
 import { useTranslation } from 'react-i18next';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
+import { useAppSelector } from 'src/store/hooks';
+import getMemberConversation from 'src/utils/getMemberConversation';
+import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
+import getGroupTitle from 'src/utils/getGroupTitle';
+import { selectConversation } from 'src/store/conversationSlice';
 
 import './ChatCall.scss';
 
@@ -19,20 +25,68 @@ const ChatCall: React.FC<IChatCallProps> = ({ onClose, title, isOpen }) => {
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-header.chat-call',
   });
-
+  const { selectedFriend } = useAppSelector(selectFriend);
+  const [hasConversation, setHasConversation] = React.useState<boolean>(false);
+  const { selectedConversation } = useAppSelector(selectConversation);
+  const userProfileStore = useAppSelector(selectUserProfile);
+  const name = selectedFriend?.fullName ?? selectedFriend?.username;
+  const nameMember =
+    getMemberConversation(selectedConversation, userProfileStore)?.fullName ??
+    getMemberConversation(selectedConversation, userProfileStore)?.username ??
+    selectedFriend?.fullName ??
+    selectedFriend?.username;
+  React.useEffect(() => {
+    selectedConversation ? setHasConversation(true) : setHasConversation(false);
+  }, [selectedConversation]);
   return (
     <Modal transitionName="none" maskTransitionName="none" open={isOpen}>
       <div className="modal-body">
         <div className="modal-body__items">
-          <Avatar
-            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
-            imgWidth={96}
-            username="A"
-            className="custom-avatar"
-          />
-          <Title level={5} className="username">
-            Danh Huy
-          </Title>
+          {hasConversation ? (
+            <>
+              {selectedConversation?.isGroup ? (
+                <>
+                  <AvatarGroupChat
+                    conversation={selectedConversation}
+                    imgWidth={26}
+                  />
+                  <Title level={5} className="username-group">
+                    {selectedConversation.title ||
+                      getGroupTitle(selectedConversation, userProfileStore)}
+                  </Title>
+                </>
+              ) : (
+                <>
+                  <Avatar
+                    path={
+                      getMemberConversation(
+                        selectedConversation,
+                        userProfileStore
+                      )?.avatar
+                    }
+                    imgWidth={96}
+                    username={nameMember?.charAt(0).toUpperCase()}
+                    className="custom-avatar"
+                  />
+                  <Title level={5} className="username">
+                    {selectedConversation?.title || nameMember}
+                  </Title>
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              <Avatar
+                path={selectedFriend?.avatar}
+                imgWidth={96}
+                username={name?.charAt(0).toUpperCase()}
+                className="custom-avatar"
+              />
+              <Title level={5} className="username">
+                {name}
+              </Title>
+            </>
+          )}
           <Title level={5} className="title-action">
             {title === 'Audio' ? t('start-voice-call') : t('start-video-call')}
           </Title>
