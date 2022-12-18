@@ -86,6 +86,10 @@ const NavDashboard: React.FC = () => {
     setIsDark(!isDark);
   };
 
+  const handleNotificationChange = React.useCallback(() => {
+    dispatch(updateNotification());
+  }, [notification]);
+
   return (
     <div className="navbar-dash">
       <Link to="/" className="logo">
@@ -94,9 +98,7 @@ const NavDashboard: React.FC = () => {
 
       <Button
         className="navbar-dash__notification"
-        onClick={() => {
-          dispatch(updateNotification());
-        }}
+        onClick={handleNotificationChange}
       >
         <Tooltip
           className="custom-nav-icon"

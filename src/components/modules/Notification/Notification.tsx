@@ -7,15 +7,15 @@ import Button from '@common/Button/Button';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { getUsers } from 'src/services/userService';
+import ListRequestFriend from '@modules/ListRequestFriend/ListRequestFriend';
 
 import './Notification.scss';
-import ListRequestFriend from '../ListRequestFriend/ListRequestFriend';
 
 const Notification: React.FC = () => {
   const { t } = useTranslation(['common', 'dashboard', 'popup-notification']);
 
   const notification = useAppSelector(selectNotification);
-  const [active, setActive] = React.useState('btn-all--active');
+  const [active, setActive] = React.useState(true);
 
   const [listFriendRequest, setListFriendRequest] = React.useState<
     IUserItemResult[]
@@ -46,17 +46,14 @@ const Notification: React.FC = () => {
       </Title>
       <div className="notification__btn">
         <Button
-          className={clsx('btn-all', active === 'btn-all--active' && active)}
-          onClick={() => setActive('btn-all--active')}
+          className={clsx('btn-all', active && 'btn-all--active')}
+          onClick={React.useCallback(() => setActive(true), [active])}
         >
           {t('btn-all', { ns: 'popup-notification' })}
         </Button>
         <Button
-          className={clsx(
-            'btn-unread',
-            active === 'btn-unread--active' && active
-          )}
-          onClick={() => setActive('btn-unread--active')}
+          className={clsx('btn-unread', !active && 'btn-unread--active')}
+          onClick={React.useCallback(() => setActive(false), [active])}
         >
           {t('btn-unread', { ns: 'popup-notification' })}
         </Button>
