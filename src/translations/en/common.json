@@ -251,5 +251,11 @@
     "ask-account": "Wanting to use another account?",
     "author-title": "© 2022 Chat App. Crafted with ",
     "author": " by RVK Team"
+  },
+  "popup-notification": {
+    "header": "Notifications",
+    "btn-all": "All",
+    "btn-unread": "Unread",
+    "invitation-title":  "Friend request"
   }
 }

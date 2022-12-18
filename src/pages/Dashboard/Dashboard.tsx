@@ -19,6 +19,7 @@ import { ESocketEvent } from 'src/models/socket';
 import { useTranslation } from 'react-i18next';
 
 import './Dashboard.scss';
+import Notification from '@modules/Notification/Notification';
 
 const Dashboard: React.FC = () => {
   const socket = React.useContext(SocketContext);
@@ -76,6 +77,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard-page">
       <NavDashboard />
+      <Notification />
       {navbarAction === ENavbar.SETTINGS ? (
         <SidebarSettings />
       ) : (

@@ -7,6 +7,7 @@ import {
   SettingOutlined,
   UsergroupAddOutlined,
   UserOutlined,
+  NotificationOutlined,
 } from '@ant-design/icons';
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
@@ -23,6 +24,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectNavBar, updateNavbar } from 'src/store/navbarSlice';
 import { selectUserProfile } from 'src/store/userSlice';
+import {
+  selectNotification,
+  updateNotification,
+} from 'src/store/notificationSlice';
 
 import './NavDashboard.scss';
 
@@ -33,6 +38,7 @@ const NavDashboard: React.FC = () => {
   const [isDark, setIsDark] = useState(false);
   const navbarIndex = useAppSelector(selectNavBar);
   const userProfileStore = useAppSelector(selectUserProfile);
+  const notification = useAppSelector(selectNotification);
   const { t } = useTranslation('dashboard', { keyPrefix: 'navbar' });
 
   const navBarMenu = React.useMemo(() => {
@@ -85,6 +91,22 @@ const NavDashboard: React.FC = () => {
       <Link to="/" className="logo">
         <img className="logo__img" src="/images/logos/logo.svg" alt="Logo" />
       </Link>
+
+      <Button
+        className="navbar-dash__notification"
+        onClick={() => {
+          dispatch(updateNotification());
+        }}
+      >
+        <Tooltip
+          className="custom-nav-icon"
+          placement="top"
+          tooltipTitle="Thông báo"
+          isActive={notification}
+        >
+          <NotificationOutlined />
+        </Tooltip>
+      </Button>
 
       <div className="menu-dashboard">
         {navBarMenu.map((item) => {
