@@ -2,6 +2,7 @@ import * as React from 'react';
 import { DashboardPage, HomePage, LoginPage, VerifyAccount } from 'src/pages';
 import CallPage from 'src/pages/Call/Call';
 import Register from 'src/pages/Register/Register';
+import TestPeer from 'src/pages/TestPeer/TestPeer';
 
 interface IRoute {
   path: string;
@@ -41,6 +42,11 @@ const routes: IRoute[] = [
     path: '/settings',
     private: true,
     component: DashboardPage,
+  },
+  {
+    path: '/test-peer',
+    private: false,
+    component: TestPeer,
   },
 ];
 
