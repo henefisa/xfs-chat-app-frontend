@@ -35,7 +35,7 @@ const ChatMain: React.FC = () => {
     return () => {
       socket.removeListener('GET_MESSAGE');
     };
-  }, [selectedConversation]);
+  }, [selectedConversation, listMessage]);
   return (
     <div className="chatmain">
       <ChatDayTitle day="Today" />

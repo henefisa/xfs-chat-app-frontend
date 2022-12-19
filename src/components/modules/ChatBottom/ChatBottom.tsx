@@ -61,15 +61,10 @@ const ChatBottom: React.FC<IChatBottom> = () => {
 
   const handleSendMessage = async () => {
     if (!userProfileStore || !messages.trim()) return;
-
+    let conversationId = '';
     if (selectedConversation) {
-      socket.emit(ESocketEvent.SEND_MESSAGE, {
-        userId: userProfileStore.id,
-        conversationId: selectedConversation.id,
-        text: messages,
-      });
+      conversationId = selectedConversation?.id;
     } else {
-      let newConversationId = '';
       if (!selectedFriend?.conversation && selectedFriend) {
         try {
           const newConversation = [userProfileStore.id, selectedFriend.id];
@@ -83,19 +78,17 @@ const ChatBottom: React.FC<IChatBottom> = () => {
           const res = await getConversation(t);
           dispatch(updateListConversation(res.conversations));
           dispatch(updateConversationSelected(result));
-          newConversationId = result.id;
+          conversationId = result.id;
         } catch (err) {
           // do something
         }
       }
-
-      socket.emit(ESocketEvent.SEND_MESSAGE, {
-        userId: userProfileStore.id,
-        conversationId: newConversationId || selectedFriend?.conversation?.id,
-        text: messages,
-      });
     }
-
+    socket.emit(ESocketEvent.SEND_MESSAGE, {
+      userId: userProfileStore.id,
+      conversationId: conversationId || selectedFriend?.conversation?.id,
+      text: messages,
+    });
     dispatch(
       updateListMessage({
         id: uuidv4(),

@@ -40,7 +40,7 @@ const MessagesTable: React.FC<IMessagesTableProps> = ({
           />
         </div>
         <Title level={5} className="username">
-          {sender?.fullName ?? sender?.username}
+          {name}
         </Title>
       </div>
     </div>
