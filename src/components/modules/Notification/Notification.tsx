@@ -37,6 +37,14 @@ const Notification: React.FC = () => {
     getListRequestFriend();
   }, []);
 
+  const handleBtnAllActive = React.useCallback(() => {
+    setActive(true);
+  }, [active]);
+
+  const handleBtnUnreadActive = React.useCallback(() => {
+    setActive(false);
+  }, [active]);
+  
   return (
     <div
       className={clsx('notification', { 'notification--active': notification })}
@@ -46,14 +54,14 @@ const Notification: React.FC = () => {
       </Title>
       <div className="notification__btn">
         <Button
-          className={clsx('btn-all', active && 'btn-all--active')}
-          onClick={React.useCallback(() => setActive(true), [active])}
+          className={clsx('btn-all', { ['btn-all--active']: active })}
+          onClick={handleBtnAllActive}
         >
           {t('btn-all', { ns: 'popup-notification' })}
         </Button>
         <Button
-          className={clsx('btn-unread', !active && 'btn-unread--active')}
-          onClick={React.useCallback(() => setActive(false), [active])}
+          className={clsx('btn-unread', { ['btn-unread--active']: !active })}
+          onClick={handleBtnUnreadActive}
         >
           {t('btn-unread', { ns: 'popup-notification' })}
         </Button>
