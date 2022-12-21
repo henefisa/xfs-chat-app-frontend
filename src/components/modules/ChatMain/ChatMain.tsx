@@ -10,6 +10,7 @@ import {
   updateListMessage,
   selectConversation,
 } from 'src/store/conversationSlice';
+import { IMessages } from 'src/models';
 
 import './ChatMain.scss';
 
@@ -36,33 +37,31 @@ const ChatMain: React.FC = () => {
       socket.removeListener('GET_MESSAGE');
     };
   }, [selectedConversation, listMessage]);
+
+  const renderMessages = React.useCallback(
+    (message: IMessages, position: string) => {
+      return (
+        <div key={message.id} ref={scrollRef}>
+          <MessagesTable
+            sender={message.sender}
+            position={position}
+            time={message.createdAt}
+            messages={message.message}
+          />
+        </div>
+      );
+    },
+    [listMessage]
+  );
   return (
     <div className="chatmain">
       <ChatDayTitle day="Today" />
       {listMessage.map((message) => {
         if (!useProfileStore) return null;
         if (message.sender.id === useProfileStore.id) {
-          return (
-            <div key={message.id} ref={scrollRef}>
-              <MessagesTable
-                sender={message.sender}
-                position="right"
-                time={message.createdAt}
-                messages={message.message}
-              />
-            </div>
-          );
+          return renderMessages(message, 'right');
         }
-        return (
-          <div key={message.id} ref={scrollRef}>
-            <MessagesTable
-              sender={message.sender}
-              position="left"
-              time={message.createdAt}
-              messages={message.message}
-            />
-          </div>
-        );
+        return renderMessages(message, 'left');
       })}
     </div>
   );

@@ -14,7 +14,7 @@ import { logoutSuccess } from 'src/store/authSlice';
 import { useAppDispatch } from 'src/store/hooks';
 import { updateNavbar } from 'src/store/navbarSlice';
 import { deleteFriendSelected, deleteUserProfile } from 'src/store/userSlice';
-
+import { deleteConversationSelected } from 'src/store/conversationSlice';
 import Button from '@common/Button/Button';
 import Menu from '@common/Menu/Menu';
 import Title from '@common/Title/Title';
@@ -76,6 +76,7 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
     dispatch(logoutSuccess());
     dispatch(deleteUserProfile());
     dispatch(deleteFriendSelected());
+    dispatch(deleteConversationSelected());
     dispatch(updateNavbar(ENavbar.PROFILE));
     navigate('/login');
   };

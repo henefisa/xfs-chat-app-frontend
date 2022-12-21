@@ -5,13 +5,13 @@ const getGroupTitle = (
   userProfileStore: TUserProfile | null
 ) => {
   if (!userProfileStore) return '';
-
-  const newParticipants = conversation?.participants?.filter(
+  if (!conversation.participants) return '';
+  const newParticipants = conversation.participants.filter(
     (item) => item.user.id !== userProfileStore.id
   );
 
-  const titleConversation: string | undefined = newParticipants
-    ?.map((item) =>
+  const titleConversation: string = newParticipants
+    .map((item) =>
       item.user.fullName ? item.user.fullName : item.user.username
     )
     .join(', ');

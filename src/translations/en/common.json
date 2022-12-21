@@ -220,7 +220,8 @@
         "enter-message": "Enter Message, @",
         "emoji": "Emoji",
         "attached-file": "Attached-File",
-        "attached-image": "Images"
+        "attached-image": "Images",
+        "error-create-conversation": "Error Create Conversation"
       },
       "user-info-chat": {
         "active": "Online",

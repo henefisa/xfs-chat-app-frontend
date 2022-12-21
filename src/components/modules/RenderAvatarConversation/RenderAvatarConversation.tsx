@@ -18,65 +18,36 @@ const RenderAvatarConversation: React.FC<IRenderAvatarConversation> = ({
   imgSize,
 }) => {
   const { selectedFriend } = useAppSelector(selectFriend);
-  const [hasConversation, setHasConversation] = React.useState<boolean>(false);
-
   const { selectedConversation } = useAppSelector(selectConversation);
   const userProfileStore = useAppSelector(selectUserProfile);
-  const name = selectedFriend?.fullName ?? selectedFriend?.username;
+  const nameFriend = selectedFriend?.fullName ?? selectedFriend?.username;
   const nameMember =
     getMemberConversation(selectedConversation, userProfileStore)?.fullName ??
-    getMemberConversation(selectedConversation, userProfileStore)?.username ??
-    selectedFriend?.fullName ??
-    selectedFriend?.username;
-  React.useEffect(() => {
-    selectedConversation ? setHasConversation(true) : setHasConversation(false);
-  }, [selectedConversation]);
+    getMemberConversation(selectedConversation, userProfileStore)?.username;
+  const nameUser = nameFriend ?? nameMember;
   return (
     <>
-      {hasConversation ? (
+      {selectedConversation?.isGroup ? (
         <>
-          {selectedConversation?.isGroup ? (
-            <>
-              <AvatarGroupChat
-                conversation={selectedConversation}
-                imgWidth={26}
-              />
-              <Title
-                level={5}
-                className="chat-header__username"
-                onClick={handleOpenDetail}
-              >
-                {selectedConversation.title ||
-                  getGroupTitle(selectedConversation, userProfileStore)}
-              </Title>
-            </>
-          ) : (
-            <>
-              <Avatar
-                path={
-                  getMemberConversation(selectedConversation, userProfileStore)
-                    ?.avatar
-                }
-                imgWidth={imgSize}
-                username={nameMember?.charAt(0).toUpperCase()}
-                className="custom-avatar"
-              />
-              <Title
-                level={5}
-                className="chat-header__username"
-                onClick={handleOpenDetail}
-              >
-                {selectedConversation?.title || nameMember}
-              </Title>
-            </>
-          )}
+          <AvatarGroupChat conversation={selectedConversation} imgWidth={26} />
+          <Title
+            level={5}
+            className="chat-header__username"
+            onClick={handleOpenDetail}
+          >
+            {selectedConversation.title ||
+              getGroupTitle(selectedConversation, userProfileStore)}
+          </Title>
         </>
       ) : (
         <>
           <Avatar
-            path={selectedFriend?.avatar}
+            path={
+              getMemberConversation(selectedConversation, userProfileStore)
+                ?.avatar || selectedFriend?.avatar
+            }
             imgWidth={imgSize}
-            username={name?.charAt(0).toUpperCase()}
+            username={nameUser?.charAt(0).toUpperCase()}
             className="custom-avatar"
           />
           <Title
@@ -84,7 +55,7 @@ const RenderAvatarConversation: React.FC<IRenderAvatarConversation> = ({
             className="chat-header__username"
             onClick={handleOpenDetail}
           >
-            {name}
+            {selectedConversation?.title || nameUser}
           </Title>
         </>
       )}

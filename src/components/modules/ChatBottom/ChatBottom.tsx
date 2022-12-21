@@ -29,6 +29,7 @@ import {
 } from 'src/store/conversationSlice';
 import './ChatBottom.scss';
 import { IConversation } from 'src/models';
+import { notification } from 'antd';
 interface IChatBottom {}
 
 const ChatBottom: React.FC<IChatBottom> = () => {
@@ -59,31 +60,40 @@ const ChatBottom: React.FC<IChatBottom> = () => {
     setMessages((prev: string) => prev + emojiObject.emoji);
   };
 
+  const creatNewConversation = async () => {
+    if (!userProfileStore || !messages.trim()) return;
+    if (!selectedFriend?.conversation && selectedFriend) {
+      try {
+        const newConversation = [userProfileStore.id, selectedFriend.id];
+        const result: IConversation = await createConversation(
+          {
+            members: newConversation,
+          },
+          t1
+        );
+
+        const res = await getConversation(t);
+        dispatch(updateListConversation(res.conversations));
+        dispatch(updateConversationSelected(result));
+        return result.id;
+      } catch (err) {
+        notification.error({
+          message: t1('error'),
+          description: t('error-create-conversation'),
+          duration: 1.5,
+          key: '1',
+        });
+      }
+    }
+  };
   const handleSendMessage = async () => {
     if (!userProfileStore || !messages.trim()) return;
     let conversationId = '';
-    if (selectedConversation) {
-      conversationId = selectedConversation?.id;
-    } else {
-      if (!selectedFriend?.conversation && selectedFriend) {
-        try {
-          const newConversation = [userProfileStore.id, selectedFriend.id];
-          const result: IConversation = await createConversation(
-            {
-              members: newConversation,
-            },
-            t1
-          );
-
-          const res = await getConversation(t);
-          dispatch(updateListConversation(res.conversations));
-          dispatch(updateConversationSelected(result));
-          conversationId = result.id;
-        } catch (err) {
-          // do something
-        }
-      }
-    }
+    if (!selectedConversation) {
+      conversationId = (await Promise.resolve(
+        creatNewConversation()
+      )) as string;
+    } else conversationId = selectedConversation.id;
     socket.emit(ESocketEvent.SEND_MESSAGE, {
       userId: userProfileStore.id,
       conversationId: conversationId || selectedFriend?.conversation?.id,

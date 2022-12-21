@@ -220,7 +220,8 @@
         "enter-message": "Tin nhắn, @",
         "emoji": "Biểu cảm",
         "attached-file": "Đính kèm file",
-        "attached-image": "Đính kèm ảnh"
+        "attached-image": "Đính kèm ảnh",
+        "error-create-conversation": "Lỗi tạo cuộc trò chuyện"
       },
       "user-info-chat": {
         "active": "Hoạt động",
