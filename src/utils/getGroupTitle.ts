@@ -5,7 +5,7 @@ const getGroupTitle = (
   userProfileStore: TUserProfile | null
 ) => {
   if (!userProfileStore) return '';
-
+  if (!conversation.participants) return '';
   const newParticipants = conversation.participants.filter(
     (item) => item.user.id !== userProfileStore.id
   );

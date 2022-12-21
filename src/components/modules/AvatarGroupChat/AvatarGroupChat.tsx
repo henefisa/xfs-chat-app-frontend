@@ -6,7 +6,7 @@ import { IConversation } from 'src/models';
 import './AvatarGroupChat.scss';
 
 interface IAvatarGroupChatProps {
-  conversation: IConversation;
+  conversation: IConversation | null;
   imgWidth: number;
 }
 
@@ -16,11 +16,11 @@ const AvatarGroupChat: React.FC<IAvatarGroupChatProps> = ({
 }) => {
   return (
     <AvatarGroup
-      maxCount={conversation.participants.length === 4 ? 4 : 3}
+      maxCount={conversation?.participants?.length === 4 ? 4 : 3}
       maxPopoverTrigger="click"
       className="conversation-avatar"
     >
-      {conversation.participants.map((participant) => {
+      {conversation?.participants?.map((participant) => {
         const name = participant.user.fullName ?? participant.user.username;
         return (
           <Avatar
