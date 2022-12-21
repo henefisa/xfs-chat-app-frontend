@@ -85,14 +85,17 @@ const ChatBottom: React.FC = () => {
       }
     }
   };
+
+  const selectConversationId = async (conversationId: IConversation | null) => {
+    if (!conversationId) {
+      return creatNewConversation();
+    }
+    return conversationId;
+  };
+
   const handleSendMessage = async () => {
     if (!userProfileStore || !messages.trim()) return;
-    let conversationId = '';
-    if (!selectedConversation) {
-      conversationId = (await Promise.resolve(
-        creatNewConversation()
-      )) as string;
-    } else conversationId = selectedConversation.id;
+    const conversationId = await selectConversationId(selectedConversation);
     socket.emit(ESocketEvent.SEND_MESSAGE, {
       userId: userProfileStore.id,
       conversationId: conversationId || selectedFriend?.conversation?.id,
