@@ -1,0 +1,22 @@
+@use '../../../assets/styles/variables' as v;
+
+.invitation-list {
+  height: 100%;
+
+  .invitation-list__title {
+    margin: 24px;
+    color: v.$text-color;
+  }
+
+  .invitation-list__loading {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .loading-icon {
+      color: v.$primary;
+      font-size: 26px;
+    }
+  }
+}

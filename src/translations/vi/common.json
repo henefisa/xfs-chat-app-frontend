@@ -84,6 +84,7 @@
       "groups": "Nhóm",
       "contacts": "Liên hệ",
       "search": "Tìm kiếm",
+      "invitation": "Danh sách kết bạn",
       "settings": "Cài đặt",
       "dark-light": "Sáng / Tối",
       "user-menu": {
@@ -108,13 +109,15 @@
         "attached-file": "File đã đính kèm"
       },
       "search-user": {
-        "invitation-title": "Danh sách lời mời",
         "title": "Tìm kiếm bạn bè",
         "search-placeholder": "Nhập để tìm kiếm...",
         "result-title": "Kết quả",
         "add": "Thêm",
         "cancel": "Hủy",
         "accept": "Chấp nhận"
+      },
+      "invitation": {
+        "invitation-title": "Danh sách lời mời"
       },
       "chats": {
         "title": "Nhắn tin",

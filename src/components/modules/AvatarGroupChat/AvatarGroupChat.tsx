@@ -21,7 +21,7 @@ const AvatarGroupChat: React.FC<IAvatarGroupChatProps> = ({
       className="conversation-avatar"
     >
       {conversation?.participants?.map((participant) => {
-        const name = participant?.user.fullName ?? participant?.user.username;
+        const name = participant.user.fullName ?? participant.user.username;
         return (
           <Avatar
             key={participant?.id}
