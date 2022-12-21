@@ -30,9 +30,8 @@ import {
 import './ChatBottom.scss';
 import { IConversation } from 'src/models';
 import { notification } from 'antd';
-interface IChatBottom {}
 
-const ChatBottom: React.FC<IChatBottom> = () => {
+const ChatBottom: React.FC = () => {
   const socket = React.useContext(SocketContext);
   const dispatch = useAppDispatch();
 
