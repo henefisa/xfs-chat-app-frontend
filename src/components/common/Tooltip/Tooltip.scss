@@ -54,8 +54,17 @@
   justify-content: center;
   cursor: pointer;
 
+  &.dark-mode {
+    background-color: #36404a;
+    color: #a6b0cf;
+  }
+
   &.active {
     color: v.$primary;
     background-color: v.$background;
+  }
+
+  &.dark-mode.active {
+    background-color: #3e4a56;
   }
 }

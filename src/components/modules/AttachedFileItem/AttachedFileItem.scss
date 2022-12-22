@@ -10,6 +10,35 @@
   padding: 8px;
   margin-bottom: 8px;
 
+  &.dark-mode {
+    border: 1px solid #36404a;
+    .file-info {
+      .file-icon {
+        color: #9aa1b9;
+      }
+
+      .file-body {
+        .file-body__name {
+          color: #e1e9f1;
+        }
+        .file-body__size {
+          color: #9aa1b9;
+        }
+      }
+    }
+
+    .actions {
+      .ant-btn.button.download-btn {
+        color: #9aa1b9;
+      }
+      .file-actions {
+        .menu-icon {
+          color: #9aa1b9;
+        }
+      }
+    }
+  }
+
   .file-info {
     display: flex;
     align-items: center;
