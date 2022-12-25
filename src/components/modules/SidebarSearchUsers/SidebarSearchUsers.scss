@@ -1,31 +1,12 @@
 @use '../../../../src/assets/styles/variables' as v;
 
-.spin.loading {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  .loading-icon {
-    color: v.$primary;
-    font-size: 36px;
-  }
-}
-
-.invitation-list {
-  .invitation-list__title {
-    margin: 24px;
-    color: v.$text-color;
-  }
-}
-
 .sidebar-search {
   .header-search {
     padding: 24px 24px 0;
 
     .header-search__title {
       color: v.$text-color;
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 600;
       margin: 0 0 24px;
     }

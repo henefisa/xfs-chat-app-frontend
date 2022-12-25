@@ -84,6 +84,7 @@
       "groups": "Groups",
       "contacts": "Contacts",
       "search": "Search",
+      "invitation": "Invitation list",
       "settings": "Settings",
       "dark-light": "Dark / Light Mode",
       "user-menu": {
@@ -108,13 +109,15 @@
         "attached-file": "Attached Files"
       },
       "search-user": {
-        "invitation-title": "Invitation List",
         "title": "Search Users",
         "search-placeholder": "Search users...",
         "result-title": "Result",
         "add": "Add",
         "cancel": "Cancel",
         "accept": "Accept"
+      },
+      "invitation": {
+        "invitation-title": "Invitation List"
       },
       "chats": {
         "title": "Chats",

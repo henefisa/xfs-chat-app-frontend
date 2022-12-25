@@ -1,7 +1,7 @@
 @use '../../../assets/styles/variables' as v;
 
 .list-request {
-  max-height: 280px;
+  max-height: calc(100vh - 85px);
   margin: 0 8px;
   padding: 8px 16px;
   border-radius: 5px;
