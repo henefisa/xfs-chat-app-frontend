@@ -27,16 +27,13 @@ const ChatMain: React.FC = () => {
   }, [listMessage]);
   useEffect(() => {
     socket.on(ESocketEvent.GET_MESSAGE, ({ user, message }) => {
+      console.log(message);
       if (message.conversation === selectedConversation?.id) {
         const newMessage = { ...message, sender: user };
         dispatch(updateListMessage(newMessage));
       }
     });
-
-    return () => {
-      socket.removeListener('GET_MESSAGE');
-    };
-  }, [selectedConversation, listMessage]);
+  }, [listMessage]);
 
   const renderMessages = React.useCallback(
     (message: IMessages, position: string) => {
@@ -53,16 +50,25 @@ const ChatMain: React.FC = () => {
     },
     [listMessage]
   );
+  const renderListMessages = React.useCallback(() => {
+    {
+      return (
+        <>
+          {listMessage.map((message) => {
+            if (!useProfileStore) return null;
+            if (message.sender.id === useProfileStore.id) {
+              return renderMessages(message, 'right');
+            }
+            return renderMessages(message, 'left');
+          })}
+        </>
+      );
+    }
+  }, [listMessage]);
   return (
     <div className="chatmain">
       <ChatDayTitle day="Today" />
-      {listMessage.map((message) => {
-        if (!useProfileStore) return null;
-        if (message.sender.id === useProfileStore.id) {
-          return renderMessages(message, 'right');
-        }
-        return renderMessages(message, 'left');
-      })}
+      <>{renderListMessages()}</>
     </div>
   );
 };

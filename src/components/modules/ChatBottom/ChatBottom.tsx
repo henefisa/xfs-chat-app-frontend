@@ -61,28 +61,27 @@ const ChatBottom: React.FC = () => {
 
   const creatNewConversation = async () => {
     if (!userProfileStore || !messages.trim()) return;
-    if (!selectedFriend?.conversation && selectedFriend) {
-      try {
-        const newConversation = [userProfileStore.id, selectedFriend.id];
-        const result: IConversation = await createConversation(
-          {
-            members: newConversation,
-          },
-          t1
-        );
+    if (selectedFriend?.conversation || !selectedFriend) return;
+    try {
+      const newConversation = [userProfileStore.id, selectedFriend.id];
+      const result: IConversation = await createConversation(
+        {
+          members: newConversation,
+        },
+        t1
+      );
 
-        const res = await getConversation(t);
-        dispatch(updateListConversation(res.conversations));
-        dispatch(updateConversationSelected(result));
-        return result.id;
-      } catch (err) {
-        notification.error({
-          message: t1('error'),
-          description: t('error-create-conversation'),
-          duration: 1.5,
-          key: '1',
-        });
-      }
+      const res = await getConversation(t);
+      dispatch(updateListConversation(res.conversations));
+      dispatch(updateConversationSelected(result));
+      return result.id;
+    } catch (err) {
+      notification.error({
+        message: t1('error'),
+        description: t('error-create-conversation'),
+        duration: 1.5,
+        key: '1',
+      });
     }
   };
 
@@ -90,7 +89,7 @@ const ChatBottom: React.FC = () => {
     if (!conversationId) {
       return creatNewConversation();
     }
-    return conversationId;
+    return conversationId.id;
   };
 
   const handleSendMessage = async () => {
