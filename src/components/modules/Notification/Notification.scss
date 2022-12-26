@@ -1,0 +1,64 @@
+@use '../../../assets/styles/variables' as v;
+
+.notification {
+  position: fixed;
+  width: 360px;
+  top: 20px;
+  bottom: 20px;
+  left: 80px;
+  border-radius: 8px;
+  background-color: white;
+  overflow: hidden;
+  z-index: 999999;
+  box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  display: none;
+
+  &--active {
+    display: block;
+  }
+
+  .notification__header {
+    line-height: 24px;
+    padding: 20px 16px 12px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .notification__btn {
+    padding-left: 16px;
+
+    .btn-all {
+      margin-right: 8px;
+    }
+
+    .btn-all,
+    .btn-unread {
+      background-color: transparent;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 18px;
+      padding: 5px 12px;
+      color: v.$text-color;
+      box-shadow: none;
+
+      &:hover {
+        color: v.$text-color;
+      }
+    }
+
+    .btn-unread--active,
+    .btn-all--active {
+      color: #7269ef;
+      background-color: #f7f7ff;
+
+      &:hover {
+        color: #7269ef;
+      }
+    }
+  }
+
+  .invitation-list__title {
+    margin: 24px;
+    color: v.$text-color;
+  }
+}
