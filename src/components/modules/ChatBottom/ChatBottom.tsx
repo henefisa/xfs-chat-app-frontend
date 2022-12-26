@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -42,7 +42,7 @@ const ChatBottom: React.FC = () => {
 
   const inputFileRef = React.createRef<HTMLInputElement>();
   const inputImgRef = React.createRef<HTMLInputElement>();
-  const [messages, setMessages] = useState('');
+  const [messages, setMessages] = React.useState('');
 
   const { selectedConversation } = useAppSelector(selectConversation);
 
@@ -60,8 +60,13 @@ const ChatBottom: React.FC = () => {
   };
 
   const creatNewConversation = async () => {
-    if (!userProfileStore || !messages.trim()) return;
-    if (selectedFriend?.conversation || !selectedFriend) return;
+    if (
+      !userProfileStore ||
+      !messages.trim() ||
+      selectedFriend?.conversation ||
+      !selectedFriend
+    )
+      return;
     try {
       const newConversation = [userProfileStore.id, selectedFriend.id];
       const result: IConversation = await createConversation(

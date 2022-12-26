@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from 'react';
+import React from 'react';
 import { SocketContext } from 'src/context/socket/context';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';
@@ -15,19 +15,18 @@ import { IMessages } from 'src/models';
 import './ChatMain.scss';
 
 const ChatMain: React.FC = () => {
-  const socket = useContext(SocketContext);
+  const socket = React.useContext(SocketContext);
   const dispatch = useAppDispatch();
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
 
   const useProfileStore = useAppSelector(selectUserProfile);
   const { listMessage } = useAppSelector(selectMessages);
   const { selectedConversation } = useAppSelector(selectConversation);
-  useEffect(() => {
+  React.useEffect(() => {
     scrollRef.current?.scrollIntoView();
   }, [listMessage]);
-  useEffect(() => {
+  React.useEffect(() => {
     socket.on(ESocketEvent.GET_MESSAGE, ({ user, message }) => {
-      console.log(message);
       if (message.conversation === selectedConversation?.id) {
         const newMessage = { ...message, sender: user };
         dispatch(updateListMessage(newMessage));
