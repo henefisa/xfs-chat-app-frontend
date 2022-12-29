@@ -1,6 +1,34 @@
 @use '../../../../src/assets/styles/variables' as v;
 
 .sidebar-contacts {
+  &.dark-mode {
+    .sidebar-contacts__header {
+      .contact-title {
+        color: #e1e9f1;
+      }
+      .contact-add {
+        .contact-add__icon {
+          color: #9aa1b9;
+        }
+      }
+    }
+    .sidebar-contacts__box {
+      .contact-names {
+        .contact-names__btn {
+          &.contact-names__btn--active {
+            background-color: #36404a;
+          }
+          .contact-names__label {
+            color: #e1e9f1;
+          }
+          .contact-names__icon {
+            color: #9aa1b9;
+          }
+        }
+      }
+    }
+  }
+
   .sidebar-contacts__header {
     padding: 24px 24px 0;
     display: flex;
@@ -31,7 +59,7 @@
     padding: 0 24px 24px;
   }
 
-  .sidebar-contacts__unstyled {
+  .sidebar-contacts__box {
     padding: 24px;
     height: calc(100vh - 160px);
     overflow: auto;
@@ -89,7 +117,7 @@
           align-items: center;
         }
 
-        .icon {
+        .contact-names__icon {
           font-size: 16px;
           display: flex;
           align-items: center;

@@ -18,7 +18,6 @@ import UserMenu from '@modules/UserMenu/UserMenu';
 import ENavbar from 'src/interfaces/ENavbar';
 
 import * as React from 'react';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
@@ -32,8 +31,6 @@ import './NavDashboard.scss';
 const NavDashboard: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // Viết tạm state dark/light theme
-  // const [isDark, setIsDark] = useState(false);
   const navbarIndex = useAppSelector(selectNavBar);
   const userProfileStore = useAppSelector(selectUserProfile);
   const isDark = useAppSelector(selectDarkLight);

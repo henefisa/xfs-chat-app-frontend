@@ -7,6 +7,19 @@
   border: 1px solid #f0eff5;
   box-shadow: 0 2px 4px rgb(15 34 58 / 12%);
 
+  &.dark-mode {
+    background-color: #313a43;
+    border: 1px solid #313a43;
+
+    .ant-dropdown-menu-item {
+      .menu-item {
+        .menu-item__title {
+          color: #9aa1b9;
+        }
+      }
+    }
+  }
+
   .ant-dropdown-menu-item {
     padding: 0;
 

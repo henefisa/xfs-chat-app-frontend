@@ -18,12 +18,14 @@ import { TUserInfo } from 'src/models';
 import TextArea from '@common/TextArea/TextArea';
 import ESidebarSetting from 'src/interfaces/ESidebarSettings';
 import isEqual from 'lodash.isequal';
+import { selectDarkLight } from 'src/store/darkLightSlice';
 
 import './SidebarSettings.scss';
 
 const SidebarSettings: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.settings' });
   const dispatch = useAppDispatch();
+  const isDark = useAppSelector(selectDarkLight);
   const userProfileStore = useAppSelector(selectUserProfile);
   const [active, setActive] = React.useState(ESidebarSetting.ACCOUNT);
   const [selectedFile, setSelectedFile] = React.useState<File>();
@@ -115,7 +117,7 @@ const SidebarSettings: React.FC = () => {
   };
 
   return (
-    <div className="sidebar-settings">
+    <div className={clsx("sidebar-settings", {"dark-mode": isDark})}>
       <Title className="title-settings" level={3}>
         {t('title')}
       </Title>

@@ -13,7 +13,10 @@
   overflow-y: auto;
 
   &.dark-mode {
+    width: 79px;
     background-color: #36404a;
+    padding-right: 4px;
+    margin-right: 0;
   }
 
   &::-webkit-scrollbar {

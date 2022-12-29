@@ -7,6 +7,9 @@ import { selectUserProfile } from 'src/store/userSlice';
 import { IConversation } from 'src/models';
 import getMemberConversation from 'src/utils/getMemberConversation';
 import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
+import { selectDarkLight } from 'src/store/darkLightSlice';
+import clsx from 'clsx';
+
 import './Conversation.scss';
 
 interface ConversationProps {
@@ -26,9 +29,10 @@ const Conversation: React.FC<ConversationProps> = ({
 }) => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.chats' });
   const userProfileStore = useAppSelector(selectUserProfile);
+  const isDark = useAppSelector(selectDarkLight);
 
   return (
-    <div className="conversation-item">
+    <div className={clsx('conversation-item', { 'dark-mode': isDark })}>
       <div className="conversation-item__avatar">
         {conversation.isGroup ? (
           <AvatarGroupChat conversation={conversation} imgWidth={26} />

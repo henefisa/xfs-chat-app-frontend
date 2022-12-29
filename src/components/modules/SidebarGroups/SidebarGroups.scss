@@ -1,6 +1,21 @@
 @use '../../../../src/assets/styles/variables' as v;
 
 .sidebar-groups {
+
+
+  &.dark-mode {
+    .sidebar-groups__header {
+      .group-title {
+        color: #e1e9f1;
+      }
+      .group-create {
+        .group-create__icon {
+          color: #9aa1b9;
+        }
+      }
+    }
+  }
+
   .sidebar-groups__header {
     padding: 24px;
     display: flex;
