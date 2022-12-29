@@ -17,6 +17,7 @@ import navbarReducer from './navbarSlice';
 import languageReducer from './languageSlice';
 import conversationReducer from './conversationSlice';
 import darkLightReducer from './darkLightSlice';
+import notificationReducer from './notificationSlice';
 
 const loginPersistConfig = {
   key: 'login',
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   navbar: navbarReducer,
   darkLight: darkLightReducer,
+  notification: notificationReducer,
   auth: persistReducer(loginPersistConfig, authReducer),
   language: persistReducer(languagePersistConfig, languageReducer),
   conversation: conversationReducer,
