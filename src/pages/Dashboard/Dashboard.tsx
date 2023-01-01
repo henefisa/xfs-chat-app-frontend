@@ -17,6 +17,7 @@ import { IConversation } from 'src/models';
 import { getConversation } from 'src/services/conversationService';
 import { ESocketEvent } from 'src/models/socket';
 import { useTranslation } from 'react-i18next';
+import Notification from '@modules/Notification/Notification';
 
 import './Dashboard.scss';
 
@@ -76,6 +77,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard-page">
       <NavDashboard />
+      <Notification />
       {navbarAction === ENavbar.SETTINGS ? (
         <SidebarSettings />
       ) : (

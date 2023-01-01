@@ -48,6 +48,21 @@
     }
   }
 
+  .navbar-dash__notification {
+    padding: 0;
+    background-color: v.$white;
+    border: unset;
+    box-shadow: unset;
+
+    &:focus {
+      background-color: transparent;
+    }
+    
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
   .menu-dashboard {
     display: flex;
     align-items: center;
