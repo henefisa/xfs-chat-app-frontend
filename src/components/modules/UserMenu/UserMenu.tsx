@@ -83,23 +83,26 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
     navigate('/login');
   };
 
-  const hanldeClickItem: MenuProps['onClick'] = (e) => {
-    switch (e.key) {
-      case '0': {
-        break;
+  const hanldeClickItem: MenuProps['onClick'] = React.useCallback(
+    (e: { key: string }) => {
+      switch (e.key) {
+        case '0': {
+          break;
+        }
+        case '1': {
+          break;
+        }
+        case '2': {
+          handleLogout();
+          break;
+        }
+        default: {
+          throw new Error('Error');
+        }
       }
-      case '1': {
-        break;
-      }
-      case '2': {
-        handleLogout();
-        break;
-      }
-      default: {
-        throw new Error('Error');
-      }
-    }
-  };
+    },
+    []
+  );
 
   return (
     <Menu
