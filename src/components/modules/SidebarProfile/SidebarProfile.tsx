@@ -16,6 +16,8 @@ import AttachedFileItem from '@modules/AttachedFileItem/AttachedFileItem';
 import ProfileMenu from '@modules/ProfileMenu/ProfileMenu';
 
 import './SidebarProfile.scss';
+import { selectDarkLight } from 'src/store/darkLightSlice';
+import clsx from 'clsx';
 
 const { Panel } = Collapse;
 
@@ -44,7 +46,7 @@ const listAttachedFile = [
 
 const SidebarProfile: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.profile' });
-
+  const isDark = useAppSelector(selectDarkLight);
   const userProfileStore = useAppSelector(selectUserProfile);
   const name = userProfileStore?.fullName ?? userProfileStore?.username;
 
@@ -66,7 +68,7 @@ const SidebarProfile: React.FC = () => {
   }, [t, userProfileStore]);
 
   return (
-    <div className="sidebar-profile">
+    <div className={clsx('sidebar-profile', { 'dark-mode': isDark })}>
       <div className="header-profile">
         <Title level={4} className="profile-heading">
           {t('heading')}

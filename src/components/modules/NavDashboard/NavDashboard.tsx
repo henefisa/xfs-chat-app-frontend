@@ -19,12 +19,13 @@ import UserMenu from '@modules/UserMenu/UserMenu';
 import ENavbar from 'src/interfaces/ENavbar';
 
 import * as React from 'react';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectNavBar, updateNavbar } from 'src/store/navbarSlice';
 import { selectUserProfile } from 'src/store/userSlice';
+import { changeDarkLight, selectDarkLight } from 'src/store/darkLightSlice';
+import clsx from 'clsx';
 import {
   selectNotification,
   updateNotification,
@@ -35,10 +36,9 @@ import './NavDashboard.scss';
 const NavDashboard: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // Viết tạm state dark/light theme
-  const [isDark, setIsDark] = useState(false);
   const navbarIndex = useAppSelector(selectNavBar);
   const userProfileStore = useAppSelector(selectUserProfile);
+  const isDark = useAppSelector(selectDarkLight);
   const notification = useAppSelector(selectNotification);
   const { t } = useTranslation('dashboard', { keyPrefix: 'navbar' });
 
@@ -90,7 +90,7 @@ const NavDashboard: React.FC = () => {
   }, [t]);
 
   const handleThemeChange = () => {
-    setIsDark(!isDark);
+    dispatch(changeDarkLight());
   };
 
   const handleNotificationChange = React.useCallback(() => {
@@ -98,7 +98,7 @@ const NavDashboard: React.FC = () => {
   }, [notification]);
 
   return (
-    <div className="navbar-dash">
+    <div className={clsx('navbar-dash', { 'dark-mode': isDark })}>
       <Link to="/" className="logo">
         <img className="logo__img" src="/images/logos/logo.svg" alt="Logo" />
       </Link>
@@ -130,7 +130,7 @@ const NavDashboard: React.FC = () => {
               }}
             >
               <Tooltip
-                className="custom-nav-icon"
+                className={clsx('custom-nav-icon', { 'dark-mode': isDark })}
                 placement="top"
                 tooltipTitle={item.tooltipTitle}
                 isActive={navbarIndex === item.key}
@@ -144,12 +144,15 @@ const NavDashboard: React.FC = () => {
 
       <div className="actions-dashboard">
         <div className="actions-dashboard__item">
-          <LanguageDropDown placement="topRight" />
+          <LanguageDropDown
+            placement="topRight"
+            className={clsx({ 'dark-mode': isDark })}
+          />
         </div>
         <div className="actions-dashboard__item">
           <Button className="btn-theme" onClick={handleThemeChange}>
             <Tooltip
-              className="custom-nav-icon"
+              className={clsx('custom-nav-icon', { 'dark-mode': isDark })}
               tooltipTitle={t('dark-light')}
               placement="right"
             >
@@ -162,7 +165,7 @@ const NavDashboard: React.FC = () => {
             overlay={<UserMenu />}
             trigger={['click']}
             placement="topLeft"
-            className="custom-dropdown-menu"
+            className={clsx('custom-dropdown-menu', { 'dark-mode': isDark })}
           >
             <Avatar
               path={userProfileStore?.avatar}

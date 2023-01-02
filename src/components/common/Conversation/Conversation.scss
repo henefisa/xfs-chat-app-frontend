@@ -7,6 +7,24 @@
   transition: all 0.4s;
   display: flex;
 
+  &.dark-mode {
+    &:hover {
+      background-color: #36404a;
+    }
+
+    .conversation-item__content {
+      .conversation-title {
+        color: #e1e9f1;
+      }
+      .message {
+        color: #abb4d2;
+      }
+    }
+    .conversation-item__time {
+      color: #abb4d2;
+    }
+  }
+
   .conversation-item__avatar {
     margin-right: 16px;
     display: flex;

@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { createConversation } from 'src/services/conversationService';
 import { useAppSelector } from 'src/store/hooks';
 import { selectFriend, selectUserProfile } from 'src/store/userSlice';
+import { selectDarkLight } from 'src/store/darkLightSlice';
 
 import './SidebarGroups.scss';
 
@@ -29,6 +30,7 @@ const SidebarGroups: React.FC = () => {
 
   const { listFriend } = useAppSelector(selectFriend);
   const userProfileStore = useAppSelector(selectUserProfile);
+  const isDark = useAppSelector(selectDarkLight);
 
   const handleChange = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,7 +79,7 @@ const SidebarGroups: React.FC = () => {
 
   return (
     <>
-      <div className="sidebar-groups">
+      <div className={clsx('sidebar-groups', { 'dark-mode': isDark })}>
         <div className="sidebar-groups__header">
           <Title className="group-title" level={4}>
             {t('title')}

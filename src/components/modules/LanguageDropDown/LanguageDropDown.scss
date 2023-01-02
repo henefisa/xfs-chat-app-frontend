@@ -1,0 +1,11 @@
+.ant-dropdown-trigger.custom-dropdown-menu {
+    &.dark-mode {
+        background-color: #36404a;
+        color: #a6b0cf;
+    }
+
+    &.dark-mode.ant-dropdown-open {
+        background-color: #3e4a56;
+        color: #7269ef;
+    }
+}

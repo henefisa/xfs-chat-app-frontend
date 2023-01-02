@@ -3,6 +3,23 @@
 .search-sidebar {
   position: relative;
 
+  &.dark-mode {
+    .search-sidebar__input {
+      background-color: rgb(54, 64, 74);
+      border: 1px solid rgb(54, 64, 74);
+
+      &::placeholder {
+        color: #9aa1b9;
+      }
+    }
+
+    span {
+      .search-sidebar__icon {
+        color: #9aa1b9;
+      }
+    }
+  }
+
   .search-sidebar__input {
     padding: 11px 16px 11px 56px;
     border-radius: 6px;

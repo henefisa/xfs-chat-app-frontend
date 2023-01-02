@@ -11,21 +11,24 @@ import { useNavigate } from 'react-router-dom';
 import ENavbar from 'src/interfaces/ENavbar';
 import { logout } from 'src/services/authService';
 import { logoutSuccess } from 'src/store/authSlice';
-import { useAppDispatch } from 'src/store/hooks';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { updateNavbar } from 'src/store/navbarSlice';
 import { deleteFriendSelected, deleteUserProfile } from 'src/store/userSlice';
 
 import Button from '@common/Button/Button';
 import Menu from '@common/Menu/Menu';
 import Title from '@common/Title/Title';
+import { selectDarkLight } from 'src/store/darkLightSlice';
 
 import './UserMenu.scss';
+import clsx from 'clsx';
 
 interface IUserMenuProps extends MenuProps {}
 
 const UserMenu: React.FC<IUserMenuProps> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const isDark = useAppSelector(selectDarkLight);
 
   const { t } = useTranslation('dashboard', { keyPrefix: 'navbar.user-menu' });
   const { t: t1 } = useTranslation(['common', 'notification']);
@@ -80,25 +83,34 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
     navigate('/login');
   };
 
-  const hanldeClickItem: MenuProps['onClick'] = (e) => {
-    switch (e.key) {
-      case '0': {
-        break;
+  const hanldeClickItem: MenuProps['onClick'] = React.useCallback(
+    (e: { key: string }) => {
+      switch (e.key) {
+        case '0': {
+          break;
+        }
+        case '1': {
+          break;
+        }
+        case '2': {
+          handleLogout();
+          break;
+        }
+        default: {
+          throw new Error('Error');
+        }
       }
-      case '1': {
-        break;
-      }
-      case '2': {
-        handleLogout();
-        break;
-      }
-      default: {
-        throw new Error('Error');
-      }
-    }
-  };
+    },
+    []
+  );
 
-  return <Menu className="user-menu" items={menu} onClick={hanldeClickItem} />;
+  return (
+    <Menu
+      className={clsx('user-menu', { 'dark-mode': isDark })}
+      items={menu}
+      onClick={hanldeClickItem}
+    />
+  );
 };
 
 export default UserMenu;

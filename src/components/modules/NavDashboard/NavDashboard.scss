@@ -12,6 +12,13 @@
   background-color: v.$white;
   overflow-y: auto;
 
+  &.dark-mode {
+    width: 79px;
+    background-color: #36404a;
+    padding-right: 4px;
+    margin-right: 0;
+  }
+
   &::-webkit-scrollbar {
     width: 5px;
     background-color: v.$white;
@@ -67,6 +74,7 @@
       background-color: v.$white;
       border: unset;
       box-shadow: unset;
+      border-radius: 10px;
     }
 
     .menu-dashboard__btn + .menu-dashboard__btn {
@@ -79,6 +87,7 @@
 
     .actions-dashboard__item {
       .btn-theme {
+        border-radius: 10px;
         padding: 0;
         background-color: v.$white;
         border: unset;

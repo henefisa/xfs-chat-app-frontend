@@ -1,6 +1,14 @@
 @use '../../../../src/assets/styles/variables' as v;
 
 .sidebar-search {
+  &.dark-mode {
+    .header-search {
+      .header-search__title {
+        color: #e1e9f1;
+      }
+    }
+  }
+
   .header-search {
     padding: 24px 24px 0;
 

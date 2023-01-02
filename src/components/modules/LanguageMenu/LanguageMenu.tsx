@@ -10,6 +10,7 @@ import Menu from '@common/Menu/Menu';
 import './LanguageMenu.scss';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { changeLanguage, selectLanguage } from 'src/store/languageSlice';
+import { selectDarkLight } from 'src/store/darkLightSlice';
 
 interface ILanguageProps extends MenuProps {}
 
@@ -18,6 +19,7 @@ const LanguageMenu: React.FC<ILanguageProps> = () => {
 
   const dispatch = useAppDispatch();
   const languageStorage = useAppSelector(selectLanguage);
+  const isDark = useAppSelector(selectDarkLight);
 
   const getKeyState = () => {
     switch (languageStorage.languageCode) {
@@ -91,7 +93,7 @@ const LanguageMenu: React.FC<ILanguageProps> = () => {
 
   return (
     <Menu
-      className="language-menu"
+      className={clsx('language-menu', { 'dark-mode': isDark })}
       items={items}
       onClick={handleClickLanguageMenu}
     />

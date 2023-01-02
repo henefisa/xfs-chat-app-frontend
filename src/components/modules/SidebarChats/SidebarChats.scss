@@ -1,6 +1,19 @@
 @use '../../../../src/assets/styles/variables' as v;
 
 .sidebar-chats {
+  &.dark-mode {
+    .header-chats {
+      .header-chats__title {
+        color: #e1e9f1;
+      }
+    }
+    .conversation-list {
+      .conversation-list__title {
+        color: #e1e9f1;
+      }
+    }
+  }
+
   .header-chats {
     padding: 24px 24px 0;
 

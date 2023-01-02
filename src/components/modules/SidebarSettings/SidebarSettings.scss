@@ -4,6 +4,87 @@
   background-color: #f5f7fb;
   width: 95%;
 
+  &.dark-mode {
+    background-color: #303841;
+
+    .title-settings {
+      color: #e1e9f1;
+    }
+
+    .account-details {
+      .account-details__inner {
+        background-color: #262e35;
+
+        .title-list {
+          .account-details__title {
+            color: #e1e9f1;
+            background-color: transparent;
+
+            &.account-details__title--active {
+              background-color: #3e4a56;
+              color: v.$button;
+            }
+          }
+        }
+        .form-container {
+          background-color: #262e35;
+          .ant-form-item {
+            .ant-input[disabled] {
+              background-color: #586f86;
+            }
+            .ant-form-item-label label {
+              color: #e1e9f1;
+            }
+          }
+          .form-input {
+            background-color: #36404a;
+            border: 1px solid #36404a;
+            color: #a6b0cf;
+          }
+        }
+        .privacy__inner {
+          .privacy__panel {
+            .panel-item {
+              .panel-item__title {
+                color: #e1e9f1;
+              }
+              .panel-item__btn {
+                background-color: #36404a;
+                color: #eff2f7;
+                &:hover {
+                  opacity: 0.9;
+                  color: #eff2f7;
+                }
+                &:focus {
+                  color: #eff2f7;
+                  border: 2px solid rgb(54, 64, 74);
+                }
+              }
+            }
+          }
+        }
+        .security__inner {
+          .security__panel {
+            .panel-item {
+              .panel-item__title {
+                color: #e1e9f1;
+              }
+            }
+          }
+        }
+        .help__inner {
+          .help__panel {
+            .panel-item {
+              .panel-item__title {
+                color: #e1e9f1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   .title-settings {
     width: 1000px;
     margin: 0 auto;
@@ -136,7 +217,6 @@
             border: none;
             box-shadow: none;
             font-size: 15px;
-
 
             &:hover {
               opacity: 0.8;

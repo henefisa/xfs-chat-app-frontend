@@ -11,6 +11,9 @@ import {
 
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
+import { selectDarkLight } from 'src/store/darkLightSlice';
+import { useAppSelector } from 'src/store/hooks';
+import clsx from 'clsx';
 
 import './ContactMenu.scss';
 
@@ -19,6 +22,8 @@ interface IContactMenuProps extends MenuProps {}
 const ContactMenu: React.FC<IContactMenuProps> = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
 
+  const isDark = useAppSelector(selectDarkLight);
+
   const menu: MenuProps['items'] = [
     {
       label: (
@@ -26,7 +31,7 @@ const ContactMenu: React.FC<IContactMenuProps> = () => {
           <Title className="menu-item__title" level={5}>
             {t('menu-share')}
           </Title>
-          <ShareAltOutlined className="icon" />
+          <ShareAltOutlined className="menu-item__icon" />
         </Button>
       ),
       key: 0,
@@ -37,7 +42,7 @@ const ContactMenu: React.FC<IContactMenuProps> = () => {
           <Title className="menu-item__title" level={5}>
             {t('menu-block')}
           </Title>
-          <StopOutlined className="icon" />
+          <StopOutlined className="menu-item__icon" />
         </Button>
       ),
       key: 1,
@@ -48,14 +53,19 @@ const ContactMenu: React.FC<IContactMenuProps> = () => {
           <Title className="menu-item__title" level={5}>
             {t('menu-remove')}
           </Title>
-          <DeleteOutlined className="icon" />
+          <DeleteOutlined className="menu-item__icon" />
         </Button>
       ),
       key: 2,
     },
   ];
 
-  return <Menu className="contact-menu" items={menu} />;
+  return (
+    <Menu
+      className={clsx('contact-menu', { 'dark-mode': isDark })}
+      items={menu}
+    />
+  );
 };
 
 export default ContactMenu;
