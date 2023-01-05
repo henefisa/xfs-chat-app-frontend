@@ -11,7 +11,7 @@ import Input from '@common/Input/Input';
 import Tooltip from '@common/Tooltip/Tooltip';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import { useTranslation } from 'react-i18next';
-import { SocketContext } from 'src/context/socket/context';
+import { SocketContext } from 'src/context/socket/contextSocket';
 import { ESocketEvent } from 'src/models/socket';
 import {
   createConversation,
@@ -109,7 +109,9 @@ const ChatBottom: React.FC = () => {
   const onChangeMessage = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setMessage(e.target.value);
-    },[]);
+    },
+    []
+  );
   return (
     <div className="chat-bottom">
       <div className="type-chat">

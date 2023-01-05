@@ -1,5 +1,5 @@
 import React from 'react';
-import { SocketContext } from 'src/context/socket/context';
+import { SocketContext } from 'src/context/socket/contextSocket';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import ChatDayTitle from '@modules/ChatDayTitle/ChatDayTitle';
 import { ESocketEvent } from 'src/models/socket';

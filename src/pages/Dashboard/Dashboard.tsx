@@ -4,7 +4,7 @@ import NavDashboard from '@modules/NavDashboard/NavDashboard';
 import SidebarDashboard from '@modules/SidebarDashboard/SidebarDashboard';
 import * as React from 'react';
 import SidebarSettings from '@modules/SidebarSettings/SidebarSettings';
-import { SocketContext } from 'src/context/socket/context';
+import { SocketContext } from 'src/context/socket/contextSocket';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectNavBar } from 'src/store/navbarSlice';
 import ENavbar from 'src/interfaces/ENavbar';

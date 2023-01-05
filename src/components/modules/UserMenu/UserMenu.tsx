@@ -41,7 +41,7 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
             <ProfileOutlined className="custom-menu-icon" />
           </Button>
         ),
-        key: 0,
+        key: 'UserProfile',
       },
       {
         label: (
@@ -52,7 +52,7 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
             <SettingOutlined className="custom-menu-icon" />
           </Button>
         ),
-        key: 1,
+        key: 'Setting',
       },
       {
         type: 'divider',
@@ -66,7 +66,7 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
             <LogoutOutlined className="custom-menu-icon" />
           </Button>
         ),
-        key: 2,
+        key: 'LogOut',
       },
     ];
   }, [t]);
@@ -84,13 +84,13 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
   const hanldeClickItem: MenuProps['onClick'] = React.useCallback(
     (e: { key: string }) => {
       switch (e.key) {
-        case '0': {
+        case 'UserProfile': {
           break;
         }
-        case '1': {
+        case 'Setting': {
           break;
         }
-        case '2': {
+        case 'LogOut': {
           handleLogout();
           break;
         }
