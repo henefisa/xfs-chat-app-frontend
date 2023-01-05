@@ -32,11 +32,11 @@ import {
   updateListFriend,
 } from 'src/store/userSlice';
 import {
-  deleteConversationSelected,
   deleteListMessage,
   getListMessageFailed,
   getListMessageStart,
   getListMessageSuccess,
+  updateConversationSelected,
 } from 'src/store/conversationSlice';
 
 import './SidebarContacts.scss';
@@ -106,8 +106,8 @@ const SidebarContacts: React.FC = () => {
 
   const handleSelectFriend = (friend: IUserItemResult) => {
     dispatch(updateFriendSelected(friend));
-    dispatch(deleteConversationSelected());
     handleGetMessage(friend.conversation);
+    handleGetConversation(friend.conversation);
   };
 
   const onSelectFriend = React.useCallback((friend: IUserItemResult) => {
@@ -118,12 +118,14 @@ const SidebarContacts: React.FC = () => {
     return () => setToggleModal(isTrue);
   }, []);
 
-  const handleGetMessage = async (conversation: IConversation | null) => {
+  const handleGetConversation = (conversation: IConversation) => {
+    dispatch(updateConversationSelected(conversation));
+  };
+  const handleGetMessage = async (conversation: IConversation) => {
     if (!conversation) {
       dispatch(deleteListMessage());
       return;
     }
-
     dispatch(getListMessageStart());
 
     try {

@@ -26,7 +26,8 @@ const Dashboard: React.FC = () => {
   const { selectedFriend } = useAppSelector(selectFriend);
   const dispatch = useAppDispatch();
 
-  const { selectedConversation } = useAppSelector(selectConversation);
+  const { selectedConversation, listConversation } =
+    useAppSelector(selectConversation);
   const userProfileStore = useAppSelector(selectUserProfile);
   const navbarAction = useAppSelector(selectNavBar);
 
@@ -48,23 +49,20 @@ const Dashboard: React.FC = () => {
 
   React.useEffect(() => {
     if (!userProfileStore) return;
-
-    const handleSubscribeAllConversation = (list: IConversation[]) => {
-      if (list.length === 0 || !userProfileStore) return;
-
-      list.forEach((conversation) => {
-        socket.emit(ESocketEvent.SUBSCRIBE, {
-          conversationId: conversation.id,
-          userId: userProfileStore.id,
-        });
+    if (listConversation.length === 0 || !userProfileStore) return;
+    listConversation.forEach((conversation) => {
+      socket.emit(ESocketEvent.SUBSCRIBE, {
+        conversationId: conversation.id,
+        userId: userProfileStore.id,
       });
-    };
+    });
+  }, [userProfileStore, listConversation]);
 
+  React.useEffect(() => {
     const handleGetListConversation = async () => {
       try {
         const result = await getConversation(t);
         dispatch(updateListConversation(result.conversations));
-        handleSubscribeAllConversation(result.conversations);
       } catch (err) {
         dispatch(updateListConversation([]));
       }
@@ -72,7 +70,6 @@ const Dashboard: React.FC = () => {
 
     handleGetListConversation();
   }, [userProfileStore]);
-
   return (
     <div className="dashboard-page">
       <NavDashboard />

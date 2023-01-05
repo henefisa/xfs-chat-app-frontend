@@ -9,14 +9,14 @@ import './MessagesTable.scss';
 
 interface IMessagesTableProps {
   position: string;
-  messages: string;
+  message: string;
   time: string;
   sender: TUserProfile | null;
 }
 
 const MessagesTable: React.FC<IMessagesTableProps> = ({
   position,
-  messages,
+  message,
   time,
   sender,
 }) => {
@@ -33,11 +33,7 @@ const MessagesTable: React.FC<IMessagesTableProps> = ({
       </div>
       <div className="messages-table__body">
         <div className="bubble">
-          <MessagesContent
-            messages={messages}
-            position={position}
-            time={time}
-          />
+          <MessagesContent message={message} position={position} time={time} />
         </div>
         <Title level={5} className="username">
           {name}

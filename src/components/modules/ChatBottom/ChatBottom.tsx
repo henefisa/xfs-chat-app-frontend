@@ -1,6 +1,4 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
-
 import {
   PaperClipOutlined,
   PictureOutlined,
@@ -24,7 +22,6 @@ import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import {
   selectConversation,
   updateListConversation,
-  updateListMessage,
   updateConversationSelected,
 } from 'src/store/conversationSlice';
 import './ChatBottom.scss';
@@ -42,13 +39,10 @@ const ChatBottom: React.FC = () => {
 
   const inputFileRef = React.createRef<HTMLInputElement>();
   const inputImgRef = React.createRef<HTMLInputElement>();
-  const [messages, setMessages] = React.useState('');
-
+  const [message, setMessage] = React.useState('');
   const { selectedConversation } = useAppSelector(selectConversation);
-
   const { selectedFriend } = useAppSelector(selectFriend);
   const userProfileStore = useAppSelector(selectUserProfile);
-
   const toggleFile = () => {
     inputFileRef.current?.click();
   };
@@ -56,13 +50,13 @@ const ChatBottom: React.FC = () => {
     inputImgRef.current?.click();
   };
   const onEmojiClick = (emojiObject: EmojiClickData) => {
-    setMessages((prev: string) => prev + emojiObject.emoji);
+    setMessage((prev: string) => prev + emojiObject.emoji);
   };
 
-  const creatNewConversation = async () => {
+  const createNewConversation = async () => {
     if (
       !userProfileStore ||
-      !messages.trim() ||
+      !message.trim() ||
       selectedFriend?.conversation ||
       !selectedFriend
     )
@@ -75,7 +69,6 @@ const ChatBottom: React.FC = () => {
         },
         t1
       );
-
       const res = await getConversation(t);
       dispatch(updateListConversation(res.conversations));
       dispatch(updateConversationSelected(result));
@@ -92,39 +85,26 @@ const ChatBottom: React.FC = () => {
 
   const selectConversationId = async (conversationId: IConversation | null) => {
     if (!conversationId) {
-      return creatNewConversation();
+      const newConversationId = await createNewConversation();
+      return newConversationId;
     }
     return conversationId.id;
   };
 
   const handleSendMessage = async () => {
-    if (!userProfileStore || !messages.trim()) return;
+    if (!userProfileStore || !message.trim()) return;
     const conversationId = await selectConversationId(selectedConversation);
     socket.emit(ESocketEvent.SEND_MESSAGE, {
       userId: userProfileStore.id,
-      conversationId: conversationId || selectedFriend?.conversation?.id,
-      text: messages,
+      conversationId: conversationId,
+      text: message,
     });
-    dispatch(
-      updateListMessage({
-        id: uuidv4(),
-        updatedAt: new Date().toString(),
-        createdAt: new Date().toString(),
-        attachment: null,
-        isPin: false,
-        isTick: false,
-        message: messages,
-        sender: userProfileStore,
-        conversation: null,
-      })
-    );
-
-    setMessages('');
+    setMessage('');
   };
 
   const onSendMessage = React.useCallback(() => {
     return () => handleSendMessage();
-  }, [messages]);
+  }, [message]);
 
   return (
     <div className="chat-bottom">
@@ -132,8 +112,8 @@ const ChatBottom: React.FC = () => {
         <Input
           className="type-chat__input"
           placeholder={t('enter-message')}
-          onChange={(e) => setMessages(e.target.value)}
-          value={messages}
+          onChange={(e) => setMessage(e.target.value)}
+          value={message}
           onPressEnter={onSendMessage()}
         />
       </div>
