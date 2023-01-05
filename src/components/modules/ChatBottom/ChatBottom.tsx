@@ -106,13 +106,17 @@ const ChatBottom: React.FC = () => {
     return () => handleSendMessage();
   }, [message]);
 
+  const onChangeMessage = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setMessage(e.target.value);
+    },[]);
   return (
     <div className="chat-bottom">
       <div className="type-chat">
         <Input
           className="type-chat__input"
           placeholder={t('enter-message')}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={onChangeMessage}
           value={message}
           onPressEnter={onSendMessage()}
         />
