@@ -13,7 +13,6 @@ import {
   selectConversation,
   updateListConversation,
 } from 'src/store/conversationSlice';
-import { IConversation } from 'src/models';
 import { getConversation } from 'src/services/conversationService';
 import { ESocketEvent } from 'src/models/socket';
 import { useTranslation } from 'react-i18next';
