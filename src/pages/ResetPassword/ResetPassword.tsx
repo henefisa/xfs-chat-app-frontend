@@ -20,7 +20,7 @@ const ForgotPassword: React.FC = () => {
   const [password, setPassword] = React.useState('');
   const [isUpdatePassword, setIsUpdatePassword] = React.useState(false);
 
-  const handleResetPassword = async () => {
+  async function handleResetPassword() {
     setIsUpdatePassword(true);
     try {
       const url = `api${location.pathname}${location.search}`;
@@ -29,7 +29,7 @@ const ForgotPassword: React.FC = () => {
     } catch (error) {
       setIsUpdatePassword(false);
     }
-  };
+  }
 
   return (
     <div className="reset-password">

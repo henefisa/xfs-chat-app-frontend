@@ -19,7 +19,7 @@ const ForgotPassword: React.FC = () => {
   const [email, setEmail] = React.useState('');
   const [isGettingLinkEmail, setIsGettingLinkEmail] = React.useState(false);
 
-  const handleGetLinkEmail = async () => {
+  async function handleGetLinkEmail() {
     setIsGettingLinkEmail(true);
     try {
       await authService.forgotPassword(email, t);
@@ -27,7 +27,7 @@ const ForgotPassword: React.FC = () => {
     } catch (error) {
       setIsGettingLinkEmail(false);
     }
-  };
+  }
 
   return (
     <div className="forgot-password">
