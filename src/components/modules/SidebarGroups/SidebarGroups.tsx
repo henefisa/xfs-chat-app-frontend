@@ -11,10 +11,14 @@ import Title from '@common/Title/Title';
 import CheckboxMember from '@modules/CheckboxCustom/CheckboxMember';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { createConversation } from 'src/services/conversationService';
+import {
+  createConversation,
+  getConversation,
+} from 'src/services/conversationService';
 import { useAppSelector } from 'src/store/hooks';
 import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import { selectDarkLight } from 'src/store/darkLightSlice';
+import { updateListConversation } from 'src/store/conversationSlice';
 
 import './SidebarGroups.scss';
 
@@ -57,7 +61,8 @@ const SidebarGroups: React.FC = () => {
           { title: groupName, members: newGroupFriend },
           t1
         );
-
+        const res = await getConversation(t);
+        dispatch(updateListConversation(res.conversations));
         setIsLoading(false);
         setToggleModal(false);
       } catch (err) {
@@ -190,7 +195,7 @@ const SidebarGroups: React.FC = () => {
             </Button>
             <Button
               className="btn-create"
-              onClick={handleCreateGroupConversation}
+              onClick={handleCreateGroupConversation()}
               loading={isLoading}
             >
               {t('btn-create')}
@@ -208,3 +213,9 @@ const SidebarGroups: React.FC = () => {
 };
 
 export default SidebarGroups;
+function dispatch(arg0: {
+  payload: import('../../../models').IConversation[];
+  type: string;
+}) {
+  throw new Error('Function not implemented.');
+}
