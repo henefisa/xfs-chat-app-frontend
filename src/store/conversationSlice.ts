@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IConversation, IMessages } from 'src/models';
+import { IConversation, IMessage } from 'src/models';
 import { RootState } from '.';
 
 interface IUserConversationState {
@@ -8,7 +8,7 @@ interface IUserConversationState {
 }
 
 interface IUserMessage {
-  listMessage: IMessages[];
+  listMessage: IMessage[];
   isFetching: boolean;
   error: boolean;
 }
@@ -31,12 +31,12 @@ const initialState: IConversationState = {
 };
 
 export const conversationSlice = createSlice({
-  name: 'user',
+  name: 'conversation',
   initialState,
   reducers: {
     updateConversationSelected: (
       state,
-      action: PayloadAction<IConversation>
+      action: PayloadAction<IConversation | null>
     ) => {
       state.conversation.selectedConversation = action.payload;
     },
@@ -52,7 +52,7 @@ export const conversationSlice = createSlice({
     getListMessageStart: (state) => {
       state.message.isFetching = true;
     },
-    getListMessageSuccess: (state, action: PayloadAction<IMessages[]>) => {
+    getListMessageSuccess: (state, action: PayloadAction<IMessage[]>) => {
       state.message.isFetching = false;
       state.message.error = false;
       state.message.listMessage = action.payload.reverse();
@@ -61,8 +61,11 @@ export const conversationSlice = createSlice({
       state.message.isFetching = false;
       state.message.error = true;
     },
-    updateListMessage: (state, action: PayloadAction<IMessages>) => {
+    updateListMessage: (state, action: PayloadAction<IMessage>) => {
       state.message.listMessage.push(action.payload);
+    },
+    deleteListMessage: (state) => {
+      state.message.listMessage = [];
     },
   },
 });
@@ -76,9 +79,11 @@ export const {
   getListMessageSuccess,
   getListMessageFailed,
   updateListMessage,
+  deleteListMessage,
 } = conversationSlice.actions;
 
 export const selectConversation = (state: RootState) =>
   state.conversation.conversation;
+export const selectMessages = (state: RootState) => state.conversation.message;
 
 export default conversationSlice.reducer;

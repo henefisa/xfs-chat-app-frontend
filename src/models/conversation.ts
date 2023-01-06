@@ -27,10 +27,11 @@ export interface IMessageQuery {
   offset?: string;
 }
 
-export interface IMessages extends IBase {
+export interface IMessage extends IBase {
   attachment: string | null;
   isPin: boolean;
   isTick: boolean;
   message: string;
   sender: TUserProfile;
+  conversation: string | null;
 }

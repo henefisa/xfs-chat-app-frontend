@@ -19,7 +19,6 @@
     border-radius: 9px;
     position: relative;
     font-size: 15px;
-    animation: fadeIn 1s ease-in;
     margin: auto;
     max-width: 600px;
     white-space: normal;
@@ -61,16 +60,6 @@
       .chat-time {
         color: hsla(0, 0%, 100%, 0.5);
         text-align: left;
-      }
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
       }
     }
 

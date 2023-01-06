@@ -24,8 +24,8 @@ const AvatarGroupChat: React.FC<IAvatarGroupChatProps> = ({
         const name = participant.user.fullName ?? participant.user.username;
         return (
           <Avatar
-            key={participant.id}
-            path={participant.user.avatar}
+            key={participant?.id}
+            path={participant?.user.avatar}
             username={name.charAt(0).toUpperCase()}
             imgWidth={imgWidth}
           />

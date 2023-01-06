@@ -10,7 +10,6 @@ import './ChatUI.scss';
 
 const ChatUI = () => {
   const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
-  const [messages, setMessages] = useState(['']);
 
   return (
     <div className="chat-ui">
@@ -20,8 +19,8 @@ const ChatUI = () => {
         })}
       >
         <ChatHeader setOpen={setIsUserProfileOpen} />
-        <ChatMain messages={messages} />
-        <ChatBottom setMessagesUser={setMessages} />
+        <ChatMain />
+        <ChatBottom />
       </div>
       {isUserProfileOpen && (
         <div className="chat-ui__profile">

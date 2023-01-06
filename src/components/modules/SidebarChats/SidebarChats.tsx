@@ -8,7 +8,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { IConversation } from 'src/models';
-import { getMessages } from 'src/services/conversationService';
+import { getMessages, getConversation } from 'src/services/conversationService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';
 import {
@@ -17,6 +17,7 @@ import {
   getListMessageSuccess,
   selectConversation,
   updateConversationSelected,
+  updateListConversation,
 } from 'src/store/conversationSlice';
 import getGroupTitle from 'src/utils/getGroupTitle';
 import { selectDarkLight } from 'src/store/darkLightSlice';
@@ -32,6 +33,13 @@ const SidebarChats: React.FC = () => {
 
   const { listConversation, selectedConversation } =
     useAppSelector(selectConversation);
+  React.useEffect(() => {
+    const getListConvertion = async () => {
+      const res = await getConversation(t1);
+      dispatch(updateListConversation(res.conversations));
+    };
+    getListConvertion();
+  }, []);
   const handleClick = async (conversation: IConversation) => {
     dispatch(getListMessageStart());
     try {

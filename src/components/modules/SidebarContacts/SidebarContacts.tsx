@@ -17,14 +17,27 @@ import Title from '@common/Title/Title';
 import ContactMenu from '@modules/ContactMenu/ContactMenu';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { EFriendStatus, IFriendConvert, IUserItemResult } from 'src/models';
+import {
+  EFriendStatus,
+  IConversation,
+  IFriendConvert,
+  IUserItemResult,
+} from 'src/models';
 import { getUsers } from 'src/services/userService';
+import { getMessages } from 'src/services/conversationService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import {
   selectFriend,
   updateFriendSelected,
   updateListFriend,
 } from 'src/store/userSlice';
+import {
+  deleteListMessage,
+  getListMessageFailed,
+  getListMessageStart,
+  getListMessageSuccess,
+  updateConversationSelected,
+} from 'src/store/conversationSlice';
 
 import './SidebarContacts.scss';
 import { selectDarkLight } from 'src/store/darkLightSlice';
@@ -52,8 +65,8 @@ const SidebarContacts: React.FC = () => {
 
         return accumulator;
       }, [] as string[]);
-
-      const newList = listCharacter.sort().map((character) => {
+      listCharacter.sort();
+      const newList = listCharacter.map((character) => {
         const objectItem: IFriendConvert = {
           character: character,
           friends: [],
@@ -95,6 +108,8 @@ const SidebarContacts: React.FC = () => {
 
   const handleSelectFriend = (friend: IUserItemResult) => {
     dispatch(updateFriendSelected(friend));
+    handleGetMessage(friend.conversation);
+    handleGetConversation(friend.conversation);
   };
 
   const onSelectFriend = React.useCallback((friend: IUserItemResult) => {
@@ -104,6 +119,24 @@ const SidebarContacts: React.FC = () => {
   const onToggleModal = React.useCallback((isTrue: boolean) => {
     return () => setToggleModal(isTrue);
   }, []);
+
+  const handleGetConversation = (conversation: IConversation) => {
+    dispatch(updateConversationSelected(conversation));
+  };
+  const handleGetMessage = async (conversation: IConversation) => {
+    if (!conversation) {
+      dispatch(deleteListMessage());
+      return;
+    }
+    dispatch(getListMessageStart());
+
+    try {
+      const result = await getMessages(t1, { id: conversation.id });
+      dispatch(getListMessageSuccess(result.messages));
+    } catch (err) {
+      dispatch(getListMessageFailed());
+    }
+  };
 
   return (
     <>

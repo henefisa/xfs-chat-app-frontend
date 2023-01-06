@@ -7,19 +7,14 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import * as React from 'react';
-
-import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
 import Dropdown from '@common/Dropdown/Dropdown';
 import InputDropdown from '@common/Input/InputDropdown';
-import Title from '@common/Title/Title';
 import Tooltip from '@common/Tooltip/Tooltip';
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from 'src/store/hooks';
 import ActionsChatMenu from '@modules/ActionsChatMenu/ActionsChatMenu';
 import ChatCall from '@modules/ChatCall/ChatCall';
-import { selectFriend } from 'src/store/userSlice';
-
+import RenderAvatarConversation from '@modules/RenderAvatarConversation/RenderAvatarConversation';
 import './ChatHeader.scss';
 
 interface IChatHeader {
@@ -31,14 +26,10 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-header',
   });
-  const handleClickuser = () => {
-    setOpen(true);
-  };
 
-  const { selectedFriend } = useAppSelector(selectFriend);
-
-  const name = selectedFriend?.fullName ?? selectedFriend?.username;
-
+  const onClickuser = React.useCallback(() => {
+    return () => setOpen(true);
+  }, []);
   const listActionChat = React.useMemo(() => {
     return [
       {
@@ -68,15 +59,10 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   return (
     <div className="chat-header">
       <div className="user-info">
-        <Avatar
-          path={selectedFriend?.avatar}
-          imgWidth={35}
-          username={name?.charAt(0).toUpperCase()}
-          className="user-info__avatar"
+        <RenderAvatarConversation
+          handleOpenDetail={onClickuser()}
+          imgSize={46}
         />
-        <Title level={5} className="user-info__name" onClick={handleClickuser}>
-          {name}
-        </Title>
         <div className="user-info__status">
           <CheckCircleFilled className="status__icon" />
         </div>

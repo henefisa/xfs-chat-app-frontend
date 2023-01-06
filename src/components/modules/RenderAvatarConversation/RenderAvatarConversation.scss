@@ -1,0 +1,12 @@
+@use '../../../assets/styles/variables' as v;
+
+.ant-typography.title.chat-header__username {
+  font-size: 16px;
+  font-weight: 500;
+  color: v.$text-color;
+  margin-bottom: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

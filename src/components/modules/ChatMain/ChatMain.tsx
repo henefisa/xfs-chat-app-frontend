@@ -1,29 +1,40 @@
-import React, { useRef, useEffect } from 'react';
-
-import MessagesTable from '@modules/MessagesTable/MessagesTable';
+import React from 'react';
+import { SocketContext } from 'src/context/socket/contextSocket';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import ChatDayTitle from '@modules/ChatDayTitle/ChatDayTitle';
+import { ESocketEvent } from 'src/models/socket';
+import {
+  selectMessages,
+  updateListMessage,
+  selectConversation,
+} from 'src/store/conversationSlice';
+import ListMessage from './ListMessage';
 
 import './ChatMain.scss';
 
-interface IChatMain {
-  messages: string[];
-}
-const ChatMain: React.FC<IChatMain> = ({ messages }) => {
-  const scrollRef = useRef<null | HTMLDivElement>(null);
-  useEffect(() => {
+const ChatMain: React.FC = () => {
+  const socket = React.useContext(SocketContext);
+  const dispatch = useAppDispatch();
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const { listMessage } = useAppSelector(selectMessages);
+  const { selectedConversation } = useAppSelector(selectConversation);
+  React.useEffect(() => {
     scrollRef.current?.scrollIntoView();
-  }, [messages]);
+  }, [listMessage]);
+  React.useEffect(() => {
+    socket.off(ESocketEvent.GET_MESSAGE);
+    socket.on(ESocketEvent.GET_MESSAGE, ({ user, message }) => {
+      if (message.conversation === selectedConversation?.id) {
+        const newMessage = { ...message, sender: user };
+        dispatch(updateListMessage(newMessage));
+      }
+    });
+  });
+
   return (
     <div className="chatmain">
       <ChatDayTitle day="Today" />
-      {messages.map((messages: string, index: number) => {
-        if (messages != '')
-          return (
-            <div key={index} ref={scrollRef}>
-              <MessagesTable position="right" messages={messages} />
-            </div>
-          );
-      })}
+      <ListMessage listMessage={listMessage} />
     </div>
   );
 };

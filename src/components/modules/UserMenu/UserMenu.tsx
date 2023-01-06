@@ -14,7 +14,7 @@ import { logoutSuccess } from 'src/store/authSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { updateNavbar } from 'src/store/navbarSlice';
 import { deleteFriendSelected, deleteUserProfile } from 'src/store/userSlice';
-
+import { deleteConversationSelected } from 'src/store/conversationSlice';
 import Button from '@common/Button/Button';
 import Menu from '@common/Menu/Menu';
 import Title from '@common/Title/Title';
@@ -44,7 +44,7 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
             <ProfileOutlined className="custom-menu-icon" />
           </Button>
         ),
-        key: 0,
+        key: 'UserProfile',
       },
       {
         label: (
@@ -55,7 +55,7 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
             <SettingOutlined className="custom-menu-icon" />
           </Button>
         ),
-        key: 1,
+        key: 'Setting',
       },
       {
         type: 'divider',
@@ -69,7 +69,7 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
             <LogoutOutlined className="custom-menu-icon" />
           </Button>
         ),
-        key: 2,
+        key: 'LogOut',
       },
     ];
   }, [t]);
@@ -79,6 +79,7 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
     dispatch(logoutSuccess());
     dispatch(deleteUserProfile());
     dispatch(deleteFriendSelected());
+    dispatch(deleteConversationSelected());
     dispatch(updateNavbar(ENavbar.PROFILE));
     navigate('/login');
   };
@@ -86,13 +87,14 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
   const hanldeClickItem: MenuProps['onClick'] = React.useCallback(
     (e: { key: string }) => {
       switch (e.key) {
-        case '0': {
+        case 'UserProfile': {
           break;
         }
-        case '1': {
+        case 'Setting': {
           break;
         }
-        case '2': {
+        case 'LogOut': {
+
           handleLogout();
           break;
         }

@@ -5,7 +5,7 @@ import { initInterceptor } from 'src/api/apiRequest';
 import {
   SocketContextProvider,
   defaultSocketContextState,
-} from 'src/context/socket/context';
+} from 'src/context/socket/contextSocket';
 import Router from 'src/routes';
 import { useAppDispatch } from 'src/store/hooks';
 
