@@ -11,8 +11,11 @@ import Title from '@common/Title/Title';
 import Dropdown from '@common/Dropdown/Dropdown';
 import FileActionMenu from '@modules/FileActionMenu/FileActionMenu';
 import Button from '@common/Button/Button';
+import { selectDarkLight } from 'src/store/darkLightSlice';
+import { useAppSelector } from 'src/store/hooks';
 
 import './AttachedFileItem.scss';
+import clsx from 'clsx';
 
 interface IFileItemProps {
   name: string;
@@ -25,8 +28,9 @@ interface IAttachedFileItemProps {
 }
 
 const AttachedFileItem: React.FC<IAttachedFileItemProps> = ({ item }) => {
+  const isDark = useAppSelector(selectDarkLight);
   return (
-    <div className="file-item">
+    <div className={clsx('file-item', { 'dark-mode': isDark })}>
       <div className="file-info">
         <div className="file-icon">
           {item.type === 'zip' ? (

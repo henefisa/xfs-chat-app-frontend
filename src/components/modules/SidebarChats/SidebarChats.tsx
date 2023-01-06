@@ -20,6 +20,7 @@ import {
   updateListConversation,
 } from 'src/store/conversationSlice';
 import getGroupTitle from 'src/utils/getGroupTitle';
+import { selectDarkLight } from 'src/store/darkLightSlice';
 
 import './SidebarChats.scss';
 
@@ -27,6 +28,7 @@ const SidebarChats: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.chats' });
   const { t: t1 } = useTranslation('common');
   const userProfileStore = useAppSelector(selectUserProfile);
+  const isDark = useAppSelector(selectDarkLight);
   const dispatch = useAppDispatch();
 
   const { listConversation, selectedConversation } =
@@ -54,7 +56,7 @@ const SidebarChats: React.FC = () => {
   }, []);
 
   return (
-    <div className="sidebar-chats">
+    <div className={clsx('sidebar-chats', { 'dark-mode': isDark })}>
       <div className="header-chats">
         <Title className="header-chats__title" level={4}>
           {t('title')}

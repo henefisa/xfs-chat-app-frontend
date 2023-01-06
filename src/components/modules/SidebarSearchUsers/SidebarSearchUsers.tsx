@@ -3,10 +3,13 @@ import SearchSidebar from '@common/SearchSidebar/SearchSidebar';
 import Spin from '@common/Spin/Spin';
 import Title from '@common/Title/Title';
 import ListUsersResult from '@modules/ListUsersResult/ListUsersResult';
+import clsx from 'clsx';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { IUserItemResult } from 'src/models';
 import { getUsers } from 'src/services/userService';
+import { selectDarkLight } from 'src/store/darkLightSlice';
+import { useAppSelector } from 'src/store/hooks';
 import debounce from 'src/utils/debounce';
 
 import './SidebarSearchUsers.scss';
@@ -15,6 +18,8 @@ interface ISidebarSearchUsersProps {}
 
 const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
   const { t } = useTranslation(['common', 'dashboard']);
+
+  const isDark = useAppSelector(selectDarkLight);
 
   const [getUserLoading, setGetUserLoading] = React.useState(false);
 
@@ -41,7 +46,7 @@ const SidebarSearchUsers: React.FC<ISidebarSearchUsersProps> = () => {
   }, []);
 
   return (
-    <div className="sidebar-search">
+    <div className={clsx('sidebar-search', { 'dark-mode': isDark })}>
       <div className="header-search">
         <Title className="header-search__title" level={4}>
           {t('sidebar.search-user.title', { ns: 'dashboard' })}

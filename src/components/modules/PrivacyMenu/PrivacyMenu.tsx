@@ -5,13 +5,17 @@ import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import Menu from '@common/Menu/Menu';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from 'src/store/hooks';
+import { selectDarkLight } from 'src/store/darkLightSlice';
 
 import './PrivacyMenu.scss';
+import clsx from 'clsx';
 
 interface IPrivacyMenuProps extends MenuProps {}
 
 const PrivacyMenu: React.FC<IPrivacyMenuProps> = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.settings' });
+  const isDark = useAppSelector(selectDarkLight);
 
   const menu: MenuProps['items'] = [
     {
@@ -46,7 +50,12 @@ const PrivacyMenu: React.FC<IPrivacyMenuProps> = () => {
     },
   ];
 
-  return <Menu className="privacy-menu" items={menu} />;
+  return (
+    <Menu
+      className={clsx('privacy-menu', { 'dark-mode': isDark })}
+      items={menu}
+    />
+  );
 };
 
 export default PrivacyMenu;

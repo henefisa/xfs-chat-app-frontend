@@ -255,5 +255,11 @@
     "ask-account": "Muốn sử dụng một tài khoản khác?",
     "author-title": "© 2022 Chat App. Thiết kế ",
     "author": " bởi RVK Team"
+  },
+  "popup-notification": {
+    "header": "Thông báo",
+    "btn-all": "Tất cả",
+    "btn-unread": "Chưa đọc",
+    "invitation-title":  "Lời mời kết bạn"
   }
 }

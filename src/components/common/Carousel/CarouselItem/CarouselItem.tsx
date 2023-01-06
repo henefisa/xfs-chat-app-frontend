@@ -1,5 +1,8 @@
 import * as React from 'react';
 import Avatar from '@common/Avatar/Avatar';
+import clsx from 'clsx';
+import { selectDarkLight } from 'src/store/darkLightSlice';
+import { useAppSelector } from 'src/store/hooks';
 
 import '../Carousel.scss';
 
@@ -9,8 +12,9 @@ interface CarouselItemProps {
 }
 
 const CarouselItem: React.FC<CarouselItemProps> = ({ path, name }) => {
+  const isDark = useAppSelector(selectDarkLight);
   return (
-    <div className="carousel-item">
+    <div className={clsx('carousel-item', { 'dark-mode': isDark })}>
       <div className="carousel-item__avatar">
         <Avatar
           path={path}
@@ -20,7 +24,7 @@ const CarouselItem: React.FC<CarouselItemProps> = ({ path, name }) => {
         />
         <span className="carousel-item__status" />
       </div>
-      <h5>{name}</h5>
+      <h5 className="carousel-item__name">{name}</h5>
     </div>
   );
 };

@@ -40,6 +40,7 @@ import {
 } from 'src/store/conversationSlice';
 
 import './SidebarContacts.scss';
+import { selectDarkLight } from 'src/store/darkLightSlice';
 
 const SidebarContacts: React.FC = () => {
   const [toggleModal, setToggleModal] = React.useState(false);
@@ -49,6 +50,7 @@ const SidebarContacts: React.FC = () => {
 
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.contacts' });
   const { t: t1 } = useTranslation('common');
+  const isDark = useAppSelector(selectDarkLight);
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
@@ -138,7 +140,7 @@ const SidebarContacts: React.FC = () => {
 
   return (
     <>
-      <div className="sidebar-contacts">
+      <div className={clsx('sidebar-contacts', { 'dark-mode': isDark })}>
         <div className="sidebar-contacts__header">
           <Title className="contact-title" level={4}>
             {t('title')}
@@ -152,7 +154,7 @@ const SidebarContacts: React.FC = () => {
         <div className="sidebar-contacts__search">
           <SearchSidebar placeholder={t('search-contacts')} />
         </div>
-        <div className="sidebar-contacts__unstyled">
+        <div className="sidebar-contacts__box">
           {loading ? (
             <Spin
               className="loading"
@@ -184,7 +186,7 @@ const SidebarContacts: React.FC = () => {
                             trigger={['click']}
                             placement="bottomRight"
                           >
-                            <MoreOutlined className="icon" />
+                            <MoreOutlined className="contact-names__icon" />
                           </Dropdown>
                         </Button>
                       );

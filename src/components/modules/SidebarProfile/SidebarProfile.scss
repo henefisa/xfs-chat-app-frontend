@@ -1,6 +1,73 @@
 @use '../../../assets/styles/variables' as v;
 
 .sidebar-profile {
+  &.dark-mode {
+    .header-profile {
+      .profile-heading {
+        color: #e1e9f1;
+      }
+    }
+    .user-info {
+      .title.user-info__name {
+        color: #e1e9f1;
+      }
+
+      .user-info__status {
+        color: #9aa1b9;
+      }
+    }
+    .content-profile {
+      .user-description {
+        color: #9aa1b9;
+      }
+      .ant-collapse.attached,
+      .ant-collapse.user-profile {
+        border: none;
+
+        .attached__panel,
+        .user-profile__panel {
+          background-color: #36404a;
+          border-radius: 4px;
+          .ant-collapse-header {
+            .ant-collapse-arrow svg {
+              color: #e1e9f1;
+            }
+            .panel-header {
+              .panel-header__title,
+              .panel-header__icon {
+                color: #e1e9f1;
+              }
+            }
+           
+          }
+          .panel-inner,
+          .list-file {
+            background-color: #262e35;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+          }
+        }
+
+        .ant-motion-collapse,
+        .ant-collapse-content.ant-collapse-content-active {
+          .ant-collapse-content-box {
+            .panel-inner {
+              .profile-item {
+                .profile-item__title {
+                  color: #9aa1b9;
+                }
+
+                .profile-item__desc {
+                  color: #e1e9f1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   .header-profile {
     display: flex;
     align-items: center;

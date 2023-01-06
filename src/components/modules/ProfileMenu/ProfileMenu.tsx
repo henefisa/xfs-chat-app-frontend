@@ -5,13 +5,17 @@ import { useTranslation } from 'react-i18next';
 import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import Menu from '@common/Menu/Menu';
+import { selectDarkLight } from 'src/store/darkLightSlice';
+import { useAppSelector } from 'src/store/hooks';
 
 import './ProfileMenu.scss';
+import clsx from 'clsx';
 
 interface IProfileMenuProps extends MenuProps {}
 
 const ProfileMenu: React.FC<IProfileMenuProps> = () => {
   const { t } = useTranslation('common');
+  const isDark = useAppSelector(selectDarkLight);
 
   const menu: MenuProps['items'] = React.useMemo(() => {
     return [
@@ -51,7 +55,12 @@ const ProfileMenu: React.FC<IProfileMenuProps> = () => {
     ];
   }, [t]);
 
-  return <Menu className="profile-menu" items={menu} />;
+  return (
+    <Menu
+      className={clsx('profile-menu', { 'dark-mode': isDark })}
+      items={menu}
+    />
+  );
 };
 
 export default ProfileMenu;

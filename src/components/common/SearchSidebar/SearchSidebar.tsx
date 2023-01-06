@@ -3,6 +3,8 @@ import * as React from 'react';
 import Input from '@common/Input/Input';
 
 import { SearchOutlined } from '@ant-design/icons';
+import { useAppSelector } from 'src/store/hooks';
+import { selectDarkLight } from 'src/store/darkLightSlice';
 
 import './SearchSidebar.scss';
 
@@ -17,6 +19,7 @@ const SearchSidebar: React.FC<SearchSidebarProps> = ({
   placeholder,
   onChange,
 }) => {
+  const isDark = useAppSelector(selectDarkLight);
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!onChange) return;
 
@@ -24,7 +27,7 @@ const SearchSidebar: React.FC<SearchSidebarProps> = ({
   };
 
   return (
-    <div className={clsx('search-sidebar', className)}>
+    <div className={clsx('search-sidebar', { 'dark-mode': isDark }, className)}>
       <Input
         className="search-sidebar__input"
         placeholder={placeholder}

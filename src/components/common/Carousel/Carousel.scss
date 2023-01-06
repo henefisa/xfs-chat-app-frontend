@@ -12,6 +12,14 @@
 }
 
 .carousel-item {
+  &.dark-mode {
+    background-color: #36404a;
+
+    .carousel-item__name {
+      color: #e1e9f1;
+    }
+  }
+
   padding: 8px 14px;
   position: relative;
   text-align: center;
@@ -40,7 +48,7 @@
     }
   }
 
-  h5 {
+  .carousel-item__name {
     font-size: 13px;
     margin-top: 12px;
     margin-bottom: 4px;
