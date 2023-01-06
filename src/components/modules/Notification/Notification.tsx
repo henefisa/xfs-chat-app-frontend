@@ -44,7 +44,7 @@ const Notification: React.FC = () => {
   const handleBtnUnreadActive = React.useCallback(() => {
     setActive(false);
   }, [active]);
-  
+
   return (
     <div
       className={clsx('notification', { 'notification--active': notification })}

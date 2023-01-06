@@ -117,7 +117,7 @@ const SidebarSettings: React.FC = () => {
   };
 
   return (
-    <div className={clsx("sidebar-settings", {"dark-mode": isDark})}>
+    <div className={clsx('sidebar-settings', { 'dark-mode': isDark })}>
       <Title className="title-settings" level={3}>
         {t('title')}
       </Title>

@@ -4,16 +4,17 @@ import {
   PaperClipOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
 import Title from '@common/Title/Title';
 import { Collapse, Divider } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'src/store/hooks';
-import { selectFriend } from 'src/store/userSlice';
+import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import AttachedFileItem from '@modules/AttachedFileItem/AttachedFileItem';
-
+import getMemberConversation from 'src/utils/getMemberConversation';
+import { selectConversation } from 'src/store/conversationSlice';
+import RenderAvatarConversation from '@modules/RenderAvatarConversation/RenderAvatarConversation';
 import './UserInfoChat.scss';
 
 const { Panel } = Collapse;
@@ -32,18 +33,33 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
 
   const date = new Date();
   const { selectedFriend } = useAppSelector(selectFriend);
-  const name = selectedFriend?.fullName ?? selectedFriend?.username;
+  const { selectedConversation } = useAppSelector(selectConversation);
+  const userProfileStore = useAppSelector(selectUserProfile);
+  const nameMember =
+    getMemberConversation(selectedConversation, userProfileStore)?.fullName ??
+    getMemberConversation(selectedConversation, userProfileStore)?.username ??
+    selectedFriend?.fullName ??
+    selectedFriend?.username;
 
   const userInfoChat = [
     {
       title: t1('name'),
-      desc: name,
+      desc: nameMember || selectedConversation?.title,
     },
-    { title: 'Email', desc: selectedFriend?.email },
+    {
+      title: 'Email',
+      desc:
+        getMemberConversation(selectedConversation, userProfileStore)?.email ||
+        selectedFriend?.email,
+    },
     { title: t1('time'), desc: `${date.getHours()}:${date.getMinutes()}` },
     {
       title: t1('location'),
-      desc: selectedFriend?.location || 'SomeWhere',
+      desc:
+        getMemberConversation(selectedConversation, userProfileStore)
+          ?.location ||
+        selectedFriend?.location ||
+        'SomeWhere',
     },
   ];
 
@@ -78,15 +94,7 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
         </Button>
       </div>
       <div className="user-avatar">
-        <Avatar
-          path={selectedFriend?.avatar}
-          imgWidth={96}
-          username={name?.charAt(0).toUpperCase()}
-          className="custom-avatar"
-        />
-        <Title level={5} className="username">
-          {name}
-        </Title>
+        <RenderAvatarConversation imgSize={96} />
         <div className="status">
           <CheckCircleFilled className="status__icon" />
           <Title level={5} className="status__name">
