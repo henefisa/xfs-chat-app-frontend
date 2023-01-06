@@ -28,18 +28,26 @@
     "register": {
       "success": "Sign up successfully. OTP has been sent to email!",
       "error": "Sign up failed!"
+    },
+    "forgot-password": {
+      "success": "Email link sent successfully!",
+      "error": "Sending link to email failed!"
+    },
+    "reset-password": {
+      "success": "Password update successful",
+      "error": "Password update successful"
     }
   },
   "home": {
     "title": "Welcome to my Chat App",
-    "sub-title" : "It's easy talking to your friend with RVK Chat App",
+    "sub-title": "It's easy talking to your friend with RVK Chat App",
     "login-title": "Signin",
     "register-title": "Signup",
     "try-title": "Try It Now",
     "group-chat": "Group Chat",
     "video-call": "Video Call",
     "file-sharing": "File Sharing",
-    "privacy" : "Privacy and Security"
+    "privacy": "Privacy and Security"
   },
   "login": {
     "title": "Sign in",
@@ -259,6 +267,27 @@
     "header": "Notifications",
     "btn-all": "All",
     "btn-unread": "Unread",
-    "invitation-title":  "Friend request"
+    "invitation-title": "Friend request"
+  },
+  "forgot-password": {
+    "title": "Find Your Account",
+    "sub-title": "Please enter your email address to search for your account.",
+    "input-placeholder": "Enter your email address",
+    "error-required-message": "Required!",
+    "email-error-type-message": "Invalid email!",
+    "btn-cancel": "Cancel",
+    "btn-search": "Search",
+    "author-title": "© 2022 Chat App. Crafted with ",
+    "author": " by RVK Team"
+  },
+  "reset-password": {
+    "title": "Reset Password",
+    "sub-title": "Please enter new password to change password.",
+    "input-placeholder": "Enter your new password",
+    "error-required-message": "Required!",
+    "btn-cancel": "Cancel",
+    "btn-completed": "Search",
+    "author-title": "© 2022 Chat App. Crafted with ",
+    "author": " by RVK Team"
   }
 }

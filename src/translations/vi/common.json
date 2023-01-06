@@ -28,18 +28,26 @@
     "register": {
       "success": "Đăng ký thành công. OTP đã được gửi đến email!",
       "error": "Đăng ký thất bại!"
+    },
+    "forgot-password": {
+      "success": "Liên kết email được gửi thành công!",
+      "error": "Gửi liên kết đến email không thành công!"
+    },
+    "reset-password": {
+      "success": "Cập nhật mật khẩu thành công",
+      "error": "Cập nhật mật khẩu thất bại"
     }
   },
   "home": {
     "title": "Chào mừng bạn đến với ứng dụng trò chuyện của chúng tôi",
-    "sub-title" : "Thật dễ dàng để nói chuyện với bạn bè của bạn qua RVK Chat App",
+    "sub-title": "Thật dễ dàng để nói chuyện với bạn bè của bạn qua RVK Chat App",
     "login-title": "Đăng nhập",
     "register-title": "Đăng ký",
     "try-title": "Bắt đầu ngay bây giờ",
     "group-chat": "Chat nhóm",
     "video-call": "Cuộc gọi Video",
     "file-sharing": "Chia sẽ File",
-    "privacy" : "Riêng tư và bảo mật"
+    "privacy": "Riêng tư và bảo mật"
   },
   "login": {
     "title": "Đăng nhập",
@@ -259,6 +267,27 @@
     "header": "Thông báo",
     "btn-all": "Tất cả",
     "btn-unread": "Chưa đọc",
-    "invitation-title":  "Lời mời kết bạn"
+    "invitation-title": "Lời mời kết bạn"
+  },
+  "forgot-password": {
+    "title": "Tìm tài khoản của bạn",
+    "sub-title": "Vui lòng nhập địa chỉ email của bạn để tìm kiếm tài khoản của bạn.",
+    "input-placeholder": "Nhập địa chỉ email của bạn",
+    "error-required-message": "Vui lòng nhập email!",
+    "email-error-type-message": "Email không hợp lệ!",
+    "btn-cancel": "Hủy bỏ",
+    "btn-search": "Tìm kiếm",
+    "author-title": "© 2022 Chat App. Thiết kế ",
+    "author": " bởi RVK Team"
+  },
+  "reset-password": {
+    "title": "Đặt lại mật khẩu",
+    "sub-title": "Vui lòng nhập mật khẩu mới để thay đổi mật khẩu.",
+    "input-placeholder": "Nhập mật khẩu mới",
+    "error-required-message": "Vui lòng nhập trường này!",
+    "btn-cancel": "Hủy bỏ",
+    "btn-completed": "Save change",
+    "author-title": "© 2022 Chat App. Thiết kế ",
+    "author": " bởi RVK Team"
   }
 }
