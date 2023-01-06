@@ -8,7 +8,9 @@
     "edit": "Chỉnh sửa",
     "update": "Cập nhật",
     "action": "Hành động",
-    "another-action": "Hành động khác"
+    "another-action": "Hành động khác",
+    "author-title": "© 2022 Chat App. Thiết kế ",
+    "author": " bởi RVK Team"
   },
   "languages": {
     "title": "Ngôn ngữ",
@@ -276,9 +278,7 @@
     "error-required-message": "Vui lòng nhập email!",
     "email-error-type-message": "Email không hợp lệ!",
     "btn-cancel": "Hủy bỏ",
-    "btn-search": "Tìm kiếm",
-    "author-title": "© 2022 Chat App. Thiết kế ",
-    "author": " bởi RVK Team"
+    "btn-search": "Tìm kiếm"
   },
   "reset-password": {
     "title": "Đặt lại mật khẩu",
@@ -286,8 +286,6 @@
     "input-placeholder": "Nhập mật khẩu mới",
     "error-required-message": "Vui lòng nhập trường này!",
     "btn-cancel": "Hủy bỏ",
-    "btn-completed": "Save change",
-    "author-title": "© 2022 Chat App. Thiết kế ",
-    "author": " bởi RVK Team"
+    "btn-completed": "Save change"
   }
 }

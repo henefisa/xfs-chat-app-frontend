@@ -1,4 +1,4 @@
-import { HeartFilled, MailOutlined } from '@ant-design/icons';
+import { MailOutlined } from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Logo from '@common/Logo/Logo';
 import Title from '@common/Title/Title';
@@ -9,6 +9,7 @@ import { Form } from 'antd';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import Author from '@common/Author/Author';
 import * as authService from 'src/services/authService';
 
 import './ForgotPassword.scss';
@@ -86,11 +87,7 @@ const ForgotPassword: React.FC = () => {
 
       <div className="forgot-password__footer">
         <Language />
-        <Title className="author" level={5}>
-          {t('author-title', { ns: 'forgot-password' })}
-          <HeartFilled className="author__heart-icon" />{' '}
-          {t('author', { ns: 'forgot-password' })}
-        </Title>
+        <Author />
       </div>
     </div>
   );

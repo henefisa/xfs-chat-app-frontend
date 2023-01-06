@@ -8,7 +8,9 @@
     "edit": "Edit",
     "update": "Update",
     "action": "Action",
-    "another-action": "Another action"
+    "another-action": "Another action",
+    "author-title": "© 2022 Chat App. Crafted with ",
+    "author": " by RVK Team"
   },
   "languages": {
     "title": "Language",
