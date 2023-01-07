@@ -8,9 +8,9 @@ import getGroupTitle from 'src/utils/getGroupTitle';
 import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
 import { selectConversation } from 'src/store/conversationSlice';
 import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 
 import './AvatarConversation.scss';
-import clsx from 'clsx';
 interface IAvatarConversation {
   handleOpenDetail?: () => void;
   imgSize: number;
