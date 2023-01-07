@@ -94,7 +94,6 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
           break;
         }
         case 'LogOut': {
-
           handleLogout();
           break;
         }
