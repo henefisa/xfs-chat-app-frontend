@@ -1,0 +1,13 @@
+@use '../../../assets/styles/variables' as v;
+
+.author,
+.anothor-account-title {
+  font-size: 15px;
+  font-weight: 400;
+  color: v.$text-color;
+}
+
+.anticon.author__heart-icon {
+  font-size: 12px;
+  color: #ff0000;
+}

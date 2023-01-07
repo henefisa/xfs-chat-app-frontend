@@ -14,7 +14,7 @@ interface BlockGroupProps {
 const BlockGroup: React.FC<BlockGroupProps> = ({ avtTitle, name, pill }) => {
   const isDark = useAppSelector(selectDarkLight);
   return (
-    <div className={clsx("block-group", {"dark-mode": isDark})}>
+    <div className={clsx('block-group', { 'dark-mode': isDark })}>
       <div className="block-group__avatar">
         <span>{avtTitle}</span>
       </div>
