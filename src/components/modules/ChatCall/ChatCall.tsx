@@ -2,7 +2,7 @@ import React from 'react';
 import { CloseOutlined, PhoneOutlined } from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Modal from '@common/Modal/Modal';
-import RenderAvatarConversation from '@modules/RenderAvatarConversation/RenderAvatarConversation';
+import AvatarConversation from 'src/components/modules/AvatarConversation/AvatarConversation';
 import './ChatCall.scss';
 
 interface IChatCallProps {
@@ -12,12 +12,11 @@ interface IChatCallProps {
 }
 
 const ChatCall: React.FC<IChatCallProps> = ({ onClose, title, isOpen }) => {
-
   return (
     <Modal transitionName="none" maskTransitionName="none" open={isOpen}>
       <div className="modal-body">
         <div className="modal-body__items">
-          <RenderAvatarConversation imgSize={96} titleCall={title}/>
+          <AvatarConversation imgSize={96} titleCall={title} />
         </div>
         <div className="actions">
           <Button

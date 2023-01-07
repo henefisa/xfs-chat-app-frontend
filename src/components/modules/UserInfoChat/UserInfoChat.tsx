@@ -14,7 +14,7 @@ import { selectFriend, selectUserProfile } from 'src/store/userSlice';
 import AttachedFileItem from '@modules/AttachedFileItem/AttachedFileItem';
 import getMemberConversation from 'src/utils/getMemberConversation';
 import { selectConversation } from 'src/store/conversationSlice';
-import RenderAvatarConversation from '@modules/RenderAvatarConversation/RenderAvatarConversation';
+import AvatarConversation from 'src/components/modules/AvatarConversation/AvatarConversation';
 import './UserInfoChat.scss';
 
 const { Panel } = Collapse;
@@ -94,7 +94,7 @@ const UserInfoChat: React.FC<IUserInfoChat> = ({ setClose }) => {
         </Button>
       </div>
       <div className="user-avatar">
-        <RenderAvatarConversation imgSize={96} />
+        <AvatarConversation imgSize={96} />
         <div className="status">
           <CheckCircleFilled className="status__icon" />
           <Title level={5} className="status__name">

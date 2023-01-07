@@ -9,13 +9,14 @@ import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
 import { selectConversation } from 'src/store/conversationSlice';
 import { useTranslation } from 'react-i18next';
 
-import './RenderAvatarConversation.scss';
-interface IRenderAvatarConversation {
+import './AvatarConversation.scss';
+import clsx from 'clsx';
+interface IAvatarConversation {
   handleOpenDetail?: () => void;
   imgSize: number;
   titleCall?: string;
 }
-const RenderAvatarConversation: React.FC<IRenderAvatarConversation> = ({
+const AvatarConversation: React.FC<IAvatarConversation> = ({
   handleOpenDetail,
   imgSize,
   titleCall,
@@ -38,7 +39,10 @@ const RenderAvatarConversation: React.FC<IRenderAvatarConversation> = ({
           <AvatarGroupChat conversation={selectedConversation} imgWidth={26} />
           <Title
             level={5}
-            className="chat-header__username"
+            className={clsx(
+              'chat-header__username',
+              titleCall && 'titlecall__username'
+            )}
             onClick={handleOpenDetail}
           >
             {selectedConversation.title ||
@@ -64,11 +68,17 @@ const RenderAvatarConversation: React.FC<IRenderAvatarConversation> = ({
           >
             {selectedConversation?.title || nameUser}
           </Title>
-          {titleCall && <Title className="titlecall">{titleCall === 'Audio' ? t('start-voice-call') : t('start-video-call')}</Title>}
+          {titleCall && (
+            <Title className="titlecall">
+              {titleCall === 'Audio'
+                ? t('start-voice-call')
+                : t('start-video-call')}
+            </Title>
+          )}
         </>
       )}
     </>
   );
 };
 
-export default RenderAvatarConversation;
+export default AvatarConversation;
