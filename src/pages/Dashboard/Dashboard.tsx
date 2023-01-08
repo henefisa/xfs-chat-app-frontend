@@ -73,7 +73,6 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard-page">
       <NavDashboard />
-      <Notification />
       {navbarAction === ENavbar.SETTINGS ? (
         <SidebarSettings />
       ) : (

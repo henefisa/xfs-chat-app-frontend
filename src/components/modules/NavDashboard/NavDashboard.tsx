@@ -26,10 +26,6 @@ import { selectNavBar, updateNavbar } from 'src/store/navbarSlice';
 import { selectUserProfile } from 'src/store/userSlice';
 import { changeDarkLight, selectDarkLight } from 'src/store/darkLightSlice';
 import clsx from 'clsx';
-import {
-  selectNotification,
-  updateNotification,
-} from 'src/store/notificationSlice';
 
 import './NavDashboard.scss';
 
@@ -39,11 +35,16 @@ const NavDashboard: React.FC = () => {
   const navbarIndex = useAppSelector(selectNavBar);
   const userProfileStore = useAppSelector(selectUserProfile);
   const isDark = useAppSelector(selectDarkLight);
-  const notification = useAppSelector(selectNotification);
   const { t } = useTranslation('dashboard', { keyPrefix: 'navbar' });
 
   const navBarMenu = React.useMemo(() => {
     return [
+      {
+        icon: NotificationOutlined,
+        tooltipTitle: t('notifications'),
+        key: ENavbar.NOTIFICATIONS,
+        path: 'dashboard',
+      },
       {
         icon: UserOutlined,
         tooltipTitle: t('profile'),
@@ -93,29 +94,11 @@ const NavDashboard: React.FC = () => {
     dispatch(changeDarkLight());
   };
 
-  const handleNotificationChange = React.useCallback(() => {
-    dispatch(updateNotification());
-  }, [notification]);
-
   return (
     <div className={clsx('navbar-dash', { 'dark-mode': isDark })}>
       <Link to="/" className="logo">
         <img className="logo__img" src="/images/logos/logo.svg" alt="Logo" />
       </Link>
-
-      <Button
-        className="navbar-dash__notification"
-        onClick={handleNotificationChange}
-      >
-        <Tooltip
-          className="custom-nav-icon"
-          placement="top"
-          tooltipTitle="Thông báo"
-          isActive={notification}
-        >
-          <NotificationOutlined />
-        </Tooltip>
-      </Button>
 
       <div className="menu-dashboard">
         {navBarMenu.map((item) => {

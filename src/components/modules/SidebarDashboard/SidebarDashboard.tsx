@@ -4,6 +4,7 @@ import SidebarContacts from '@modules/SidebarContacts/SidebarContacts';
 import SidebarGroups from '@modules/SidebarGroups/SidebarGroups';
 import SidebarProfile from '@modules/SidebarProfile/SidebarProfile';
 import SidebarSearchUsers from '@modules/SidebarSearchUsers/SidebarSearchUsers';
+import Notification from '../Notification/Notification';
 import clsx from 'clsx';
 import * as React from 'react';
 import ENavbar from 'src/interfaces/ENavbar';
@@ -19,6 +20,7 @@ const SidebarDashboard: React.FC = () => {
 
   return (
     <div className={clsx('sidebar', { 'dark-mode': isDark })}>
+      {navbarAction === ENavbar.NOTIFICATIONS && <Notification />}
       {navbarAction === ENavbar.PROFILE && <SidebarProfile />}
       {navbarAction === ENavbar.CHATS && <SidebarChats />}
       {navbarAction === ENavbar.GROUPS && <SidebarGroups />}
