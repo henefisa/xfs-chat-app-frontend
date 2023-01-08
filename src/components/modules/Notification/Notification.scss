@@ -1,17 +1,16 @@
 @use '../../../assets/styles/variables' as v;
 
 .notification {
-  padding: 24px;
-
   .notification__header {
     color: v.$text-color;
     font-size: 21px;
     font-weight: 600;
     margin: 0;
-    padding-bottom: 24px;
+    padding: 24px;
   }
 
   .notification__btn {
+    margin-left: 24px;
     .btn-all {
       margin-right: 8px;
     }
@@ -43,7 +42,7 @@
   }
 
   .invitation-list__title {
-    margin: 24px 24px 24px 0;
+    padding: 24px;
     color: v.$text-color;
   }
 }
