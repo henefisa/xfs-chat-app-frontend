@@ -1,0 +1,17 @@
+@use '../../../assets/styles/variables' as v;
+.archive {
+  .archive__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    .archive-heading {
+      color: v.$text-color;
+      font-size: 21px;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+  .archive__content {
+  }
+}

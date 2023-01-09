@@ -14,10 +14,10 @@ import { useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';
 import AttachedFileItem from '@modules/AttachedFileItem/AttachedFileItem';
 import ProfileMenu from '@modules/ProfileMenu/ProfileMenu';
-
-import './SidebarProfile.scss';
 import { selectDarkLight } from 'src/store/darkLightSlice';
 import clsx from 'clsx';
+
+import './SidebarProfile.scss';
 
 const { Panel } = Collapse;
 

@@ -88,6 +88,7 @@
       "settings": "Settings",
       "dark-light": "Dark / Light Mode",
       "user-menu": {
+        "archive": "Archive",
         "profile": "Profile",
         "setting": "Settings",
         "logout": "Logout"
@@ -187,6 +188,9 @@
         "update-error": "Update failed!",
         "btn-save": "Save change",
         "btn-cancel": "Cancel"
+      },
+      "archive": {
+        "archive-store": "Archive store"
       }
     },
     "chat-overlay": "Select a chat or start a new one",

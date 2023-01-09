@@ -88,6 +88,7 @@
       "settings": "Cài đặt",
       "dark-light": "Sáng / Tối",
       "user-menu": {
+        "archive": "Kho lưu trữ",
         "profile": "Hồ sơ",
         "setting": "Cài đặt",
         "logout": "Đăng xuất"
@@ -187,6 +188,9 @@
         "update-error": "cập nhật hồ sơ thất bại",
         "btn-save": "Lưu thay đổi",
         "btn-cancel": "Hủy bỏ"
+      },
+      "archive": {
+        "archive-store": "Kho lưu trữ"
       }
     },
     "chat-overlay": "Hãy chọn một đoạn chat hoặc bắt đầu cuộc trò chuyện mới",

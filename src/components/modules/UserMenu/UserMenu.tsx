@@ -2,6 +2,7 @@ import {
   LogoutOutlined,
   ProfileOutlined,
   SettingOutlined,
+  InboxOutlined,
 } from '@ant-design/icons';
 
 import { MenuProps } from 'antd';
@@ -35,6 +36,17 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
 
   const menu: MenuProps['items'] = React.useMemo(() => {
     return [
+      {
+        label: (
+          <Button className="menu-item">
+            <Title className="menu-item__title" level={5}>
+              {t('archive')}
+            </Title>
+            <InboxOutlined className="custom-menu-icon" />
+          </Button>
+        ),
+        key: 'Archive',
+      },
       {
         label: (
           <Button className="menu-item">
@@ -84,9 +96,17 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
     navigate('/login');
   };
 
+  const handleArchive = () => {
+    dispatch(updateNavbar(ENavbar.ARCHIVE));
+  };
+
   const hanldeClickItem: MenuProps['onClick'] = React.useCallback(
     (e: { key: string }) => {
       switch (e.key) {
+        case 'Archive': {
+          handleArchive();
+          break;
+        }
         case 'UserProfile': {
           break;
         }
@@ -94,7 +114,6 @@ const UserMenu: React.FC<IUserMenuProps> = () => {
           break;
         }
         case 'LogOut': {
-
           handleLogout();
           break;
         }

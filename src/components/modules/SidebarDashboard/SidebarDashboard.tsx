@@ -4,6 +4,7 @@ import SidebarContacts from '@modules/SidebarContacts/SidebarContacts';
 import SidebarGroups from '@modules/SidebarGroups/SidebarGroups';
 import SidebarProfile from '@modules/SidebarProfile/SidebarProfile';
 import SidebarSearchUsers from '@modules/SidebarSearchUsers/SidebarSearchUsers';
+import ArchiveConversation from '@modules/ArchiveConversation/ArchiveConversation';
 import clsx from 'clsx';
 import * as React from 'react';
 import ENavbar from 'src/interfaces/ENavbar';
@@ -25,6 +26,7 @@ const SidebarDashboard: React.FC = () => {
       {navbarAction === ENavbar.CONTACTS && <SidebarContacts />}
       {navbarAction === ENavbar.SEARCH && <SidebarSearchUsers />}
       {navbarAction === ENavbar.INVITATION && <InvitationList />}
+      {navbarAction === ENavbar.ARCHIVE && <ArchiveConversation />}
     </div>
   );
 };

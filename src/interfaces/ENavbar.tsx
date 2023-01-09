@@ -6,6 +6,7 @@ enum ENavbar {
   SEARCH = 'SEARCH',
   INVITATION = 'INVITATION',
   SETTINGS = 'SETTINGS',
+  ARCHIVE = 'ARCHIVE',
 }
 
 export default ENavbar;
