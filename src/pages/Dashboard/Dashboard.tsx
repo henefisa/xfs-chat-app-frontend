@@ -16,7 +16,6 @@ import {
 import { getConversation } from 'src/services/conversationService';
 import { ESocketEvent } from 'src/models/socket';
 import { useTranslation } from 'react-i18next';
-import Notification from '@modules/Notification/Notification';
 
 import './Dashboard.scss';
 
