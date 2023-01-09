@@ -89,6 +89,7 @@
   },
   "dashboard": {
     "navbar": {
+      "notifications": "Notifications",
       "profile": "Profile",
       "chat": "Chats",
       "groups": "Groups",

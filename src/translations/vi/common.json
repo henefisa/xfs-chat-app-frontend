@@ -89,6 +89,7 @@
   },
   "dashboard": {
     "navbar": {
+      "notifications": "Thông báo",
       "profile": "Hồ sơ",
       "chat": "Chats",
       "groups": "Nhóm",
