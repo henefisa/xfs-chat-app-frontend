@@ -1,4 +1,3 @@
-import InvitationList from '@modules/InvitationList/InvitationList';
 import SidebarChats from '@modules/SidebarChats/SidebarChats';
 import SidebarContacts from '@modules/SidebarContacts/SidebarContacts';
 import SidebarGroups from '@modules/SidebarGroups/SidebarGroups';
@@ -24,7 +23,6 @@ const SidebarDashboard: React.FC = () => {
       {navbarAction === ENavbar.GROUPS && <SidebarGroups />}
       {navbarAction === ENavbar.CONTACTS && <SidebarContacts />}
       {navbarAction === ENavbar.SEARCH && <SidebarSearchUsers />}
-      {navbarAction === ENavbar.INVITATION && <InvitationList />}
     </div>
   );
 };
