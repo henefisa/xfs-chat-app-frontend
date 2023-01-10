@@ -69,7 +69,7 @@ const Dashboard: React.FC = () => {
     };
 
     handleGetListConversation();
-  }, [userProfileStore]);
+  }, []);
   return (
     <div className="dashboard-page">
       <NavDashboard />
