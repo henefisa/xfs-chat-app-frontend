@@ -20,7 +20,7 @@ const SidebarDashboard: React.FC = () => {
 
   return (
     <div className={clsx('sidebar', { 'dark-mode': isDark })}>
-      {navbarAction === ENavbar.NOTIFICATIONS && <Notification />}
+      {navbarAction === ENavbar.NOTIFICATION && <Notification />}
       {navbarAction === ENavbar.PROFILE && <SidebarProfile />}
       {navbarAction === ENavbar.CHATS && <SidebarChats />}
       {navbarAction === ENavbar.GROUPS && <SidebarGroups />}

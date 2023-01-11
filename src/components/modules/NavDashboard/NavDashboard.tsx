@@ -42,7 +42,7 @@ const NavDashboard: React.FC = () => {
       {
         icon: NotificationOutlined,
         tooltipTitle: t('notifications'),
-        key: ENavbar.NOTIFICATIONS,
+        key: ENavbar.NOTIFICATION,
         path: 'dashboard',
       },
       {
