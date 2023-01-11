@@ -7,16 +7,23 @@ import getMemberConversation from 'src/utils/getMemberConversation';
 import getGroupTitle from 'src/utils/getGroupTitle';
 import AvatarGroupChat from '@modules/AvatarGroupChat/AvatarGroupChat';
 import { selectConversation } from 'src/store/conversationSlice';
+import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 
-import './RenderAvatarConversation.scss';
-interface IRenderAvatarConversation {
+import './AvatarConversation.scss';
+interface IAvatarConversation {
   handleOpenDetail?: () => void;
   imgSize: number;
+  titleCall?: string;
 }
-const RenderAvatarConversation: React.FC<IRenderAvatarConversation> = ({
+const AvatarConversation: React.FC<IAvatarConversation> = ({
   handleOpenDetail,
   imgSize,
+  titleCall,
 }) => {
+  const { t } = useTranslation('dashboard', {
+    keyPrefix: 'chat-ui.chat-header.chat-call',
+  });
   const { selectedFriend } = useAppSelector(selectFriend);
   const { selectedConversation } = useAppSelector(selectConversation);
   const userProfileStore = useAppSelector(selectUserProfile);
@@ -32,12 +39,16 @@ const RenderAvatarConversation: React.FC<IRenderAvatarConversation> = ({
           <AvatarGroupChat conversation={selectedConversation} imgWidth={26} />
           <Title
             level={5}
-            className="chat-header__username"
+            className={clsx(
+              'chat-header__username',
+              titleCall && 'titlecall__username'
+            )}
             onClick={handleOpenDetail}
           >
             {selectedConversation.title ||
               getGroupTitle(selectedConversation, userProfileStore)}
           </Title>
+          {titleCall && <Title className="titlecall">{titleCall}</Title>}
         </>
       ) : (
         <>
@@ -57,10 +68,17 @@ const RenderAvatarConversation: React.FC<IRenderAvatarConversation> = ({
           >
             {selectedConversation?.title || nameUser}
           </Title>
+          {titleCall && (
+            <Title className="titlecall">
+              {titleCall === 'Audio'
+                ? t('start-voice-call')
+                : t('start-video-call')}
+            </Title>
+          )}
         </>
       )}
     </>
   );
 };
 
-export default RenderAvatarConversation;
+export default AvatarConversation;

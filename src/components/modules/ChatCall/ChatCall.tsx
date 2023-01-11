@@ -1,12 +1,8 @@
 import React from 'react';
 import { CloseOutlined, PhoneOutlined } from '@ant-design/icons';
-
-import Avatar from '@common/Avatar/Avatar';
-import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import Modal from '@common/Modal/Modal';
-import { useTranslation } from 'react-i18next';
-
+import AvatarConversation from 'src/components/modules/AvatarConversation/AvatarConversation';
 import './ChatCall.scss';
 
 interface IChatCallProps {
@@ -16,26 +12,11 @@ interface IChatCallProps {
 }
 
 const ChatCall: React.FC<IChatCallProps> = ({ onClose, title, isOpen }) => {
-  const { t } = useTranslation('dashboard', {
-    keyPrefix: 'chat-ui.chat-header.chat-call',
-  });
-
   return (
     <Modal transitionName="none" maskTransitionName="none" open={isOpen}>
       <div className="modal-body">
         <div className="modal-body__items">
-          <Avatar
-            path="http://chatvia-light.react.themesbrand.com/static/media/avatar-2.feb0f89de58f0ef9b424.jpg"
-            imgWidth={96}
-            username="A"
-            className="custom-avatar"
-          />
-          <Title level={5} className="username">
-            Danh Huy
-          </Title>
-          <Title level={5} className="title-action">
-            {title === 'Audio' ? t('start-voice-call') : t('start-video-call')}
-          </Title>
+          <AvatarConversation imgSize={96} titleCall={title} />
         </div>
         <div className="actions">
           <Button

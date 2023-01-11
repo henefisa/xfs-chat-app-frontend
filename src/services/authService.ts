@@ -81,6 +81,50 @@ export const logout = async (
     });
   }
 };
+export const forgotPassword = async (
+  email: string,
+  t: TFunction<('common' | 'forgot-password' | 'notification')[], undefined>
+) => {
+  try {
+    await apiRequest.post('api/reset-password', { email });
+    notification.success({
+      message: t('success', { ns: 'common' }),
+      description: t('forgot-password.success', { ns: 'notification' }),
+      duration: 1.5,
+      key: '1',
+    });
+  } catch (error) {
+    notification.error({
+      message: t('error', { ns: 'common' }),
+      description: t('forgot-password.error', { ns: 'notification' }),
+      duration: 1.5,
+      key: '1',
+    });
+  }
+};
+
+export const resetPassword = async (
+  url: string,
+  password: string,
+  t: TFunction<('common' | 'notification' | 'reset-password')[], undefined>,
+  navigate: NavigateFunction
+) => {
+  try {
+    await apiRequest.post(url, { password });
+    notification.success({
+      message: t('success', { ns: 'common' }),
+      description: t('reset-password.success', { ns: 'notification' }),
+      duration: 2,
+    });
+    navigate('/login');
+  } catch (error) {
+    notification.error({
+      message: t('error', { ns: 'common' }),
+      description: t('reset-password.error', { ns: 'notification' }),
+      duration: 2,
+    });
+  }
+};
 
 interface IUserRegister {
   email: string;

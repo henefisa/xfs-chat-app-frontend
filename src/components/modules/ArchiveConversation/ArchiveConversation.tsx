@@ -14,8 +14,7 @@ const ArchiveConversation = () => {
           {t('archive-store')}
         </Title>
       </div>
-      <div className="archive__content">
-      </div>
+      <div className="archive__content"></div>
     </div>
   );
 };

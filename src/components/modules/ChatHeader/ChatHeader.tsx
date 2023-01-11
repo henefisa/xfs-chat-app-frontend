@@ -14,7 +14,7 @@ import Tooltip from '@common/Tooltip/Tooltip';
 import { useTranslation } from 'react-i18next';
 import ActionsChatMenu from '@modules/ActionsChatMenu/ActionsChatMenu';
 import ChatCall from '@modules/ChatCall/ChatCall';
-import RenderAvatarConversation from '@modules/RenderAvatarConversation/RenderAvatarConversation';
+import AvatarConversation from 'src/components/modules/AvatarConversation/AvatarConversation';
 import './ChatHeader.scss';
 
 interface IChatHeader {
@@ -59,10 +59,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   return (
     <div className="chat-header">
       <div className="user-info">
-        <RenderAvatarConversation
-          handleOpenDetail={onClickuser()}
-          imgSize={46}
-        />
+        <AvatarConversation handleOpenDetail={onClickuser()} imgSize={46} />
         <div className="user-info__status">
           <CheckCircleFilled className="status__icon" />
         </div>

@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { DashboardPage, HomePage, LoginPage, VerifyAccount } from 'src/pages';
 import CallPage from 'src/pages/Call/Call';
+import ForgotPassword from 'src/pages/ForgotPassword/ForgotPassword';
 import Register from 'src/pages/Register/Register';
+import ResetPassword from 'src/pages/ResetPassword/ResetPassword';
 
 interface IRoute {
   path: string;
@@ -42,6 +44,8 @@ const routes: IRoute[] = [
     private: true,
     component: DashboardPage,
   },
+  { path: '/forgot-password', component: ForgotPassword },
+  { path: '/reset-password/:id', component: ResetPassword },
 ];
 
 export default routes;
