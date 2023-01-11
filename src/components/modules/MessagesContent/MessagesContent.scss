@@ -22,6 +22,9 @@
     margin: auto;
     max-width: 600px;
     white-space: normal;
+    word-break: break-all;
+    cursor: text;
+    user-select: text;
     &:after {
       content: '';
       position: absolute;
