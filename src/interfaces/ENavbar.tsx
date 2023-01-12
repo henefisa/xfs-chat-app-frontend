@@ -5,6 +5,7 @@ enum ENavbar {
   CONTACTS = 'CONTACTS',
   SEARCH = 'SEARCH',
   SETTINGS = 'SETTINGS',
+  NOTIFICATION = 'NOTIFICATION',
 }
 
 export default ENavbar;
