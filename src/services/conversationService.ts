@@ -2,6 +2,7 @@ import { notification } from 'antd';
 import { TFunction } from 'i18next';
 import apiRequest from 'src/api/apiRequest';
 import {
+  IConversation,
   IDataCreateConversation,
   IMessageQuery,
   TConversationQuery,
@@ -58,6 +59,41 @@ export const getMessages = async (
       params: query,
     });
 
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+  }
+};
+
+export const getConversationArchive = async (
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    const res = await apiRequest.get(
+      'api/conversations/conversations-archived'
+    );
+    return res.data;
+  } catch (err) {
+    notification.error({
+      message: t('error'),
+      description: t('normal-error-message'),
+      duration: 1.5,
+      key: '1',
+    });
+  }
+};
+
+export const archiveConversation = async (
+  query: IConversation,
+  t: TFunction<'common', undefined>
+) => {
+  try {
+    const res = await apiRequest.get(`api/conversations/archive/${query.id}`);
     return res.data;
   } catch (err) {
     notification.error({

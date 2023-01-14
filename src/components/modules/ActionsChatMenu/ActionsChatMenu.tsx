@@ -9,6 +9,12 @@ import Title from '@common/Title/Title';
 import Button from '@common/Button/Button';
 import Menu from '@common/Menu/Menu';
 import { useTranslation } from 'react-i18next';
+import { archiveConversation } from 'src/services/conversationService';
+import {
+  deleteConversationSelected,
+  selectConversation,
+} from 'src/store/conversationSlice';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 
 import './ActionsChatMenu.scss';
 
@@ -18,6 +24,9 @@ const ActionsChatMenu: React.FC<IActionsChatMenuProps> = () => {
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-header.action-chat-menu',
   });
+  const { t: t1 } = useTranslation('common');
+  const { selectedConversation } = useAppSelector(selectConversation);
+  const dispatch = useAppDispatch();
   const menu: MenuProps['items'] = [
     {
       label: (
@@ -26,7 +35,7 @@ const ActionsChatMenu: React.FC<IActionsChatMenuProps> = () => {
           <InboxOutlined className="custom-menu-icon" />
         </Button>
       ),
-      key: 0,
+      key: 'Archive',
     },
     {
       label: (
@@ -35,7 +44,7 @@ const ActionsChatMenu: React.FC<IActionsChatMenuProps> = () => {
           <AudioMutedOutlined className="custom-menu-icon" />
         </Button>
       ),
-      key: 1,
+      key: 'Mute',
     },
     {
       label: (
@@ -44,11 +53,38 @@ const ActionsChatMenu: React.FC<IActionsChatMenuProps> = () => {
           <DeleteOutlined className="custom-menu-icon" />
         </Button>
       ),
-      key: 2,
+      key: 'Delete',
     },
   ];
 
-  return <Menu className="chat-menu" items={menu} />;
+  const handleArchiveConversation = async () => {
+    if (!selectedConversation) return;
+    await archiveConversation(selectedConversation, t1);
+    dispatch(deleteConversationSelected());
+  };
+
+  const hanldeClickItem: MenuProps['onClick'] = React.useCallback(
+    (e: { key: string }) => {
+      switch (e.key) {
+        case 'Archive': {
+          handleArchiveConversation();
+          break;
+        }
+        case 'Mute': {
+          break;
+        }
+        case 'Delete': {
+          break;
+        }
+        default: {
+          throw new Error('Error');
+        }
+      }
+    },
+    []
+  );
+
+  return <Menu className="chat-menu" items={menu} onClick={hanldeClickItem} />;
 };
 
 export default ActionsChatMenu;

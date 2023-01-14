@@ -5,6 +5,7 @@ import { RootState } from '.';
 interface IUserConversationState {
   selectedConversation: IConversation | null;
   listConversation: IConversation[];
+  listConversationArchive: IConversation[];
 }
 
 interface IUserMessage {
@@ -22,6 +23,7 @@ const initialState: IConversationState = {
   conversation: {
     selectedConversation: null,
     listConversation: [],
+    listConversationArchive: [],
   },
   message: {
     listMessage: [],
@@ -67,6 +69,15 @@ export const conversationSlice = createSlice({
     deleteListMessage: (state) => {
       state.message.listMessage = [];
     },
+    updateListConversationArchive: (
+      state,
+      action: PayloadAction<IConversation[]>
+    ) => {
+      state.conversation.listConversationArchive = action.payload;
+    },
+    deleteListConversationArchive: (state) => {
+      state.conversation.listConversationArchive = [];
+    },
   },
 });
 
@@ -80,6 +91,8 @@ export const {
   getListMessageFailed,
   updateListMessage,
   deleteListMessage,
+  updateListConversationArchive,
+  deleteListConversationArchive,
 } = conversationSlice.actions;
 
 export const selectConversation = (state: RootState) =>

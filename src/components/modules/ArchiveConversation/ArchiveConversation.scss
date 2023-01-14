@@ -13,5 +13,17 @@
     }
   }
   .archive__content {
+    padding-right: 8px;
+    height: calc(100vh - 280px);
+    overflow: auto;
+
+    .conversation-btn {
+      width: 100%;
+      padding: 0;
+      background-color: unset;
+      border: unset;
+      text-align: unset;
+      box-shadow: unset;
+    }
   }
 }
