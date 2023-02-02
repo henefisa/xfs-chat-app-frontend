@@ -17,6 +17,7 @@ import navbarReducer from './navbarSlice';
 import languageReducer from './languageSlice';
 import conversationReducer from './conversationSlice';
 import darkLightReducer from './darkLightSlice';
+import sFriendRequestReducer from './socketFriendRequestSlice';
 
 const loginPersistConfig = {
   key: 'login',
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   auth: persistReducer(loginPersistConfig, authReducer),
   language: persistReducer(languagePersistConfig, languageReducer),
   conversation: conversationReducer,
+  sFriendRequest: sFriendRequestReducer,
 });
 
 const store = configureStore({

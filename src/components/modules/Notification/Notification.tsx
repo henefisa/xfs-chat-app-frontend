@@ -8,15 +8,25 @@ import { getUsers } from 'src/services/userService';
 import ListRequestFriend from '@modules/ListRequestFriend/ListRequestFriend';
 
 import './Notification.scss';
+import { socket } from 'src/context/socket/config';
+import { ESocketEvent } from 'src/models/socket';
+import { useAppSelector } from 'src/store/hooks';
+import { selectFriendRequest } from 'src/store/socketFriendRequestSlice';
 
 const Notification: React.FC = () => {
+  // const friendRequest = useAppSelector(selectFriendRequest);
+
   const { t } = useTranslation(['common', 'dashboard', 'popup-notification']);
 
   const [active, setActive] = React.useState(true);
 
+  const [frq, setfrq] = React.useState();
+
   const [listFriendRequest, setListFriendRequest] = React.useState<
     IUserItemResult[]
   >([]);
+
+  console.log(listFriendRequest);
 
   React.useEffect(() => {
     const getListRequestFriend = async () => {
@@ -32,7 +42,16 @@ const Notification: React.FC = () => {
     };
 
     getListRequestFriend();
-  }, []);
+  }, [frq]);
+
+  React.useEffect(() => {
+    socket
+      .off(ESocketEvent.GET_FRIEND_REQUEST)
+      .on(ESocketEvent.GET_FRIEND_REQUEST, ({ user }) => {
+        // setListFriendRequest((prev) => [...prev, user]);
+        setfrq(user);
+      });
+  });
 
   const handleBtnAllActive = React.useCallback(() => {
     setActive(true);

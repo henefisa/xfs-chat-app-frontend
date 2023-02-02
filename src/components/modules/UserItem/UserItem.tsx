@@ -10,9 +10,15 @@ import {
 import Avatar from '@common/Avatar/Avatar';
 import Button from '@common/Button/Button';
 import Title from '@common/Title/Title';
+import debounce from 'src/utils/debounce';
+import { SocketContext } from 'src/context/socket/contextSocket';
+import { ESocketEvent } from 'src/models/socket';
+
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
+import { selectUserProfile } from 'src/store/userSlice';
+import { changeSFriendRequest } from 'src/store/socketFriendRequestSlice';
 
 import './UserItem.scss';
-import debounce from 'src/utils/debounce';
 
 interface IUserItem {
   user: IUserItemResult;
@@ -20,10 +26,16 @@ interface IUserItem {
 }
 
 const UserItem: React.FC<IUserItem> = ({ user, className }) => {
+  const dispatch = useAppDispatch();
+
+  const userProfileStore = useAppSelector(selectUserProfile);
+
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'sidebar.search-user',
   });
   const { t: t1 } = useTranslation('common');
+
+  const socket = React.useContext(SocketContext);
 
   const name = user.fullName || user.username;
 
@@ -37,6 +49,11 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
 
     try {
       const result = await sendFriendRequest(id, t1);
+      socket.emit(ESocketEvent.FRIEND_REQUEST, {
+        ownerId: userProfileStore?.id,
+        userTargetId: id,
+      });
+      dispatch(changeSFriendRequest());
       setFriendStatus(result);
       setIsLoading(false);
       setIsCancel(false);
