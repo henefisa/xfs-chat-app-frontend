@@ -22,7 +22,7 @@ const TypingMessage = () => {
         setUserTyping(null);
       }
     });
-  });
+  }, [typing, userTyping, selectedConversation]);
   React.useEffect(() => {
     socket.on(ESocketEvent.STOP_TYPING, ({ conversationId }) => {
       if (conversationId === selectedConversation?.id) {
@@ -30,7 +30,7 @@ const TypingMessage = () => {
         setUserTyping(null);
       }
     });
-  });
+  }, [typing, userTyping, selectedConversation]);
   if (userTyping?.id === useProfileStore?.id) return null;
   return (
     <div>
