@@ -12,6 +12,7 @@ interface IMessagesTableProps {
   message: string;
   time: string;
   sender: TUserProfile | null;
+  isLastOne: boolean;
 }
 
 const MessagesTable: React.FC<IMessagesTableProps> = ({
@@ -19,25 +20,30 @@ const MessagesTable: React.FC<IMessagesTableProps> = ({
   message,
   time,
   sender,
+  isLastOne,
 }) => {
   const name = sender?.fullName ?? sender?.username;
   return (
     <div className={clsx('messages-table', `messages-table--${position}`)}>
       <div className="messages-table__avatar">
-        <Avatar
-          path={sender?.avatar}
-          imgWidth={35}
-          username={name?.charAt(0).toUpperCase()}
-          className="custom-avatar"
-        />
+        {isLastOne && (
+          <Avatar
+            path={sender?.avatar}
+            imgWidth={35}
+            username={name?.charAt(0).toUpperCase()}
+            className="custom-avatar"
+          />
+        )}
       </div>
       <div className="messages-table__body">
         <div className="bubble">
           <MessagesContent message={message} position={position} time={time} />
         </div>
-        <Title level={5} className="username">
-          {name}
-        </Title>
+        {isLastOne && (
+          <Title level={5} className="username">
+            {name}
+          </Title>
+        )}
       </div>
     </div>
   );

@@ -20,11 +20,17 @@ const ListMessage: React.FC<IListMessage> = ({ listMessage }) => {
               key={message.id}
               message={message}
               position={'right'}
+              isLastOne={message.isLastOne}
             />
           );
         }
         return (
-          <BubbleMessage key={message.id} message={message} position={'left'} />
+          <BubbleMessage
+            key={message.id}
+            message={message}
+            position={'left'}
+            isLastOne={message.isLastOne}
+          />
         );
       })}
     </div>
