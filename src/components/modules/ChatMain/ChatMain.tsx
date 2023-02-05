@@ -24,18 +24,6 @@ const ChatMain: React.FC = () => {
     scrollRef.current?.scrollIntoView();
   }, [listMessage]);
 
-  useEffect(() => {
-    const newListMessage = [...listMessage];
-    newListMessage.forEach((message, index) => {
-      if (message.sender.id !== newListMessage[index + 1]?.sender.id) {
-        newListMessage[index] = Object.assign({}, newListMessage[index], {
-          isLastOne: true,
-        });
-      }
-    });
-    dispatch(updateListMessage(newListMessage));
-  }, []);
-
   function pushNewMessage(listMessage: IMessage[], newMessage: IMessage) {
     const newListMessage = [...listMessage];
 
