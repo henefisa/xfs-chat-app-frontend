@@ -1,7 +1,5 @@
 import * as React from 'react';
 import Title from '@common/Title/Title';
-import { useAppSelector } from 'src/store/hooks';
-import { selectNotification } from 'src/store/notificationSlice';
 import { EFriendStatus, IUserItemResult } from 'src/models';
 import Button from '@common/Button/Button';
 import clsx from 'clsx';
@@ -14,7 +12,6 @@ import './Notification.scss';
 const Notification: React.FC = () => {
   const { t } = useTranslation(['common', 'dashboard', 'popup-notification']);
 
-  const notification = useAppSelector(selectNotification);
   const [active, setActive] = React.useState(true);
 
   const [listFriendRequest, setListFriendRequest] = React.useState<
@@ -46,9 +43,7 @@ const Notification: React.FC = () => {
   }, [active]);
 
   return (
-    <div
-      className={clsx('notification', { 'notification--active': notification })}
-    >
+    <div className={clsx('notification')}>
       <Title className="notification__header" level={3}>
         {t('header', { ns: 'popup-notification' })}
       </Title>
