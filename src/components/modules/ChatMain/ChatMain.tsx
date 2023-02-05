@@ -64,7 +64,7 @@ const ChatMain: React.FC = () => {
         dispatch(updateListMessage(newListMessage));
       }
     });
-  });
+  }, [listMessage]);
 
   return (
     <div className="chatmain">
