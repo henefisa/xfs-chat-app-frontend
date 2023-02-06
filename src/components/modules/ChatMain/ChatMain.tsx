@@ -9,6 +9,7 @@ import {
   selectConversation,
 } from 'src/store/conversationSlice';
 import ListMessage from './ListMessage';
+import TypingMessage from './TypingMessage';
 
 import './ChatMain.scss';
 
@@ -30,11 +31,11 @@ const ChatMain: React.FC = () => {
       }
     });
   });
-
   return (
     <div className="chatmain">
       <ChatDayTitle day="Today" />
       <ListMessage listMessage={listMessage} />
+      <TypingMessage />
     </div>
   );
 };

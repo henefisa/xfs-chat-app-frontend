@@ -42,13 +42,13 @@ const SidebarChats: React.FC = () => {
     getListConvertion();
   }, []);
   const handleClick = async (conversation: IConversation) => {
+    dispatch(updateConversationSelected(conversation));
     setActiveConversation('active');
     dispatch(deleteFriendSelected());
     dispatch(getListMessageStart());
     try {
       const result = await getMessages(t1, { id: conversation.id });
       dispatch(getListMessageSuccess(result.messages));
-      dispatch(updateConversationSelected(conversation));
     } catch (err) {
       dispatch(getListMessageFailed());
     }
