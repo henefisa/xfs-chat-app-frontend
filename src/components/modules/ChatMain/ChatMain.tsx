@@ -10,6 +10,7 @@ import {
 } from 'src/store/conversationSlice';
 import ListMessage from './ListMessage';
 import { IMessage } from 'src/models';
+import TypingMessage from './TypingMessage';
 
 import './ChatMain.scss';
 
@@ -70,6 +71,7 @@ const ChatMain: React.FC = () => {
     <div className="chatmain">
       <ChatDayTitle day="Today" />
       <ListMessage listMessage={listMessage} />
+      <TypingMessage />
     </div>
   );
 };

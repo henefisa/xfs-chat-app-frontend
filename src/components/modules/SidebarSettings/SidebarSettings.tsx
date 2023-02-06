@@ -33,6 +33,8 @@ const SidebarSettings: React.FC = () => {
   const [disabled, setDisabled] = React.useState<boolean>(true);
   const [updateSuccess, setUpdateSuccess] = React.useState<boolean>(false);
   const [hideCancel, setHideCancel] = React.useState<boolean>(true);
+  const [isSaveChange, setIsSaveChange] = React.useState<boolean>(false);
+
   const [form] = Form.useForm();
 
   const privacy = [
@@ -81,18 +83,24 @@ const SidebarSettings: React.FC = () => {
   };
 
   const handleFinish = async (values: TUserInfo) => {
-    if (selectedFile) {
-      const res = await userService.getPresignUrl(selectedFile.name, t);
-      await userService.putPresignUrl(res.url, selectedFile, t);
-      const profile = { ...values, avatar: res.key };
-      await userService.updateUserProfile(dispatch, profile, t);
-    } else {
-      await userService.updateUserProfile(dispatch, values, t);
+    setIsSaveChange(true);
+    try {
+      if (selectedFile) {
+        const res = await userService.getPresignUrl(selectedFile.name, t);
+        await userService.putPresignUrl(res.url, selectedFile, t);
+        const profile = { ...values, avatar: res.key };
+        await userService.updateUserProfile(dispatch, profile, t);
+      } else {
+        await userService.updateUserProfile(dispatch, values, t);
+      }
+      await userService.getUserProfile(dispatch);
+      setIsSaveChange(false);
+      setUpdateSuccess(!updateSuccess);
+      setDisabled(true);
+      setHideCancel(true);
+    } catch (error) {
+      setIsSaveChange(false);
     }
-    await userService.getUserProfile(dispatch);
-    setUpdateSuccess(!updateSuccess);
-    setDisabled(true);
-    setHideCancel(true);
   };
 
   React.useEffect(() => {
@@ -221,6 +229,7 @@ const SidebarSettings: React.FC = () => {
                     className="form-button__save-change"
                     htmlType="submit"
                     disabled={disabled}
+                    loading={isSaveChange}
                   >
                     {t('btn-save')}
                   </Button>

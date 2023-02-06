@@ -32,11 +32,11 @@ const Dashboard: React.FC = () => {
 
   React.useEffect(() => {
     socket.connect();
-    socket.on('connect', () => {
+    socket.on(ESocketEvent.CONNECT, () => {
       console.log('connected');
     });
 
-    socket.on('disconnect', () => {
+    socket.on(ESocketEvent.DISCONNECT, () => {
       console.log('disconnected');
     });
 
@@ -58,6 +58,7 @@ const Dashboard: React.FC = () => {
   }, [userProfileStore, listConversation]);
 
   React.useEffect(() => {
+    socket.emit(ESocketEvent.ONLINE, { userId: userProfileStore?.id });
     const handleGetListConversation = async () => {
       try {
         const result = await getConversation(t);
@@ -68,7 +69,8 @@ const Dashboard: React.FC = () => {
     };
 
     handleGetListConversation();
-  }, []);
+  }, [userProfileStore]);
+
   return (
     <div className="dashboard-page">
       <NavDashboard />
