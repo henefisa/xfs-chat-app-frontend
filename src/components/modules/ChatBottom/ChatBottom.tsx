@@ -116,7 +116,6 @@ const ChatBottom: React.FC = () => {
 
   const onFocusInput = React.useCallback(async () => {
     const conversationId = await selectConversationId(selectedConversation);
-    console.log(selectedConversation?.id);
     socket.emit(ESocketEvent.TYPING, {
       conversationId: conversationId,
       userId: userProfileStore?.id,
