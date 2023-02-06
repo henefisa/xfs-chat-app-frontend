@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { IConversation } from 'src/models';
 import { getMessages, getConversation } from 'src/services/conversationService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { selectUserProfile } from 'src/store/userSlice';
+import { deleteFriendSelected, selectUserProfile } from 'src/store/userSlice';
 import {
   getListMessageFailed,
   getListMessageStart,
@@ -30,6 +30,7 @@ const SidebarChats: React.FC = () => {
   const userProfileStore = useAppSelector(selectUserProfile);
   const isDark = useAppSelector(selectDarkLight);
   const dispatch = useAppDispatch();
+  const [activeConversation, setActiveConversation] = React.useState('');
 
   const { listConversation, selectedConversation } =
     useAppSelector(selectConversation);
@@ -42,6 +43,8 @@ const SidebarChats: React.FC = () => {
   }, []);
   const handleClick = async (conversation: IConversation) => {
     dispatch(updateConversationSelected(conversation));
+    setActiveConversation('active');
+    dispatch(deleteFriendSelected());
     dispatch(getListMessageStart());
     try {
       const result = await getMessages(t1, { id: conversation.id });
@@ -111,7 +114,7 @@ const SidebarChats: React.FC = () => {
                     <Button
                       key={conversation.id}
                       className={clsx('conversation-btn', {
-                        ['conversation-btn--active']:
+                        [`conversation-btn--${activeConversation}`]:
                           conversation.id === selectedConversation?.id,
                       })}
                       onClick={onHandleClick(conversation)}

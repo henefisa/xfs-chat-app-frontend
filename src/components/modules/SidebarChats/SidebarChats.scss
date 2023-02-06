@@ -11,6 +11,13 @@
       .conversation-list__title {
         color: #e1e9f1;
       }
+      .conversation-list__result {
+        .conversation-btn {
+          &--active {
+            background-color: #36404a;
+          }
+        }
+      }
     }
   }
 
@@ -62,6 +69,9 @@
         border: unset;
         text-align: unset;
         box-shadow: unset;
+        &--active {
+          background-color: v.$card-background-hover;
+        }
       }
     }
   }
