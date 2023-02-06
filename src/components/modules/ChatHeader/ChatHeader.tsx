@@ -59,10 +59,7 @@ const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
   return (
     <div className="chat-header">
       <div className="user-info">
-        <AvatarConversation
-          handleOpenDetail={onClickuser()}
-          imgSize={46}
-        />
+        <AvatarConversation handleOpenDetail={onClickuser()} imgSize={46} />
         <div className="user-info__status">
           <CheckCircleFilled className="status__icon" />
         </div>
