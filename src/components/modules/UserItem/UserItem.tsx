@@ -62,6 +62,10 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
       setFriendStatus(null);
       setIsLoading(false);
       setIsCancel(true);
+      socket.emit(ESocketEvent.FRIEND_REQUEST, {
+        ownerId: userProfileStore?.id,
+        userTargetId: id,
+      });
     } catch (err) {
       setIsLoading(false);
     }
