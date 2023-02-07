@@ -33,5 +33,6 @@ export interface IMessage extends IBase {
   isTick: boolean;
   message: string;
   sender: TUserProfile;
+  isLastOne: boolean;
   conversation: string | null;
 }
