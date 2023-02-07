@@ -29,8 +29,9 @@ const PeerProvider: FC<{ children?: ReactNode }> = ({ children }) => {
     console.log(hostNameAndPort[0], +hostNameAndPort[1], location.hostname);
 
     const peer = new Peer(userProfileStore?.id, {
-      host: location.hostname,
-      port: 8000,
+      secure: true,
+      host: hostNameAndPort[0],
+      port: +hostNameAndPort[1],
       path: '/peerjs',
       debug: 3,
     });
