@@ -7,9 +7,14 @@ import MessagesTable from '../MessagesTable/MessagesTable';
 interface IBubbleMessage {
   message: IMessage;
   position: string;
+  isLastOne: boolean;
 }
 
-const BubbleMessage: React.FC<IBubbleMessage> = ({ message, position }) => {
+const BubbleMessage: React.FC<IBubbleMessage> = ({
+  message,
+  position,
+  isLastOne,
+}) => {
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const { listMessage } = useAppSelector(selectMessages);
   React.useEffect(() => {
@@ -22,6 +27,7 @@ const BubbleMessage: React.FC<IBubbleMessage> = ({ message, position }) => {
         position={position}
         time={message.createdAt}
         message={message.message}
+        isLastOne={isLastOne}
       />
     </div>
   );

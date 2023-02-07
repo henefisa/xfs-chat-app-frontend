@@ -46,11 +46,11 @@ const Dashboard: FC = () => {
 
   useEffect(() => {
     socket.connect();
-    socket.on('connect', () => {
+    socket.on(ESocketEvent.CONNECT, () => {
       console.log('connected');
     });
 
-    socket.on('disconnect', () => {
+    socket.on(ESocketEvent.DISCONNECT, () => {
       console.log('disconnected');
     });
 
@@ -82,7 +82,7 @@ const Dashboard: FC = () => {
     };
 
     handleGetListConversation();
-  }, []);
+  }, [dispatch, t]);
 
   useEffect(() => {
     // listen for connection being created from the caller

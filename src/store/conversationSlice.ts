@@ -61,8 +61,8 @@ export const conversationSlice = createSlice({
       state.message.isFetching = false;
       state.message.error = true;
     },
-    updateListMessage: (state, action: PayloadAction<IMessage>) => {
-      state.message.listMessage.push(action.payload);
+    updateListMessage: (state, action: PayloadAction<IMessage[]>) => {
+      state.message.listMessage = action.payload;
     },
     deleteListMessage: (state) => {
       state.message.listMessage = [];

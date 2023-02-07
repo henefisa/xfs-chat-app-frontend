@@ -10,14 +10,16 @@ import { useTranslation } from 'react-i18next';
 import { IConversation } from 'src/models';
 import { getMessages, getConversation } from 'src/services/conversationService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { selectUserProfile } from 'src/store/userSlice';
+import { deleteFriendSelected, selectUserProfile } from 'src/store/userSlice';
 import {
   getListMessageFailed,
   getListMessageStart,
   getListMessageSuccess,
   selectConversation,
+  selectMessages,
   updateConversationSelected,
   updateListConversation,
+  updateListMessage,
 } from 'src/store/conversationSlice';
 import getGroupTitle from 'src/utils/getGroupTitle';
 import { selectDarkLight } from 'src/store/darkLightSlice';
@@ -27,9 +29,26 @@ import './SidebarChats.scss';
 const SidebarChats: React.FC = () => {
   const { t } = useTranslation('dashboard', { keyPrefix: 'sidebar.chats' });
   const { t: t1 } = useTranslation('common');
+  const [clickConversation, setClickConversation] =
+    React.useState<boolean>(false);
+
   const userProfileStore = useAppSelector(selectUserProfile);
   const isDark = useAppSelector(selectDarkLight);
+  const { listMessage } = useAppSelector(selectMessages);
   const dispatch = useAppDispatch();
+  const [activeConversation, setActiveConversation] = React.useState('');
+
+  React.useEffect(() => {
+    const newListMessage = [...listMessage];
+    newListMessage.forEach((message, index) => {
+      if (message.sender.id !== newListMessage[index + 1]?.sender.id) {
+        newListMessage[index] = Object.assign({}, newListMessage[index], {
+          isLastOne: true,
+        });
+      }
+    });
+    dispatch(updateListMessage(newListMessage));
+  }, [clickConversation]);
 
   const { listConversation, selectedConversation } =
     useAppSelector(selectConversation);
@@ -40,12 +59,17 @@ const SidebarChats: React.FC = () => {
     };
     getListConvertion();
   }, []);
+
   const handleClick = async (conversation: IConversation) => {
+    dispatch(updateConversationSelected(conversation));
+    setActiveConversation('active');
+    dispatch(deleteFriendSelected());
     dispatch(getListMessageStart());
     try {
       const result = await getMessages(t1, { id: conversation.id });
       dispatch(getListMessageSuccess(result.messages));
       dispatch(updateConversationSelected(conversation));
+      setClickConversation((prev) => !prev);
     } catch (err) {
       dispatch(getListMessageFailed());
     }
@@ -111,7 +135,7 @@ const SidebarChats: React.FC = () => {
                     <Button
                       key={conversation.id}
                       className={clsx('conversation-btn', {
-                        ['conversation-btn--active']:
+                        [`conversation-btn--${activeConversation}`]:
                           conversation.id === selectedConversation?.id,
                       })}
                       onClick={onHandleClick(conversation)}

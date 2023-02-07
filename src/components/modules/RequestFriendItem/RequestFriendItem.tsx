@@ -3,7 +3,7 @@ import Button from '@common/Button/Button';
 import Title from '@common/Title/Title';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { IUserItemResult } from 'src/models';
+import { IFriendRequest } from 'src/models';
 import {
   acceptRequestFriend,
   cancelFriendRequest,
@@ -13,7 +13,7 @@ import debounce from 'src/utils/debounce';
 import './RequestFriendItem.scss';
 
 interface IRequestFriendItemProps {
-  friend: IUserItemResult;
+  friend: IFriendRequest;
 }
 
 const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
@@ -22,7 +22,7 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
   const [isCancelOrAccept, setIsCancelOrAccept] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const name = friend.fullName ?? friend.username;
+  const name = friend.owner.fullName ?? friend.owner.username;
 
   const handleCancelRequest = async (id: string) => {
     setIsLoading(true);
@@ -59,7 +59,7 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
   return (
     <div className="friend-item">
       <Avatar
-        path={friend.avatar}
+        path={friend.owner.avatar}
         username={name.charAt(0).toUpperCase()}
         imgWidth={35.2}
         className="friend-item__avatar"
@@ -69,7 +69,7 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
           {name}
         </Title>
         <Title className="friend-location" level={5}>
-          {friend.location || 'Some Where'}
+          {friend.owner.location || 'Some Where'}
         </Title>
       </div>
       <div className="friend-item__actions">
@@ -79,7 +79,7 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
               className="accept-btn"
               loading={isLoading}
               spinSize="small"
-              onClick={() => debounceAcceptRequest(friend.id)}
+              onClick={() => debounceAcceptRequest(friend.owner.id)}
             >
               {t('sidebar.search-user.accept', { ns: 'dashboard' })}
             </Button>
@@ -87,7 +87,7 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
               className="cancel-btn"
               loading={isLoading}
               spinSize="small"
-              onClick={() => debounceCancelRequest(friend.id)}
+              onClick={() => debounceCancelRequest(friend.owner.id)}
             >
               {t('sidebar.search-user.cancel', { ns: 'dashboard' })}
             </Button>

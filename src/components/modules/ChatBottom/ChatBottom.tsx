@@ -24,9 +24,10 @@ import {
   updateListConversation,
   updateConversationSelected,
 } from 'src/store/conversationSlice';
-import './ChatBottom.scss';
 import { IConversation } from 'src/models';
 import { notification } from 'antd';
+
+import './ChatBottom.scss';
 
 const ChatBottom: React.FC = () => {
   const socket = React.useContext(SocketContext);
@@ -112,6 +113,23 @@ const ChatBottom: React.FC = () => {
     },
     []
   );
+
+  const onFocusInput = React.useCallback(async () => {
+    const conversationId = await selectConversationId(selectedConversation);
+    socket.emit(ESocketEvent.TYPING, {
+      conversationId: conversationId,
+      userId: userProfileStore?.id,
+    });
+  }, [selectedConversation]);
+
+  const onBlurInput = React.useCallback(async () => {
+    const conversationId = await selectConversationId(selectedConversation);
+    socket.emit(ESocketEvent.STOP_TYPING, {
+      conversationId: conversationId,
+      userId: userProfileStore?.id,
+    });
+  }, [selectedConversation]);
+
   return (
     <div className="chat-bottom">
       <div className="type-chat">
@@ -119,6 +137,8 @@ const ChatBottom: React.FC = () => {
           className="type-chat__input"
           placeholder={t('enter-message')}
           onChange={onChangeMessage}
+          onBlur={onBlurInput}
+          onFocus={onFocusInput}
           value={message}
           onPressEnter={onSendMessage()}
         />
