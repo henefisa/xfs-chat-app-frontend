@@ -3,11 +3,15 @@ import Button from '@common/Button/Button';
 import Title from '@common/Title/Title';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import { socket } from 'src/context/socket/config';
 import { IFriendRequest } from 'src/models';
+import { ESocketEvent } from 'src/models/socket';
 import {
   acceptRequestFriend,
   cancelFriendRequest,
 } from 'src/services/userService';
+import { useAppSelector } from 'src/store/hooks';
+import { selectUserProfile } from 'src/store/userSlice';
 import debounce from 'src/utils/debounce';
 
 import './RequestFriendItem.scss';
@@ -21,16 +25,23 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
 
   const [isCancelOrAccept, setIsCancelOrAccept] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const userProfileStore = useAppSelector(selectUserProfile);
 
   const name = friend.owner.fullName ?? friend.owner.username;
 
+  const setStateAndEmitEventSocket = () => {
+    setIsLoading(false);
+    setIsCancelOrAccept(true);
+    socket.emit(ESocketEvent.CANCEL_OR_ACCEPT_FRIEND_REQUEST, {
+      userId: userProfileStore?.id,
+    });
+  };
+
   const handleCancelRequest = async (id: string) => {
     setIsLoading(true);
-
     try {
       await cancelFriendRequest(id, t);
-      setIsLoading(false);
-      setIsCancelOrAccept(true);
+      setStateAndEmitEventSocket();
     } catch (err) {
       setIsLoading(false);
     }
@@ -38,11 +49,9 @@ const RequestFriendItem: React.FC<IRequestFriendItemProps> = ({ friend }) => {
 
   const handleAcceptRequest = async (id: string) => {
     setIsLoading(true);
-
     try {
       await acceptRequestFriend(id, t);
-      setIsLoading(false);
-      setIsCancelOrAccept(true);
+      setStateAndEmitEventSocket();
     } catch (err) {
       setIsLoading(false);
     }

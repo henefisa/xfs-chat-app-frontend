@@ -27,6 +27,7 @@ const Notification: React.FC = () => {
       try {
         const result = await getFriends({ status: EFriendStatus.REQUESTED }, t);
         setListFriendRequest(result.friends);
+        console.log(result.friends);
       } catch (err) {
         console.log(err);
       }
