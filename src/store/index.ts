@@ -17,6 +17,7 @@ import navbarReducer from './navbarSlice';
 import languageReducer from './languageSlice';
 import conversationReducer from './conversationSlice';
 import darkLightReducer from './darkLightSlice';
+import mediaCallReducer from './callSlice';
 
 const loginPersistConfig = {
   key: 'login',
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   auth: persistReducer(loginPersistConfig, authReducer),
   language: persistReducer(languagePersistConfig, languageReducer),
   conversation: conversationReducer,
+  mediaCall: mediaCallReducer,
 });
 
 const store = configureStore({

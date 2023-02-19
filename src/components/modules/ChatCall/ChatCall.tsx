@@ -1,22 +1,25 @@
-import { useCallback, useContext, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import type { FC } from 'react';
 import { CloseOutlined, PhoneOutlined } from '@ant-design/icons';
 import Button from '@common/Button/Button';
 import Modal from '@common/Modal/Modal';
 import AvatarConversation from 'src/components/modules/AvatarConversation/AvatarConversation';
 import './ChatCall.scss';
-import { useAppSelector } from 'src/store/hooks';
+import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectConversation } from 'src/store/conversationSlice';
 import type { DataConnection, MediaConnection } from 'peerjs';
 import { selectUserProfile } from 'src/store/userSlice';
 import getMemberConversation from 'src/utils/getMemberConversation';
 import { PeerContext } from 'src/context/peer';
+import { removeCaller } from 'src/store/callSlice';
+import { message } from 'antd';
 
 interface IChatCallProps {
   onClose(): void;
   title: string;
   isOpen: boolean;
   receivingCall?: MediaConnection;
+  remoteConnection?: DataConnection;
 }
 
 const ChatCall: FC<IChatCallProps> = ({
@@ -24,6 +27,7 @@ const ChatCall: FC<IChatCallProps> = ({
   title,
   isOpen,
   receivingCall,
+  remoteConnection,
 }) => {
   const { selectedConversation } = useAppSelector(selectConversation);
   const userProfileStore = useAppSelector(selectUserProfile);
@@ -32,7 +36,9 @@ const ChatCall: FC<IChatCallProps> = ({
   const member = getMemberConversation(selectedConversation, userProfileStore);
   const [localConnection, setLocalConnection] = useState<DataConnection>();
   const [peerStream, setPeerStream] = useState<MediaStream>();
+  const [isWaitingForCallee, setIsWaitingForCallee] = useState(false);
   const [peer] = useContext(PeerContext);
+  const dispatch = useAppDispatch();
 
   // console.log(member);
 
@@ -52,6 +58,11 @@ const ChatCall: FC<IChatCallProps> = ({
       // connect with peer (peer.connect)
       const con = peer?.connect(member?.id as string);
 
+      // send data once connection open
+      con?.on('open', () => {
+        con?.send(userProfileStore);
+      });
+
       // list for close event coming from the remote peer (close call from remote)
       con?.on('close', () => {
         handleClosePeer();
@@ -64,9 +75,13 @@ const ChatCall: FC<IChatCallProps> = ({
         localAudioRef.current.srcObject
       );
 
+      setIsWaitingForCallee(true);
+
       // callee accept the call, show the remote audio stream
       call?.on('stream', (stream) => {
         if (!remoteAudioRef.current) return;
+
+        setIsWaitingForCallee(false);
 
         remoteAudioRef.current.srcObject = stream;
         remoteAudioRef.current.autoplay = true;
@@ -74,6 +89,9 @@ const ChatCall: FC<IChatCallProps> = ({
       });
     } catch (error) {
       console.error(`Err: ${error}`);
+      message.error(
+        'Please allow media permission from your computer, then refresh and try again'
+      );
     }
   };
 
@@ -103,6 +121,10 @@ const ChatCall: FC<IChatCallProps> = ({
       });
     } catch (error) {
       console.error(`Err: ${error}`);
+      handleClosePeer();
+      message.error(
+        'Please allow media permission from your computer, then refresh and try again'
+      );
     }
   };
 
@@ -114,6 +136,8 @@ const ChatCall: FC<IChatCallProps> = ({
     // close connection
     localConnection?.close();
     setLocalConnection(undefined);
+    setPeerStream(undefined);
+    dispatch(removeCaller());
 
     // remove stream
     const stream = localAudioRef.current.srcObject;
@@ -138,19 +162,39 @@ const ChatCall: FC<IChatCallProps> = ({
     localAudioRef.current.srcObject = null;
     remoteAudioRef.current.srcObject = null;
     onClose();
-  }, [localConnection, onClose]);
+  }, [dispatch, localConnection, onClose]);
+
+  // close call from both side if user close the web
+  useEffect(() => {
+    window.addEventListener('beforeunload', handleClosePeer);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleClosePeer);
+    };
+  }, [handleClosePeer]);
+
+  useEffect(() => {
+    // listen when caller hang up
+    remoteConnection?.on('close', () => {
+      handleClosePeer();
+    });
+  }, [remoteConnection, handleClosePeer]);
 
   return (
     <Modal transitionName="none" maskTransitionName="none" open={isOpen}>
       <div className="modal-body">
         <div className="modal-body__items">
           {receivingCall ? (
-            <div>You have a call</div>
+            <>
+              <div>You have a call</div>
+              <AvatarConversation imgSize={96} />
+            </>
           ) : (
             <AvatarConversation imgSize={96} titleCall={title} />
           )}
-          <audio ref={localAudioRef} controls muted></audio>
-          <audio ref={remoteAudioRef} controls muted></audio>
+          {isWaitingForCallee ? <div>Calling...</div> : null}
+          <audio ref={localAudioRef} />
+          <audio ref={remoteAudioRef} />
         </div>
         <div className="actions">
           <Button
@@ -159,12 +203,14 @@ const ChatCall: FC<IChatCallProps> = ({
           >
             <CloseOutlined className="custom-icon" />
           </Button>
-          <Button
-            className="actions__btn actions__btn--success"
-            onClick={receivingCall ? handleAcceptCall : handleOpenPeer}
-          >
-            <PhoneOutlined className="custom-icon" />
-          </Button>
+          {!(isWaitingForCallee || !!peerStream) && (
+            <Button
+              className="actions__btn actions__btn--success"
+              onClick={receivingCall ? handleAcceptCall : handleOpenPeer}
+            >
+              <PhoneOutlined className="custom-icon" />
+            </Button>
+          )}
         </div>
       </div>
     </Modal>

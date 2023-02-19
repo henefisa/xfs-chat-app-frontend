@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import Peer from 'peerjs';
 import { useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';

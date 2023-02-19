@@ -22,6 +22,8 @@ import './Dashboard.scss';
 import { PeerContext } from 'src/context/peer';
 import type { MediaConnection, DataConnection } from 'peerjs';
 import ChatCall from 'src/components/modules/ChatCall/ChatCall';
+import { TUserProfile } from 'src/models';
+import { addCurrentCaller } from 'src/store/callSlice';
 
 const Dashboard: FC = () => {
   const socket = useContext(SocketContext);
@@ -88,6 +90,17 @@ const Dashboard: FC = () => {
     // listen for connection being created from the caller
     peer?.on('connection', (con) => {
       setRemoteConnection(con);
+
+      con.on('open', function () {
+        // Receive messages
+        con.on('data', function (data) {
+          if (data) {
+            const callerData = data as TUserProfile;
+            console.log('Received', callerData);
+            dispatch(addCurrentCaller(callerData));
+          }
+        });
+      });
     });
 
     // listen for call event coming from the caller
@@ -95,13 +108,7 @@ const Dashboard: FC = () => {
       setReceivingCall(call);
       setCallModalOpen(true);
     });
-  }, [peer]);
-
-  useEffect(() => {
-    remoteConnection?.on('close', () => {
-      handleClose();
-    });
-  }, [handleClose, remoteConnection]);
+  }, [dispatch, peer]);
 
   return (
     <div className="dashboard-page">
@@ -123,6 +130,7 @@ const Dashboard: FC = () => {
           isOpen={true}
           title="Call"
           receivingCall={receivingCall}
+          remoteConnection={remoteConnection}
           onClose={handleClose}
         />
       )}
