@@ -6,7 +6,8 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
-import * as React from 'react';
+import { useState, useCallback, useMemo } from 'react';
+import type { Dispatch, SetStateAction, FC } from 'react';
 import Button from '@common/Button/Button';
 import Dropdown from '@common/Dropdown/Dropdown';
 import InputDropdown from '@common/Input/InputDropdown';
@@ -18,19 +19,19 @@ import AvatarConversation from 'src/components/modules/AvatarConversation/Avatar
 import './ChatHeader.scss';
 
 interface IChatHeader {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const ChatHeader: React.FC<IChatHeader> = ({ setOpen }) => {
-  const [id, setId] = React.useState(-1);
+const ChatHeader: FC<IChatHeader> = ({ setOpen }) => {
+  const [id, setId] = useState(-1);
   const { t } = useTranslation('dashboard', {
     keyPrefix: 'chat-ui.chat-header',
   });
 
-  const onClickuser = React.useCallback(() => {
+  const onClickuser = useCallback(() => {
     return () => setOpen(true);
   }, []);
-  const listActionChat = React.useMemo(() => {
+  const listActionChat = useMemo(() => {
     return [
       {
         icon: PhoneOutlined,
