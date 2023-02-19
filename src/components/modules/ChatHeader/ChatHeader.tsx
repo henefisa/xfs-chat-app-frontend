@@ -6,7 +6,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import type { Dispatch, SetStateAction, FC } from 'react';
 import Button from '@common/Button/Button';
 import Dropdown from '@common/Dropdown/Dropdown';

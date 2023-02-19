@@ -40,8 +40,6 @@ const ChatCall: FC<IChatCallProps> = ({
   const [peer] = useContext(PeerContext);
   const dispatch = useAppDispatch();
 
-  // console.log(member);
-
   const handleOpenPeer = async () => {
     try {
       if (!localAudioRef.current) return;

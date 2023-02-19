@@ -1,13 +1,13 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useMemo } from 'react';
 import Peer from 'peerjs';
 import { useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';
 import type { FC, ReactNode, Dispatch, SetStateAction } from 'react';
 import type { Peer as TPeer } from 'peerjs';
 
-export const PeerContext = createContext<
-  [Peer | undefined, Dispatch<SetStateAction<Peer | undefined>>]
->([
+type PeerCtx = [Peer | undefined, Dispatch<SetStateAction<Peer | undefined>>];
+
+export const PeerContext = createContext<PeerCtx>([
   undefined,
   () => {
     return;
@@ -39,8 +39,10 @@ const PeerProvider: FC<{ children?: ReactNode }> = ({ children }) => {
     setPeer(peer);
   }, [userProfileStore?.id]);
 
+  const peerContextValues: PeerCtx = useMemo(() => [peer, setPeer], [peer]);
+
   return (
-    <PeerContext.Provider value={[peer, setPeer]}>
+    <PeerContext.Provider value={peerContextValues}>
       {children}
     </PeerContext.Provider>
   );
