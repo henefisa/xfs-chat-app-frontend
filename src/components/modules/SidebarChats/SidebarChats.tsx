@@ -7,7 +7,7 @@ import Title from '@common/Title/Title';
 import clsx from 'clsx';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { IConversation, IMessage } from 'src/models';
+import { IConversation } from 'src/models';
 import { getMessages, getConversation } from 'src/services/conversationService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { deleteFriendSelected, selectUserProfile } from 'src/store/userSlice';
@@ -75,16 +75,6 @@ const SidebarChats: React.FC = () => {
     }
   };
 
-  const getLastMessage = async (conversation: IConversation) => {
-    try {
-      const result = await getMessages(t1, { id: conversation.id });
-      if (!result) return null;
-      return result.messages[0];
-    } catch (err) {
-      dispatch(getListMessageFailed());
-    }
-  };
-
   const onHandleClick = React.useCallback((conversation: IConversation) => {
     return () => handleClick(conversation);
   }, []);
@@ -140,7 +130,6 @@ const SidebarChats: React.FC = () => {
                     conversation,
                     userProfileStore
                   );
-                  // console.log('last message: ', lastMessages[index].message);
                   return (
                     <Button
                       key={conversation.id}
