@@ -7,7 +7,7 @@ import Title from '@common/Title/Title';
 import clsx from 'clsx';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { IConversation } from 'src/models';
+import { IConversation, IMessage } from 'src/models';
 import { getMessages, getConversation } from 'src/services/conversationService';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { selectUserProfile } from 'src/store/userSlice';
@@ -30,6 +30,7 @@ const SidebarChats: React.FC = () => {
   const userProfileStore = useAppSelector(selectUserProfile);
   const isDark = useAppSelector(selectDarkLight);
   const dispatch = useAppDispatch();
+  const [lastMessages, setLastMessages] = React.useState<IMessage[]>([]);
 
   const { listConversation, selectedConversation } =
     useAppSelector(selectConversation);
@@ -40,12 +41,30 @@ const SidebarChats: React.FC = () => {
     };
     getListConvertion();
   }, []);
+
+  React.useEffect(() => {
+    listConversation.forEach(async (conversation) => {
+      const lastMessage = await getLastMessage(conversation);
+      setLastMessages([...lastMessages, lastMessage]);
+    });
+  }, [listConversation]);
+
   const handleClick = async (conversation: IConversation) => {
     dispatch(getListMessageStart());
     try {
       const result = await getMessages(t1, { id: conversation.id });
       dispatch(getListMessageSuccess(result.messages));
       dispatch(updateConversationSelected(conversation));
+    } catch (err) {
+      dispatch(getListMessageFailed());
+    }
+  };
+
+  const getLastMessage = async (conversation: IConversation) => {
+    try {
+      const result = await getMessages(t1, { id: conversation.id });
+      if (!result) return null;
+      return result.messages[0];
     } catch (err) {
       dispatch(getListMessageFailed());
     }
@@ -101,12 +120,12 @@ const SidebarChats: React.FC = () => {
                 {t('recent')}
               </Title>
               <div className="conversation-list__result">
-                {listConversation.map((conversation) => {
+                {listConversation.map((conversation, index) => {
                   const titleConversation = getGroupTitle(
                     conversation,
                     userProfileStore
                   );
-
+                  // console.log('last message: ', lastMessages[index].message);
                   return (
                     <Button
                       key={conversation.id}
