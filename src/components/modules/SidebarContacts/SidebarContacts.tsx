@@ -109,7 +109,7 @@ const SidebarContacts: React.FC = () => {
   const handleSelectFriend = (friend: IUserItemResult) => {
     dispatch(updateFriendSelected(friend));
     handleGetMessage(friend.conversation);
-    handleGetConversation(friend.conversation);
+    dispatch(updateConversationSelected(friend.conversation));
   };
 
   const onSelectFriend = React.useCallback((friend: IUserItemResult) => {
@@ -120,9 +120,6 @@ const SidebarContacts: React.FC = () => {
     return () => setToggleModal(isTrue);
   }, []);
 
-  const handleGetConversation = (conversation: IConversation) => {
-    dispatch(updateConversationSelected(conversation));
-  };
   const handleGetMessage = async (conversation: IConversation) => {
     if (!conversation) {
       dispatch(deleteListMessage());

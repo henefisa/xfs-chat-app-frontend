@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 
 import './AvatarConversation.scss';
+import { selectCaller } from 'src/store/callSlice';
 interface IAvatarConversation {
   handleOpenDetail?: () => void;
   imgSize: number;
@@ -32,6 +33,9 @@ const AvatarConversation: React.FC<IAvatarConversation> = ({
     getMemberConversation(selectedConversation, userProfileStore)?.fullName ??
     getMemberConversation(selectedConversation, userProfileStore)?.username;
   const nameUser = nameFriend ?? nameMember;
+  const { caller } = useAppSelector(selectCaller);
+  const callerName = caller?.fullName || caller?.username;
+
   return (
     <>
       {selectedConversation?.isGroup ? (
@@ -54,11 +58,16 @@ const AvatarConversation: React.FC<IAvatarConversation> = ({
         <>
           <Avatar
             path={
+              caller?.avatar ||
               getMemberConversation(selectedConversation, userProfileStore)
-                ?.avatar || selectedFriend?.avatar
+                ?.avatar ||
+              selectedFriend?.avatar
             }
             imgWidth={imgSize}
-            username={nameUser?.charAt(0).toUpperCase()}
+            username={
+              callerName?.charAt(0).toUpperCase() ||
+              nameUser?.charAt(0).toUpperCase()
+            }
             className="custom-avatar"
           />
           <Title
@@ -66,7 +75,7 @@ const AvatarConversation: React.FC<IAvatarConversation> = ({
             className="chat-header__username"
             onClick={handleOpenDetail}
           >
-            {selectedConversation?.title || nameUser}
+            {callerName || selectedConversation?.title || nameUser}
           </Title>
           {titleCall && (
             <Title className="titlecall">

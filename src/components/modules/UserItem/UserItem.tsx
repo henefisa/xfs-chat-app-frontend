@@ -13,6 +13,10 @@ import Title from '@common/Title/Title';
 
 import './UserItem.scss';
 import debounce from 'src/utils/debounce';
+import { useAppSelector } from 'src/store/hooks';
+import { selectUserProfile } from 'src/store/userSlice';
+import { socket } from 'src/context/socket/config';
+import { ESocketEvent } from 'src/models/socket';
 
 interface IUserItem {
   user: IUserItemResult;
@@ -31,6 +35,7 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [friendStatus, setFriendStatus] =
     React.useState<IFriendStatusState | null>(null);
+  const userProfileStore = useAppSelector(selectUserProfile);
 
   const handleAddFriend = async (id: string) => {
     setIsLoading(true);
@@ -40,6 +45,10 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
       setFriendStatus(result);
       setIsLoading(false);
       setIsCancel(false);
+      socket.emit(ESocketEvent.FRIEND_REQUEST, {
+        ownerId: userProfileStore?.id,
+        userTargetId: id,
+      });
     } catch (err) {
       setIsLoading(false);
     }
@@ -53,6 +62,10 @@ const UserItem: React.FC<IUserItem> = ({ user, className }) => {
       setFriendStatus(null);
       setIsLoading(false);
       setIsCancel(true);
+      socket.emit(ESocketEvent.FRIEND_REQUEST, {
+        ownerId: userProfileStore?.id,
+        userTargetId: id,
+      });
     } catch (err) {
       setIsLoading(false);
     }

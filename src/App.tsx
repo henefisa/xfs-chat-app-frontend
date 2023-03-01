@@ -8,6 +8,7 @@ import {
 } from 'src/context/socket/contextSocket';
 import Router from 'src/routes';
 import { useAppDispatch } from 'src/store/hooks';
+import PeerProvider from './context/peer';
 
 function App() {
   const navigate = useNavigate();
@@ -20,7 +21,9 @@ function App() {
 
   return (
     <SocketContextProvider value={defaultSocketContextState}>
-      <Router />
+      <PeerProvider>
+        <Router />
+      </PeerProvider>
     </SocketContextProvider>
   );
 }
