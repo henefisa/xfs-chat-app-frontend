@@ -125,12 +125,11 @@ const SidebarChats: React.FC = () => {
                 {t('recent')}
               </Title>
               <div className="conversation-list__result">
-                {listConversation.map((conversation) => {
+                {listConversation.map((conversation, index) => {
                   const titleConversation = getGroupTitle(
                     conversation,
                     userProfileStore
                   );
-
                   return (
                     <Button
                       key={conversation.id}

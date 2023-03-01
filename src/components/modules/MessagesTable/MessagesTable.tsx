@@ -12,7 +12,7 @@ interface IMessagesTableProps {
   message?: string;
   time?: string;
   sender: TUserProfile | null;
-  isLastOne: boolean;
+  isLastOne?: boolean;
   typing?: boolean;
 }
 
